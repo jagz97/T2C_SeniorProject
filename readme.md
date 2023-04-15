@@ -1,8 +1,10 @@
 # Run Server
 
 ## Install dependencies for backend server
-`cd server
-npm install`
+navigate to server:
+`cd server`
+install dependencies:
+`npm install`
 
 ## To run server
 `npm start`
