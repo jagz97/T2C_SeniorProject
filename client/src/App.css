@@ -1,38 +1,95 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
+}
+ 
+body {
+  background-color: rgb(114,126,173); /*Fallback color for background image*/
+  background: url('images/pexels-luke-webb-2734920 1.png') no-repeat bottom center fixed;
+  background-size: cover;
+  font-family: 'DM Sans', sans-serif; /*imported DM sans via google fonts*/
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.container-signin {
+  background-color: rgba(0,0,0,.5);
+  width: 520px;
+  height: 510px;
+  margin-top: 3rem; /*temporary spacing for the card*/
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.signin-input {
+  border: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.signin-input-addon {
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.container-continue {
+  width: 100%;
+  margin-top: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .875rem;
+}
+
+.continue {
+  width: 29%;
+  align-self: center;
+}
+
+.line-continue {
+  width: 32%;
+  color: #dfdfdf;
+  opacity: 1;
+}
+
+
+/* =================
+	Buttons
+================= */
+
+.recover-password {
+  color: rgba(199, 199, 199, 1);
+  text-decoration: none;
+}
+
+.recover-password:hover,
+.recover-password:focus {
+  color: rgba(199, 199, 199, .7);
+  opacity: .7;
+}
+
+.btn-submit-signin {
+  background-color: rgba(60,58,131,1);
+  border: none;
+  color: white;
+  width : 100%;
+  padding: 1em 1.5em;
+  font-weight: 700;
+}
+
+
+.btn-submit-signin:hover,
+.btn-submit-signin:focus,
+.btn-submit-signin:active  {
+  /* transition: none; */
+  background-color: rgba(60,58,131,.8) !important; /*Not sure if !important is bad practice*/
+}
+
+
+
+.google-signin{
+  display: table;
+  margin: 2em auto;
+  opacity: .9;
+}
+
+.google-signin:hover,
+.google-signin:focus {
+  opacity: .7;
 }
