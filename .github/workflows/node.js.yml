@@ -31,11 +31,4 @@ jobs:
       run: |
         cd server
         npm run build --if-present
-    - name: Install client dependencies
-      run: |
-        cd client
-        npm install --prefer-offline --no-audit --no-optional --no-fund --no-save --no-save-dev --no-progress --loglevel=error
-    - name: Start client
-      run: |
-        cd client
-        npm start
+        npm run start
