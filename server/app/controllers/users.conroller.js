@@ -39,7 +39,10 @@ exports.register = async (req, res) => {
         res.status(500).json(err);
         console.log(err);
     });
-    
+
+    // const token = user.generateAuthToken();
+    // res.header("x-auth-token", token).send(token);
+
        
 
 

@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+
 module.exports = (sequelize, Sequelize) => {
     const Users = sequelize.define("users", {
           email: {
@@ -13,11 +15,12 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
           }
         });
-        const  privatekey =  "this is my secret"
+       
+        const secret = "this is my secret";
         Users.prototype.generateAuthToken = function() {
             const token = jwt.sign(
                 { id: this.id, username: this.username },
-                 privatekey);
+                 secret);
         return token;
       };
       return Users;

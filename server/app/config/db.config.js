@@ -1,7 +1,7 @@
 module.exports = {
-    HOST: "localhost",
-    USER: "root",
-    PASSWORD: "new_password",
+    HOST: "t2c-testdb.mysql.database.azure.com",
+    USER: "jagz97",
+    PASSWORD: "Singhj97!",
     DB: "testdb",
     dialect: "mysql",
     pool: {
