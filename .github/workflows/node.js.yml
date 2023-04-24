@@ -31,7 +31,7 @@ jobs:
       run: |
         cd server
         npm i
-        npm run test 
+        npm run test &
         sleep 10
       
     - name: Build client 
