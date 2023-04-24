@@ -37,7 +37,6 @@ jobs:
         sleep 5   
     - name: Build client 
       run: | 
-        cd ../
         cd client
         npm i
         npm run build
