@@ -1,4 +1,5 @@
 ![example workflow](https://github.com/jagz97/T2C_SeniorProject/actions/workflows/node.js.yml/badge.svg)
+![Built by SJSU Students](https://badgen.net/badge/Built%20by/SJSU%20Students/yellow)
 
 # Run Server
 
