@@ -31,7 +31,7 @@ jobs:
       run: |
         cd server
         npm i
-        npm run test --timeout 5000 
+        npm run test 
         
     - name: Wait for test to finish
       run: |
