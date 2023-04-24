@@ -1,4 +1,4 @@
-![Build Status](https://github.com/jagz97/T2C_SeniorProject/blob/master/.github/workflows/node.js.yml/badge.svg)
+![Build Status](https://github.com/jagz97/T2C_SeniorProjec/actions/workflows/node.js.yml/badge.svg)
 
 # Run Server
 
