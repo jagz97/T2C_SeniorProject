@@ -31,3 +31,7 @@ jobs:
       run: |
         cd server
         npm run build --if-present
+        cd ../
+        cd client
+        npm i
+        npm run build
