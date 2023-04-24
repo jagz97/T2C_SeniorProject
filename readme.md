@@ -1,3 +1,5 @@
+![Build Status](https://jagz97/T2C_SeniorProject/edit/master/.github/workflows/node.js.yml/badge.svg)
+
 # Run Server
 
 ## Install dependencies for backend server
