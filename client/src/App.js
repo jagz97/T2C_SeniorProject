@@ -1,8 +1,14 @@
-import SignIn from './SignIn'
+import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import LoginPage from './pages/LoginPage'
 
 function App() {
   return (
-    <SignIn/>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<LoginPage/>}/>
+        {/*For now set route for LoginPage to '/' */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 

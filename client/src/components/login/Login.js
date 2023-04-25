@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import './App.css'
-import deleteIcon from './images/email-delete-icon.png'
-import hideIcon from './images/hide-password-icon.png'
-import googleIcon from './images/Google.png'
+import './Login.css'
+import deleteIcon from '../../images/email-delete-icon.png'
+import hideIcon from '../../images/hide-password-icon.png'
+import googleIcon from '../../images/Google.png'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
@@ -11,15 +11,15 @@ import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 import InputGroup from 'react-bootstrap/InputGroup'
 
-const SignIn = () => {
+const Login = () => {
 
     // A state object to store form data
-    const [signInData, setSignInData] = useState({email : '', password : ''})
+    const [loginData, setLoginData] = useState({email : '', password : ''})
 
     // An onChange event handler for all form inputs
     const handleFormData = (event) => {
         const {name, value} = event.target
-        setSignInData((prevData) => ({
+        setLoginData((prevData) => ({
             ...prevData,
             [name] : value
        }))
@@ -29,14 +29,14 @@ const SignIn = () => {
     // the captured form data to the console
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(signInData)
+        console.log(loginData)
     }
 
     return (
         <Container>
             <Row>
                 <Col>
-                    <Card className="container-signin  p-5 mx-auto rounded-5">
+                    <Card className="container-login  p-5 mx-auto rounded-5">
                         <Card.Body>
                             <Form onSubmit={handleSubmit} >
                                 
@@ -46,13 +46,13 @@ const SignIn = () => {
                                             type='email'
                                             placeholder='Enter Email' 
                                             name='email'
-                                            value={signInData.email}
+                                            value={loginData.email}
                                             onChange={handleFormData}
                                             size='lg'
                                             required
-                                            className='signin-input'
+                                            className='login-input'
                                         />
-                                        <InputGroup.Text className='signin-input-addon'><img src={deleteIcon} alt="delete icon"></img></InputGroup.Text>
+                                        <InputGroup.Text className='login-input-addon'><img src={deleteIcon} alt="delete icon"></img></InputGroup.Text>
                                     </InputGroup>
                                 </Form.Group>
 
@@ -62,20 +62,20 @@ const SignIn = () => {
                                             type='password' 
                                             placeholder='Enter Password' 
                                             name='password'
-                                            value={signInData.password}
+                                            value={loginData.password}
                                             onChange={handleFormData}
                                             size='lg'
                                             required
-                                            className='signin-input'
+                                            className='login-input'
                                         />
-                                        <InputGroup.Text className='signin-input-addon'><img src={hideIcon} alt="icon"></img></InputGroup.Text>
+                                        <InputGroup.Text className='login-input-addon'><img src={hideIcon} alt="icon"></img></InputGroup.Text>
                                     </InputGroup>
                                     <p className="text-end mt-2" >
                                         <a href="#" className = "recover-password">Recover Password?</a>
                                     </p>
                                 </Form.Group>
 
-                                <Button className='btn-submit-signin' type='submit'>Sign In</Button>
+                                <Button className='btn-submit-login' type='submit'>Sign In</Button>
 
                             </Form>
 
@@ -84,7 +84,7 @@ const SignIn = () => {
                                 <div className='continue'>Or continue with</div>
                                 <hr className='line-continue'/>
                             </div>
-                            <a href='#' className='google-signin'><img src={googleIcon}/></a>
+                            <a href='#' className='google-login'><img src={googleIcon}/></a>
 
                         </Card.Body>
                     </Card>
@@ -94,4 +94,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+export default Login
