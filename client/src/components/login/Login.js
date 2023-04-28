@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 import './Login.css'
 import deleteIcon from '../../images/email-delete-icon.png'
 import hideIcon from '../../images/hide-password-icon.png'
@@ -33,58 +34,62 @@ const Login = () => {
     }
 
     return (
-        <Container>
+        <Container className='container-login-page'>
             <Row>
-                <Col>
-                    <Card className="container-login  p-5 mx-auto rounded-5">
-                        <Card.Body>
-                            <Form onSubmit={handleSubmit} >
-                                
-                                <Form.Group className='mb-3'>
-                                    <InputGroup>
-                                        <Form.Control 
-                                            type='email'
-                                            placeholder='Enter Email' 
-                                            name='email'
-                                            value={loginData.email}
-                                            onChange={handleFormData}
-                                            size='lg'
-                                            required
-                                            className='login-input'
-                                        />
-                                        <InputGroup.Text className='login-input-addon'><img src={deleteIcon} alt="delete icon"></img></InputGroup.Text>
-                                    </InputGroup>
-                                </Form.Group>
+               <Col className='d-flex justify-content-center'>
+                    <div className='page-title-text'>Sign in to <strong>Travel2Connect</strong></div>
+               </Col>
+               
+                
+                <Col className='d-flex justify-content-center'>
+                    <Card className="container-card">
+                        <Card.Body className='p-0'>
+                            <Form className='container-form' onSubmit={handleSubmit} >
+                                    <Form.Group>
+                                        <InputGroup className='container-email-input'>
+                                            <Form.Control 
+                                                type='email'
+                                                placeholder='Enter Email' 
+                                                name='email'
+                                                value={loginData.email}
+                                                onChange={handleFormData}
+                                                required
+                                                className='login-input'
+                                            />
+                                            <InputGroup.Text className='login-input-addon'><img src={deleteIcon} alt="delete icon"></img></InputGroup.Text>
+                                        </InputGroup>
+                                    </Form.Group>
 
-                                <Form.Group className='mb-4'>
-                                    <InputGroup>                                    
-                                        <Form.Control 
-                                            type='password' 
-                                            placeholder='Enter Password' 
-                                            name='password'
-                                            value={loginData.password}
-                                            onChange={handleFormData}
-                                            size='lg'
-                                            required
-                                            className='login-input'
-                                        />
-                                        <InputGroup.Text className='login-input-addon'><img src={hideIcon} alt="icon"></img></InputGroup.Text>
-                                    </InputGroup>
-                                    <p className="text-end mt-2" >
-                                        <a href="#" className = "recover-password">Recover Password?</a>
-                                    </p>
-                                </Form.Group>
-
-                                <Button className='btn-submit-login' type='submit'>Sign In</Button>
+                                    <Form.Group>
+                                        <InputGroup className='container-password-input'>                                    
+                                            <Form.Control 
+                                                type='password' 
+                                                placeholder='Enter Password' 
+                                                name='password'
+                                                value={loginData.password}
+                                                onChange={handleFormData}
+                                                required
+                                                className='login-input'
+                                            />
+                                            <InputGroup.Text className='login-input-addon'><img src={hideIcon} alt="hide icon"></img></InputGroup.Text>
+                                            
+                                        </InputGroup>
+                                        <div className='container-recover-password'>
+                                            <Link to='/' className='recover-password-btn'>Recover Password?</Link>
+                                        </div>
+                                        
+                                    </Form.Group>
+                                    
+                                    <Button className='btn-submit-login' type='submit'>Sign In</Button>
 
                             </Form>
 
                             <div className='container-continue'>
                                 <hr className='line-continue'/>
-                                <div className='continue'>Or continue with</div>
+                                <div className='continue-text'>Or continue with</div>
                                 <hr className='line-continue'/>
                             </div>
-                            <a href='#' className='google-login'><img src={googleIcon}/></a>
+                            <Link to='/' className='google-login'><img src={googleIcon} alt='google icon'/></Link>
 
                         </Card.Body>
                     </Card>
