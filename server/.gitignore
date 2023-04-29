@@ -33,3 +33,5 @@ coverage/
 #digicert
 *.crt
 *.pem
+package-lock.json
+
