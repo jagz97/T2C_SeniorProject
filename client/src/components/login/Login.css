@@ -119,6 +119,7 @@
   .btn-submit-login:focus,
   .btn-submit-login:active  {
     background-color: rgba(60,58,131,.8) !important; /*Not sure if !important is bad practice*/
+    color: rgba(255,255,255,.8);
     box-shadow:none;
   }
   

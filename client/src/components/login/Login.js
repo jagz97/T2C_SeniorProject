@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useRef,useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import './Login.css'
 import deleteIcon from '../../images/email-delete-icon.png'
@@ -14,23 +14,40 @@ import InputGroup from 'react-bootstrap/InputGroup'
 
 const Login = () => {
 
-    // A state object to store form data
-    const [loginData, setLoginData] = useState({email : '', password : ''})
+    const [emailData, setEmailData] = useState('')
+    const [passwordData, setPasswordData] = useState('')
 
-    // An onChange event handler for all form inputs
-    const handleFormData = (event) => {
-        const {name, value} = event.target
-        setLoginData((prevData) => ({
-            ...prevData,
-            [name] : value
-       }))
-    } 
+    // State for toggling pwd input visibility
+    const [showPassword, setShowPassword] = useState(false)
 
+    const emailInputRef = useRef(null);
+
+    const handleEmailData = (event) => {
+        setEmailData(event.target.value)
+    }
+
+    const handlePasswordData = (event) => {
+        setPasswordData(event.target.value)
+    }
+
+    // For email input text reset   
+   useEffect(() => {
+      emailInputRef.current.focus();
+   }, [emailData]);
+
+    // onclick handler for email text reset
+    const resetText = () => setEmailData('')
+    
+    // onclick handler for revealing pwd text
+    const toggleHidden = () => setShowPassword(!showPassword)
+    
     // An onSubmit event handler which for now logs
     // the captured form data to the console
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(loginData)
+        console.log(emailData,passwordData)
+        // setPasswordData('')
+        // setEmailData('')
     }
 
     return (
@@ -40,7 +57,6 @@ const Login = () => {
                     <div className='page-title-text'>Sign in to <strong>Travel2Connect</strong></div>
                </Col>
                
-                
                 <Col className='d-flex justify-content-center'>
                     <Card className="container-card">
                         <Card.Body className='p-0'>
@@ -50,28 +66,31 @@ const Login = () => {
                                             <Form.Control 
                                                 type='email'
                                                 placeholder='Enter Email' 
-                                                name='email'
-                                                value={loginData.email}
-                                                onChange={handleFormData}
+                                                value={emailData}
+                                                onChange={handleEmailData}
                                                 required
                                                 className='login-input'
+                                                ref={emailInputRef}
                                             />
-                                            <InputGroup.Text className='login-input-addon'><img src={deleteIcon} alt="delete icon"></img></InputGroup.Text>
+                                            <InputGroup.Text className='login-input-addon' onClick={resetText}>
+                                                <img src={deleteIcon} alt="delete icon"></img>
+                                            </InputGroup.Text>
                                         </InputGroup>
                                     </Form.Group>
 
                                     <Form.Group>
                                         <InputGroup className='container-password-input'>                                    
                                             <Form.Control 
-                                                type='password' 
+                                                type={ showPassword ? 'text': 'password'} 
                                                 placeholder='Enter Password' 
-                                                name='password'
-                                                value={loginData.password}
-                                                onChange={handleFormData}
+                                                value={passwordData}
+                                                onChange={handlePasswordData}
                                                 required
                                                 className='login-input'
                                             />
-                                            <InputGroup.Text className='login-input-addon'><img src={hideIcon} alt="hide icon"></img></InputGroup.Text>
+                                            <InputGroup.Text className='login-input-addon' onClick={toggleHidden}>
+                                                <img src={hideIcon} alt="hide icon"></img>
+                                            </InputGroup.Text>
                                             
                                         </InputGroup>
                                         <div className='container-recover-password'>
@@ -81,7 +100,6 @@ const Login = () => {
                                     </Form.Group>
                                     
                                     <Button className='btn-submit-login' type='submit'>Sign In</Button>
-
                             </Form>
 
                             <div className='container-continue'>
