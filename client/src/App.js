@@ -1,12 +1,14 @@
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
+import ProfilePage from './pages/ProfilePage'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<LoginPage/>}/>
+        {/* <Route path='/' element={<LoginPage/>}/> */}
         {/*For now set route for LoginPage to '/' */}
+        <Route path='/' element={<ProfilePage/>}/>
       </Routes>
     </BrowserRouter>
   );

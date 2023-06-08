@@ -1,0 +1,43 @@
+body {
+    background-image: none;
+    background-color: #1E1E1E;
+    font-family: 'DM Sans', sans-serif; /*probably should add this in index.css*/
+    color: #fff;
+}
+
+/* =================
+    Places Visited
+        Section
+  ================= */
+.places-visited-heading {
+    font-weight: 700;
+}
+
+.places-visited-subheading {
+    color: #404040;
+    font-weight: 500;
+
+    font-family: 'Urbanist';
+}
+
+
+/* =================
+    Profile Posts 
+        Section
+  ================= */
+.profile-post-header {
+    text-transform: uppercase;
+    color:#8B2CFF;
+    font-size: 1.5rem;
+}
+
+.profile-post-header img {
+    margin-right: 8px;
+}
+
+.profile-post-line {
+    width: 140px;
+    height: 6px;
+    border-radius: 500px;
+    background-color: #8B2CFF;
+}
