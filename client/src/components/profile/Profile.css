@@ -6,6 +6,46 @@ body {
 }
 
 /* =================
+    Banner Section
+  ================= */
+.profile-banner {
+    display: block;
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.profile-about {
+    background-color: #2a2a2a;
+    width: 90%;
+    max-width: 750px;
+    min-height: 230px;
+    border-radius: 20px;
+    margin: 175px auto 75px;
+    font-size: 28px;
+    padding: 1.5em;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.container-profile-picture {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 375px;
+    height: 375px;
+    border: 20px solid rgba(139, 44, 255, .3);
+    border-radius: 50%;
+}
+
+.profile-picture {
+    width: 100%;
+    border-radius: 50%;
+}
+
+/* =================
     Places Visited
         Section
   ================= */
@@ -16,7 +56,6 @@ body {
 .places-visited-subheading {
     color: #404040;
     font-weight: 500;
-
     font-family: 'Urbanist';
 }
 

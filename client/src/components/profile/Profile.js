@@ -6,22 +6,43 @@ import Row from 'react-bootstrap/Row'
 import PlaceVisited from '../placeVisited/PlaceVisited'
 import ProfilePost from '../profilePost/ProfilePost'
 import PostHeaderImg from '../../images/Union 3.png'
-
+import ProfileBanner from '../../images/pexels-venelin-dimitrov-3476312.jpg'
 
 
 
 const Profile = () => {
     return (
         <div>
-            {/* <Navbar/> */}
+            <section className="profile-intro">
+                <Container fluid>
+                    <Row>
+                        <Col className="px-0" style={{position:"relative"}}>
+                            <div className="container-profile-picture">
+                                <img src="https://picsum.photos/700/700" alt="user profile avatar" className="profile-picture"/>
+                            </div>
+                            <img src={ProfileBanner} alt="user profile banner" className="profile-banner"/>
+                            <div className="profile-about">                      
+                                {/* 255 character placeholder text */}
+                                Lorem ipsum dolor sit amet, 
+                                consectetuer adipiscing elit. 
+                                Aenean commodo ligula eget dolor. Aenean massa. 
+                                Cum sociis natoque penatibus et magnis dis parturient montes, 
+                                nascetur ridiculus mus. Donec quam felis, 
+                                ultricies nec, pellentesque eu, pretium quis,
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
+            </section>
+           
             <section className="profile-places-visited">
                 {/* Fluid Container Unitl Large Breakpoint */}
-                <Container fluid="xl"> 
+                <Container className="my-3" fluid="xl"> 
                     <Row className="justify-content-center mx-auto" style={{width:"100%"}}>
                         {/* Places Visited Section Header */}
                         <Col className="col-12">
                             <div className="text-center text-md-start">
-                                <h2 className="display-4 places-visited-heading">Places Visited</h2>
+                                <h2 className="display-5 places-visited-heading">Places Visited</h2>
                                 <h4 className="places-visited-subheading">Ratings of the Experiences</h4>
                             </div>
                         </Col>
@@ -44,7 +65,7 @@ const Profile = () => {
                             <div className="d-flex flex-column align-items-center" style={{height:"100%"}}>
                                 <div className="profile-post-line"></div>
                                 <div className="profile-post-header mt-2 mx-auto d-flex align-items-center">
-                                    <img src={PostHeaderImg}/>posts
+                                    <img src={PostHeaderImg} alt="post header icon"/>posts
                                 </div>
                             </div>
                         </Col>
