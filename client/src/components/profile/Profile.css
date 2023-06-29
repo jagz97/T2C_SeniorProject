@@ -36,7 +36,7 @@ body {
     transform: translate(-50%);
     width: 375px;
     height: 375px;
-    border: 20px solid rgba(139, 44, 255, .3);
+    border: 27px solid rgba(139, 44, 255, .3);
     border-radius: 50%;
 }
 
