@@ -6,7 +6,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path='/' element={<LoginPage/>}/> */}
+        <Route path='/test' element={<LoginPage/>}/>
         {/*For now set route for LoginPage to '/' */}
         <Route path='/' element={<ProfilePage/>}/>
       </Routes>

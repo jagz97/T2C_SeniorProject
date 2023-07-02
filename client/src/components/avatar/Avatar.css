@@ -17,14 +17,13 @@
 
 .avatar svg {
     display: block;
-    margin: auto;
     width: 70%;
     height: 100%;
     color: #fff;
 }
+
 .avatar-border {
     border: 27px solid rgba(139, 44, 255, .3);
     border-radius: 50%;
 }
-
 

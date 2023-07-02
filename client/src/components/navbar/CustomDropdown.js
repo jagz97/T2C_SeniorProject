@@ -8,7 +8,7 @@ const CustomDropdown = React.forwardRef(({ children, onClick }, ref) => (
         onClick(e);
         
       }}
-      style={{cursor: "pointer"}}
+      className="custom-dropdown"
     >
       {children}
     </div>
