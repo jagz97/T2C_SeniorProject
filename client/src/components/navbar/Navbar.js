@@ -1,4 +1,5 @@
 import React from 'react'
+import Avatar from '../avatar/Avatar'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavbarBootstrap from 'react-bootstrap/Navbar';
@@ -34,7 +35,7 @@ const Navbar = () => {
                 <Dropdown.Item>Yet Another Option</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            <Nav.Link href="#" className="d-none d-sm-block"><div style={{ border: "1px solid #fff", borderRadius: "50%", width: "40px", height: "40px", backgroundColor: "plum" }}></div></Nav.Link>
+            <Nav.Link href="#" className="d-none d-sm-block"><Avatar src="https://picsum.photos/700/700" alt="avatar photo" size={45}/></Nav.Link>
           </Nav>
         </NavbarBootstrap.Collapse>
       </Container>

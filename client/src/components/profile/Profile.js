@@ -1,5 +1,6 @@
 import React from 'react'
 import './Profile.css'
+import Avatar from '../avatar/Avatar'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -20,7 +21,8 @@ const Profile = () => {
                     <Row>
                         <Col className="px-0" style={{position:"relative"}}>
                             <div className="container-profile-picture">
-                                <img src="https://picsum.photos/700/700" alt="user profile avatar" className="profile-picture"/>
+                                {/* <img src="https://picsum.photos/700/700" alt="user profile avatar" className="profile-picture"/> */}
+                                <Avatar src="https://picsum.photos/700/700" alt="avatar photo" size={375} border/>
                             </div>
                             <img src={ProfileBanner} alt="user profile banner" className="profile-banner"/>
                             <div className="profile-about">                      

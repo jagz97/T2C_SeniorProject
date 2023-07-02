@@ -34,10 +34,6 @@ body {
     top: 20%;
     left: 50%;
     transform: translate(-50%);
-    width: 375px;
-    height: 375px;
-    border: 27px solid rgba(139, 44, 255, .3);
-    border-radius: 50%;
 }
 
 .profile-picture {
