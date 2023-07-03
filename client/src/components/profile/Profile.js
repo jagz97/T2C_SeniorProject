@@ -5,12 +5,10 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Navbar from '../navbar/Navbar'
-import PlaceVisited from '../placeVisited/PlaceVisited'
-import ProfilePost from '../profilePost/ProfilePost'
+import PlaceVisited from './PlaceVisited'
+import ProfilePost from './ProfilePost'
 import PostHeaderImg from '../../images/Union 3.png'
 import ProfileBanner from '../../images/pexels-venelin-dimitrov-3476312.jpg'
-
-
 
 const Profile = () => {
     return (
@@ -52,8 +50,8 @@ const Profile = () => {
 
                         {/*Places Visited Content*/}
                         {/* Hard Code some content for now */}
-                        <PlaceVisited/>
-                        <PlaceVisited/>
+                        <PlaceVisited rating={5}/>
+                        <PlaceVisited rating={1}/>
                         <PlaceVisited/> 
                       
                     </Row>

@@ -12,7 +12,6 @@ import {
   MoreVerticalFill
 } from 'akar-icons'
 
-
 /* may need to import react router bootstrap at some point for the nav items */
 const Navbar = () => {
   return (
