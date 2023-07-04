@@ -8,7 +8,8 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import ProfileBanner from '../../images/pexels-venelin-dimitrov-3476312.jpg'
-import {BsGrid3X3} from 'react-icons/bs'
+import { BsGrid3X3 } from 'react-icons/bs'
+
 const Profile = () => {
     return (
         <div>
