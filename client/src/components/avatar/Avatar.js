@@ -7,10 +7,12 @@ import {
 const Avatar = ({src,alt,size,border}) => {
     let render = "";
 
+    // if no size prop given default dimension 50x50
     let sizeStyle = size ? {width: size, height: size} : {width: "50px", height: "50px"}
 
     let avatarBorder = border && "avatar-border"
-
+    
+    // render either user img or anonymous icon
     if(src) {
         render = <img src={src} alt={alt}/>
     }

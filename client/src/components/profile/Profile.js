@@ -1,15 +1,14 @@
 import React from 'react'
 import './Profile.css'
 import Avatar from '../avatar/Avatar'
-import Container from 'react-bootstrap/Container'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
 import Navbar from '../navbar/Navbar'
 import PlaceVisited from './PlaceVisited'
 import ProfilePost from './ProfilePost'
-import PostHeaderImg from '../../images/Union 3.png'
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
+import Row from 'react-bootstrap/Row'
 import ProfileBanner from '../../images/pexels-venelin-dimitrov-3476312.jpg'
-
+import {BsGrid3X3} from 'react-icons/bs'
 const Profile = () => {
     return (
         <div>
@@ -18,10 +17,10 @@ const Profile = () => {
                 <Container fluid>
                     <Row>
                         <Col className="px-0" style={{position:"relative"}}>
-                            <div className="container-profile-picture">
-                                <Avatar src="https://picsum.photos/700/700" alt="avatar photo" size={375} border/>
-                            </div>
                             <img src={ProfileBanner} alt="user profile banner" className="profile-banner"/>
+                            <div className="container-profile-picture">
+                                <Avatar size={375} border/>
+                            </div>
                             <div className="profile-about">                      
                                 {/* 255 character placeholder text */}
                                 Lorem ipsum dolor sit amet, 
@@ -50,9 +49,9 @@ const Profile = () => {
 
                         {/*Places Visited Content*/}
                         {/* Hard Code some content for now */}
-                        <PlaceVisited rating={5}/>
-                        <PlaceVisited rating={1}/>
-                        <PlaceVisited/> 
+                        <PlaceVisited rating={2}/>
+                        <PlaceVisited rating={0}/>
+                        <PlaceVisited rating={3.5}/> 
                       
                     </Row>
                 </Container>
@@ -65,8 +64,9 @@ const Profile = () => {
                         <Col className="col-12">
                             <div className="d-flex flex-column align-items-center" style={{height:"100%"}}>
                                 <div className="profile-post-line"></div>
-                                <div className="profile-post-header mt-2 mx-auto d-flex align-items-center">
-                                    <img src={PostHeaderImg} alt="post header icon"/>posts
+                                <div className="profile-post-header mt-2 mx-auto d-flex align-items-center gap-2">
+                                    
+                                    <BsGrid3X3 size={30}/>posts
                                 </div>
                             </div>
                         </Col>
