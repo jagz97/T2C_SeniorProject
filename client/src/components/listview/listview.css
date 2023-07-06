@@ -1,0 +1,50 @@
+.container-listview {
+    margin-top: 5em; /*Test*/
+    /* background-color: black; */
+}
+
+.container-search {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #21262B;
+    color: #4A545C;
+    border: 1px solid #4A545C;
+}
+
+.input-search {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 24px;
+    height: 25px;
+    padding: 0;
+}
+
+.input-search,
+.input-search::placeholder {
+    color: inherit
+}
+
+.input-search:focus,
+.input-search:active {
+    outline: none;
+}
+
+.listview-posts {
+    min-height: 350px;
+    background-color: #353C43;
+}
+
+.listview-options {
+    padding: .5em 1em;
+    border: 1px #D0D0CE solid;
+    background-color: #21262B;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    display: flex;
+    justify-content: space-between;
+    
+}
