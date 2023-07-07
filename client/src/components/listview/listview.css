@@ -1,8 +1,10 @@
 .container-listview {
     margin-top: 5em; /*Test*/
-    /* background-color: black; */
 }
 
+/* =================
+   Search Bar
+  ================= */
 .container-search {
     display: flex;
     align-items: center;
@@ -18,8 +20,8 @@
     background: none;
     border: none;
     color: inherit;
-    font-size: 24px;
-    height: 25px;
+    font-size: 20px;
+    height: 20px;
     padding: 0;
 }
 
@@ -33,18 +35,70 @@
     outline: none;
 }
 
-.listview-posts {
+/* =================
+    Main Content
+  ================= */
+
+.listview {
     min-height: 350px;
     background-color: #353C43;
 }
 
-.listview-options {
-    padding: .5em 1em;
+.container-listview-filter{
     border: 1px #D0D0CE solid;
     background-color: #21262B;
     border-top-left-radius: 9px;
     border-top-right-radius: 9px;
+    font-size: .8rem;
+}
+
+.listview-filters {
+    width: 85%;
     display: flex;
     justify-content: space-between;
-    
+    align-items: center;
+    padding: .5em 0 .5em 5em;
+    vertical-align: middle;
+}
+
+.listview-post {
+    border-bottom: 1px #D0D0CE solid;
+}
+
+.listview-post-items {
+    font-size: .8rem;
+    width: 85%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    padding-left: 5.2em;
+}
+
+.listview-item,
+.listview-filter {
+    width: 65px;
+}
+
+.listview-post-icons {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 8px;
+    align-self: center;
+    width: 10%;
+}
+
+.listview-icon {
+    background-color: rgb(139, 44, 255);
+    padding: .2em .4em;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+@media (max-width: 761px ) {
+    .listview-filters,
+    .listview-post-items {
+        padding-left: 2em;
+    }
 }

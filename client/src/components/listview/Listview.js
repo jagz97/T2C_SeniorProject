@@ -2,6 +2,7 @@ import React from 'react'
 import './listview.css'
 import Navbar from '../navbar/Navbar'
 import ListviewFilter from './ListviewFilter'
+import ListviewPost from './ListviewPost'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -20,7 +21,7 @@ const Listview = () => {
                     <Col className="rounded-4 py-2" style={{ minHeight: 600}}>
                         {/* List Component */}
                         <div className="container-search p-2 rounded-2">
-                            <span><Search size={25}/></span>
+                            <span><Search size={20}/></span>
                             <input 
                                 className="input-search shadow-none" 
                                 type="text"
@@ -29,16 +30,21 @@ const Listview = () => {
                                 placeholder="Search"
                             />
                         </div>
-                        <div className="listview-posts mt-3">
-                            <div className="listview-options">
-                                <ListviewFilter>Photo</ListviewFilter>
-                                <ListviewFilter>Location</ListviewFilter>
-                                <ListviewFilter>Caption</ListviewFilter>
-                                <ListviewFilter>Date</ListviewFilter>
-
+                        <div className="listview mt-3">
+                            <div className="container-listview-filter">
+                                <div className="listview-filters">
+                                    <ListviewFilter hideClass = "d-none d-md-block">Photo</ListviewFilter>
+                                    <ListviewFilter>Location</ListviewFilter>
+                                    <ListviewFilter>Caption</ListviewFilter>
+                                    <ListviewFilter>Date</ListviewFilter>
+                                </div>
                             </div>
-                            {/* Post Elements */}
-
+                            <div className="container-listview-posts">
+                                <ListviewPost/>
+                                <ListviewPost/>
+                                <ListviewPost/>
+                                <ListviewPost/>
+                            </div>
                         </div>
                     </Col>
                 </Row>

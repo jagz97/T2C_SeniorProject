@@ -1,9 +1,11 @@
 import React from 'react'
 import { PiCaretUpDownFill } from 'react-icons/pi'
 
-const ListviewFilter = ({children}) => {
+const ListviewFilter = ({children, hideClass}) => {
+    const filterClass = hideClass ? `listview-filter ${hideClass}` : `listview-filter`
+   
     return (
-        <div>{children} <PiCaretUpDownFill/></div>
+        <div className={filterClass}>{children}<PiCaretUpDownFill size={14}/></div>
     )
 }
 
