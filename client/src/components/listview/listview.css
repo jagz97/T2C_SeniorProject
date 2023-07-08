@@ -44,7 +44,7 @@
     background-color: #353C43;
 }
 
-.container-listview-filter{
+.container-listview-sorter {
     border: 1px #D0D0CE solid;
     background-color: #21262B;
     border-top-left-radius: 9px;
@@ -52,13 +52,17 @@
     font-size: .8rem;
 }
 
-.listview-filters {
+.listview-sorters {
     width: 85%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: .5em 0 .5em 5em;
     vertical-align: middle;
+}
+
+.listview-sorter {
+    cursor: pointer;
 }
 
 .listview-post {
@@ -76,8 +80,15 @@
 }
 
 .listview-item,
-.listview-filter {
-    width: 65px;
+.listview-sorter {
+    width: 100px;
+}
+
+.listview-item {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #EAF0F7;
 }
 
 .listview-post-icons {
@@ -85,19 +96,20 @@
     align-items: center;
     flex-direction: column;
     gap: 8px;
-    align-self: center;
     width: 10%;
+    color: #fff;
 }
 
 .listview-icon {
-    background-color: rgb(139, 44, 255);
-    padding: .2em .4em;
-    border-radius: 8px;
+    background-color: rgba(139, 44, 255,.5);
+    padding: 3px 9px;
+    border-radius: 5px;
     font-size: 20px;
+    cursor: pointer;
 }
 
 @media (max-width: 761px ) {
-    .listview-filters,
+    .listview-sorters,
     .listview-post-items {
         padding-left: 2em;
     }
