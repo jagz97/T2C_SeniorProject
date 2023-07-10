@@ -114,3 +114,40 @@
         padding-left: 2em;
     }
 }
+
+.listview-modal .modal-content {
+    background-color: #21262B;
+    border: none;
+}
+
+.listview-modal .modal-header,
+.listview-modal .modal-footer {
+    border: none;
+}
+
+.listview-btn {
+    background-color:rgba(139, 44, 255,.5);
+    border: none;
+    border-radius: 5px;
+    padding: 0.3em 0.7em;
+    color: #fff;
+}
+
+.listview-update-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.listview-update-input {
+    display: inline-block;
+    width: 49%;
+    border-radius: 5px;
+    padding: .3em .4em;
+    border: none;
+}
+
+textarea.listview-update-input {
+    width: 100%;
+    margin-top: 0.3em;
+}
+
