@@ -3,7 +3,7 @@ import React from 'react'
 // Can change these icons to a more similar icon in figma
 import { RiPencilLine, RiDeleteBin7Line} from 'react-icons/ri'
 
-const ListviewPost = ({postData, update, remove}) => {
+const ListviewPost = ({postData, showUpdateModal, showRemoveModal}) => {
 
     const { id, location, caption, date } = postData
 
@@ -16,10 +16,10 @@ const ListviewPost = ({postData, update, remove}) => {
                 <div className='listview-item'>{date}</div>
             </div>
             <div className="listview-post-icons d-flex flex-md-row">
-                <div className="listview-icon" onClick={update}>
+                <div className="listview-icon" onClick={showUpdateModal}>
                     <RiPencilLine/>  
                 </div>
-                <div className="listview-icon" onClick={remove}>
+                <div className="listview-icon" onClick={showRemoveModal}>
                     <RiDeleteBin7Line/>
                 </div>
             </div>

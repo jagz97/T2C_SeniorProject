@@ -136,6 +136,7 @@
 .listview-update-container {
     display: flex;
     justify-content: space-between;
+    align-content: center;
 }
 
 .listview-update-input {

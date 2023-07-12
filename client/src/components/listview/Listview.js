@@ -1,15 +1,14 @@
 import React from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import './listview.css'
 import Navbar from '../navbar/Navbar'
 import ListviewSorter from './ListviewSorter'
 import ListviewPost from './ListviewPost'
+import ListviewUpdateModal from './ListviewUpdateModal'
+import ListviewRemoveModal from './ListviewRemoveModal'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-
 
 import {
     Search,
@@ -18,6 +17,7 @@ import {
 /*Temporary*/
 import data from './tempdata'
 
+
 const Listview = () => {
 
     const [userPosts, setUserPosts] = useState(data)
@@ -25,10 +25,8 @@ const Listview = () => {
     const [prevSorter, setPrevSorter] = useState("")
 
     const [showRemove, setShowRemove] = useState(false)
-    const [showUpdate, setShowupdate] = useState(false)
+    const [showUpdate, setShowUpdate] = useState(false)
 
-    const [editData, setEditData] = useState({caption: "", location: "", date: ""})
-    
     // Reference to the post that we 
     // may remove or modify
     const IdRef = useRef(null)
@@ -58,79 +56,68 @@ const Listview = () => {
 
     }
 
+    // style dropdowns
+    const handleUpdate = (postId, updateData) => {
+        console.log(`update should happen for ${postId}`)
+        const {  
+            caption,
+            location,
+            year,
+            month,
+            day
+        } =  updateData
 
-    const updateHandler = (postId) => {
-        if(!showUpdate) {
-            IdRef.current = postId
-            setShowupdate(true)
-        }
-        else {
-            setUserPosts((prevPost) => {
-                return prevPost.map((post) => {
-                    if(post.id === postId) {
-                        let k = {
-                            id: post.id,
-                            caption: editData.caption || post.caption,
-                            location: editData.location || post.location,
-                            date: editData.date || post.date
-                        }
-                        console.log(k)
-                        return k
-                    }
-                    else {
-                        return post
+        // Convert Month String to Number
+        const monthNum = new Date(`${month}, ${day} ${year} `).getMonth() + 1
+
+        setUserPosts((prevPosts) => {
+            return prevPosts.map((post) => {
+                if(postId === post.id) {
+                    return  {
+                        id: post.id,
+                        location: location || post.location,
+                        caption: caption || post.caption,
+                        date: `${year}/${monthNum}/${day}` || post.date
                     }
                 }
-                )})
-            setEditData({caption:"", location:"", date:""})
-            IdRef.current = null
-            setShowupdate(false)
-        }
-    }
-
-    const handleUpdateInputs = (event) => {
-        const {value, name} = event.target
-        setEditData((prevData) => ({
-            ...prevData,
-            [name] : value
-        }))
-    }
-    const closeUpdate = () => setShowupdate(false)
-
-    const removeHandler = (postId) => { 
-        if(!showRemove) {
-            IdRef.current = postId
-            setShowRemove(true)
-        }
-        
-        else {
-            // console.log(IdRef)
-            setUserPosts((prevPosts) => {
-                let updatedPosts = [...prevPosts]
-                return updatedPosts.filter((post) => {
-                    if(post.id !== postId) 
-                        return post  
-                })
+                else {
+                    return post
+                }
             })
-            IdRef.current = null
-            // Maybe do a POST request here
-            setShowRemove(false)
-        }
-    }
-
-    const closeRemove = () => {
+        })
+        setShowUpdate(false)
         IdRef.current = null
-        setShowRemove(false)
     }
-
+    
+    const handleRemove = (postId) => { 
+        console.log(`post to remove ${IdRef.current}`)
+        setUserPosts((prevPosts) => {
+            let updatedPosts = [...prevPosts]
+            return updatedPosts.filter((post) => {
+                if(post.id !== postId) 
+                    return post  
+            })
+        })
+        
+        // reset ref for the next post to be removed/updated
+        IdRef.current = null
+        // Maybe do a POST request here
+        setShowRemove(false)
+        
+    }
 
     const postElements = userPosts.map((post) => (
         <ListviewPost
             key = {post.id}
             postData = {post}
-            update = {() => updateHandler(post.id)}
-            remove = {() => removeHandler(post.id)}
-        />
+            showUpdateModal = {() => {
+                setShowUpdate(true)
+                IdRef.current = post.id
+            }}
+            showRemoveModal = {() => {
+                setShowRemove(true)
+                IdRef.current = post.id
+            }}/>
     ))
 
     return (
@@ -169,67 +156,32 @@ const Listview = () => {
                 </Row>
             </Container>
 
-        
-            <Modal show={showRemove} centered dialogClassName="listview-modal">
-                <Modal.Header>
-                    <Modal.Title>Confirm Post Deletion</Modal.Title>
-                </Modal.Header>
-                <Modal.Body ><h5>Are you sure you want to remove this Post?</h5></Modal.Body>
-                <Modal.Footer>
-                    <button className="listview-btn" onClick={closeRemove}>
-                        Cancel
-                    </button>
-                    <button className="listview-btn" onClick={() => removeHandler(IdRef.current)}>
-                        Delete Post
-                    </button>
-                </Modal.Footer>
-            </Modal>
-            
+            <ListviewRemoveModal
+                title="Confirm Post Deletion"
+                stateShow={showRemove}
+                closeModalHandler={() => {
+                    IdRef.current = null
+                    setShowRemove(false)
+                }}
+                confirmHandler={() => handleRemove(IdRef.current)}
+            >
+                <h5>Are you sure you want to remove this Post?</h5>
+            </ListviewRemoveModal>
 
-            <Modal show={showUpdate} centered dialogClassName="listview-modal">
-                <Modal.Header>
-                    <Modal.Title>Edit Post</Modal.Title>
-                </Modal.Header>
-                <Modal.Body >
-                    <h5>Enter New Post Information</h5>
-                    <textarea 
-                        className="listview-update-input"
-                        name="caption"
-                        value= {editData.caption}
-                        onChange={handleUpdateInputs}
-                        placeholder="Caption" 
-                    />   
-                    <div className="listview-update-container">
-                        <input 
-                            className="listview-update-input"
-                            type="text" 
-                            name="location"
-                            value={editData.location}
-                            onChange={handleUpdateInputs}
-                            placeholder="Location" 
-                        />
-                        <input 
-                            className="listview-update-input"
-                            name="date"
-                            value={editData.date}
-                            onChange={handleUpdateInputs}
-                            type="date" 
-                        />
-                    </div>
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <button className="listview-btn" onClick={closeUpdate}>
-                        Cancel
-                    </button>
-                    <button className="listview-btn" onClick={() => updateHandler(IdRef.current)}>
-                        Confirm Edit
-                    </button>
-                </Modal.Footer>
-            </Modal>
-
+            <ListviewUpdateModal
+                title="Edit Post"
+                stateShow={showUpdate}
+                closeModalHandler={() => {
+                    IdRef.current = null
+                    setShowUpdate(false)
+                }}
+                confirmHandler={handleUpdate}
+                postId = {IdRef.current}
+            >
+            </ListviewUpdateModal>
         </div>
     )
 }
 
 export default Listview
+
