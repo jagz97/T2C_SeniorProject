@@ -14,7 +14,9 @@ const DatePickerYear = ({value,setYear,max,min}) => {
        <select
         value={value}
         onChange={(event) => setYear(event.target.value)}
+        className="datepicker-year"
       >
+        <option value="" className="default-option" disabled>Year</option>
         {fillYearOptions()}
       </select>
     </>

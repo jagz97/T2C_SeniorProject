@@ -17,7 +17,6 @@ import {
 /*Temporary*/
 import data from './tempdata'
 
-
 const Listview = () => {
 
     const [userPosts, setUserPosts] = useState(data)
@@ -56,7 +55,6 @@ const Listview = () => {
 
     }
 
-    // style dropdowns
     const handleUpdate = (postId, updateData) => {
         console.log(`update should happen for ${postId}`)
         const {  
@@ -66,10 +64,17 @@ const Listview = () => {
             month,
             day
         } =  updateData
-
-        // Convert Month String to Number
-        const monthNum = new Date(`${month}, ${day} ${year} `).getMonth() + 1
-
+        
+        
+        let newDate
+        // if all entries have been filled in the date picker
+        // set the new date otherwise the date will stay same
+        if(year && month && day) {
+            // Convert Month String to Number
+            const monthNum = new Date(`${month}, ${day} ${year} `).getMonth() + 1
+            newDate = `${year}/${monthNum}/${day}`
+        }
+        
         setUserPosts((prevPosts) => {
             return prevPosts.map((post) => {
                 if(postId === post.id) {
@@ -77,7 +82,7 @@ const Listview = () => {
                         id: post.id,
                         location: location || post.location,
                         caption: caption || post.caption,
-                        date: `${year}/${monthNum}/${day}` || post.date
+                        date: newDate || post.date
                     }
                 }
                 else {
@@ -125,7 +130,7 @@ const Listview = () => {
             <Navbar/>
             <Container className="container-listview" >
                 <Row className="rounded-4 mx-auto" style={{backgroundColor: "rgba(139, 44, 255, .3)"}}>
-                    <Col className="rounded-4 py-2" style={{ minHeight: 600}}>
+                    <Col className="rounded-4 py-2" style={{ minHeight: 500}}>
                         <div className="container-search p-2 rounded-2">
                             <span><Search size={20}/></span>
                             <input 
@@ -165,7 +170,6 @@ const Listview = () => {
                 }}
                 confirmHandler={() => handleRemove(IdRef.current)}
             >
-                <h5>Are you sure you want to remove this Post?</h5>
             </ListviewRemoveModal>
 
             <ListviewUpdateModal

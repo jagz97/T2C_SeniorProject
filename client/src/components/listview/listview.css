@@ -115,6 +115,11 @@
     }
 }
 
+
+/* =================
+        Modals
+  ================= */
+  
 .listview-modal .modal-content {
     background-color: #21262B;
     border: none;
@@ -133,22 +138,26 @@
     color: #fff;
 }
 
-.listview-update-container {
+.listview-update-row {
     display: flex;
     justify-content: space-between;
-    align-content: center;
 }
 
-.listview-update-input {
-    display: inline-block;
-    width: 49%;
+.listview-update-caption {
+    width: 100%;
     border-radius: 5px;
     padding: .3em .4em;
     border: none;
 }
 
-textarea.listview-update-input {
-    width: 100%;
-    margin-top: 0.3em;
+.listview-update-location {
+    width: 43%;
+}
+
+.listview-update-caption,
+.listview-update-location {
+    border-radius: 5px;
+    padding: .3em .4em;
+    border: none;
 }
 

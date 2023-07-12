@@ -7,17 +7,18 @@ const ListviewModal = ({ title, stateShow, closeModalHandler, confirmHandler, po
     const [caption, setCaption] = useState("")
     const [location, setLocation] = useState("")
 
-
     const currentYear = new Date().getFullYear();
     
-    const [day, setDay] = useState("1");
-    const [month, setMonth] = useState("January");
-    const [year, setYear] = useState(`${currentYear}`);
+    // Could have date parts in a state object 
+    // but makes it harder to change individual states
+    const [day, setDay] = useState("");
+    const [month, setMonth] = useState("");
+    const [year, setYear] = useState("");
     
     const resetInputs = () => {
-        setDay("1")
-        setMonth("January")
-        setYear(`${currentYear}`)
+        setDay("")
+        setMonth("")
+        setYear("")
         setCaption("")
         setLocation("")
     }
@@ -30,23 +31,24 @@ const ListviewModal = ({ title, stateShow, closeModalHandler, confirmHandler, po
                 </Modal.Header>
                 <Modal.Body >
                 <h5>Enter New Post Information</h5>
+                <div className="listview-update-container">
                     <textarea 
-                        className="listview-update-input"
+                        className="listview-update-caption"
                         name="caption"
                         value= {caption}
                         onChange={(e) => setCaption(e.target.value)}
                         placeholder="Caption" 
                     />   
-                    <div className="listview-update-container">
+                    <div className="listview-update-row">
                         <input 
-                            className="listview-update-input"
+                            className="listview-update-location"
                             type="text" 
                             name="location"
                             value={location}
                             onChange={(e) => setLocation(e.target.value)}
                             placeholder="Location" 
                         />
-                        <DatePicker>
+                        <DatePicker size={"55%"}>
                             <DatePicker.Year
                                 value={year}
                                 setYear={(year) => setYear(year)}
@@ -66,9 +68,13 @@ const ListviewModal = ({ title, stateShow, closeModalHandler, confirmHandler, po
                             />
                         </DatePicker>
                     </div>
+                </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className="listview-btn" onClick={closeModalHandler}>
+                    <button className="listview-btn" onClick={() => {
+                        closeModalHandler()
+                        resetInputs()
+                    }}>
                         Cancel
                     </button>
                     <button className="listview-btn" onClick={() => {

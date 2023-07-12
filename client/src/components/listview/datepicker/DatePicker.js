@@ -1,10 +1,15 @@
 import React from 'react'
+import './datepicker.css'
 import { useState } from 'react'
 
-const DatePicker = ({className,children}) => {
- 
+const DatePicker = ({children, size}) => {
+  
+  const sizeStyle = {
+    width: size || "50%"
+  }
+
   return (
-    <div style={{display: "inline-flex" ,width: "45%"}}>
+    <div className="container-datepicker" style={sizeStyle}>
         {children}    
     </div>
   )

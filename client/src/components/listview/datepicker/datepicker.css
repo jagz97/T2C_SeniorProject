@@ -1,0 +1,15 @@
+.container-datepicker {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-datepicker > select {
+    background-color: #fff;
+    padding: 0 0.3em;
+    border: none;
+    border-radius: 5px;
+}
+
+.default-option {
+    color: #999;
+}

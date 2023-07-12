@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 const DatePickerDay = ({value, setDay, month, year, currDay}) => {
 
-  let numDays
+  let numDays = 30 // by default show 30 days
   let dayOptions = []
   
   if (month === "January" || month === "March" || month === "May" || month === "July" 
@@ -21,6 +21,7 @@ const DatePickerDay = ({value, setDay, month, year, currDay}) => {
     }
 
   }
+
 
   for(let day = 1; day <= numDays; day++ ) {
     dayOptions.push(<option key={day} value={day}>{day}</option>)
@@ -42,7 +43,10 @@ const DatePickerDay = ({value, setDay, month, year, currDay}) => {
         value={value}
         onChange={(event) => {
           setDay(event.target.value)
-        }}>
+        }}
+        className="datepicker-day"
+        >
+        <option value="" className="default-option" disabled>Day</option>
         {dayOptions}
       </select>
     </>
