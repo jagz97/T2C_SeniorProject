@@ -18,10 +18,8 @@ import data from './tempdata'
 const Listview = () => {
 
     const [userPosts, setUserPosts] = useState(data)
-
-    const [renderedPosts, setRenderedPosts] = useState([])
+    const [searchText, setSearchText] = useState("")
     const [prevSorter, setPrevSorter] = useState("")
-
     const [showRemove, setShowRemove] = useState(false)
     const [showUpdate, setShowUpdate] = useState(false)
 
@@ -29,13 +27,8 @@ const Listview = () => {
     // may remove or modify
     const IdRef = useRef(null)
 
-    const searchHandler = (searchText) => {
-        console.log(`Check if ${searchText} exists in posts`)
-      
-    }
-
     const sorterHandler = (sorter) => {
-        setRenderedPosts((prevPosts) => {
+        setUserPosts((prevPosts) => {
             if(sorter === prevSorter) {
                 return [...prevPosts].reverse()
             }
@@ -75,7 +68,7 @@ const Listview = () => {
             newDate = `${year}/${monthNum}/${day}`
         }
         
-        setRenderedPosts((prevPosts) => {
+        setUserPosts((prevPosts) => {
             return prevPosts.map((post) => {
                 if(postId === post.id) {
                     return  {
@@ -96,7 +89,7 @@ const Listview = () => {
     
     const handleRemove = (postId) => { 
         console.log(`post to remove ${IdRef.current}`)
-        setRenderedPosts((prevPosts) => {
+        setUserPosts((prevPosts) => {
             let updatedPosts = [...prevPosts]
             return updatedPosts.filter((post) => {
                 if(post.id !== postId) 
@@ -111,19 +104,43 @@ const Listview = () => {
         
     }
 
-    const postElements = renderedPosts.map((post) => (
-        <ListviewPost
-            key = {post.id}
-            postData = {post}
-            showUpdateModal = {() => {
-                setShowUpdate(true)
-                IdRef.current = post.id
-            }}
-            showRemoveModal = {() => {
-                setShowRemove(true)
-                IdRef.current = post.id
-            }}/>
-    ))
+    const populatePostArray = (postArray) => {
+        return postArray.map((post) => (
+            <ListviewPost
+                key = {post.id}
+                postData = {post}
+                showUpdateModal = {() => {
+                    setShowUpdate(true)
+                    IdRef.current = post.id
+                }}
+                showRemoveModal = {() => {
+                    setShowRemove(true)
+                    IdRef.current = post.id
+                }}/>
+        ))
+    }
+
+  
+    let postElements // arr of JSX either with all posts or filtered posts
+
+    // if text is in search bar filter through state array
+    // wrap the filtered posts in ListviewPost JSX
+    if(searchText) {
+        const searchQuery = searchText.toLowerCase()
+        const filteredPosts = userPosts.filter((post) => {
+            return (
+                post.location.toLowerCase().search(searchQuery) !== -1 ||
+                post.caption.toLowerCase().search(searchQuery) !== -1 ||
+                post.date.toLowerCase().search(searchQuery) !== -1 
+            )
+        })
+
+        postElements = populatePostArray(filteredPosts)
+    }
+    else {
+        // just wrap the state array in ListviewPost JSX
+        postElements = populatePostArray(userPosts)
+    }
 
     return (
         <div>
@@ -132,7 +149,7 @@ const Listview = () => {
                 <Row className="rounded-4 mx-auto" style={{backgroundColor: "rgba(139, 44, 255, .3)"}}>
                     <Col className="rounded-4 py-2" style={{ minHeight: 500}}>
                        <ListviewSearch
-                        searchHandler={searchHandler}
+                        setSearchText={setSearchText}
                        />
                         <div className="listview mt-3">
                             <div className="container-listview-sorter">
