@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useRef } from 'react'
 import './listview.css'
 import Navbar from '../navbar/Navbar'
+import ListviewSearch from './ListviewSearch'
 import ListviewSorter from './ListviewSorter'
 import ListviewPost from './ListviewPost'
 import ListviewUpdateModal from './ListviewUpdateModal'
@@ -10,9 +11,6 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 
-import {
-    Search,
-} from 'akar-icons'
 
 /*Temporary*/
 import data from './tempdata'
@@ -20,7 +18,8 @@ import data from './tempdata'
 const Listview = () => {
 
     const [userPosts, setUserPosts] = useState(data)
-    const [searchText, setSearchText] = useState("")
+
+    const [renderedPosts, setRenderedPosts] = useState([])
     const [prevSorter, setPrevSorter] = useState("")
 
     const [showRemove, setShowRemove] = useState(false)
@@ -30,12 +29,13 @@ const Listview = () => {
     // may remove or modify
     const IdRef = useRef(null)
 
-    const searchHandler = (event) => {
-        setSearchText(event.target.value)
+    const searchHandler = (searchText) => {
+        console.log(`Check if ${searchText} exists in posts`)
+      
     }
 
     const sorterHandler = (sorter) => {
-        setUserPosts((prevPosts) => {
+        setRenderedPosts((prevPosts) => {
             if(sorter === prevSorter) {
                 return [...prevPosts].reverse()
             }
@@ -75,7 +75,7 @@ const Listview = () => {
             newDate = `${year}/${monthNum}/${day}`
         }
         
-        setUserPosts((prevPosts) => {
+        setRenderedPosts((prevPosts) => {
             return prevPosts.map((post) => {
                 if(postId === post.id) {
                     return  {
@@ -96,7 +96,7 @@ const Listview = () => {
     
     const handleRemove = (postId) => { 
         console.log(`post to remove ${IdRef.current}`)
-        setUserPosts((prevPosts) => {
+        setRenderedPosts((prevPosts) => {
             let updatedPosts = [...prevPosts]
             return updatedPosts.filter((post) => {
                 if(post.id !== postId) 
@@ -111,7 +111,7 @@ const Listview = () => {
         
     }
 
-    const postElements = userPosts.map((post) => (
+    const postElements = renderedPosts.map((post) => (
         <ListviewPost
             key = {post.id}
             postData = {post}
@@ -131,17 +131,9 @@ const Listview = () => {
             <Container className="container-listview" >
                 <Row className="rounded-4 mx-auto" style={{backgroundColor: "rgba(139, 44, 255, .3)"}}>
                     <Col className="rounded-4 py-2" style={{ minHeight: 500}}>
-                        <div className="container-search p-2 rounded-2">
-                            <span><Search size={20}/></span>
-                            <input 
-                                className="input-search shadow-none" 
-                                type="text"
-                                name="search"
-                                value={searchText}
-                                placeholder="Search"
-                                onChange={searchHandler}
-                            />
-                        </div>
+                       <ListviewSearch
+                        searchHandler={searchHandler}
+                       />
                         <div className="listview mt-3">
                             <div className="container-listview-sorter">
                                 <div className="listview-sorters">

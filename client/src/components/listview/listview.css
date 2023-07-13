@@ -10,7 +10,6 @@
     align-items: center;
     gap: 5px;
     background-color: #21262B;
-    color: #4A545C;
     border: 1px solid #4A545C;
 }
 
@@ -19,15 +18,15 @@
     width: 100%;
     background: none;
     border: none;
-    color: inherit;
     font-size: 20px;
     height: 20px;
     padding: 0;
+    color: inherit;
 }
 
-.input-search,
-.input-search::placeholder {
-    color: inherit
+.input-search::placeholder,
+.icon-search {
+    color: #4A545C;
 }
 
 .input-search:focus,
