@@ -6,7 +6,7 @@ import {
 
 const ListviewSearch = ({searchText, setSearchText}) => {
     return (
-        <div className="container-search p-2 rounded-2">
+        <div className="container-search rounded-2">
             <span className="icon-search"><Search size={20}/></span>
             <input 
                 className="input-search shadow-none" 

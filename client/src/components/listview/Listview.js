@@ -10,7 +10,7 @@ import ListviewRemoveModal from './ListviewRemoveModal'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-
+import backgroundImage from '../../images/pexels-venelin-dimitrov-3476312.jpg'
 
 /*Temporary*/
 import data from './tempdata'
@@ -104,6 +104,7 @@ const Listview = () => {
         
     }
 
+
     const populatePostArray = (postArray) => {
         return postArray.map((post) => (
             <ListviewPost
@@ -145,7 +146,9 @@ const Listview = () => {
     return (
         <div>
             <Navbar/>
+          
             <Container className="container-listview" >
+                
                 <Row className="rounded-4 mx-auto" style={{backgroundColor: "rgba(139, 44, 255, .3)"}}>
                     <Col className="rounded-4 py-2" style={{ minHeight: 500}}>
                        <ListviewSearch
