@@ -60,7 +60,7 @@ const Profile = () => {
 
             <section className="profile-posts">
                 <Container className="my-5">
-                    <Row className="mx-auto justify-content-center align-items-center" style={{width:"83%"}}>
+                    <Row className="mx-auto justify-content-center align-items-center gap-1" style={{width:"83%"}}>
                         {/* Posts Section Header */}
                         <Col className="col-12">
                             <div className="d-flex flex-column align-items-center" style={{height:"100%"}}>

@@ -11,6 +11,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import backgroundImage from '../../images/pexels-venelin-dimitrov-3476312.jpg'
+import { BsGrid3X3 } from 'react-icons/bs'
 
 /*Temporary*/
 import data from './tempdata'
@@ -147,8 +148,16 @@ const Listview = () => {
         <div>
             <Navbar/>
      
-            <Container className="container-listview px-0" fluid>
-                <Row className="px-4">
+            <Container className="position-relative" fluid>
+                <Row className="container-intro-img">
+                    <img className="intro-img" src={backgroundImage} alt="purple field"/>
+                </Row>
+                <Row className="container-listview">
+                    <Col className="col-12 col-sm-10 col-xxl-8 mx-auto">
+                        <div className="d-flex align-items-center gap-3 ms-4 my-5">
+                            <BsGrid3X3 size={100}/> <span className="intro-text">posts</span>
+                        </div>
+                    </Col>
                     <Col className="rounded-4 col-12 col-sm-10 col-xxl-8 mx-auto" style={{backgroundColor: "rgba(139, 44, 255, .3)"}}>
                        <div className="rounded-4 py-2" style={{ minHeight: 500}}>
                             <ListviewSearch
