@@ -146,27 +146,28 @@ const Listview = () => {
     return (
         <div>
             <Navbar/>
-          
-            <Container className="container-listview" >
-                
-                <Row className="rounded-4 mx-auto" style={{backgroundColor: "rgba(139, 44, 255, .3)"}}>
-                    <Col className="rounded-4 py-2" style={{ minHeight: 500}}>
-                       <ListviewSearch
-                        setSearchText={setSearchText}
-                       />
-                        <div className="listview mt-3">
-                            <div className="container-listview-sorter">
-                                <div className="listview-sorters">
-                                    <ListviewSorter hideClass = "d-none d-md-block" onClick={() => sorterHandler("id")}>
-                                        Photo
-                                    </ListviewSorter>
-                                    <ListviewSorter onClick={() => sorterHandler("location")}>Location</ListviewSorter>
-                                    <ListviewSorter onClick={() => sorterHandler("caption")}>Caption</ListviewSorter>
-                                    <ListviewSorter onClick={() => sorterHandler("date")}>Date</ListviewSorter>
+     
+            <Container className="container-listview px-0" fluid>
+                <Row className="px-4">
+                    <Col className="rounded-4 col-12 col-sm-10 col-xxl-8 mx-auto" style={{backgroundColor: "rgba(139, 44, 255, .3)"}}>
+                       <div className="rounded-4 py-2" style={{ minHeight: 500}}>
+                            <ListviewSearch
+                                 setSearchText={setSearchText}
+                            />
+                            <div className="listview mt-3">
+                                <div className="container-listview-sorter">
+                                    <div className="listview-sorters">
+                                        <ListviewSorter hideClass = "d-none d-md-block" onClick={() => sorterHandler("id")}>
+                                            Photo
+                                        </ListviewSorter>
+                                        <ListviewSorter onClick={() => sorterHandler("location")}>Location</ListviewSorter>
+                                        <ListviewSorter onClick={() => sorterHandler("caption")}>Caption</ListviewSorter>
+                                        <ListviewSorter onClick={() => sorterHandler("date")}>Date</ListviewSorter>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="container-listview-posts">
-                               { postElements }
+                                <div className="container-listview-posts">
+                                { postElements }
+                                </div>
                             </div>
                         </div>
                     </Col>
