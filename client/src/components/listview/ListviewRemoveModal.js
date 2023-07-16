@@ -6,11 +6,11 @@ const ListviewModal = ({ title, stateShow, closeModalHandler, confirmHandler}) =
     return (
         <>
             <Modal show={stateShow} centered dialogClassName="listview-modal">
-                <Modal.Header>
+                <Modal.Header className="pb-0">
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body ><h5>Are you sure you want to remove this Post?</h5></Modal.Body>
-                <Modal.Footer>
+                <Modal.Body ><h6>Are you sure you want to remove this Post?</h6></Modal.Body>
+                <Modal.Footer className="pt-0">
                     <button className="listview-btn" onClick={closeModalHandler}>
                         Cancel
                     </button>

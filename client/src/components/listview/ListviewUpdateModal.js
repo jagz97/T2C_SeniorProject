@@ -26,7 +26,7 @@ const ListviewModal = ({ title, stateShow, closeModalHandler, confirmHandler, po
     return (
         <>
             <Modal show={stateShow} centered dialogClassName="listview-modal">
-                <Modal.Header>
+                <Modal.Header className="pb-0">
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
@@ -38,6 +38,7 @@ const ListviewModal = ({ title, stateShow, closeModalHandler, confirmHandler, po
                         value= {caption}
                         onChange={(e) => setCaption(e.target.value)}
                         placeholder="Caption" 
+                        maxLength={255}
                     />   
                     <div className="listview-update-row">
                         <input 
@@ -70,7 +71,7 @@ const ListviewModal = ({ title, stateShow, closeModalHandler, confirmHandler, po
                     </div>
                 </div>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="pt-0">
                     <button className="listview-btn" onClick={() => {
                         closeModalHandler()
                         resetInputs()

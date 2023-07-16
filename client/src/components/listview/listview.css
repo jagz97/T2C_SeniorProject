@@ -196,6 +196,7 @@
     border-radius: 5px;
     padding: .3em .4em;
     border: none;
+    resize: none;
 }
 
 .listview-update-location {
