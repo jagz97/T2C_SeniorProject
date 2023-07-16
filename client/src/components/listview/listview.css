@@ -68,7 +68,6 @@
   ================= */
 
 .listview {
-    min-height: 350px;
     background-color: #353C43;
 }
 
@@ -94,6 +93,10 @@
     align-items: center;
 }
 
+.container-listview-posts{
+    min-height: 400px;
+}
+
 .listview-post {
     border-bottom: 1px #D0D0CE solid;
 }
@@ -107,7 +110,15 @@
     height: 100px;
     padding-left: 5.2em;
 }
+.no-posts-message {
+    padding-top: 180px;
+    text-align: center;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 1rem;
 
+}
 .listview-item,
 .listview-sorter {
     width: 100px;
@@ -166,6 +177,14 @@
     padding: 0.3em 0.7em;
     color: #fff;
 }
+
+.listview-btn:hover,
+.listview-btn:focus,
+.listview-icon:hover,
+.lisview.icon:focus {
+    opacity: .9
+}
+
 
 .listview-update-row {
     display: flex;

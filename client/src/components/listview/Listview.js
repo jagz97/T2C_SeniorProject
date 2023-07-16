@@ -143,12 +143,11 @@ const Listview = () => {
         // just wrap the state array in ListviewPost JSX
         postElements = populatePostArray(userPosts)
     }
-
+    console.log(postElements)
     return (
         <div>
             <Navbar/>
-     
-            <Container className="position-relative" fluid>
+            <Container className="my-5" fluid>
                 <Row className="container-intro-img">
                     <img className="intro-img" src={backgroundImage} alt="purple field"/>
                 </Row>
@@ -175,7 +174,7 @@ const Listview = () => {
                                     </div>
                                 </div>
                                 <div className="container-listview-posts">
-                                { postElements }
+                                { (postElements.length && postElements) || <div className="no-posts-message">no posts were found</div>} 
                                 </div>
                             </div>
                         </div>

@@ -8,7 +8,7 @@ const ListviewPost = ({postData, showUpdateModal, showRemoveModal}) => {
     const { id, location, caption, date } = postData
 
     return (
-        <div className="listview-post d-flex gap-2 gap-lg-4 gap-xl-4">
+        <div className="listview-post d-flex gap-2 gap-lg-4">
             <div className="listview-post-items">
                 <div className='d-none d-md-block listview-item'>{id}</div>
                 <div className='listview-item'>{location}</div>
@@ -19,7 +19,7 @@ const ListviewPost = ({postData, showUpdateModal, showRemoveModal}) => {
                 <div className="listview-icon" onClick={showUpdateModal}>
                     <RiPencilLine/>  
                 </div>
-                <div className="listview-icon" onClick={showRemoveModal}>
+                <div className="listview-icon " onClick={showRemoveModal}>
                     <RiDeleteBin7Line/>
                 </div>
             </div>
