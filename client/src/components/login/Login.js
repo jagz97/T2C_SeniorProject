@@ -14,11 +14,13 @@ import InputGroup from 'react-bootstrap/InputGroup'
 
 const Login = () => {
 
-    const [emailData, setEmailData] = useState('')
-    const [passwordData, setPasswordData] = useState('')
+    const [emailData, setEmailData] = useState('adam')
+    const [passwordData, setPasswordData] = useState('ada123')
 
     // State for toggling pwd input visibility
     const [showPassword, setShowPassword] = useState(false)
+
+    const [errorMessage, setErrorMessage] = useState("")
 
     const emailInputRef = useRef(null);
 
@@ -43,11 +45,35 @@ const Login = () => {
     
     // An onSubmit event handler which for now logs
     // the captured form data to the console
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
-        console.log(emailData,passwordData)
-        // setPasswordData('')
-        // setEmailData('')
+        // console.log(emailData,passwordData)
+        const formData = {email: emailData, password: passwordData}
+        fetch("http://localhost:8080/api/users/auth/signin", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(res => {
+            if(!res.ok) {
+                return Promise.reject(res)
+            }
+            return res.json()
+        })
+        .then(data => {
+            console.log(data)
+            if(errorMessage) {
+                setErrorMessage("")
+            }
+        })
+        .catch(err => {
+            err.json().then((json) => {
+                setErrorMessage(json.message)
+            })
+        })
     }
 
     return (
@@ -64,7 +90,7 @@ const Login = () => {
                                     <Form.Group>
                                         <InputGroup className='container-email-input'>
                                             <Form.Control 
-                                                type='email'
+                                                type='text'
                                                 placeholder='Enter Email' 
                                                 value={emailData}
                                                 onChange={handleEmailData}
@@ -93,10 +119,11 @@ const Login = () => {
                                             </InputGroup.Text>
                                             
                                         </InputGroup>
+                                        <div className="login-error-message">{errorMessage}</div>
                                         <div className='container-recover-password'>
                                             <Link to='/' className='recover-password-btn'>Recover Password?</Link>
                                         </div>
-                                        
+                                      
                                     </Form.Group>
                                     
                                     <Button className='btn-submit-login' type='submit'>Sign In</Button>

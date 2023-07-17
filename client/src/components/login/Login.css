@@ -21,7 +21,7 @@
     background-color: rgba(0,0,0,.53);
     width: 520px;
     max-height: 575px; 
-    padding: 3.75em;
+    padding: 3em 3.5em;
     border-radius: 38px;
     font-size: 0.875rem;
   }
@@ -81,13 +81,18 @@
     opacity: .7;
   }
   
+  .login-error-message {
+    margin-top: .4em;
+    color: #F32F24;
+    font-weight: 700;
+    text-align: end;
+  }
   
   /* =================
       Buttons
   ================= */
   .container-recover-password {
     text-align: right;
-    margin-top: 15px;
     font-weight: 500;
   }
 
@@ -127,7 +132,7 @@
   .google-login{
     display: table;
     margin: 0 auto;
-    margin-top: 45px;
+    margin-top: 20px;
     opacity: .9;
   }
   
