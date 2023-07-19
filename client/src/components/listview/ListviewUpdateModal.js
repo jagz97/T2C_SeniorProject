@@ -30,48 +30,54 @@ const ListviewModal = ({ title, stateShow, closeModalHandler, confirmHandler, po
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
-                <h5>Enter New Post Information</h5>
                 <div className="listview-update-container">
+                    <label htmlFor="listview-update-caption">Caption</label>
                     <textarea 
                         className="listview-update-caption"
+                        id="listview-update-caption"
                         name="caption"
                         value= {caption}
                         onChange={(e) => setCaption(e.target.value)}
-                        placeholder="Caption" 
                         maxLength={255}
                     />   
-                    <div className="listview-update-row">
-                        <input 
-                            className="listview-update-location"
-                            type="text" 
-                            name="location"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
-                            placeholder="Location" 
-                        />
-                        <DatePicker size={"55%"}>
-                            <DatePicker.Year
-                                value={year}
-                                setYear={(year) => setYear(year)}
-                                min={1900}
-                                max={currentYear}
+                    <div className="listview-update-inputs">
+                        <div className="container-update-location" >
+                            <label htmlFor="listview-update-location" >Location</label>
+                            <input 
+                                className="listview-update-location"
+                                id="listview-update-location"
+                                type="text" 
+                                name="location"
+                                value={location}
+                                onChange={(e) => setLocation(e.target.value)}
                             />
-                            <DatePicker.Month 
-                                value={month} 
-                                setMonth={(month) => setMonth(month)} 
-                            />
-                            <DatePicker.Day
-                                value={day}
-                                setDay={(day) => setDay(day)}
-                                year={year}
-                                month={month}
-                                currDay={day}
-                            />
-                        </DatePicker>
+                        </div>
+                        <div className="container-update-date">
+                            <label htmlFor="listview-update-date">Date</label>
+                            <DatePicker size={"100%"} id="listview-update-date">
+                                <DatePicker.Year
+                                    value={year}
+                                    setYear={(year) => setYear(year)}
+                                    min={1900}
+                                    max={currentYear}
+                                />
+                                <DatePicker.Month 
+                                    value={month} 
+                                    setMonth={(month) => setMonth(month)} 
+                                />
+                                <DatePicker.Day
+                                    value={day}
+                                    setDay={(day) => setDay(day)}
+                                    year={year}
+                                    month={month}
+                                    currDay={day}
+                                />
+                            </DatePicker>
+                        </div>
                     </div>
                 </div>
                 </Modal.Body>
-                <Modal.Footer className="pt-0">
+                <Modal.Footer>
                     <button className="listview-btn" onClick={() => {
                         closeModalHandler()
                         resetInputs()
