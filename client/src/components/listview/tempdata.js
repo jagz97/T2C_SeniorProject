@@ -1,4 +1,4 @@
-export default [
+let data =[
     {
         "id": 0,
         "location": "Italy",
@@ -25,4 +25,5 @@ export default [
     }
 ]
 
+export {data}
 

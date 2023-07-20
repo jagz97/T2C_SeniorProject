@@ -14,7 +14,7 @@ import backgroundImage from '../../images/pexels-venelin-dimitrov-3476312.jpg'
 import { BsGrid3X3 } from 'react-icons/bs'
 
 /*Temporary*/
-import data from './tempdata'
+import {data} from './tempdata'
 
 const Listview = () => {
 
