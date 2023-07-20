@@ -1,6 +1,5 @@
 import React from 'react'
 import './datepicker.css'
-import { useState } from 'react'
 
 const DatePicker = ({children, size, id}) => {
   
