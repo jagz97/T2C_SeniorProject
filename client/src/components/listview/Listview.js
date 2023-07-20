@@ -93,8 +93,7 @@ const Listview = () => {
         setUserPosts((prevPosts) => {
             let updatedPosts = [...prevPosts]
             return updatedPosts.filter((post) => {
-                if(post.id !== postId) 
-                    return post  
+                return (post.id !== postId) 
             })
         })
         

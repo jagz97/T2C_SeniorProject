@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Modal from 'react-bootstrap/Modal'
-import DatePicker from './datepicker/index'
+import DatePicker from '../datepicker/index'
 const ListviewModal = ({ title, stateShow, closeModalHandler, confirmHandler, postId}) => {
     
 
