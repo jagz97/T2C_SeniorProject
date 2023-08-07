@@ -103,7 +103,9 @@ const Login = () => {
                                             ref={emailInputRef}
                                         />
                                         <InputGroup.Text className='login-input-addon' onClick={resetText}>
-                                            <FaRegCircleXmark/>
+                                            <div className="addon" onClick={resetText}>
+                                                <FaRegCircleXmark/> 
+                                            </div>
                                         </InputGroup.Text>
                                     </InputGroup>
                                 </Form.Group>
@@ -118,8 +120,10 @@ const Login = () => {
                                             required
                                             className='login-input'
                                         />
-                                        <InputGroup.Text className='login-input-addon' onClick={toggleHidden}>
-                                            {showPassword ? <FaRegEyeSlash/> : <FaRegEye/>}
+                                        <InputGroup.Text className='login-input-addon'>
+                                            <div className="addon" onClick={toggleHidden}>
+                                                {showPassword ? <FaRegEyeSlash/> : <FaRegEye/>}
+                                            </div>
                                         </InputGroup.Text>
 
                                     </InputGroup>

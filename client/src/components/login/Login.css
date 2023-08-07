@@ -36,6 +36,7 @@
     border: none;
     border-radius: 8px;
   }
+  
 
   .login-input,
   .login-input::placeholder {
@@ -53,15 +54,26 @@
 
   
   .login-input-addon {
+    color: #677185;
     background-color: #fff;
     border:none;
-    cursor: pointer;
-    border-radius: 10px;
-    padding: 0 1.5em;
-    color: #677185;
+    padding: 0;
   }
+  
 
- 
+  .addon {
+    font-size: 18px;
+    margin-right: 8px;
+    padding: .6em .9em;
+    /* border-radius: 8px; */
+
+  }
+  .addon:hover {
+    cursor: pointer;
+    /* background-color: #eeeeee; */
+    opacity: .8;
+  }
+  
   .container-continue {
     margin-top: 45px;
     display: flex;
