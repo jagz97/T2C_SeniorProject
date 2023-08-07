@@ -12,8 +12,7 @@ import { BsGrid3X3 } from 'react-icons/bs'
 
 const Profile = () => {
     return (
-        <div>
-            <Navbar/>
+        <>
             <section className="profile-intro">
                 <Container fluid>
                     <Row>
@@ -85,7 +84,7 @@ const Profile = () => {
                     </Row>
                 </Container>
             </section>
-        </div>
+        </>
     )
 }
 

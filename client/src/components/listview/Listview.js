@@ -144,8 +144,7 @@ const Listview = () => {
     }
     console.log(postElements)
     return (
-        <div>
-            <Navbar/>
+        <>
             <Container className="my-5" fluid>
                 <Row className="container-intro-img">
                     <img className="intro-img" src={backgroundImage} alt="purple field"/>
@@ -203,7 +202,7 @@ const Listview = () => {
                 postId = {IdRef.current}
             >
             </ListviewUpdateModal>
-        </div>
+        </>
     )
 }
 
