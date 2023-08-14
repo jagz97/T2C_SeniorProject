@@ -72,11 +72,11 @@ exports.signin= async(req, res) => {
           user.password
         );
     
-        // if (!passwordIsValid) {
-        //   return res.status(401).send({
-        //     message: "Invalid Password!",
-        //   });
-        // }
+        if (!passwordIsValid) {
+          return res.status(401).send({
+            message: "Invalid Password!",
+          });
+        }
     
         const token = jwt.sign({ id: user.id },
                                config.secret,
