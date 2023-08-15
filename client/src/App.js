@@ -8,12 +8,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='login' element={<LoginPage/>}/>
-        
-        <Route element={<NavLayout/>}>
-          <Route path='profile' element={<ProfilePage/>}/>
-          <Route path='posts' element={<ListviewPage/>}/>
-        </Route>
+          <Route path='login' element={<LoginPage/>}/>
+          <Route element={<NavLayout/>}>
+            <Route index element={<h1>Home</h1>}/>
+            <Route path='profile' element={<ProfilePage/>}/>
+            <Route path='posts' element={<ListviewPage/>}/>
+          </Route>
       </Routes>
     </BrowserRouter>
   );

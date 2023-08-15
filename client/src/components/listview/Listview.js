@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState, useRef } from 'react'
 import './listview.css'
-import Navbar from '../navbar/Navbar'
 import ListviewSearch from './ListviewSearch'
 import ListviewSorter from './ListviewSorter'
 import ListviewPost from './ListviewPost'
