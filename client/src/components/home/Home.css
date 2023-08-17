@@ -1,0 +1,16 @@
+
+
+.dest-image-wrapper {
+    background-color: firebrick;
+    width: 275px;
+    /* height: 360px; */
+}
+
+.dest-image {
+    display: block;
+    object-fit: fill;
+    object-position: center;
+    width: 100%;
+    height: 360px;
+    border-radius: 15px;
+}
