@@ -12,26 +12,23 @@ import rich from "./temp-images/richard-iwaki.jpg"
 import sidra from "./temp-images/sidra-s.jpg"
 
 
+import './breakpoint.css'
+
 
 const Home = () => {
 
     return (
         <Container fluid>
-            <Row>
-                <Col className="col-12 mb-3">
-                    <div className="text-center text-md-start">
-                        <h2 className="display-5 places-visited-heading">Popular Destinations</h2>
-                    </div>
-                    <div className="container-popular-dest">
-                        
-                       
-                        <PopularDest img={axp} name={"CN Tower"} location= {"Santorini, France"}/>
-                        <PopularDest img={amy}/>
-                        <PopularDest img={rich}/>
-                        <PopularDest img={sidra}/>
-                        
-                    </div>
+
+            <Row className="gx-3 justify-content-center mx-auto" style={{maxWidth: 1490}}>
+                <Col className="col-12 mb-3 text-xxl-start text-center">
+                    <h2 className="display-5 ps-xxl-3 ps-xl-5">Popular Destinations</h2>
                 </Col>
+                    <PopularDest img={axp} name={"CN Tower"} location= {"Santorini, France"}/>
+                    <PopularDest img={amy} name={"CN Tower"} location= {"Santorini, France"}/>
+                    <PopularDest img={rich} name={"CN Tower"} location= {"Toronto, Canada"}/>
+                    <PopularDest img={sidra} name={"CN Tower"} location= {"Santorini, France"}/>
+                    <PopularDest img={sidra} name={"CN Tower"} location= {"Santorini, France"}/>
             </Row>
             
         </Container>

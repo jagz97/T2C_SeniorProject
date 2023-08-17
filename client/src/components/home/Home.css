@@ -1,10 +1,17 @@
 
 
 .dest-image-wrapper {
-    background-color: firebrick;
-    width: 275px;
+    /* background-color: firebrick; */
+    width: 100%;
     /* height: 360px; */
+    margin-bottom: 10px;
 }
+
+.popular-destination {
+    width: 275px;
+    margin: 0 auto;
+}
+
 
 .dest-image {
     display: block;
@@ -12,5 +19,21 @@
     object-position: center;
     width: 100%;
     height: 360px;
-    border-radius: 15px;
+    border-radius: 10px;
 }
+
+.dest-location-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dest-name {
+    font-weight: 400;
+    font-size: 1.25rem;
+}
+
+.dest-location {
+    color: #6A6A6A;
+}
+
