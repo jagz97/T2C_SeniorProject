@@ -23,7 +23,7 @@ const Home = () => {
 
             <Row className="gx-3 justify-content-center mx-auto" style={{maxWidth: 1490}}>
                 <Col className="col-12 mb-3 text-xxl-start text-center">
-                    <h2 className="display-5 ps-xxl-3 ps-xl-5">Popular Destinations</h2>
+                    <h2 className="home-section-header ps-xxl-3 ps-xl-5">Popular Destinations</h2>
                 </Col>
                     <PopularDest img={axp} name={"CN Tower"} location= {"Santorini, France"}/>
                     <PopularDest img={amy} name={"CN Tower"} location= {"Santorini, France"}/>
@@ -33,7 +33,7 @@ const Home = () => {
             </Row>
             <Row className="gx-4 justify-content-center mx-auto" style={{maxWidth: 1490}}>
                 <Col className="col-12 mb-3 text-xxl-start text-center">
-                    <h2 className="display-5 ps-xxl-3 ps-xl-5">Popular Traveling Packages</h2>
+                    <h2 className="home-section-header ps-xxl-3 ps-xl-5">Popular Traveling Packages</h2>
                 </Col>
                 <PopularPackage img={axp} location={"Athens, Greece"} rating={5} price={500}/>
                 <PopularPackage img={axp} location={"Athens, Greece"} rating={5} price={500}/>

@@ -1,4 +1,7 @@
-
+.home-section-header {
+    font-weight: 700;
+    font-size: 2.625rem;
+}
 .home-image {
     display: block;
     object-fit: fill;
