@@ -4,7 +4,7 @@ import {
     Person
 } from 'akar-icons'
 
-const Avatar = ({src,alt,size,border}) => {
+const Avatar = ({src,alt,size,border,cursor}) => {
     let render = "";
 
     // if no size prop given default dimension 50x50
@@ -14,7 +14,7 @@ const Avatar = ({src,alt,size,border}) => {
     
     // render either user img or anonymous icon
     if(src) {
-        render = <img src={src} alt={alt}/>
+        render = <img src={src} alt={alt} style = {cursor && {cursor:"pointer"} }/>
     }
     else {
         render = <Person/>
