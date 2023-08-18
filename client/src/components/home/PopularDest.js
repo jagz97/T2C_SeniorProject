@@ -6,8 +6,8 @@ const PopularDest = ({img, name, location}) => {
     return (
         <Col className="col-auto col-xxl-2.4 mb-4">
             <div className="popular-destination">
-                <div className="dest-image-wrapper">
-                    <img className="dest-image" src={img} alt="destination"/>
+                <div className="image-wrapper">
+                    <img className="dest-image home-image" src={img} alt="destination"/>
                 </div>
                 <p className="dest-name m-0">
                     {name}

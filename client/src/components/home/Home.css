@@ -1,23 +1,29 @@
 
+.home-image {
+    display: block;
+    object-fit: fill;
+    object-position: center;
+    width: 100%;
+}
 
-.dest-image-wrapper {
+.image-wrapper {
     /* background-color: firebrick; */
     width: 100%;
     /* height: 360px; */
     margin-bottom: 10px;
 }
 
+
+/* =================
+        Popular 
+        Destinations
+  ================= */
 .popular-destination {
     width: 275px;
     margin: 0 auto;
 }
 
-
 .dest-image {
-    display: block;
-    object-fit: fill;
-    object-position: center;
-    width: 100%;
     height: 360px;
     border-radius: 10px;
 }
@@ -37,3 +43,62 @@
     color: #6A6A6A;
 }
 
+/* =================
+        Travel
+        Packages
+  ================= */
+
+.popular-package {
+    width: 350px;
+}
+.package-image {
+    height: 290px;
+    border-radius: 10px 10px 0px;
+}
+
+.package-info {
+    padding: 1em;
+    background-color: #fff;
+    color: #000;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.package-location {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.package-desc {
+    margin-top: 10px;
+    color: #6A6A6A;
+    line-height: 1.4;
+    font-size: 0.975rem; 
+}
+
+
+.package-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.price-wrapper {
+    display: inline-flex;
+    font-size: 1.25rem;
+    align-items: center;    
+    gap: 3px;
+}
+
+.price {
+    font-size: 2.45rem;
+    color: #FF6B6B;
+}
+
+.package-details-btn {
+    padding: .5em 1.8em;
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    background-color: #3C3A83;
+    border-radius: 8px;
+}

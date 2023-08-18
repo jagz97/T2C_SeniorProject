@@ -1,6 +1,7 @@
 import React from 'react'
 import './Home.css'
 import PopularDest from './PopularDest'
+import PopularPackage from './PopularPackage'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -30,7 +31,15 @@ const Home = () => {
                     <PopularDest img={sidra} name={"CN Tower"} location= {"Santorini, France"}/>
                     <PopularDest img={sidra} name={"CN Tower"} location= {"Santorini, France"}/>
             </Row>
-            
+            <Row className="gx-4 justify-content-center mx-auto" style={{maxWidth: 1490}}>
+                <Col className="col-12 mb-3 text-xxl-start text-center">
+                    <h2 className="display-5 ps-xxl-3 ps-xl-5">Popular Traveling Packages</h2>
+                </Col>
+                <PopularPackage img={axp} location={"Athens, Greece"} rating={5} price={500}/>
+                <PopularPackage img={axp} location={"Athens, Greece"} rating={5} price={500}/>
+                <PopularPackage img={axp} location={"Athens, Greece"} rating={5} price={500}/>
+                
+            </Row>
         </Container>
     )
 }
