@@ -27,12 +27,11 @@ const Home = () => {
 
     return (
         <Container fluid>
-
             <Row className="gx-3 justify-content-center mx-auto my-5" style={{maxWidth: 1490}}>
                 <Col className="col-12 mb-3 text-xxl-start text-center">
                     <h2 className="home-section-header ps-xxl-3 ps-xl-5">Popular Destinations</h2>
                 </Col>
-                    <PopularDest img={axp} name={"CN Tower"} location= {"Santorini, France"}/>
+                    <PopularDest img={axp} name={"FN Tower"} location= {"Santorini, France"}/>
                     <PopularDest img={amy} name={"CN Tower"} location= {"Santorini, France"}/>
                     <PopularDest img={rich} name={"CN Tower"} location= {"Toronto, Canada"}/>
                     <PopularDest img={sidra} name={"CN Tower"} location= {"Santorini, France"}/>

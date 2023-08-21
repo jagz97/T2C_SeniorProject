@@ -14,7 +14,7 @@ const Ratings = ({value, size}) => {
     let numStars = value
 
     const ratingSize = size ? size : 25
-    console.log(ratingSize)
+
     if(value) {    
     
         // handle case if value of props.value out of range

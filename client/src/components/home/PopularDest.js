@@ -13,7 +13,7 @@ const PopularDest = ({img, name, location}) => {
                     {name}
                 </p>
                 <div className="dest-location-wrapper">
-                    <IoLocationSharp color={"#04c1d9"}/>
+                    <IoLocationSharp color={"#04c1d9"} style={{marginLeft: -2}}/>
                     <p className="dest-location m-0">{location}</p>
                 </div>
 

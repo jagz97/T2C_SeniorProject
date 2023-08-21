@@ -98,13 +98,19 @@
     color: #FF6B6B;
 }
 
+.package-rating {
+    margin-left: -3px;
+}
+
 .package-details-btn {
-    display: block;
     padding: .4em 1.5em;
-    border: none;
-    line-height: 1.4;
     color: #fff;
     font-weight: 600;
     background-color: #3C3A83;
     border-radius: 8px;
+    text-decoration: none;
+}
+
+a.package-details-btn {
+    color: #fff;
 }
