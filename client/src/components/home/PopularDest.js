@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col'
 
 const PopularDest = ({img, name, location}) => {
     return (
-        <Col className="col-auto col-xxl-2.4 mb-4">
+        <Col className="col-auto mb-4">
             <div className="popular-destination">
                 <div className="image-wrapper">
                     <img className="dest-image home-image" src={img} alt="destination"/>

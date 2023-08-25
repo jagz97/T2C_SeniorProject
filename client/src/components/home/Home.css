@@ -1,7 +1,10 @@
 .home-section-header {
     font-weight: 700;
     font-size: 2.625rem;
+    max-width: 1465px;
+
 }
+
 .home-image {
     display: block;
     object-fit: fill;
@@ -56,7 +59,8 @@
 }
 .package-image {
     height: 290px;
-    border-radius: 10px 10px 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .package-info {
@@ -114,3 +118,15 @@
 a.package-details-btn {
     color: #fff;
 }
+
+.popular-users {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+}
+.popular-users::-webkit-scrollbar{
+    display: none;
+  }
+.home-scroll-btn {
+    cursor: pointer;
+}
+

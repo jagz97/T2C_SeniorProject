@@ -7,8 +7,8 @@ const PopularUser = ({pfp}) => {
     const clickHandler = () => console.log("Clicked.")
 
     return (
-        <Col className="col-auto" onClick={clickHandler}>
-            <Avatar size={160} src={pfp} cursor/>
+        <Col className="col-auto px-3" onClick={clickHandler}>
+            <Avatar size={150} src={pfp} cursor/>
         </Col>
     )
 }

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 const PopularPackage = ({img, location,rating, description, price, details}) => {
 
     return (
-        <Col className="col-auto">
+        <Col className="col-auto px-4">
             <div className="popular-package mb-5">
                 <img className="package-image home-image" src={img} alt="travel package"/>
                 <div className="package-info">
