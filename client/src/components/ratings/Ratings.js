@@ -36,7 +36,7 @@ const Ratings = ({value}) => {
       If no value prop given or a decimal part is present
       add a half star to jsx arr
     */
-    if(!numStars || numStars % 1 != 0) 
+    if(!numStars || numStars % 1 !== 0) 
         render.push(<LiaStarHalfSolid key={render.length} color="#FFE071" size="25px" />)
     
     return (

@@ -5,10 +5,10 @@ import mohammedLak from './temp-images/mohammed-lak.jpg'
 
 const PlaceVisited = ({location, rating}) => {
     return (
-        <Col className="col-auto col-md-6 col-lg-4">
-            <div style={{width: "100%"}}>
-                <div style={{height: "400px", width: "100%"}}>
-                    <img src={mohammedLak} alt=" " style={{display: "block", width: "100%", height:"100%", maxWidth: "400px", borderRadius: "1.2em"}}></img>
+        <Col className="col-auto ">
+            <div>
+                <div style={{height: 375, width: 425}}>
+                    <img src={mohammedLak} alt=" " style={{display: "block", width: "100%", height:"100%",  borderRadius: "1.2em", objectFit: "fill"}}></img>
                 </div>
                 <h2 className="mt-2" style={{width:"100%", maxWidth:"320px"}}>Croatia</h2>
                 <div style={{width:"100%", maxWidth:"320px", marginBottom: "1em"}}><Ratings value={rating}/></div>
@@ -18,5 +18,4 @@ const PlaceVisited = ({location, rating}) => {
         
     )
 }
-
 export default PlaceVisited
