@@ -120,12 +120,17 @@ a.package-details-btn {
 }
 
 .popular-users {
-    flex-wrap: nowrap;
+    display: flex;
+    justify-content: space-between;
+    /* flex-wrap: nowrap; */
+    gap: 25px;
     overflow-x: scroll;
 }
+
 .popular-users::-webkit-scrollbar{
-    display: none;
-  }
+    /* display: none; */
+}
+
 .home-scroll-btn {
     cursor: pointer;
 }

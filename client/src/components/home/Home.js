@@ -33,7 +33,7 @@ const Home = () => {
         if(scrollRef) {
             scrollRef.current.scrollBy({
                 top: 0,
-                left: 750,
+                left: 700,
                 behavior: "smooth",
             })
            
@@ -46,7 +46,7 @@ const Home = () => {
         if(scrollRef) {
             scrollRef.current.scrollBy({
                 top: 0,
-                left: -750,
+                left: -700,
                 behavior: "smooth",
             })
         }
@@ -87,7 +87,7 @@ const Home = () => {
                 <Col className="col-auto d-none d-lg-block">
                     <BsChevronLeft className="home-scroll-btn" size={125} onClick={handleLeftScroll}/>
                 </Col>
-                <Col className="popular-users d-flex justify-content-between" ref={scrollRef} style={{maxWidth: 750}}> 
+                <Col className="popular-users" ref={scrollRef} style={{maxWidth: 700}}> 
                    
                     <PopularUser pfp={pfp3} />
                     <PopularUser pfp={pfp3} />
