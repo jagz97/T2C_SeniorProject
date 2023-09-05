@@ -22,9 +22,6 @@ import pfp2 from "./temp-pfp/pfp2.jpg"
 import pfp3 from "./temp-pfp/pfp3.jpg"
 import pfp4 from "./temp-pfp/pfp4.jpg"
 
-
-
-
 const Home = () => {
 
     const scrollRef = useRef(null)
@@ -83,9 +80,11 @@ const Home = () => {
             <Row className="justify-content-center mb-4">
                 <h2 className="home-section-header text-center text-xxl-start">Popular Users</h2>
             </Row>
-            <Row className="gx-2 justify-content-center align-items-center mx-auto mb-5" style={{maxWidth: 1490}}>
+            <Row className="justify-content-center align-items-center mx-auto mb-5" style={{maxWidth: 1490}}>
                 <Col className="col-auto d-none d-lg-block">
-                    <BsChevronLeft className="home-scroll-btn" size={125} onClick={handleLeftScroll}/>
+                    <button className="btn-scroll">
+                        <BsChevronLeft className="home-scroll-btn" size={100} onClick={handleLeftScroll}/>
+                    </button>
                 </Col>
                 <Col className="popular-users" ref={scrollRef} style={{maxWidth: 700}}> 
                    
@@ -105,7 +104,9 @@ const Home = () => {
                 </Col>
                 
                 <Col className="col-auto d-none d-lg-block">
-                    <BsChevronRight className="home-scroll-btn" onClick={handleRightScroll} size={125}/>
+                    <button className="btn-scroll">
+                        <BsChevronRight className="home-scroll-btn" onClick={handleRightScroll} size={100}/>
+                    </button>
                 </Col>
                
             </Row>

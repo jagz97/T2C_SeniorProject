@@ -127,11 +127,23 @@ a.package-details-btn {
     overflow-x: scroll;
 }
 
-.popular-users::-webkit-scrollbar{
-    /* display: none; */
+
+@media(min-width: 992px) {
+    .popular-users::-webkit-scrollbar{
+        display: none;
+    }
 }
 
-.home-scroll-btn {
-    cursor: pointer;
+.btn-scroll {
+    display: block;
+    padding: 1em 0;
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    border-radius: 5px;
 }
 
+.btn-scroll:focus,
+.btn-scroll:hover {
+    background-color: rgba(52, 52, 52, 0.2);
+}
