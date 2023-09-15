@@ -5,7 +5,8 @@ const cookieSession = require("cookie-session");
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:8081",
+  credentials: true 
 };
 
 app.use(cors(corsOptions));
@@ -19,14 +20,14 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  cookieSession({
-    name: "t2c-session",
-    keys: ["COOKIE_SECRET"], // should use as secret environment variable
-    httpOnly: true,
-    sameSite: 'strict'
-  })
-);
+// app.use(
+//   cookieSession({
+//     name: "t2c-session",
+//     keys: ["COOKIE_SECRET"], // should use as secret environment variable
+//     httpOnly: true,
+//     sameSite: 'strict'
+//   })
+// );
 
 
 const db = require("./app/models");
@@ -45,6 +46,7 @@ app.get("/", (req, res) => {
 
 require("./app/routes/turorial.routes")(app);
 require("./app/routes/users.routes")(app);
+require("./app/routes/user.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
