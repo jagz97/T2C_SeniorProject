@@ -1,0 +1,137 @@
+  body {
+    background-color: rgb(114,126,173); /*Fallback color for background image*/
+    background: url('../../images/pexels-luke-webb-2734920 1.png') no-repeat bottom center fixed;
+    background-size: cover;
+    font-family: 'DM Sans', sans-serif; /*imported DM sans via google fonts*/
+    color: #fff;
+  }
+  
+  .container-login-page {
+    /* background-color: green; */
+    margin-top: 13vh;
+  }
+  
+  .page-title-text {
+    width: 480px;
+    font-size: 3.85rem;
+    line-height: 1.2;
+  }
+
+  .container-card {
+    background-color: rgba(0,0,0,.53);
+    width: 520px;
+    max-height: 575px; 
+    padding: 3.75em;
+    border-radius: 38px;
+    font-size: 0.875rem;
+  }
+
+  
+  .container-password-input {
+    margin-top: 20px;
+  }
+
+  .login-input {
+    padding: 1.1em;
+    border: none;
+    border-radius: 8px;
+  }
+
+  .login-input,
+  .login-input::placeholder {
+    color: rgba(79, 85, 90, 1);
+    font-weight: 500;
+    font-size: 1.125rem;
+    letter-spacing: 1.5px;
+    line-height: 0;
+  }
+   
+  .login-input:focus,
+  .login-input:active{
+    box-shadow: none;
+  }
+
+  
+  .login-input-addon {
+    background-color: #fff;
+    border:none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 0 1.5em;
+  }
+
+ 
+  .container-continue {
+    margin-top: 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .continue-text {
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: 1.3px;
+    text-align: center;
+  }
+  
+  .line-continue {
+    width: 33%;
+    color: #dfdfdf;
+    opacity: .7;
+  }
+  
+  
+  /* =================
+      Buttons
+  ================= */
+  .container-recover-password {
+    text-align: right;
+    margin-top: 15px;
+    font-weight: 500;
+  }
+
+  .recover-password-btn {
+    color: rgba(199, 199, 199, 1);
+    text-decoration: none;
+    letter-spacing: 1.8px;
+  }
+  
+  .recover-password-btn:hover,
+  .recover-password-btn:focus {
+    color: rgba(199, 199, 199, .7);
+  }
+  
+  .btn-submit-login{
+    background-color: rgba(60,58,131,1);
+    border: none;
+    border-radius: 12px;
+    width : 100%;
+    padding: 1em 2em;
+    font-weight: 700;
+    font-size: 1.1875rem;
+    margin-top: 55px;
+    letter-spacing: 1.5px;
+  }
+  
+  
+  .btn-submit-login:hover,
+  .btn-submit-login:focus,
+  .btn-submit-login:active  {
+    background-color: rgba(60,58,131,.8) !important; /*Not sure if !important is bad practice*/
+    color: rgba(255,255,255,.8);
+    box-shadow:none;
+  }
+  
+  
+  .google-login{
+    display: table;
+    margin: 0 auto;
+    margin-top: 45px;
+    opacity: .9;
+  }
+  
+  .google-login:hover,
+  .google-login:focus {
+    opacity: 1;
+  }
