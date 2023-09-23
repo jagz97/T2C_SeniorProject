@@ -1,7 +1,6 @@
 import React from 'react'
 import './Profile.css'
 import Avatar from '../avatar/Avatar'
-import Navbar from '../navbar/Navbar'
 import PlaceVisited from './PlaceVisited'
 import ProfilePost from './ProfilePost'
 import Container from 'react-bootstrap/Container'
@@ -78,6 +77,7 @@ const Profile = () => {
             </Container>
             
         </div>
+
     )
 }
 

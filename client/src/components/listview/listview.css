@@ -1,0 +1,220 @@
+/* =================
+        Intro
+  ================= */
+.container-intro-img {
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    margin-top: -65px;
+}
+.intro-img {
+    height: 300px;
+    display: block;
+    height: 450px;
+    object-fit: cover;
+    object-position: center;
+    padding: 0;
+}
+
+
+.intro-text {
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.container-listview {
+    margin: 0 auto;
+    margin-top: 65px;
+    width: 95%;
+}
+
+/* =================
+   Search Bar
+  ================= */
+.container-search {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #21262B;
+    border: 1px solid #4A545C;
+    padding: .3em .5em;
+}
+
+.input-search {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    font-size: 20px;
+    height: 20px;
+    padding: 0;
+    color: inherit;
+}
+
+.input-search::placeholder,
+.icon-search {
+    color: #4A545C;
+}
+
+.input-search:focus,
+.input-search:active {
+    outline: none;
+}
+
+/* =================
+    Main Content
+  ================= */
+
+.listview {
+    background-color: #353C43;
+}
+
+.container-listview-sorter {
+    border: 1px #D0D0CE solid;
+    background-color: #21262B;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    font-size: .8rem;
+}
+
+.listview-sorters {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5em 0 .5em 5em;
+}
+
+.listview-sorter {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.container-listview-posts{
+    min-height: 400px;
+}
+
+.listview-post {
+    border-bottom: 1px #D0D0CE solid;
+}
+
+.listview-post-items {
+    font-size: .8rem;
+    width: 85%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    padding-left: 5.2em;
+}
+.no-posts-message {
+    padding-top: 180px;
+    text-align: center;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 1rem;
+
+}
+.listview-item,
+.listview-sorter {
+    width: 100px;
+}
+
+.listview-item {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #EAF0F7;
+}
+
+.listview-post-icons {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 8px;
+    width: 10%;
+    color: #fff;
+}
+
+.listview-icon {
+    background-color: rgba(139, 44, 255,.5);
+    padding: 3px 9px;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 761px ) {
+    .listview-sorters,
+    .listview-post-items {
+        padding-left: 2em;
+    }
+}
+
+
+/* =================
+        Modals
+  ================= */
+  
+.listview-modal .modal-content {
+    background-color: #21262B;
+    border: none;
+}
+
+.listview-modal .modal-header,
+.listview-modal .modal-footer {
+    border: none;
+}
+
+.listview-btn {
+    background-color:rgba(139, 44, 255,.5);
+    border: none;
+    border-radius: 5px;
+    padding: 0.3em 0.7em;
+    color: #fff;
+}
+
+.listview-btn:hover,
+.listview-btn:focus,
+.listview-icon:hover,
+.lisview.icon:focus {
+    opacity: .9
+}
+
+
+.listview-update-inputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.container-update-location {
+    width: 43%;
+}
+.container-update-date {
+    width: 56%;
+}
+.listview-update-caption {
+    width: 100%;
+    border-radius: 5px;
+    padding: .3em .4em;
+    border: none;
+    resize: none;
+}
+
+.listview-update-location {
+    width: 100%;
+    height: 33px;
+    display: block;
+}
+
+.listview-update-caption,
+.listview-update-location {
+    border-radius: 5px;
+    padding: .3em .4em;
+    border: none;
+}
+
