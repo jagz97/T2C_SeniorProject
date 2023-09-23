@@ -1,0 +1,19 @@
+.nav-item {
+    border-radius: 50%;
+    transition: 250ms;
+    cursor: default;
+}
+
+.nav-item:hover,
+.nav-item:focus {
+    background-color: #2a2a2a;
+    /* background-color: #1e1e1e; */
+}
+
+.custom-dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+}

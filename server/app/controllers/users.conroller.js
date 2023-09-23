@@ -2,7 +2,7 @@ const db = require("../models");
 const Users = db.users;
 
 const joi = require("joi");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const config = require("../config/auth.config");
 const Op = db.Sequelize.Op;
 
@@ -23,7 +23,7 @@ exports.register = async (req, res) => {
     const user = {
         username: req.body.username,
         email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 8)
+        password: req.body.password
     };
 
     // save user to database
@@ -71,12 +71,14 @@ exports.signin= async(req, res) => {
           req.body.password,
           user.password
         );
+
+        console.log(passwordIsValid);
     
-        // if (!passwordIsValid) {
-        //   return res.status(401).send({
-        //     message: "Invalid Password!",
-        //   });
-        // }
+        if (!passwordIsValid) {
+          return res.status(401).send({
+            message: "Invalid Password!",
+          });
+        }
     
         const token = jwt.sign({ id: user.id },
                                config.secret,
@@ -87,16 +89,21 @@ exports.signin= async(req, res) => {
                                });
     
     
-        req.session.token = token;
-    
+        res.setHeader('x-access-token', token);
+
+        console.log(req.headers["x-access-token"]);
+                              
         return res.status(200).send({
           id: user.id,
           username: user.username,
-          email: user.email
+          email: user.email,
+          accesstoken: token
         });
       } catch (error) {
         return res.status(500).send({ message: error.message });
       }
+
+      
 
 };
 
