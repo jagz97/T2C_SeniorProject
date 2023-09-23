@@ -12,7 +12,7 @@ import { BsGrid3X3 } from 'react-icons/bs'
 const Profile = () => {
     return (
         <div>
-            <Navbar/>
+      
             
             <Container fluid>
                 <Row>
