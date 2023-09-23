@@ -9,6 +9,7 @@ import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 import InputGroup from 'react-bootstrap/InputGroup'
 
+import { api } from "../../api/axios"
 import { FaRegCircleXmark, FaRegEyeSlash, FaRegEye } from 'react-icons/fa6'
 import { FcGoogle } from 'react-icons/fc'
 
@@ -45,39 +46,19 @@ const Login = () => {
     // onclick handler for revealing pwd text
     const toggleHidden = () => setShowPassword(!showPassword)
 
-    // An onSubmit event handler which for now logs
-    // the captured form data to the console
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
        
         const formData = { email: emailData, password: passwordData }
-       
-        fetch(REQUEST_URL, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(res => {
-            if(!res.ok) {
-                return Promise.reject(res)
-            }
-            return res.json()
-        })
-        .then(data => {
-            console.log(data)
-            if(errorMessage) {
-                setErrorMessage("")
-            }
-            // Link to Home Page Route Here
-        })
-        .catch(err => {
-            err.json().then(({message}) => {
-                setErrorMessage(message)
-            })
-        })
+        try {
+            const { data : user } = await api.post("/users/auth/signin",formData)
+            console.log(user)
+
+        }
+        catch(error) {
+            const errorMessage = error.response.data?.message
+            setErrorMessage(errorMessage)
+        }
     }
 
     return (
