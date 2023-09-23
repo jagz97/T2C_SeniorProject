@@ -12,21 +12,16 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          {/* Public Routes without Navbar */}
           <Route path="login" element={<LoginPage/>}/>
-          
             <Route element={<NavLayout/>}>
-
-              {/* Public Routes */}
               <Route index element={<h1>Home</h1>}/>
-            
               {/* Protected Routes */}
               <Route element={<AuthRequired/>}>
                 <Route path="posts" element={<ListviewPage/>}/>
                 <Route path="profile" element={<ProfilePage/>}/>
               </Route>
-              
             </Route>
+            <Route path="*" element={<h1>Not Found!</h1>}/>
         </Routes>
       </AuthProvider>
     </BrowserRouter>
