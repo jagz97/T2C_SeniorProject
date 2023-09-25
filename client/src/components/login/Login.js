@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
+import useAuth from '../../hooks/useAuth'
 import './Login.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -9,11 +10,9 @@ import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 import InputGroup from 'react-bootstrap/InputGroup'
 
-import { api } from "../../api/axios"
+import { api } from '../../api/axios'
 import { FaRegCircleXmark, FaRegEyeSlash, FaRegEye } from 'react-icons/fa6'
 import { FcGoogle } from 'react-icons/fc'
-
-const REQUEST_URL = 'http://localhost:8080/api/users/auth/signin'
 
 const Login = () => {
 
@@ -27,6 +26,14 @@ const Login = () => {
 
     const emailInputRef = useRef(null);
 
+    const { login } = useAuth()
+
+    const navigate = useNavigate()
+
+    const location = useLocation()
+
+    const from = location.state?.from || "/"
+    
     const handleEmailData = (event) => {
         setEmailData(event.target.value)
     }
@@ -48,12 +55,13 @@ const Login = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-       
+        setErrorMessage("")
         const formData = { email: emailData, password: passwordData }
         try {
-            const { data : user } = await api.post("/users/auth/signin",formData)
+            const { data : user } = await api.post("/users/auth/signin", formData)
             console.log(user)
-
+            login(user)
+            navigate(from, {replace: true})
         }
         catch(error) {
             const errorMessage = error.response.data?.message
