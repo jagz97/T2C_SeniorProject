@@ -10,6 +10,8 @@ import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 import InputGroup from 'react-bootstrap/InputGroup'
 
+import { api } from '../../api/axios'
+
 import { FaRegCircleXmark, FaRegEyeSlash, FaRegEye } from 'react-icons/fa6'
 import { FcGoogle } from 'react-icons/fc'
 
@@ -36,25 +38,38 @@ const Signup = () => {
   
     //event handler 
     
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
-        console.log(signupData)
+        if(signupData.password !== signupData.cpassword) {
+            console.error("Password does not match")
+        }
+        else {
+            const newUser = {username: signupData.name, email: signupData.email, password: signupData.password}
+            try {
+                const response = await api.post("/users/auth/signup", newUser)
+                console.log(response)
+            } catch (error) {
+                if(error) {
+                    console.log(error)
+                }
+            }
+        }
     }
-    fetch("http://localhost:8080/server",{ // I just made this part up :) I'll ask you guys about connecting backend
-        method:"POST",
-        headers:{"Content-Type":""},
-        body:JSON.stringify(signupData)})
-        .then((response)=>{ return response.json()})
-        .then(data => {
-          if(data.status === "success") {
-            console.log(data);
-            setSignupData(true); 
-            navigate('/');
-          }
-          else {
-            data(false);
-          }
-        })
+    // fetch("http://localhost:8080/server",{ // I just made this part up :) I'll ask you guys about connecting backend
+    //     method:"POST",
+    //     headers:{"Content-Type":""},
+    //     body:JSON.stringify(signupData)})
+    //     .then((response)=>{ return response.json()})
+    //     .then(data => {
+    //       if(data.status === "success") {
+    //         console.log(data);
+    //         setSignupData(true); 
+    //         navigate('/');
+    //       }
+    //       else {
+    //         data(false);
+    //       }
+    //     })
 
     return (
         <Container className='container-signup-page'>
