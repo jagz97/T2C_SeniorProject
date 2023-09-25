@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import './Signup.css'
-import googleIcon from '../../images/Google.png'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
@@ -10,10 +9,9 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 import InputGroup from 'react-bootstrap/InputGroup'
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const eye = <FontAwesomeIcon icon={faEye} />;
+import { FaRegCircleXmark, FaRegEyeSlash, FaRegEye } from 'react-icons/fa6'
+import { FcGoogle } from 'react-icons/fc'
 
 const Signup = () => {
 
@@ -113,7 +111,7 @@ const Signup = () => {
                                                 required
                                                 className='signup-input'
                                             />
-                                            <InputGroup.Text className='signup-input-addon'> <i onClick={togglePasswordVisiblity}>{eye}</i></InputGroup.Text>
+                                            <InputGroup.Text className='signup-input-addon'> <i onClick={togglePasswordVisiblity}><FaRegEye/></i></InputGroup.Text>
                                             
                                         </InputGroup>
                                     
@@ -131,7 +129,7 @@ const Signup = () => {
                                                 required
                                                 className='signup-input'
                                             />
-                                            <InputGroup.Text className='signup-input-addon'> <i onClick={togglePasswordVisiblity}>{eye}</i></InputGroup.Text>
+                                            <InputGroup.Text className='signup-input-addon'> <i onClick={togglePasswordVisiblity}><FaRegEye/></i></InputGroup.Text>
                                             
                                         </InputGroup>
                                         <div className='container-have-account'>
@@ -149,8 +147,7 @@ const Signup = () => {
                                 <div className='continue-text'>Or continue with</div>
                                 <hr className='line-continue'/>
                             </div>
-                            <Link to='/' className='google-signup'><img src={googleIcon} alt='google icon'/></Link>
-
+                            <Link to='/' className='google-signup'><FcGoogle size={30}/></Link>
                         </Card.Body>
                     </Card>
                 </Col>

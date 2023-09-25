@@ -14,6 +14,7 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path="login" element={<LoginPage/>}/>
+          <Route path="register" element={<SignupPage/>}/>
             <Route element={<NavLayout/>}>
               <Route index element={<h1>Home</h1>}/>
               {/* Protected Routes */}

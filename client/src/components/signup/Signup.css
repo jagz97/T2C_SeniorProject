@@ -112,25 +112,24 @@ body {
     font-size: 1.1875rem;
     margin-top: 40px;
     letter-spacing: 1.5px;
+    transition: none !important;
   }
   
   
   .btn-submit-signup:hover,
   .btn-submit-signup:focus,
   .btn-submit-signup:active  {
-    background-color: rgba(60,58,131,.8) !important; 
-    box-shadow:none;
+    background-color: rgba(60,58,131,1) !important; 
   }
   
   
   .google-signup{
     display: table;
     margin: 0 auto;
-    margin-top: 15px;
+    margin-top: 20px;
     opacity: .9;
+    background-color: #fff;
+    padding: 1em 3.5em;
+    border-radius: 8px;
   }
   
-  .google-signup:hover,
-  .google-signup:focus {
-    opacity: 1;
-  }
