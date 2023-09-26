@@ -87,7 +87,7 @@ body {
   /* Buttons*/
   .container-have-account {
     text-align: right;
-    margin-top: 15px;
+    /* margin-top: 15px; */
     font-weight: 500;
   }
 
@@ -131,5 +131,13 @@ body {
     background-color: #fff;
     padding: 1em 3.5em;
     border-radius: 8px;
+  }
+
+  .signup-error-message {
+    margin-top: .4em;
+    color: red;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: end;
   }
   

@@ -22,11 +22,12 @@ const Signup = () => {
     const [pwd, setPwd] = useState("")
     const [confPwd, setConfPwd] = useState("")
 
+    const [errorMsg, setErrorMsg] = useState("")
+
     const [showPwd, setShowPwd] = useState(false)
     const [showConfPwd, setShowConfPwd] = useState(false)
 
     const navigate = useNavigate()
-
 
     const [passwordShown, setPasswordShown] = useState(false);
     const togglePasswordVisiblity = () => { // To make password visible or invisible up to the choice of the user
@@ -38,20 +39,22 @@ const Signup = () => {
     
     const handleSubmit = async (event) => {
         event.preventDefault()
-        // if(password !== cpassword) {
-        //     console.error("Password does not match")
-        // }
-        // else {
-        //     const newUser = {username: name, email: email, password: password}
-        //     try {
-        //         const response = await api.post("/users/auth/signup", newUser)
-        //         console.log(response)
-        //     } catch (error) {
-        //         if(error) {
-        //             console.log(error)
-        //         }
-        //     }
-        // }
+        setErrorMsg("")
+        if(pwd !== confPwd) {
+            setErrorMsg("Passwords do not match")
+        }
+        else {
+            try {
+                const newUser = { username: name, email, password: pwd }
+                const response = await api.post("/users/auth/signup", newUser)
+                navigate("/", {replace: true})
+                
+            } catch (error) {
+                if(error) {
+                    setErrorMsg(error.response.data.message)
+                }
+            }
+        }
     }
 
     return (
@@ -125,6 +128,9 @@ const Signup = () => {
                                             <InputGroup.Text className='signup-input-addon'><FaRegEye/></InputGroup.Text>
                                             
                                         </InputGroup>
+                                        
+                                        <div className="signup-error-message">{errorMsg}</div>
+                                        
                                         <div className='container-have-account'>
                                             <Link to='/' className='have-account-btn'>Already Have an Account?</Link>
                                         </div>
