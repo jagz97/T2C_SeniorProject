@@ -104,7 +104,7 @@ const Signup = () => {
                                                 className='signup-input'
                                             />
                                             <InputGroup.Text className='signup-input-addon' onClick={() => setShowPwd(!showPwd)}>
-                                                {showPwd ? <FaRegEye/> : <FaRegEyeSlash/> }
+                                                {showPwd ? <FaRegEyeSlash/> : <FaRegEye/> }
                                             </InputGroup.Text>
                                             
                                         </InputGroup>
@@ -124,7 +124,7 @@ const Signup = () => {
                                                 className='signup-input'
                                             />
                                             <InputGroup.Text className='signup-input-addon' onClick={() => setShowConfPwd(!showConfPwd)}>
-                                                {showConfPwd ? <FaRegEye/> : <FaRegEyeSlash/> }
+                                                {showConfPwd ? <FaRegEyeSlash/> : <FaRegEye/> }
                                             </InputGroup.Text>
                                         </InputGroup>
                                         
