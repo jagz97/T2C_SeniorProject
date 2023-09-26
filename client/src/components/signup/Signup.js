@@ -17,19 +17,17 @@ import { FcGoogle } from 'react-icons/fc'
 
 const Signup = () => {
 
-    
-    const [signupData, setSignupData] = useState({name :'', email : '', password : '', cpassword : ''})
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [pwd, setPwd] = useState("")
+    const [confPwd, setConfPwd] = useState("")
+
+    const [showPwd, setShowPwd] = useState(false)
+    const [showConfPwd, setShowConfPwd] = useState(false)
 
     const navigate = useNavigate()
 
-    
-    const handleFormData = (e) => {
-        const {name, value} = e.target
-        setSignupData((prevData) => ({
-            ...prevData,
-            [name] : value
-       }))
-    } 
+
     const [passwordShown, setPasswordShown] = useState(false);
     const togglePasswordVisiblity = () => { // To make password visible or invisible up to the choice of the user
       setPasswordShown(passwordShown ? false : true);
@@ -40,59 +38,39 @@ const Signup = () => {
     
     const handleSubmit = async (event) => {
         event.preventDefault()
-        if(signupData.password !== signupData.cpassword) {
-            console.error("Password does not match")
-        }
-        else {
-            const newUser = {username: signupData.name, email: signupData.email, password: signupData.password}
-            try {
-                const response = await api.post("/users/auth/signup", newUser)
-                console.log(response)
-            } catch (error) {
-                if(error) {
-                    console.log(error)
-                }
-            }
-        }
+        // if(password !== cpassword) {
+        //     console.error("Password does not match")
+        // }
+        // else {
+        //     const newUser = {username: name, email: email, password: password}
+        //     try {
+        //         const response = await api.post("/users/auth/signup", newUser)
+        //         console.log(response)
+        //     } catch (error) {
+        //         if(error) {
+        //             console.log(error)
+        //         }
+        //     }
+        // }
     }
-    // fetch("http://localhost:8080/server",{ // I just made this part up :) I'll ask you guys about connecting backend
-    //     method:"POST",
-    //     headers:{"Content-Type":""},
-    //     body:JSON.stringify(signupData)})
-    //     .then((response)=>{ return response.json()})
-    //     .then(data => {
-    //       if(data.status === "success") {
-    //         console.log(data);
-    //         setSignupData(true); 
-    //         navigate('/');
-    //       }
-    //       else {
-    //         data(false);
-    //       }
-    //     })
 
     return (
         <Container className='container-signup-page'>
             <Row>
-               
-               
-                
                 <Col className='d-flex justify-content-center'>
                     <Card className="container-card">
                         <Card.Body className='p-0'>
                             <Form className='container-form' onSubmit={handleSubmit} >
                                     <Form.Group>
                                         <InputGroup className='container-name-input'required>
-                                        
                                             <Form.Control 
-                                                type='name'
+                                                type='text'
                                                 placeholder='Enter Full Name' 
                                                 name='name'
-                                                value={signupData.name}
-                                                onChange={handleFormData}
+                                                value={name}
+                                                onChange={(event) => setName(event.target.value) }
                                                 required
                                                 className='signup-input'
-                                                
                                             />
                                             <InputGroup.Text className='signup-input-addon'></InputGroup.Text>
                                         </InputGroup>
@@ -104,8 +82,8 @@ const Signup = () => {
                                                 type='email' 
                                                 placeholder='Enter Email' 
                                                 name='email'
-                                                value={signupData.email}
-                                                onChange={handleFormData}
+                                                value={email}
+                                                onChange={(event) => setEmail(event.target.value)}
                                                 required
                                                 className='signup-input'
                                             />
@@ -118,11 +96,11 @@ const Signup = () => {
                                     <Form.Group>
                                         <InputGroup className='container-next-input'required>                                    
                                             <Form.Control 
-                                                type={passwordShown ? "text" : "password"} 
+                                                type={showPwd ? "text" : "password"} 
                                                 placeholder='Enter Password' 
-                                                name='password'
-                                                value={signupData.password}
-                                                onChange={handleFormData}
+                                                name='pwd'
+                                                value={pwd}
+                                                onChange={(event) => setPwd(event.target.value) }
                                                 required
                                                 className='signup-input'
                                             />
@@ -138,13 +116,13 @@ const Signup = () => {
                                             <Form.Control 
                                                 type={passwordShown ? "text" : "password"} 
                                                 placeholder='Confirm Password' 
-                                                name='cpassword'
-                                                value={signupData.cpassword}
-                                                onChange={handleFormData}
+                                                name='confPassword'
+                                                value={confPwd}
+                                                onChange={(event) => setConfPwd(event.target.value)}
                                                 required
                                                 className='signup-input'
                                             />
-                                            <InputGroup.Text className='signup-input-addon'> <i onClick={togglePasswordVisiblity}><FaRegEye/></i></InputGroup.Text>
+                                            <InputGroup.Text className='signup-input-addon'><FaRegEye/></InputGroup.Text>
                                             
                                         </InputGroup>
                                         <div className='container-have-account'>
