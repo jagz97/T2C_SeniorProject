@@ -29,11 +29,7 @@ const Signup = () => {
 
     const navigate = useNavigate()
 
-    const [passwordShown, setPasswordShown] = useState(false);
-    const togglePasswordVisiblity = () => { // To make password visible or invisible up to the choice of the user
-      setPasswordShown(passwordShown ? false : true);
-    };
-    
+   
   
     //event handler 
     
@@ -107,7 +103,9 @@ const Signup = () => {
                                                 required
                                                 className='signup-input'
                                             />
-                                            <InputGroup.Text className='signup-input-addon'> <i onClick={togglePasswordVisiblity}><FaRegEye/></i></InputGroup.Text>
+                                            <InputGroup.Text className='signup-input-addon' onClick={() => setShowPwd(!showPwd)}>
+                                                {showPwd ? <FaRegEye/> : <FaRegEyeSlash/> }
+                                            </InputGroup.Text>
                                             
                                         </InputGroup>
                                     
@@ -117,7 +115,7 @@ const Signup = () => {
                                     <Form.Group>
                                         <InputGroup className='container-next-input'required>                                    
                                             <Form.Control 
-                                                type={passwordShown ? "text" : "password"} 
+                                                type={showConfPwd ? "text" : "password"} 
                                                 placeholder='Confirm Password' 
                                                 name='confPassword'
                                                 value={confPwd}
@@ -125,14 +123,15 @@ const Signup = () => {
                                                 required
                                                 className='signup-input'
                                             />
-                                            <InputGroup.Text className='signup-input-addon'><FaRegEye/></InputGroup.Text>
-                                            
+                                            <InputGroup.Text className='signup-input-addon' onClick={() => setShowConfPwd(!showConfPwd)}>
+                                                {showConfPwd ? <FaRegEye/> : <FaRegEyeSlash/> }
+                                            </InputGroup.Text>
                                         </InputGroup>
                                         
                                         <div className="signup-error-message">{errorMsg}</div>
                                         
                                         <div className='container-have-account'>
-                                            <Link to='/' className='have-account-btn'>Already Have an Account?</Link>
+                                            <Link to='/login' className='have-account-btn'>Already Have an Account?</Link>
                                         </div>
                                         
                                     </Form.Group>
