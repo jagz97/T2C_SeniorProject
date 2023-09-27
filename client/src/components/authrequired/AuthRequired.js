@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth"
 const AuthRequired = () => {
     const { user } = useAuth()
     const location = useLocation()
-    console.log(location)
+    
     return (
         user ? <Outlet/> : <Navigate to="/login" state={{from: location.pathname}} replace={true}/>
     )

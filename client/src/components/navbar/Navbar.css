@@ -47,3 +47,10 @@
     background-color: #161616;
     color: #fff;
 }
+
+.nav-btns {
+    flex: 1 0 auto;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 10px;
+}
