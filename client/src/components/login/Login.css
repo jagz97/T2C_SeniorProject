@@ -1,4 +1,6 @@
-  body {
+  main.login {
+    margin: 0;
+    height: 100vh;
     background-color: rgb(114,126,173); /*Fallback color for background image*/
     background: url('../../images/pexels-luke-webb-2734920 1.png') no-repeat bottom center fixed;
     background-size: cover;
@@ -7,8 +9,7 @@
   }
   
   .container-login-page {
-    /* background-color: green; */
-    margin-top: 13vh;
+    padding-top: 10vh;
   }
   
   .page-title-text {

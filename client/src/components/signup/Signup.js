@@ -12,7 +12,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 
 import { api } from '../../api/axios'
 
-import { FaRegCircleXmark, FaRegEyeSlash, FaRegEye } from 'react-icons/fa6'
+import { FaRegEyeSlash, FaRegEye } from 'react-icons/fa6'
 import { FcGoogle } from 'react-icons/fc'
 
 const Signup = () => {
@@ -43,6 +43,9 @@ const Signup = () => {
             try {
                 const newUser = { username: name, email, password: pwd }
                 const response = await api.post("/users/auth/signup", newUser)
+
+                console.log(response)
+                // set the access token to context state?
                 navigate("/", {replace: true})
                 
             } catch (error) {
@@ -54,106 +57,108 @@ const Signup = () => {
     }
 
     return (
-        <Container className='container-signup-page'>
-            <Row>
-                <Col className='d-flex justify-content-center'>
-                    <Card className="container-card">
-                        <Card.Body className='p-0'>
-                            <Form className='container-form' onSubmit={handleSubmit} >
-                                    <Form.Group>
-                                        <InputGroup className='container-name-input'required>
-                                            <Form.Control 
-                                                type='text'
-                                                placeholder='Enter Full Name' 
-                                                name='name'
-                                                value={name}
-                                                onChange={(event) => setName(event.target.value) }
-                                                required
-                                                className='signup-input'
-                                            />
-                                            <InputGroup.Text className='signup-input-addon'></InputGroup.Text>
-                                        </InputGroup>
-                                    </Form.Group>
+        <main className="signup">
+            <Container className='container-signup-page'>
+                <Row>
+                    <Col className='d-flex justify-content-center'>
+                        <Card className="container-card">
+                            <Card.Body className='p-0'>
+                                <Form className='container-form' onSubmit={handleSubmit} >
+                                        <Form.Group>
+                                            <InputGroup className='container-name-input'required>
+                                                <Form.Control 
+                                                    type='text'
+                                                    placeholder='Enter Full Name' 
+                                                    name='name'
+                                                    value={name}
+                                                    onChange={(event) => setName(event.target.value) }
+                                                    required
+                                                    className='signup-input'
+                                                />
+                                                <InputGroup.Text className='signup-input-addon'></InputGroup.Text>
+                                            </InputGroup>
+                                        </Form.Group>
 
-                                    <Form.Group>
-                                        <InputGroup className='container-next-input'required>                                    
-                                            <Form.Control 
-                                                type='email' 
-                                                placeholder='Enter Email' 
-                                                name='email'
-                                                value={email}
-                                                onChange={(event) => setEmail(event.target.value)}
-                                                required
-                                                className='signup-input'
-                                            />
-                                            <InputGroup.Text className='signup-input-addon'></InputGroup.Text>
+                                        <Form.Group>
+                                            <InputGroup className='container-next-input'required>                                    
+                                                <Form.Control 
+                                                    type='email' 
+                                                    placeholder='Enter Email' 
+                                                    name='email'
+                                                    value={email}
+                                                    onChange={(event) => setEmail(event.target.value)}
+                                                    required
+                                                    className='signup-input'
+                                                />
+                                                <InputGroup.Text className='signup-input-addon'></InputGroup.Text>
+                                                
+                                            </InputGroup>
+                                        
+                                        </Form.Group>
+
+                                        <Form.Group>
+                                            <InputGroup className='container-next-input'required>                                    
+                                                <Form.Control 
+                                                    type={showPwd ? "text" : "password"} 
+                                                    placeholder='Enter Password' 
+                                                    name='pwd'
+                                                    value={pwd}
+                                                    onChange={(event) => setPwd(event.target.value) }
+                                                    required
+                                                    className='signup-input'
+                                                />
+                                                <InputGroup.Text className='signup-input-addon' onClick={() => setShowPwd(!showPwd)}>
+                                                    {showPwd ? <FaRegEyeSlash/> : <FaRegEye/> }
+                                                </InputGroup.Text>
+                                                
+                                            </InputGroup>
+                                        
+                                        </Form.Group>
+                                        
+
+                                        <Form.Group>
+                                            <InputGroup className='container-next-input'required>                                    
+                                                <Form.Control 
+                                                    type={showConfPwd ? "text" : "password"} 
+                                                    placeholder='Confirm Password' 
+                                                    name='confPassword'
+                                                    value={confPwd}
+                                                    onChange={(event) => setConfPwd(event.target.value)}
+                                                    required
+                                                    className='signup-input'
+                                                />
+                                                <InputGroup.Text className='signup-input-addon' onClick={() => setShowConfPwd(!showConfPwd)}>
+                                                    {showConfPwd ? <FaRegEyeSlash/> : <FaRegEye/> }
+                                                </InputGroup.Text>
+                                            </InputGroup>
                                             
-                                        </InputGroup>
-                                    
-                                    </Form.Group>
-
-                                    <Form.Group>
-                                        <InputGroup className='container-next-input'required>                                    
-                                            <Form.Control 
-                                                type={showPwd ? "text" : "password"} 
-                                                placeholder='Enter Password' 
-                                                name='pwd'
-                                                value={pwd}
-                                                onChange={(event) => setPwd(event.target.value) }
-                                                required
-                                                className='signup-input'
-                                            />
-                                            <InputGroup.Text className='signup-input-addon' onClick={() => setShowPwd(!showPwd)}>
-                                                {showPwd ? <FaRegEyeSlash/> : <FaRegEye/> }
-                                            </InputGroup.Text>
+                                            <div className="signup-error-message">{errorMsg}</div>
                                             
-                                        </InputGroup>
-                                    
-                                    </Form.Group>
-                                    
-
-                                    <Form.Group>
-                                        <InputGroup className='container-next-input'required>                                    
-                                            <Form.Control 
-                                                type={showConfPwd ? "text" : "password"} 
-                                                placeholder='Confirm Password' 
-                                                name='confPassword'
-                                                value={confPwd}
-                                                onChange={(event) => setConfPwd(event.target.value)}
-                                                required
-                                                className='signup-input'
-                                            />
-                                            <InputGroup.Text className='signup-input-addon' onClick={() => setShowConfPwd(!showConfPwd)}>
-                                                {showConfPwd ? <FaRegEyeSlash/> : <FaRegEye/> }
-                                            </InputGroup.Text>
-                                        </InputGroup>
+                                            <div className='container-have-account'>
+                                                <Link to='/login' className='have-account-btn'>Already Have an Account?</Link>
+                                            </div>
+                                            
+                                        </Form.Group>
                                         
-                                        <div className="signup-error-message">{errorMsg}</div>
-                                        
-                                        <div className='container-have-account'>
-                                            <Link to='/login' className='have-account-btn'>Already Have an Account?</Link>
-                                        </div>
-                                        
-                                    </Form.Group>
-                                    
-                                    <Button className='btn-submit-signup' type='submit'>Sign Up</Button>
+                                        <Button className='btn-submit-signup' type='submit'>Sign Up</Button>
 
-                            </Form>
+                                </Form>
 
-                            <div className='container-continue'>
-                                <hr className='line-continue'/>
-                                <div className='continue-text'>Or continue with</div>
-                                <hr className='line-continue'/>
-                            </div>
-                            <Link to='/' className='google-signup'><FcGoogle size={30}/></Link>
-                        </Card.Body>
-                    </Card>
+                                <div className='container-continue'>
+                                    <hr className='line-continue'/>
+                                    <div className='continue-text'>Or continue with</div>
+                                    <hr className='line-continue'/>
+                                </div>
+                                <Link to='/' className='google-signup'><FcGoogle size={30}/></Link>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col >
+                        <div className='page-title-text'>Welcome to <strong>Travel2Connect</strong></div>
                 </Col>
-                <Col >
-                    <div className='page-title-text'>Welcome to <strong>Travel2Connect</strong></div>
-               </Col>
-            </Row>
-        </Container>
+                </Row>
+            </Container>
+        </main>
     )
 }
 

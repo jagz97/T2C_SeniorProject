@@ -70,74 +70,76 @@ const Login = () => {
     }
 
     return (
-        <Container className='container-login-page'>
-            <Row>
-                <Col className='d-flex justify-content-center'>
-                    <div className='page-title-text'>Sign in to <strong>Travel2Connect</strong></div>
-                </Col>
+        <main className="login">
+            <Container className='container-login-page'>
+                <Row>
+                    <Col className='d-flex justify-content-center'>
+                        <div className='page-title-text'>Sign in to <strong>Travel2Connect</strong></div>
+                    </Col>
 
-                <Col className='d-flex justify-content-center'>
-                    <Card className="container-card">
-                        <Card.Body className='p-0'>
-                            <Form className='container-form' onSubmit={handleSubmit} >
-                                <Form.Group>
-                                    <InputGroup className='container-email-input'>
-                                        <Form.Control
-                                            type='text'
-                                            placeholder='Enter Email'
-                                            value={emailData}
-                                            onChange={handleEmailData}
-                                            required
-                                            className='login-input'
-                                            ref={emailInputRef}
-                                        />
-                                        <InputGroup.Text className='login-input-addon' onClick={resetText}>
-                                            <div className="addon" onClick={resetText}>
-                                                <FaRegCircleXmark/> 
-                                            </div>
-                                        </InputGroup.Text>
-                                    </InputGroup>
-                                </Form.Group>
+                    <Col className='d-flex justify-content-center'>
+                        <Card className="container-card">
+                            <Card.Body className='p-0'>
+                                <Form className='container-form' onSubmit={handleSubmit} >
+                                    <Form.Group>
+                                        <InputGroup className='container-email-input'>
+                                            <Form.Control
+                                                type='text'
+                                                placeholder='Enter Email'
+                                                value={emailData}
+                                                onChange={handleEmailData}
+                                                required
+                                                className='login-input'
+                                                ref={emailInputRef}
+                                            />
+                                            <InputGroup.Text className='login-input-addon' onClick={resetText}>
+                                                <div className="addon" onClick={resetText}>
+                                                    <FaRegCircleXmark/> 
+                                                </div>
+                                            </InputGroup.Text>
+                                        </InputGroup>
+                                    </Form.Group>
 
-                                <Form.Group>
-                                    <InputGroup className='container-password-input'>
-                                        <Form.Control
-                                            type={showPassword ? 'text' : 'password'}
-                                            placeholder='Enter Password'
-                                            value={passwordData}
-                                            onChange={handlePasswordData}
-                                            required
-                                            className='login-input'
-                                        />
-                                        <InputGroup.Text className='login-input-addon'>
-                                            <div className="addon" onClick={toggleHidden}>
-                                                {showPassword ? <FaRegEyeSlash/> : <FaRegEye/>}
-                                            </div>
-                                        </InputGroup.Text>
+                                    <Form.Group>
+                                        <InputGroup className='container-password-input'>
+                                            <Form.Control
+                                                type={showPassword ? 'text' : 'password'}
+                                                placeholder='Enter Password'
+                                                value={passwordData}
+                                                onChange={handlePasswordData}
+                                                required
+                                                className='login-input'
+                                            />
+                                            <InputGroup.Text className='login-input-addon'>
+                                                <div className="addon" onClick={toggleHidden}>
+                                                    {showPassword ? <FaRegEyeSlash/> : <FaRegEye/>}
+                                                </div>
+                                            </InputGroup.Text>
 
-                                    </InputGroup>
-                                    <div className="login-error-message">{errorMessage}</div>
-                                    <div className='container-recover-password'>
-                                        <Link to='#' className='recover-password-btn'>Recover Password?</Link>
-                                    </div>
+                                        </InputGroup>
+                                        <div className="login-error-message">{errorMessage}</div>
+                                        <div className='container-recover-password'>
+                                            <Link to='#' className='recover-password-btn'>Recover Password?</Link>
+                                        </div>
 
-                                </Form.Group>
+                                    </Form.Group>
 
-                                <Button className='btn-submit-login' type='submit'>Sign In</Button>
-                            </Form>
+                                    <Button className='btn-submit-login' type='submit'>Sign In</Button>
+                                </Form>
 
-                            <div className='container-continue'>
-                                <hr className='line-continue' />
-                                <div className='continue-text'>Or continue with</div>
-                                <hr className='line-continue' />
-                            </div>
-                            <Link to='#' className='google-login'><FcGoogle size={30}/></Link>
+                                <div className='container-continue'>
+                                    <hr className='line-continue' />
+                                    <div className='continue-text'>Or continue with</div>
+                                    <hr className='line-continue' />
+                                </div>
+                                <Link to='#' className='google-login'><FcGoogle size={30}/></Link>
 
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        </main>
     )
 }
 

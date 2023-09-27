@@ -1,4 +1,6 @@
-body {
+main.signup {
+    margin: 0;
+    height: 100vh;
     background-color: rgb(114,126,173); 
     background: url('../../images/pexels-brandon-morrison-990344.jpg') no-repeat bottom center fixed;
     background-size: cover;
@@ -7,7 +9,7 @@ body {
   }
   
   .container-signup-page {
-    margin-top: 13vh;
+    padding-top: 10vh;
   }
   
   .page-title-text {
