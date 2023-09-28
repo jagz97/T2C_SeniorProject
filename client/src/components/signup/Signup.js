@@ -49,8 +49,14 @@ const Signup = () => {
                 navigate("/", {replace: true})
                 
             } catch (error) {
-                if(error) {
-                    setErrorMsg(error.response.data.message)
+                const errorMessage = error.response?.data?.message
+                // if we get a an error response from server display it
+                // otherwise we display error directly from axios library
+                if(errorMessage) {
+                    setErrorMsg(errorMessage)
+                }
+                else {
+                    setErrorMsg(error.message)
                 }
             }
         }
@@ -59,9 +65,9 @@ const Signup = () => {
     return (
         <main className="signup">
             <Container className='container-signup-page'>
-                <Row>
-                    <Col className='d-flex justify-content-center'>
-                        <Card className="container-card">
+                <Row className="justify-content-center justify-content-xl-between">
+                    <Col className="col-auto">
+                        <Card className="container-signup-card">
                             <Card.Body className='p-0'>
                                 <Form className='container-form' onSubmit={handleSubmit} >
                                         <Form.Group>
@@ -153,8 +159,8 @@ const Signup = () => {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col >
-                        <div className='page-title-text'>Welcome to <strong>Travel2Connect</strong></div>
+                    <Col className='col-auto'>
+                        <div className='signup-title-text d-none d-xl-block'>Welcome to <strong>Travel2Connect</strong></div>
                 </Col>
                 </Row>
             </Container>

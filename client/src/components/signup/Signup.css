@@ -12,16 +12,15 @@ main.signup {
     padding-top: 10vh;
   }
   
-  .page-title-text {
+  .signup-title-text {
     width: 480px;
     font-size: 3.85rem;
     line-height: 1.2;
+    text-align: end;
     margin-top: 10%;
-    margin-left:12%;
-  
   }
 
-  .container-card {
+  .container-signup-card {
     background-color: rgba(0,0,0,.53);
     width: 480px;
     max-height: 700px; 
