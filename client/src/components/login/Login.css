@@ -68,12 +68,9 @@
     font-size: 18px;
     margin-right: 8px;
     padding: .6em .9em;
-    /* border-radius: 8px; */
-
   }
   .addon:hover {
     cursor: pointer;
-    /* background-color: #eeeeee; */
     opacity: .8;
   }
   
