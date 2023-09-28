@@ -80,7 +80,7 @@ const Login = () => {
     return (
         <main className="login">
             <Container className='container-login-page'>
-                <Row className="justify-content-center">
+                <Row className="justify-content-center justify-content-xl-between">
                     <Col className='col-auto'>
                         <div className='login-title-text'>Sign in to <strong>Travel2Connect</strong></div>
                     </Col>
