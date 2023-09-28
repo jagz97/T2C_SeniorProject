@@ -14,6 +14,7 @@ import { api } from '../../api/axios'
 import { FaRegCircleXmark, FaRegEyeSlash, FaRegEye } from 'react-icons/fa6'
 import { FcGoogle } from 'react-icons/fc'
 
+
 const Login = () => {
 
     const [emailData, setEmailData] = useState('')
@@ -64,21 +65,28 @@ const Login = () => {
             navigate(from, {replace: true})
         }
         catch(error) {
-            const errorMessage = error.response.data?.message
-            setErrorMessage(errorMessage)
+            const errorMessage = error.response?.data?.message
+            // if we get a an error response from server display it
+            // otherwise we display error directly from axios library
+            if(errorMessage) {
+                setErrorMessage(errorMessage)
+            }
+            else {
+                setErrorMessage(error.message)
+            }
         }
     }
 
     return (
         <main className="login">
             <Container className='container-login-page'>
-                <Row>
-                    <Col className='d-flex justify-content-center'>
-                        <div className='page-title-text'>Sign in to <strong>Travel2Connect</strong></div>
+                <Row className="justify-content-center">
+                    <Col className='col-auto'>
+                        <div className='login-title-text'>Sign in to <strong>Travel2Connect</strong></div>
                     </Col>
 
-                    <Col className='d-flex justify-content-center'>
-                        <Card className="container-card">
+                    <Col className='col-auto'>
+                        <Card className="container-login-card">
                             <Card.Body className='p-0'>
                                 <Form className='container-form' onSubmit={handleSubmit} >
                                     <Form.Group>
