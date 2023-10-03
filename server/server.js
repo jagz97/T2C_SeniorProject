@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -19,6 +20,9 @@ app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.use(
 //   cookieSession({
@@ -47,6 +51,7 @@ app.get("/", (req, res) => {
 require("./app/routes/turorial.routes")(app);
 require("./app/routes/users.routes")(app);
 require("./app/routes/user.routes")(app);
+require("./app/routes/profile.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
