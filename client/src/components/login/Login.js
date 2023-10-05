@@ -1,9 +1,7 @@
-import React, {useState,useRef,useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import React, { useState, useRef, useEffect } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
+import useAuth from '../../hooks/useAuth'
 import './Login.css'
-import deleteIcon from '../../images/email-delete-icon.png'
-import hideIcon from '../../images/hide-password-icon.png'
-import googleIcon from '../../images/Google.png'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
@@ -12,16 +10,31 @@ import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 import InputGroup from 'react-bootstrap/InputGroup'
 
-const Login = () => {
+import { api } from '../../api/axios'
+import { FaRegCircleXmark, FaRegEyeSlash, FaRegEye } from 'react-icons/fa6'
+import { FcGoogle } from 'react-icons/fc'
 
+
+const Login = () => {
+  
     const [emailData, setEmailData] = useState('')
     const [passwordData, setPasswordData] = useState('')
 
     // State for toggling pwd input visibility
     const [showPassword, setShowPassword] = useState(false)
 
+    const [errorMessage, setErrorMessage] = useState("")
+
     const emailInputRef = useRef(null);
 
+    const { login } = useAuth()
+
+    const navigate = useNavigate()
+
+    const location = useLocation()
+
+    const from = location.state?.from || "/"
+    
     const handleEmailData = (event) => {
         setEmailData(event.target.value)
     }
@@ -31,41 +44,56 @@ const Login = () => {
     }
 
     // For email input text reset   
-   useEffect(() => {
-      emailInputRef.current.focus();
-   }, [emailData]);
+    useEffect(() => {
+        emailInputRef.current.focus();
+    }, [emailData]);
 
     // onclick handler for email text reset
     const resetText = () => setEmailData('')
-    
+
     // onclick handler for revealing pwd text
     const toggleHidden = () => setShowPassword(!showPassword)
-    
-    // An onSubmit event handler which for now logs
-    // the captured form data to the console
-    const handleSubmit = (event) => {
+
+    const handleSubmit = async (event) => {
         event.preventDefault()
-        console.log(emailData,passwordData)
-        // setPasswordData('')
-        // setEmailData('')
+        setErrorMessage("")
+        const formData = { email: emailData, password: passwordData }
+        try {
+            const { data : user } = await api.post("/users/auth/signin", formData)
+            console.log(user)
+            login(user)
+            navigate(from, {replace: true})
+        }
+        catch(error) {
+            const errorMessage = error.response?.data?.message
+            // if we get a an error response from server display it
+            // otherwise we display error directly from axios library
+            if(errorMessage) {
+                setErrorMessage(errorMessage)
+            }
+            else {
+                setErrorMessage(error.message)
+            }
+        }
     }
 
     return (
-        <Container className='container-login-page'>
-            <Row>
-               <Col className='d-flex justify-content-center'>
-                    <div className='page-title-text'>Sign in to <strong>Travel2Connect</strong></div>
-               </Col>
-               
-                <Col className='d-flex justify-content-center'>
-                    <Card className="container-card">
-                        <Card.Body className='p-0'>
-                            <Form className='container-form' onSubmit={handleSubmit} >
+        <main className="login">
+            <Container className='container-login-page'>
+                <Row className="justify-content-center justify-content-xl-between">
+                    <Col className='col-auto'>
+                        <div className='login-title-text'>Sign in to <strong>Travel2Connect</strong></div>
+                    </Col>
+
+                    <Col className='col-auto'>
+                        <Card className="container-login-card">
+                            <Card.Body className='p-0'>
+                                <Form className='container-form' onSubmit={handleSubmit} >
                                     <Form.Group>
                                         <InputGroup className='container-email-input'>
-                                            <Form.Control 
-                                                type='email'
-                                                placeholder='Enter Email' 
+                                            <Form.Control
+                                                type='text'
+                                                placeholder='Enter Email'
                                                 value={emailData}
                                                 onChange={handleEmailData}
                                                 required
@@ -73,47 +101,53 @@ const Login = () => {
                                                 ref={emailInputRef}
                                             />
                                             <InputGroup.Text className='login-input-addon' onClick={resetText}>
-                                                <img src={deleteIcon} alt="delete icon"></img>
+                                                <div className="addon" onClick={resetText}>
+                                                    <FaRegCircleXmark/> 
+                                                </div>
                                             </InputGroup.Text>
                                         </InputGroup>
                                     </Form.Group>
 
                                     <Form.Group>
-                                        <InputGroup className='container-password-input'>                                    
-                                            <Form.Control 
-                                                type={ showPassword ? 'text': 'password'} 
-                                                placeholder='Enter Password' 
+                                        <InputGroup className='container-password-input'>
+                                            <Form.Control
+                                                type={showPassword ? 'text' : 'password'}
+                                                placeholder='Enter Password'
                                                 value={passwordData}
                                                 onChange={handlePasswordData}
                                                 required
                                                 className='login-input'
                                             />
-                                            <InputGroup.Text className='login-input-addon' onClick={toggleHidden}>
-                                                <img src={hideIcon} alt="hide icon"></img>
+                                            <InputGroup.Text className='login-input-addon'>
+                                                <div className="addon" onClick={toggleHidden}>
+                                                    {showPassword ? <FaRegEyeSlash/> : <FaRegEye/>}
+                                                </div>
                                             </InputGroup.Text>
-                                            
+
                                         </InputGroup>
+                                        <div className="login-error-message">{errorMessage}</div>
                                         <div className='container-recover-password'>
-                                            <Link to='/' className='recover-password-btn'>Recover Password?</Link>
+                                            <Link to='#' className='recover-password-btn'>Recover Password?</Link>
                                         </div>
-                                        
+
                                     </Form.Group>
-                                    
+
                                     <Button className='btn-submit-login' type='submit'>Sign In</Button>
-                            </Form>
+                                </Form>
 
-                            <div className='container-continue'>
-                                <hr className='line-continue'/>
-                                <div className='continue-text'>Or continue with</div>
-                                <hr className='line-continue'/>
-                            </div>
-                            <Link to='/' className='google-login'><img src={googleIcon} alt='google icon'/></Link>
+                                <div className='container-continue'>
+                                    <hr className='line-continue' />
+                                    <div className='continue-text'>Or continue with</div>
+                                    <hr className='line-continue' />
+                                </div>
+                                <Link to='#' className='google-login'><FcGoogle size={30}/></Link>
 
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        </main>
     )
 }
 

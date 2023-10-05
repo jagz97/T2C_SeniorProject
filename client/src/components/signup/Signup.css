@@ -1,48 +1,47 @@
-  main.login {
+main.signup {
     margin: 0;
     height: 100vh;
-    background-color: rgb(114,126,173); /*Fallback color for background image*/
-    background: url('../../images/pexels-luke-webb-2734920 1.png') no-repeat bottom center fixed;
+    background-color: rgb(114,126,173); 
+    background: url('../../images/pexels-brandon-morrison-990344.jpg') no-repeat bottom center fixed;
     background-size: cover;
-    font-family: 'DM Sans', sans-serif; /*imported DM sans via google fonts*/
+    font-family: 'DM Sans', sans-serif; 
     color: #fff;
   }
   
-  .container-login-page {
+  .container-signup-page {
     padding-top: 10vh;
   }
   
-  .login-title-text {
+  .signup-title-text {
     width: 480px;
     font-size: 3.85rem;
-    text-align: start;
     line-height: 1.2;
-    margin: 0;
+    text-align: end;
+    margin-top: 10%;
   }
 
-  .container-login-card {
+  .container-signup-card {
     background-color: rgba(0,0,0,.53);
     width: 480px;
-    max-height: 575px; 
+    max-height: 700px; 
     padding: 3.75em;
     border-radius: 38px;
     font-size: 0.875rem;
   }
 
   
-  .container-password-input {
+  .container-next-input {
     margin-top: 20px;
   }
 
-  .login-input {
+  .signup-input {
     padding: 1.1em;
     border: none;
     border-radius: 8px;
   }
-  
 
-  .login-input,
-  .login-input::placeholder {
+  .signup-input,
+  .signup-input::placeholder {
     color: rgba(79, 85, 90, 1);
     font-weight: 500;
     font-size: 1.125rem;
@@ -50,32 +49,23 @@
     line-height: 0;
   }
    
-  .login-input:focus,
-  .login-input:active{
+  .signup-input:focus,
+  .signup-input:active{
     box-shadow: none;
   }
 
   
-  .login-input-addon {
-    color: #677185;
+  .signup-input-addon {
     background-color: #fff;
     border:none;
-    padding: 0;
-  }
-  
-
-  .addon {
-    font-size: 18px;
-    margin-right: 8px;
-    padding: .6em .9em;
-  }
-  .addon:hover {
     cursor: pointer;
-    opacity: .8;
+    border-radius: 10px;
+    padding: 0 1.5em;
   }
-  
+
+ 
   .container-continue {
-    margin-top: 45px;
+    margin-top: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -94,34 +84,26 @@
     opacity: .7;
   }
   
-  .login-error-message {
-    margin-top: .4em;
-    color: #F32F24;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-align: end;
-  }
   
-  /* =================
-      Buttons
-  ================= */
-  .container-recover-password {
+  /* Buttons*/
+  .container-have-account {
     text-align: right;
+    /* margin-top: 15px; */
     font-weight: 500;
   }
 
-  .recover-password-btn {
+  .have-account-btn {
     color: rgba(199, 199, 199, 1);
     text-decoration: none;
     letter-spacing: 1.8px;
   }
   
-  .recover-password-btn:hover,
-  .recover-password-btn:focus {
+  .have-account-btn:hover,
+  .have-account-btn:focus {
     color: rgba(199, 199, 199, .7);
   }
   
-  .btn-submit-login{
+  .btn-submit-signup{
     background-color: rgba(60,58,131,1);
     border: none;
     border-radius: 12px;
@@ -129,20 +111,20 @@
     padding: 1em 2em;
     font-weight: 700;
     font-size: 1.1875rem;
-    margin-top: 55px;
+    margin-top: 40px;
     letter-spacing: 1.5px;
     transition: none !important;
   }
   
   
-  .btn-submit-login:hover,
-  .btn-submit-login:focus,
-  .btn-submit-login:active  {
+  .btn-submit-signup:hover,
+  .btn-submit-signup:focus,
+  .btn-submit-signup:active  {
     background-color: rgba(60,58,131,1) !important; 
   }
   
   
-  .google-login{
+  .google-signup{
     display: table;
     margin: 0 auto;
     margin-top: 20px;
@@ -150,5 +132,13 @@
     background-color: #fff;
     padding: 1em 3.5em;
     border-radius: 8px;
+  }
+
+  .signup-error-message {
+    margin-top: .4em;
+    color: red;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: end;
   }
   
