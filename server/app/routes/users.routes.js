@@ -8,7 +8,7 @@ module.exports = app => {
 
       res.header(
         "Access-Control-Allow-Headers", 
-        "x-access-token, Origin, Content-Type, Accept"
+        "authoriztion, Origin, Content-Type, Accept"
         );
 
         next();

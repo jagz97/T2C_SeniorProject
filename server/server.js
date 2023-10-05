@@ -3,6 +3,9 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
 
+
+global.__basedir = __dirname;
+
 const app = express();
 
 var corsOptions = {

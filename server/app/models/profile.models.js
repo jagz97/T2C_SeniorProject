@@ -2,7 +2,6 @@
 
 module.exports = (sequelize, Sequelize) => {
     const Profile = sequelize.define("Profile", {
-
         firstName: {
             type: Sequelize.STRING,
             allowNull: true
@@ -19,17 +18,34 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: true
         },
-        proifilePicture:{
-            type: Sequelize.BLOB('long'),
-            allowNull: true
-
+        userId: {
+            type: Sequelize.INTEGER, 
+            allowNull: false, 
+            references: {
+                model: 'users', 
+                key: 'userId', 
+            },
         },
-        bioPic: {
-            type: Sequelize.BLOB('long'),
-            allowNull: true
+        // Add bioPic and ProfilePicture fields with associations to the Image model.
+        bioPicId: {
+            type: Sequelize.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'Images',
+                key: 'id', //Image model has a primary key named 'id'.
+            },
         },
-
+        profilePictureId: {
+            type: Sequelize.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'Images',
+                key: 'id', //Image model has a primary key named 'id'.
+            },
+        },
     });
-        return Profile;
 
+
+
+    return Profile;
 };
