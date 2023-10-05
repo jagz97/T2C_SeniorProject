@@ -11,7 +11,9 @@ import { BsGrid3X3 } from 'react-icons/bs'
 
 const Profile = () => {
     return (
-        <div>    
+        <div>
+      
+            
             <Container fluid>
                 <Row>
                     <Col className="px-0" style={{position:"relative"}}>
