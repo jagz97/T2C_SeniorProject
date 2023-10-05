@@ -9,11 +9,13 @@ global.__basedir = __dirname;
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: "http://localhost:3000",
   credentials: true 
 };
 
 app.use(cors(corsOptions));
+
+
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -35,6 +37,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //     sameSite: 'strict'
 //   })
 // );
+
 
 
 const db = require("./app/models");
