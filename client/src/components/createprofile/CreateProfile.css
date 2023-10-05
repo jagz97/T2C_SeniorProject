@@ -1,0 +1,9 @@
+.create-profile-form label,
+.create-profile-form button {
+    display: block;
+}
+
+.create-profile-form input {
+    width: 100%;
+    max-width: 250px;
+}

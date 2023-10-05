@@ -4,6 +4,8 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
+import CreateProfilePage from './pages/CreateProfilePage'
+
 
 import AuthRequired from './components/authrequired/AuthRequired'
 
@@ -13,14 +15,20 @@ function App() {
         <Routes>
           <Route path="login" element={<LoginPage/>}/>
           <Route path="register" element={<SignupPage/>}/>
-            <Route element={<NavLayout/>}>
+
+          <Route element={<NavLayout/>}>
               <Route index element={<h1>Home</h1>}/>
-              {/* Protected Routes */}
-              <Route element={<AuthRequired/>}>
-                <Route path="posts" element={<ListviewPage/>}/>
-                <Route path="profile" element={<ProfilePage/>}/>
-              </Route>
+          </Route>
+  
+          {/* Protected Routes */}
+          <Route element={<AuthRequired/>}>
+            <Route path="createprofile" element={<CreateProfilePage/>}/>
+            <Route element={<NavLayout/>}>
+              <Route path="posts" element={<ListviewPage/>}/>
+              <Route path="profile" element={<ProfilePage/>}/>
             </Route>
+          </Route>
+            
             <Route path="*" element={<h1>Not Found!</h1>}/>
         </Routes>
     </BrowserRouter>
