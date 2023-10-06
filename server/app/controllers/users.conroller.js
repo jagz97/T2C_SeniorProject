@@ -79,8 +79,8 @@ exports.signin= async(req, res) => {
             message: "Invalid Password!",
           });
         }
-    
-        const token = jwt.sign({ id: user.id },
+    console.log(user.userId);
+        const token = jwt.sign({ id: user.userId },
                                config.secret,
                                {
                                 algorithm: 'HS256',
