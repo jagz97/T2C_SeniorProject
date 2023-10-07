@@ -23,15 +23,19 @@ db.tutorials = require("./tutorial.model.js")(sequelize, Sequelize);
 db.users = require("./users.models.js")(sequelize, Sequelize);
 db.profile = require("./profile.models.js")(sequelize, Sequelize);
 db.image = require("./image.models.js")(sequelize, Sequelize);
+db.token = require("./token.models.js")(sequelize, Sequelize);
 
 const Users = db.users;
 const Profile = db.profile;
-const Image = db.image
+const Token = db.token;
+
+//One-to-one relation of token and user
+Token.belongsTo(Users, {foreignKey: 'userId'});
 
 
-    // Define associations for bioPic and ProfilePicture.
-    Profile.belongsTo(sequelize.models.Image, { foreignKey: 'bioPicId', as: 'bioPic' });
-    Profile.belongsTo(sequelize.models.Image, { foreignKey: 'profilePictureId', as: 'profilePicture' });
+// Define associations for bioPic and ProfilePicture.
+Profile.belongsTo(sequelize.models.Image, { foreignKey: 'bioPicId', as: 'bioPic' });
+Profile.belongsTo(sequelize.models.Image, { foreignKey: 'profilePictureId', as: 'profilePicture' });
 
 
 Users.associate = (models) => {
