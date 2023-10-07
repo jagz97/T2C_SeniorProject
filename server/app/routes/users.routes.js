@@ -29,7 +29,9 @@ module.exports = app => {
 
       router.post("/auth/signout", users.signout);
 
+      router.post("/auth/requestReset", users.requestPasswordReset);
+      router.post("/auth/resetPassword", users.resetPassword);
+
     app.use('/api/users', router);
 };
-
 
