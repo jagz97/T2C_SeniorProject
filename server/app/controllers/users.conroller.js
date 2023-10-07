@@ -36,7 +36,7 @@ exports.register = async (req, res) => {
         res.send(data);
         console.log(data);
         console.log(data.dataValues);
-        console.log(data.dataValues.id);
+        console.log(data.dataValues.userId);
         console.log(data.dataValues.username);
         console.log(data.dataValues.email);
     })
@@ -67,15 +67,20 @@ exports.signin= async(req, res) => {
           req.body.password,
           user.password
         );
+        const lastLoggedIn = await user.lastLoggedIn;
+        // Determine firstTimeLogin based on lastLoggedIn
+        const firstTimeLogin = lastLoggedIn === null ? true : false;
 
-        console.log(passwordIsValid);
-    
+
+        user.lastLoggedIn = new Date();
+        await user.save();
+
         if (!passwordIsValid) {
           return res.status(401).send({
             message: "Invalid Password!",
           });
         }
-    console.log(user.userId);
+    
         const token = jwt.sign({ id: user.userId },
                                config.secret,
                                {
@@ -88,7 +93,8 @@ exports.signin= async(req, res) => {
           id: user.id,
           username: user.username,
           email: user.email,
-          accesstoken: token
+          accesstoken: token,
+          firsTimeLogin: firstTimeLogin
         });
       } catch (error) {
         return res.status(500).send({ message: error.message });
