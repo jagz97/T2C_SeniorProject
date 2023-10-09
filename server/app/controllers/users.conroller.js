@@ -1,13 +1,13 @@
 const db = require("../models");
 const Users = db.users;
 const Token = db.token;
+
 const mailConfig = require("../config/mail.config.js");
-const joi = require("joi");
 const bcrypt = require("bcrypt");
 const config = require("../config/auth.config");
-const Op = db.Sequelize.Op;
 const crypto = require("crypto");
 const nodemailer = require('nodemailer');
+
 const clientURL = 'http://localhost:3000';
 
 const jwt = require("jsonwebtoken");
@@ -88,7 +88,7 @@ exports.signin= async(req, res) => {
                                 allowInsecureKeySizes: true,
                                 expiresIn: 86400, // 24 hours
                                });
-                              
+                           
         return res.status(200).send({
           id: user.id,
           username: user.username,
@@ -156,7 +156,7 @@ exports.requestPasswordReset = async (req, res) => {
       from: 'jagjit.saini2019@gmail.com',
       to: user.email,
       subject: 'T2C Password Reset Link',
-      text: 'Copy and paste the password reset link to reset your password',
+      text: 'Copy and Paste the password reset link to reset your password',
       html:'Click the link to reset your password: '+ link
     
     };
