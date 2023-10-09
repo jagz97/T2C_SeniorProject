@@ -18,9 +18,10 @@ exports.createProfile = async (req, res) => {
       // Check if the user is authenticated based on the presence of the JWT token
       const id = req.id; // Extract user information from the request context (provided by the middleware)
       const user = await db.users.findByPk(id);
+
   
       if (!user) {
-        return res.status(404).send("User not found.");
+        return res.status(404).send({message: "User not found."});
       }
 
       const profileData = {
@@ -37,16 +38,16 @@ exports.createProfile = async (req, res) => {
       if (!profile) {
         // If no profile exists, create a new one
         profile = await Profile.create(profileData);
-        return res.status(200).send("Profile created successfully.")
+        return res.status(200).send({ message: "Profile created sucessfully." })
       }
   
       // Update the profile data
       await profile.update(profileData);
   
-      return res.status(200).send("Profile updated sucessfully.");
+      return res.status(200).send({ message: "Profile updated sucessfully." });
     } catch (error) {
       console.error(error);
-      return res.status(500).send(`Error when trying to update profile: ${error}`);
+      res.status(500).json({ message: "Internal server error" });
     }
   };
 
@@ -101,7 +102,7 @@ exports.updateProfilePicture = async (req, res) => {
     console.log(req.file);
 
     if (req.file == undefined) {
-      return res.send(`You must select a file.`);
+      return res.status(400).json({ error: "You must select a file." });
     }
 
     // Create the image record
@@ -122,7 +123,7 @@ exports.updateProfilePicture = async (req, res) => {
     });
 
     if (!profile) {
-      return res.send(`User profile not found.`);
+      return res.status(404).json("User profile not found.");
     }
 
     // Update the profilePictureId with the ID of the newly created image
@@ -131,10 +132,12 @@ exports.updateProfilePicture = async (req, res) => {
     // Save the updated profile
     await profile.save();
 
-    return res.send(`File has been uploaded and associated with the user's profile picture.`);
+    return res.status(200).send({ message: "File has been uploaded and associated with the user's profile picture." });
+
   } catch (error) {
     console.log(error);
-    return res.send(`Error when trying to upload images: ${error}`);
+    res.status(500).json({ message: "Error when trying to upload images" });
+   
   }
 };
 
@@ -195,7 +198,7 @@ exports.updateBioPic = async (req, res) => {
     console.log(req.file);
 
     if (req.file == undefined) {
-      return res.send(`You must select a file.`);
+      return res.status(400).json({ error: "You must select a file." });
     }
 
     // Create the image record
@@ -216,7 +219,7 @@ exports.updateBioPic = async (req, res) => {
     });
 
     if (!profile) {
-      return res.send(`User profile not found.`);
+      return res.status(404).json({ error: 'User profile not found.' });
     }
 
     // Update the profilePictureId with the ID of the newly created image
@@ -225,12 +228,13 @@ exports.updateBioPic = async (req, res) => {
     // Save the updated profile
     await profile.save();
 
-    return res.send(`File has been uploaded and associated with the user's profile picture.`);
+    return res.status(200).json({ message: 'File has been uploaded and associated with the user\'s profile picture.' });
   } catch (error) {
-    console.log(error);
-    return res.send(`Error when trying to upload images: ${error}`);
+    console.error(error);
+    return res.status(500).json({ error: `Error when trying to upload images: ${error.message}` });
   }
 };
+
 
 
 /*
