@@ -38,6 +38,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   })
 // );
 
+let dotenv = require('dotenv').config()
+console.log(dotenv);
 
 
 const db = require("./app/models");
@@ -58,6 +60,7 @@ require("./app/routes/turorial.routes")(app);
 require("./app/routes/users.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/profile.routes")(app);
+require("./app/routes/hotel.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
