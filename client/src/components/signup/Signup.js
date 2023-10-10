@@ -74,7 +74,7 @@ const Signup = () => {
                                             <InputGroup className='container-name-input'required>
                                                 <Form.Control 
                                                     type='text'
-                                                    placeholder='Enter Full Name' 
+                                                    placeholder='Enter Username' 
                                                     name='name'
                                                     value={name}
                                                     onChange={(event) => setName(event.target.value) }

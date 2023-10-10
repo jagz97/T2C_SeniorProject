@@ -8,7 +8,7 @@ module.exports = app => {
 
       res.header(
         "Access-Control-Allow-Headers", 
-        "x-access-token, Origin, Content-Type, Accept"
+        "authoriztion, Origin, Content-Type, Accept"
         );
 
         next();
@@ -29,7 +29,9 @@ module.exports = app => {
 
       router.post("/auth/signout", users.signout);
 
+      router.post("/auth/requestReset", users.requestPasswordReset);
+      router.post("/auth/resetPassword", users.resetPassword);
+
     app.use('/api/users', router);
 };
-
 

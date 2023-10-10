@@ -3,14 +3,19 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
 
+
+global.__basedir = __dirname;
+
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: "http://localhost:3000",
   credentials: true 
 };
 
 app.use(cors(corsOptions));
+
+
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -33,6 +38,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   })
 // );
 
+let dotenv = require('dotenv').config()
+console.log(dotenv);
+
 
 const db = require("./app/models");
 db.sequelize.sync({force: true})
@@ -52,6 +60,7 @@ require("./app/routes/turorial.routes")(app);
 require("./app/routes/users.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/profile.routes")(app);
+require("./app/routes/hotel.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

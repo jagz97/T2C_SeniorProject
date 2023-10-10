@@ -8,20 +8,17 @@ const imageFilter = (req, file, cb) => {
   }
 };
 
+
+
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, __basedir + "/resources/static/assets/uploads/");
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-t2c-${file.originalname}`);
+    cb(null, `t2c-${file.originalname}`);
   },
 });
 
 
-const upload = multer({ storage: storage, fileFilter: imageFilter }).fields([
-  { name: "profilePicture", maxCount: 1 },
-  { name: "bioPic", maxCount: 1 },
-]);
-
-
-module.exports = upload;
+var uploadFile = multer({ storage: storage, fileFilter: imageFilter });
+module.exports = uploadFile;

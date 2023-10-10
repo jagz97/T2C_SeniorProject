@@ -38,3 +38,6 @@ coverage/
 *.pem
 package-lock.json
 
+#ingore upload files
+resources/static/assests/tmp/
+resources/static/assests/uploads/
