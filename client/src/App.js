@@ -22,7 +22,9 @@ function App() {
   
           {/* Protected Routes */}
           <Route element={<AuthRequired/>}>
-            <Route path="createprofile" element={<CreateProfilePage/>}/>
+            <Route path="onboard">
+              <Route index element={<CreateProfilePage/>}/>
+            </Route>
             <Route element={<NavLayout/>}>
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
