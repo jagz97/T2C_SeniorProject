@@ -4,7 +4,7 @@ import {
     Person
 } from 'akar-icons'
 
-const Avatar = ({src,alt,size,border}) => {
+const Avatar = ({src,alt,size,color,border}) => {
     let render = "";
 
     // if no size prop given default dimension 50x50
@@ -12,6 +12,8 @@ const Avatar = ({src,alt,size,border}) => {
 
     let avatarBorder = border && "avatar-border"
     
+    let colorStyle = color ? {backgroundColor: color} : {backgroundColor: "#1e1e1e"}
+
     // render either user img or anonymous icon
     if(src) {
         render = <img src={src} alt={alt}/>
@@ -21,7 +23,7 @@ const Avatar = ({src,alt,size,border}) => {
     }
 
     return (
-        <div className={avatarBorder} style={sizeStyle}>
+        <div className={`avatar-wrapper ${avatarBorder}`} style={{...sizeStyle, ...colorStyle}}>
             <div className="avatar"> 
                 {render}
             </div>
