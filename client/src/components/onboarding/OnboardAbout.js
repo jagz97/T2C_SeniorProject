@@ -15,7 +15,7 @@ for(let i = MIN_AGE; i <= MAX_AGE; i++) {
     ages.push(<option value={i} key={i}>{i}</option>)
 }
 
-const OnboardAbout = () => {
+const OnboardAbout = ({setCurrentPage}) => {
     const [ firstName, setFirstName ] = useState("")
     const [ lastName, setLastName ] = useState("") 
     const [ age, setAge ] = useState("")
@@ -38,7 +38,7 @@ const OnboardAbout = () => {
         try {
             const request = await api.post("/profile/createProfile", profileData, headerOptions)
             console.log(request.data)
-            Navigate("/onboard/pfp")
+            setCurrentPage("profilePic") // changes state in Onboarding Page
         } catch (error) {
             const errorMessage = error.response?.data?.message
             // if we get a an error response from server display it
