@@ -63,7 +63,7 @@ const Login = () => {
 
             // if first time login redirect to profile creation page
             // else redirect to a protected route or home page
-            const path = user.firsTimeLogin ? "/createprofile" : from 
+            const path = user.firsTimeLogin ? "/onboarding" : from 
 
             login(user) // stores user info in local storage
 

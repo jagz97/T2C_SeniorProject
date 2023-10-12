@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 
-import "./CreateProfile.css"
+import "./OnboardAbout.css"
 import useAuth from "../../hooks/useAuth"
 import { api } from "../../api/axios"
 import { useNavigate } from "react-router-dom"
@@ -15,7 +15,7 @@ for(let i = MIN_AGE; i <= MAX_AGE; i++) {
     ages.push(<option value={i} key={i}>{i}</option>)
 }
 
-const CreateProfile = () => {
+const OnboardAbout = () => {
     const [ firstName, setFirstName ] = useState("")
     const [ lastName, setLastName ] = useState("") 
     const [ age, setAge ] = useState("")
@@ -101,4 +101,4 @@ const CreateProfile = () => {
     )
 }
 
-export default CreateProfile
+export default OnboardAbout

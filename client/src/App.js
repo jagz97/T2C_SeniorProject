@@ -4,7 +4,7 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
-import CreateProfilePage from './pages/CreateProfilePage'
+import OnboardAbout from './pages/OnboardAbout'
 
 
 import AuthRequired from './components/authrequired/AuthRequired'
@@ -22,8 +22,8 @@ function App() {
   
           {/* Protected Routes */}
           <Route element={<AuthRequired/>}>
-            <Route path="onboard">
-              <Route index element={<CreateProfilePage/>}/>
+            <Route path="onboarding">
+              <Route index element={<OnboardAbout/>}/>
             </Route>
             <Route element={<NavLayout/>}>
               <Route path="posts" element={<ListviewPage/>}/>
