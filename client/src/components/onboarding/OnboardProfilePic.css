@@ -34,6 +34,14 @@ label[for="onboard-file-input"] {
     right: 15px;
 }
 
+.onboard-pfp-form-footer {
+    width: 100%;
+}
+
+.error-onboard-img {
+    margin: 0;
+    text-align: center;
+}
 .onboard-pfp-form button {
     color: #fff;
     background-color: #3C3A83;
@@ -50,3 +58,4 @@ label[for="onboard-file-input"] {
 #onboard-file-input {
     display: none;
 }
+

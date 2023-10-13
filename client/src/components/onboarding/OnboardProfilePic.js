@@ -44,8 +44,9 @@ const OnboardProfilePic = ({setCurrentPage}) => {
 
     const handleUpload = (event) => {
         const { files } = event.target
+        setErrorMessage("")
         if(files.length > 0) {
-            if(files[0].type != "image/jpeg") {
+            if(!files[0].type.startsWith("image")) {
                 setErrorMessage("File must be an image")
             }
             console.log(files[0])
@@ -69,13 +70,17 @@ const OnboardProfilePic = ({setCurrentPage}) => {
                         />
                         <div className="onboard-pfp-icon"><Plus size={15}/></div>
                         </label>
-                    { errorMessage ? <p className="error">{errorMessage}</p>: null}
                     <input 
                         type="file" 
                         name="usrImg"
                         onChange={handleUpload}
-                        id="onboard-file-input"/>
-                    <button type="submit">Continue</button>
+                        accept="image/*"
+                        id="onboard-file-input"
+                    />
+                    <div className="onboard-pfp-form-footer">
+                        { errorMessage ? <p className="error error-onboard-img">{errorMessage}</p>: null}
+                        <button type="submit">Continue</button>
+                    </div>
                 </form>
             </Row>
         </Container>
