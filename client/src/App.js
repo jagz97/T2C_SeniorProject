@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
 import OnboardingPage from './pages/OnboardingPage'
 
+import "./App.css"
 
 
 import AuthRequired from './components/authrequired/AuthRequired'
