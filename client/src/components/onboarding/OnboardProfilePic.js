@@ -81,6 +81,7 @@ const OnboardProfilePic = ({setCurrentPage}) => {
                         { errorMessage ? <p className="error error-onboard-img">{errorMessage}</p>: null}
                         <button type="submit">Continue</button>
                     </div>
+                    <p className="onboard-skip-btn" onClick={() => setCurrentPage("about")}>skip for now</p>
                 </form>
             </Row>
         </Container>

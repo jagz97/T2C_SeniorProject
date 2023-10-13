@@ -17,7 +17,7 @@ label[for="onboard-file-input"] {
     position: relative;
     cursor: pointer;
     padding: 0;
-    /* clip-path: circle(50%); */
+    clip-path: circle(60%);
     overflow: hidden;
 }
 
@@ -31,7 +31,7 @@ label[for="onboard-file-input"] {
     justify-content: center;
     position: absolute;
     top: 25px;
-    right: 15px;
+    right: 10px;
 }
 
 .onboard-pfp-form-footer {
@@ -59,3 +59,6 @@ label[for="onboard-file-input"] {
     display: none;
 }
 
+.onboard-skip-btn {
+    cursor: pointer;
+}

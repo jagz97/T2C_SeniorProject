@@ -51,7 +51,7 @@ const OnboardAbout = ({setCurrentPage}) => {
             }
         }
     }
-    
+
     return (
         <Container>
             <Row className="justify-content-center align-items-center vh-100">
