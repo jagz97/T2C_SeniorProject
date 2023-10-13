@@ -19,13 +19,15 @@ const Avatar = ({src,alt,size,color,border}) => {
         render = <img src={src} alt={alt}/>
     }
     else {
-        render = <Person/>
+        render = <Person />
     }
 
     return (
-        <div className={`avatar-wrapper ${avatarBorder}`} style={{...sizeStyle, ...colorStyle}}>
-            <div className="avatar"> 
-                {render}
+        <div className={`avatar-wrapper ${avatarBorder}`}>
+            <div style={{...sizeStyle, ...colorStyle}}>
+                <div className="avatar"> 
+                    {render}
+                </div>
             </div>
         </div>
     )

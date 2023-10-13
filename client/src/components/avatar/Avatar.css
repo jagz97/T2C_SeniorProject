@@ -1,5 +1,4 @@
 .avatar {
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,16 +14,17 @@
 
 .avatar svg {
     display: block;
-    width: 70%;
-    height: 100%;
     color: #fff;
+    width: 70%;
+    height: 70%;
 }
 
 .avatar-border {
-    border: 27px solid rgba(139, 44, 255, .3);
+    border: 25px solid rgba(139, 44, 255, 0.4);
 }
 
 .avatar-wrapper {
+    overflow: hidden;
     border-radius: 50%;
 }
 
