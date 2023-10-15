@@ -19,10 +19,6 @@
     height: 70%;
 }
 
-.avatar-border {
-    border: 25px solid rgba(139, 44, 255, 0.4);
-}
-
 .avatar-wrapper {
     overflow: hidden;
     border-radius: 50%;

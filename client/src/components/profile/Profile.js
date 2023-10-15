@@ -17,7 +17,7 @@ const Profile = () => {
                     <Col className="px-0" style={{position:"relative"}}>
                         <img src={ProfileBanner} alt="user profile banner" className="profile-banner"/>
                         <div className="container-profile-picture">
-                            <Avatar size={275} border/>
+                            <Avatar size={275} border={"25px solid rgba(139, 44, 255, 0.4)"}/>
                         </div>
                         <div className="profile-about">                      
                             {/* 255 character placeholder text */}
