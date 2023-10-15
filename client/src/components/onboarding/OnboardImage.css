@@ -61,4 +61,5 @@ label[for="onboard-file-input"] {
 
 .onboard-skip-btn {
     cursor: pointer;
+    text-align: center;
 }

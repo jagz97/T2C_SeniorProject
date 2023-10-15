@@ -6,7 +6,6 @@ import Row from 'react-bootstrap/Row'
 import "./OnboardAbout.css"
 import useAuth from "../../hooks/useAuth"
 import { api } from "../../api/axios"
-import { useNavigate } from "react-router-dom"
 
 const MAX_AGE = 110
 const MIN_AGE = 18
@@ -15,15 +14,13 @@ for(let i = MIN_AGE; i <= MAX_AGE; i++) {
     ages.push(<option value={i} key={i}>{i}</option>)
 }
 
-const OnboardAbout = ({setCurrentPage}) => {
+const OnboardAbout = ({navigateNextPage}) => {
     const [ firstName, setFirstName ] = useState("")
     const [ lastName, setLastName ] = useState("") 
     const [ age, setAge ] = useState("")
     const [ gender, setGender ] = useState("")
     const [ errorMessage, setErrorMessage ] = useState("")
     const { user } = useAuth()
-    
-    const Navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -38,7 +35,7 @@ const OnboardAbout = ({setCurrentPage}) => {
         try {
             const request = await api.post("/profile/createProfile", profileData, headerOptions)
             console.log(request.data)
-            setCurrentPage("profilePic") // changes state in Onboarding Page
+            navigateNextPage() 
         } catch (error) {
             const errorMessage = error.response?.data?.message
             // if we get a an error response from server display it

@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import Container from 'react-bootstrap/Container'
 import Row from "react-bootstrap/Row"
 import Avatar from "../avatar/Avatar"
-import "./OnboardProfilePic.css"
+import "./OnboardImage.css"
 import useAuth from "../../hooks/useAuth"
 
 import {
@@ -11,15 +11,19 @@ import {
 
 import { api } from "../../api/axios"
 
-const OnboardProfilePic = ({setCurrentPage}) => {
+const OnboardImage = ({navigateNextPage, header, endpoint}) => {
 
     const [ usrImg, setUsrImg ] = useState("")
     const [ errorMessage, setErrorMessage ] = useState("")
 
     const { user } = useAuth()
-    
+
     const submitHandler = async (event) => {
         event.preventDefault()
+        if(!usrImg) {
+            setErrorMessage("Select an Image")
+            return 
+        }
         const headerOptions = {
             headers: {
                 Authorization: `${user.accesstoken}`,
@@ -27,8 +31,15 @@ const OnboardProfilePic = ({setCurrentPage}) => {
         }
 
         try {
-            const request = api.post("/profile/updateProfilePic", usrImg, headerOptions)
+            const data = new FormData()
+            endpoint === "ProfilePic" ? data.append("profilePic", usrImg) : data.append("bioPic", usrImg)
+
+            const request = await api.post(`/profile/update${endpoint}`, data, headerOptions)
             console.log(request)
+            navigateNextPage()
+            setErrorMessage("")
+            setUsrImg("")
+            
         } catch (error) {
             const errorMessage = error.response?.data?.message
             // if we get a an error response from server display it
@@ -37,6 +48,7 @@ const OnboardProfilePic = ({setCurrentPage}) => {
                 setErrorMessage(errorMessage)
             }
             else {
+                console.log(error)
                 setErrorMessage(error.message)
             }
         }
@@ -50,25 +62,23 @@ const OnboardProfilePic = ({setCurrentPage}) => {
                 setErrorMessage("File must be an image")
             }
             console.log(files[0])
-            setUsrImg(URL.createObjectURL(files[0]))
+            setUsrImg(files[0])
         }
     }
     
-    console.log(usrImg)
-
     return (
         <Container>
             <Row className="justify-content-center align-items-center vh-100">
                 <form className="onboard-pfp-form" onSubmit={submitHandler}>
-                    <h1 className="onboard-pfp-header">Choose a profile picture</h1>
+                    <h1 className="onboard-pfp-header">{header}</h1>
                     <label htmlFor="onboard-file-input">
                         <Avatar 
-                            src={usrImg} 
+                            src={usrImg ? URL.createObjectURL(usrImg): null} 
                             size={275} 
                             color={"#2a2a2a"}
                             alt="user profile picture"
                         />
-                        <div className="onboard-pfp-icon"><Plus size={15}/></div>
+                        <div className="onboard-pfp-icon"><Plus size={15} strokeWidth={5}/></div>
                         </label>
                     <input 
                         type="file" 
@@ -81,11 +91,11 @@ const OnboardProfilePic = ({setCurrentPage}) => {
                         { errorMessage ? <p className="error error-onboard-img">{errorMessage}</p>: null}
                         <button type="submit">Continue</button>
                     </div>
-                    <p className="onboard-skip-btn" onClick={() => setCurrentPage("about")}>skip for now</p>
+                    <p className="onboard-skip-btn" onClick={navigateNextPage}>skip for now</p>
                 </form>
             </Row>
         </Container>
     )
 }
 
-export default OnboardProfilePic
+export default OnboardImage
