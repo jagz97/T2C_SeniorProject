@@ -1,4 +1,6 @@
-  body {
+  main.login {
+    margin: 0;
+    height: 100vh;
     background-color: rgb(114,126,173); /*Fallback color for background image*/
     background: url('../../images/pexels-luke-webb-2734920 1.png') no-repeat bottom center fixed;
     background-size: cover;
@@ -7,19 +9,20 @@
   }
   
   .container-login-page {
-    /* background-color: green; */
-    margin-top: 13vh;
+    padding-top: 10vh;
   }
   
-  .page-title-text {
+  .login-title-text {
     width: 480px;
     font-size: 3.85rem;
+    text-align: start;
     line-height: 1.2;
+    margin: 0;
   }
 
-  .container-card {
+  .container-login-card {
     background-color: rgba(0,0,0,.53);
-    width: 520px;
+    width: 480px;
     max-height: 575px; 
     padding: 3.75em;
     border-radius: 38px;
@@ -36,6 +39,7 @@
     border: none;
     border-radius: 8px;
   }
+  
 
   .login-input,
   .login-input::placeholder {
@@ -53,14 +57,23 @@
 
   
   .login-input-addon {
+    color: #677185;
     background-color: #fff;
     border:none;
-    cursor: pointer;
-    border-radius: 10px;
-    padding: 0 1.5em;
+    padding: 0;
   }
+  
 
- 
+  .addon {
+    font-size: 18px;
+    margin-right: 8px;
+    padding: .6em .9em;
+  }
+  .addon:hover {
+    cursor: pointer;
+    opacity: .8;
+  }
+  
   .container-continue {
     margin-top: 45px;
     display: flex;
@@ -81,13 +94,19 @@
     opacity: .7;
   }
   
+  .login-error-message {
+    margin-top: .4em;
+    color: #F32F24;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: end;
+  }
   
   /* =================
       Buttons
   ================= */
   .container-recover-password {
     text-align: right;
-    margin-top: 15px;
     font-weight: 500;
   }
 
@@ -112,26 +131,24 @@
     font-size: 1.1875rem;
     margin-top: 55px;
     letter-spacing: 1.5px;
+    transition: none !important;
   }
   
   
   .btn-submit-login:hover,
   .btn-submit-login:focus,
   .btn-submit-login:active  {
-    background-color: rgba(60,58,131,.8) !important; /*Not sure if !important is bad practice*/
-    color: rgba(255,255,255,.8);
-    box-shadow:none;
+    background-color: rgba(60,58,131,1) !important; 
   }
   
   
   .google-login{
     display: table;
     margin: 0 auto;
-    margin-top: 45px;
+    margin-top: 20px;
     opacity: .9;
+    background-color: #fff;
+    padding: 1em 3.5em;
+    border-radius: 8px;
   }
   
-  .google-login:hover,
-  .google-login:focus {
-    opacity: 1;
-  }

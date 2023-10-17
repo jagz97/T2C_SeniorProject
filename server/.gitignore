@@ -29,3 +29,15 @@ yarn-error.log*
 # Test coverage
 coverage/
 .nyc_output/
+
+#digicert
+*.crt
+ 
+
+#ignore json lock
+*.pem
+package-lock.json
+
+#ingore upload files
+resources/static/assests/tmp/
+resources/static/assests/uploads/
