@@ -9,7 +9,7 @@
     object-fit: cover;
     object-position: center;
     padding: 0;
-    margin: 0 aut
+    margin: 0 auto;
 }
 
 .intro-text {
@@ -66,29 +66,32 @@
     width: 100%;
     min-width: 400px;
     max-width: 1200px;
-    min-height: 125px; /*temp*/
-    color: #000; /*temp*/
+    max-height: 350px; 
+    color: #000;
     margin: 0 auto;
     background-color: #EAF0F7;
-    border-radius: 10px;
-    padding: 2rem;
+    border-radius: 4px;
+    padding: 1.8rem;
 }
 
 .search-form {
-    width: 100%;
-    gap: 5px;
+    gap: 7px;
+   
 }
 
 .search-form label {
     display: inline-block;
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     margin: 0;
 }
 
-.search-location-wrapper {
-    height: auto;
+.search-form label,
+.search-description {
+    margin: 0;
+    padding-left: 2px;
 }
+
 .search-form input {
     border: 1px #A1A1A1 solid;
     border-radius: 5px;
@@ -99,18 +102,22 @@
 
 .search-form button {
     display: block;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     color: #fff;
     border: none;
     font-weight: 600;
     background-color: #3C3A83;
-    border-radius: 8px;
-    width: 180px;
-    padding: 0.4em 2em;
+    border-radius: 5px;
+    margin-top: 5px;
+    letter-spacing: 1px;
+    padding: 0.6em 3em;
+    
 }
 
-input[name="location"]::placeholder, 
-.search-date-description {
+
+
+input[type="text"]::placeholder, 
+.search-description {
     font-weight: 400;
     font-size: 0.8125rem;
     color: #A1A1A1;
@@ -118,21 +125,52 @@ input[name="location"]::placeholder,
 
 .search-location-icon {
     position: absolute;
-    right: 16px;
+    left: 0.75rem;
     top: 10%;
-    /* right: 100px; */
 }
 
 input[type="date"] {
     text-transform: uppercase;
 }
-
 .search-date-description {
     margin: 0;
 }
 
 
 
+@media(min-width: 992px) {
+    /* .container-search-form {
+        margin-top: 150px;
+    } */
+    .search-form {
+        gap: 15px;
+    }
+    .search-location-wrapper {
+        flex: 1 0 auto;
+        max-width: 340px;
+        
+    }
+    .search-date-wrapper {
+        flex: 0 1 auto;
+        max-width: 250px;
+    }
 
+    .search-date-wrapper,
+    .search-location-wrapper {
+        /* width: auto; */
+        height: 83px;
+    }
+    .search-date-wrapper {
+        max-width: 230px;
+    }
 
-
+    .search-form button {
+        /* margin: 3px 5px 0 auto; */
+        margin-left: auto;
+        margin-top: 3px;
+        align-self:center;
+    }
+    input[type="text"] {
+        padding-left: 30px;
+    }
+}

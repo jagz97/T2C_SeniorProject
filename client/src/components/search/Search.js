@@ -12,12 +12,12 @@ import introImg from '../../images/pexels-jake-brown-2531314.jpg'
 const Search = () => {
     return (
             <Container fluid>
-                <Row>
+                {/* <Row>
                     <h1 className="intro-text">Explore Places</h1>
                     <img src={introImg} alt="sunset" className="intro-img"/>
-                </Row>
-                <Row style={{marginTop: "-65px"}}>
-                    <Col className="col-auto col-sm-9 col-xl-12 mx-auto">
+                </Row> */}
+                <Row className="justify-content-center">
+                    <Col className="col-auto col-lg-10 mx-auto">
                         <SearchForm/>
                     </Col>
                 </Row>
