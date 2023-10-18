@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
 import './Search.css'
 
-import {
-    FaLocationDot
-} from 'react-icons/fa6'
-
-
 const SearchForm = () => {
 
     const [ location, setLocation ] = useState("")
@@ -26,12 +21,12 @@ const SearchForm = () => {
                                     type="text"
                                     value={location}
                                     name="location"
-                                    placeholder="Search Trip Destination"
+                                    placeholder="Where are you going?"
                                     onChange={(event) => setLocation(event.target.value)}
                                     id="search-location"
                                 />
                             </div>
-                            <p className="search-description d-none d-lg-block">Where are you going?</p>
+                            {/* <p className="search-description d-none d-lg-block">Where are you going?</p> */}
                         </div>
                         <div className="search-date-wrapper">
                             <label htmlFor="search-date-arrival">Date Arrival</label>
@@ -42,7 +37,7 @@ const SearchForm = () => {
                                 onChange={(event) => setArrival(event.target.value)}
                                 id="search-date-arrival"
                             />
-                            <p className="search-description d-none d-lg-block">Select Trip Dates</p>
+                            {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
                         </div>
                         <div className="search-date-wrapper">
                             <label htmlFor="search-date-departure">Date Departure</label>
@@ -53,7 +48,7 @@ const SearchForm = () => {
                                 onChange={(event) => setDeparture(event.target.value)}
                                 id="search-date-departure"
                             />
-                            <p className="search-description d-none d-lg-block">Select Trip Dates</p>
+                            {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
                         </div>
                         <button type="submit">Search</button>
                 </form>

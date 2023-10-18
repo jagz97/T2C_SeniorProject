@@ -1,7 +1,6 @@
 import React from 'react'
 import './Search.css'
 import SearchForm from './SearchForm'
-import SearchResult from './SearchResult'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
