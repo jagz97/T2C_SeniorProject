@@ -22,9 +22,7 @@ const SearchForm = () => {
                         <div className="search-wrapper search-location-wrapper">
                             <label htmlFor="search-location">Location</label>
                             <div className="position-relative">
-                                <span className="search-location-icon d-none d-lg-inline">
-                                    <FaLocationDot size={13}/>
-                                </span>
+                              
                                 <input 
                                     type="text"
                                     value={location}

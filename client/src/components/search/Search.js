@@ -12,12 +12,15 @@ import introImg from '../../images/pexels-jake-brown-2531314.jpg'
 const Search = () => {
     return (
             <Container fluid>
-                {/* <Row>
-                    <h1 className="intro-text">Explore Places</h1>
-                    <img src={introImg} alt="sunset" className="intro-img"/>
-                </Row> */}
-                <Row className="justify-content-center">
-                    <Col className="col-auto col-lg-10 mx-auto">
+                <Row className="container-search-image">
+                    <Col className="col-12 px-0">
+                        <h1 className="intro-text">Explore Places</h1>
+                        <img src={introImg} alt="sunset" className="intro-img"/>
+                    </Col>
+                </Row>
+              
+                <Row className="search-form-row justify-content-center">
+                    <Col className="col-auto col-lg-10">
                         <SearchForm/>
                     </Col>
                 </Row>
