@@ -19,10 +19,9 @@ const SearchForm = () => {
     return (
         <div className="container-search-form">
                 <form className="search-form d-flex flex-column flex-lg-row">
-                        <div className="search-wrapper search-location-wrapper">
+                        <div className="search-location-wrapper">
                             <label htmlFor="search-location">Location</label>
                             <div className="position-relative">
-                              
                                 <input 
                                     type="text"
                                     value={location}
@@ -34,7 +33,7 @@ const SearchForm = () => {
                             </div>
                             <p className="search-description d-none d-lg-block">Where are you going?</p>
                         </div>
-                        <div className="search-wrapper search-date-wrapper">
+                        <div className="search-date-wrapper">
                             <label htmlFor="search-date-arrival">Date Arrival</label>
                             <input 
                                 type="date"
@@ -45,7 +44,7 @@ const SearchForm = () => {
                             />
                             <p className="search-description d-none d-lg-block">Select Trip Dates</p>
                         </div>
-                        <div className="search-wrapper search-date-wrapper">
+                        <div className="search-date-wrapper">
                             <label htmlFor="search-date-departure">Date Departure</label>
                             <input 
                                 type="date"
