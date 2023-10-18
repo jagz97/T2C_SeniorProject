@@ -14,7 +14,7 @@ const Search = () => {
             <Container fluid>
                 <Row className="container-search-image">
                     <Col className="col-12 px-0">
-                        <h1 className="intro-text">Explore Places</h1>
+                        <h1 className="intro-text">explore places</h1>
                         <img src={introImg} alt="sunset" className="intro-img"/>
                     </Col>
                 </Row>
