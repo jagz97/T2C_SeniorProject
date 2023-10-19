@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Search.css'
+import { api } from "../../api/axios"
 
 const SearchForm = () => {
 
@@ -10,6 +11,29 @@ const SearchForm = () => {
     console.log("loc", location)
     console.log("arr,", arrival)
     console.log("dep", departure)
+
+    useEffect(() => {
+        const getResults = async () => {
+            try {
+                const formData = {
+                     city: "boston",
+                     arrival_date: "2023-10-20",  
+                     departure_date: "2023-10-23" ,
+                }
+                
+                const headers = {
+                    "Content-Type" : "application/json",  
+                }
+
+                const response = await api.get("/hotels_search_city_name", JSON.stringify(formData), headers)
+                console.log(response)
+                
+            } catch (error) {
+                console.log(error)    
+            }
+        }
+        getResults()
+    }, [])
 
     return (
         <div className="container-search-form">
@@ -36,6 +60,7 @@ const SearchForm = () => {
                                 name="arrival"
                                 onChange={(event) => setArrival(event.target.value)}
                                 id="search-date-arrival"
+                                style = {{color : arrival ? "#000" : "grey" }}
                             />
                             {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
                         </div>
@@ -47,6 +72,7 @@ const SearchForm = () => {
                                 name="departure"
                                 onChange={(event) => setDeparture(event.target.value)}
                                 id="search-date-departure"
+                                style = {{color : departure ? "#000" : "grey" }}
                             />
                             {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
                         </div>
