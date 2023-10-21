@@ -39,6 +39,8 @@ exports.hotelSearhCityName = async (req, res) => {
               
       
             }
+            
+            console.log(destId);
       
     } catch (error) {
       
@@ -84,6 +86,8 @@ exports.hotelSearhCityName = async (req, res) => {
       }));
   
       res.status(200).json(filteredResults);
+      
+
     }catch (error) {
       console.error(error);
       res.status(500).json({ error: 'An error occurred' });
