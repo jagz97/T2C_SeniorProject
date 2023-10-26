@@ -68,6 +68,8 @@ const OnboardImage = ({navigateNextPage, header, endpoint}) => {
             }
             console.log(files[0])
             setUsrImg(files[0])
+            // reset input value so that image is rendered when same file is chosen for pfp and biopic
+            event.target.value = "" 
         }
     }
     
