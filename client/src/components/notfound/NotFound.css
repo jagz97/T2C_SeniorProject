@@ -1,0 +1,24 @@
+.notfound-header {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.notfound-message {
+    margin-bottom : 0.5rem;
+}
+
+.notfound-message,
+.notfound-anchor {
+    font-size: 1rem;
+}
+
+.notfound-anchor,
+.notfound-anchor:hover  {
+    color: inherit;
+}
+
+.notfound-error {
+    position: absolute;
+    top: 50px;
+    font-weight: 700;
+}
