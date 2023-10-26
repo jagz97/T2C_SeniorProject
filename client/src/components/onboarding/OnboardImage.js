@@ -18,6 +18,12 @@ const OnboardImage = ({navigateNextPage, header, endpoint}) => {
 
     const { user } = useAuth()
 
+    const Navigate = () => {
+        setErrorMessage("")
+        setUsrImg("")
+        navigateNextPage()
+    }
+
     const submitHandler = async (event) => {
         event.preventDefault()
         if(!usrImg) {
@@ -36,9 +42,7 @@ const OnboardImage = ({navigateNextPage, header, endpoint}) => {
 
             const request = await api.post(`/profile/update${endpoint}`, data, headerOptions)
             console.log(request)
-            navigateNextPage()
-            setErrorMessage("")
-            setUsrImg("")
+            Navigate()
             
         } catch (error) {
             const errorMessage = error.response?.data?.message
@@ -53,6 +57,7 @@ const OnboardImage = ({navigateNextPage, header, endpoint}) => {
             }
         }
     }
+    
 
     const handleUpload = (event) => {
         const { files } = event.target
@@ -91,7 +96,7 @@ const OnboardImage = ({navigateNextPage, header, endpoint}) => {
                         { errorMessage ? <p className="error error-onboard-img">{errorMessage}</p>: null}
                         <button type="submit">Continue</button>
                     </div>
-                    <p className="onboard-skip-btn" onClick={navigateNextPage}>skip for now</p>
+                    <p className="onboard-skip-btn" onClick={Navigate}>skip for now</p>
                 </form>
             </Row>
         </Container>

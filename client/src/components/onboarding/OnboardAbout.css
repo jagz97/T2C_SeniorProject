@@ -17,6 +17,7 @@
     letter-spacing: 1px;
     font-size: 1.2rem;
     color: #000;
+    opacity: 1; /*For Firefox*/
 }
 
 .create-profile-form input,
@@ -24,6 +25,7 @@
     border: none;
     padding: 0.6em;
     border-radius: 8px;
+    background-color: #fff;
 }
 
 .create-profile-form select {

@@ -1,8 +1,6 @@
 import React, { useState } from "react"
 import Container from 'react-bootstrap/Container'
-import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-
 import "./OnboardAbout.css"
 import useAuth from "../../hooks/useAuth"
 import { api } from "../../api/axios"
@@ -92,6 +90,7 @@ const OnboardAbout = ({navigateNextPage}) => {
                         </select>
                 
                     <button type="submit">Continue</button>
+                    {errorMessage && <p className="error text-center mt-1">{errorMessage}</p>}
                 </form>
             </Row>
         </Container>
