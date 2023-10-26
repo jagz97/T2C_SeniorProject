@@ -23,13 +23,14 @@ const OnboardImage = ({navigateNextPage, header, endpoint}) => {
         setUsrImg("")
         navigateNextPage()
     }
-
+    console.log(usrImg)
     const submitHandler = async (event) => {
         event.preventDefault()
         if(!usrImg) {
             setErrorMessage("Select an Image")
             return 
         }
+
         const headerOptions = {
             headers: {
                 Authorization: `${user.accesstoken}`,
@@ -66,8 +67,10 @@ const OnboardImage = ({navigateNextPage, header, endpoint}) => {
             if(!files[0].type.startsWith("image")) {
                 setErrorMessage("File must be an image")
             }
-            console.log(files[0])
-            setUsrImg(files[0])
+            else {
+                console.log(files[0])
+                setUsrImg(files[0])
+            }
             // reset input value so that image is rendered when same file is chosen for pfp and biopic
             event.target.value = "" 
         }
