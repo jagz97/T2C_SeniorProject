@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './Profile.css'
 import Avatar from '../avatar/Avatar'
 import PlaceVisited from './PlaceVisited'
@@ -9,7 +9,48 @@ import Row from 'react-bootstrap/Row'
 import ProfileBanner from '../../images/pexels-venelin-dimitrov-3476312.jpg'
 import { BsGrid3X3 } from 'react-icons/bs'
 
+import useAuth from "../../hooks/useAuth"
+import { api } from '../../api/axios'
+
 const Profile = () => {
+    const [ profile, setProfile ] = useState({})
+    const [ profilePicture, setProfilePicture] = useState(null)
+    const { user } = useAuth()
+    console.log(profilePicture)
+    useEffect(() => {
+        const getProfile = async () => {
+            const headerOptions = {
+                headers: {
+                    Authorization: `${user.accesstoken}`,
+                }
+            }
+            try {
+                // const profileRequest = await api.get("/profile/getProfile", headerOptions)
+                const pictureRequest = await api.get("/profile/getProfilePicture", headerOptions)
+                console.log(pictureRequest)
+                const data = new Blob([pictureRequest.data], {type: "image/*"})
+                console.log("data",data)
+                const url = URL.createObjectURL(data)
+                console.log("URL:", url)
+                setProfilePicture(url)
+           
+            
+            } catch (error) {
+                const errorMessage = error.response?.data?.message
+                // if we get a an error response from server display it
+                // otherwise we display error directly from axios library
+                if(errorMessage) {
+                    console.log(errorMessage)
+                }
+                else {
+                    console.log(error.message)
+                }
+            }
+        }
+
+        // getProfile()
+    }, [])
+
     return (
         <div>
             <Container fluid>
@@ -17,7 +58,7 @@ const Profile = () => {
                     <Col className="px-0" style={{position:"relative"}}>
                         <img src={ProfileBanner} alt="user profile banner" className="profile-banner"/>
                         <div className="container-profile-picture">
-                            <Avatar size={275} border={"25px solid rgba(139, 44, 255, 0.4)"}/>
+                            <Avatar src={profilePicture} alt={`USR`} size={300} border={"25px solid rgba(139, 44, 255, 0.4)"}/>
                         </div>
                         <div className="profile-about">                      
                             {/* 255 character placeholder text */}
@@ -31,31 +72,24 @@ const Profile = () => {
                     </Col>
                 </Row>
 
-                <Row className="justify-content-center mx-auto mb-4" style={{maxWidth:1340}}>    
-                    <div className="text-center text-xxl-start">
-                        <h2 className="display-5 places-visited-heading">Places Visited</h2>
-                        <h4 className="places-visited-subheading">Ratings of the Experiences</h4>
-                    </div>
-                        
-                </Row>
-                <Row className="justify-content-center mx-auto">
-                    {/* Places Visited Section Header */}
-
-                    {/*Places Visited Content*/}
-                    {/* Hard Code some content for now */}
-                    <PlaceVisited rating={2}/>
-                    <PlaceVisited rating={0}/>
-                    <PlaceVisited rating={3.5}/> 
-                    
+                <Row className="profile-row mx-auto">
+                    <Col className="text-center text-xl-start">
+                        <h2 className="places-visited-heading">Places Visited</h2>
+                        <p className="places-visited-subheading">Ratings of the Experiences</p>
+                    </Col>
+                    <Col className="col-12 d-flex flex-wrap justify-content-center justify-content-xl-between" style={{gap:15}}> 
+                        <PlaceVisited rating={2}/>
+                        <PlaceVisited rating={0}/>
+                        <PlaceVisited rating={3.5}/>           
+                    </Col>
                 </Row>
                 
-                <Row className="mx-auto justify-content-center align-items-center g-4 my-5" style={{maxWidth:1200}}>
+                <Row className="profile-row mx-auto justify-content-center align-items-center g-4 my-5">
                     {/* Posts Section Header */}
                     <Col className="col-12">
                         <div className="d-flex flex-column align-items-center" style={{height:"100%"}}>
                             <div className="profile-post-line"></div>
                             <div className="profile-post-header mt-2 mx-auto d-flex align-items-center gap-2">
-                                
                                 <BsGrid3X3 size={30}/>posts
                             </div>
                         </div>
@@ -63,14 +97,16 @@ const Profile = () => {
                     
                     {/*Profile Post Content */}
                     {/* Hard Code few Components for testing */}
-                    <ProfilePost/>
-                    <ProfilePost/>
-                    <ProfilePost/>
-                    <ProfilePost/>
-                    <ProfilePost/>
-                    <ProfilePost/>
-                    <ProfilePost/>
-                    <ProfilePost/>
+                    <Col className="col-12 d-flex flex-wrap justify-content-center justify-content-xl-between" style={{gap:20}}>
+                        <ProfilePost/>
+                        <ProfilePost/>
+                        <ProfilePost/>
+                        <ProfilePost/>
+                        <ProfilePost/>
+                        <ProfilePost/>
+                        <ProfilePost/>
+                        <ProfilePost/>
+                    </Col>
                 </Row>
             </Container>
         </div>

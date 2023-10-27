@@ -17,13 +17,17 @@ body {
 }
 
 .profile-about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #2a2a2a;
-    width: 90%;
-    max-width: 750px;
+    width: 85%;
+    max-width: 650px;
+    min-width: 400px;
     min-height: 230px;
     border-radius: 20px;
-    margin: 175px auto 75px;
-    font-size: 28px;
+    margin: 100px auto 0;
+    font-size: 1.375rem;
     padding: 1.5em;
     text-align: center;
     line-height: 1.3;
@@ -31,14 +35,15 @@ body {
 
 .container-profile-picture {
     position: absolute;
-    top: 20%;
+    top: 21%;
     left: 50%;
     transform: translate(-50%);
 }
 
-.profile-picture {
-    width: 100%;
-    border-radius: 50%;
+
+.profile-row {
+    max-width: 1050px;
+    margin: 50px auto; 
 }
 
 /* =================
@@ -47,15 +52,38 @@ body {
   ================= */
 .places-visited-heading {
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
 .places-visited-subheading {
     color: #404040;
     font-weight: 500;
     font-family: 'Urbanist';
+    font-weight: 700;
+    font-size: 1.2rem;
 }
 
+.profile-visited {
+    display: "block";
+    height: 275px;
+    width: 325px;
+    border-radius: 8px;
+    object-fit: "fill";
+
+}
+
+.profile-visited-name {
+    width: 100% ;
+    max-width: 320px ;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0
+}
+
+.profile-visited-rating {
+    width: 100%;
+    max-width: 320px;
+}
 
 /* =================
     Profile Posts 
@@ -76,4 +104,18 @@ body {
     height: 6px;
     border-radius: 500px;
     background-color: #8B2CFF;
+}
+
+.profile-post-wrapper {
+    width: 240px; 
+    height: 240px;
+}
+
+
+.profile-post-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit:"cover";
+    border-radius: 9px;
 }
