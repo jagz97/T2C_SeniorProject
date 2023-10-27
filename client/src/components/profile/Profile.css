@@ -21,13 +21,12 @@ body {
     width: 85%;
     max-width: 650px;
     min-width: 400px;
-    min-height: 230px;
 }
 
 .profile-username {
     text-align: center;
     font-weight: 700;
-    font-size: 1.75rem;
+    font-size: 2.25rem;
 }
 
 .profile-about {
@@ -40,6 +39,7 @@ body {
     padding: 1.5em;
     text-align: center;
     line-height: 1.3;
+    min-height: 250px;
 }
 
 .container-profile-picture {

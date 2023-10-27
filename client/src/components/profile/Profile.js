@@ -17,7 +17,6 @@ const Profile = () => {
     const [ profilePicture, setProfilePicture] = useState(null)
     const { user } = useAuth()
 
-    console.log(profilePicture)
     useEffect(() => {
         const getProfile = async () => {
             const headerOptions = {
@@ -26,16 +25,15 @@ const Profile = () => {
                 }
             }
             try {
-                // const profileRequest = await api.get("/profile/getProfile", headerOptions)
-                const pictureRequest = await api.get("/profile/getProfilePicture", headerOptions)
-                console.log(pictureRequest)
-                const data = new Blob([pictureRequest.data], {type: "image/*"})
-                console.log("data",data)
-                const url = URL.createObjectURL(data)
-                console.log("URL:", url)
-                setProfilePicture(url)
-           
-            
+                const profileRequest = await api.get("/profile/getProfile", headerOptions)
+                // const pictureRequest = await api.get("/profile/getProfilePicture", headerOptions)
+                // console.log(pictureRequest)
+                // const data = new Blob([pictureRequest.data], {type: "image/*"})
+                // console.log("data",data)
+                // const url = URL.createObjectURL(data)
+                // console.log("URL:", url)
+                // setProfilePicture(url)
+                setProfile(profileRequest.data)
             } catch (error) {
                 const errorMessage = error.response?.data?.message
                 // if we get a an error response from server display it
@@ -49,7 +47,7 @@ const Profile = () => {
             }
         }
 
-        // getProfile()
+        getProfile()
     }, [])
 
     return (
@@ -62,7 +60,7 @@ const Profile = () => {
                             <Avatar src={profilePicture} alt={`USR`} size={300} border={"25px solid rgba(139, 44, 255, 0.4)"}/>
                         </div>
                         <div className="profile-info-wrapper">
-                            {/* <p className="profile-username">John Doe</p> */}
+                            <p className="profile-username">{profile.firstName} {profile.lastName}</p>
                             <div className="profile-about">                      
                                 {/* 255 character placeholder text */}
                                 Lorem ipsum dolor sit amet, 
