@@ -16,6 +16,7 @@ const Profile = () => {
     const [ profile, setProfile ] = useState({})
     const [ profilePicture, setProfilePicture] = useState(null)
     const { user } = useAuth()
+
     console.log(profilePicture)
     useEffect(() => {
         const getProfile = async () => {
@@ -60,27 +61,33 @@ const Profile = () => {
                         <div className="container-profile-picture">
                             <Avatar src={profilePicture} alt={`USR`} size={300} border={"25px solid rgba(139, 44, 255, 0.4)"}/>
                         </div>
-                        <div className="profile-about">                      
-                            {/* 255 character placeholder text */}
-                            Lorem ipsum dolor sit amet, 
-                            consectetuer adipiscing elit. 
-                            Aenean commodo ligula eget dolor. Aenean massa. 
-                            Cum sociis natoque penatibus et magnis dis parturient montes, 
-                            nascetur ridiculus mus. Donec quam felis, 
-                            ultricies nec, pellentesque eu, pretium quis,
+                        <div className="profile-info-wrapper">
+                            {/* <p className="profile-username">John Doe</p> */}
+                            <div className="profile-about">                      
+                                {/* 255 character placeholder text */}
+                                Lorem ipsum dolor sit amet, 
+                                consectetuer adipiscing elit. 
+                                Aenean commodo ligula eget dolor. Aenean massa. 
+                                Cum sociis natoque penatibus et magnis dis parturient montes, 
+                                nascetur ridiculus mus. Donec quam felis, 
+                                ultricies nec, pellentesque eu, pretium quis,
+                            </div>
                         </div>
                     </Col>
                 </Row>
 
                 <Row className="profile-row mx-auto">
-                    <Col className="text-center text-xl-start">
+                    <Col className="places-visited-headings text-center text-xl-start">
                         <h2 className="places-visited-heading">Places Visited</h2>
                         <p className="places-visited-subheading">Ratings of the Experiences</p>
                     </Col>
-                    <Col className="col-12 d-flex flex-wrap justify-content-center justify-content-xl-between" style={{gap:15}}> 
+                    <Col className="col-12 d-flex flex-wrap justify-content-center justify-content-center" style={{gap:15}}> 
                         <PlaceVisited rating={2}/>
                         <PlaceVisited rating={0}/>
-                        <PlaceVisited rating={3.5}/>           
+                        <PlaceVisited rating={3.5}/>     
+                        <PlaceVisited rating={2}/>
+                        <PlaceVisited rating={0}/>
+                        <PlaceVisited rating={3.5}/>       
                     </Col>
                 </Row>
                 
@@ -97,7 +104,7 @@ const Profile = () => {
                     
                     {/*Profile Post Content */}
                     {/* Hard Code few Components for testing */}
-                    <Col className="col-12 d-flex flex-wrap justify-content-center justify-content-xl-between" style={{gap:20}}>
+                    <Col className="col-12 d-flex flex-wrap justify-content-center justify-content-center" style={{gap:20}}>
                         <ProfilePost/>
                         <ProfilePost/>
                         <ProfilePost/>

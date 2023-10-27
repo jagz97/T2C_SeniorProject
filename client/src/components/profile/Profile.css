@@ -16,17 +16,26 @@ body {
     object-position: center;
 }
 
+.profile-info-wrapper {
+    margin: 110px auto 0;
+    width: 85%;
+    max-width: 650px;
+    min-width: 400px;
+    min-height: 230px;
+}
+
+.profile-username {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.75rem;
+}
+
 .profile-about {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #2a2a2a;
-    width: 85%;
-    max-width: 650px;
-    min-width: 400px;
-    min-height: 230px;
     border-radius: 20px;
-    margin: 100px auto 0;
     font-size: 1.375rem;
     padding: 1.5em;
     text-align: center;
@@ -40,7 +49,6 @@ body {
     transform: translate(-50%);
 }
 
-
 .profile-row {
     max-width: 1050px;
     margin: 50px auto; 
@@ -50,6 +58,10 @@ body {
     Places Visited
         Section
   ================= */
+
+.places-visited-headings {
+    padding-left: 22px;
+}
 .places-visited-heading {
     font-weight: 700;
     font-size: 2.5rem;
@@ -59,7 +71,6 @@ body {
     color: #404040;
     font-weight: 500;
     font-family: 'Urbanist';
-    font-weight: 700;
     font-size: 1.2rem;
 }
 
@@ -77,7 +88,7 @@ body {
     max-width: 320px ;
     font-size: 1.5rem;
     font-weight: 700;
-    margin: 0
+    margin: 0;
 }
 
 .profile-visited-rating {
