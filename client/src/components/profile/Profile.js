@@ -16,7 +16,7 @@ const Profile = () => {
     const [ profile, setProfile ] = useState({})
     const [ profilePicture, setProfilePicture] = useState(null)
     const { user } = useAuth()
-
+    console.log("PFP State:", profilePicture)
     useEffect(() => {
         const getProfile = async () => {
             const headerOptions = {
@@ -26,14 +26,23 @@ const Profile = () => {
             }
             try {
                 const profileRequest = await api.get("/profile/getProfile", headerOptions)
-                // const pictureRequest = await api.get("/profile/getProfilePicture", headerOptions)
-                // console.log(pictureRequest)
-                // const data = new Blob([pictureRequest.data], {type: "image/*"})
-                // console.log("data",data)
-                // const url = URL.createObjectURL(data)
-                // console.log("URL:", url)
-                // setProfilePicture(url)
+                const pictureRequest = await api.get("/profile/getProfilePicture", headerOptions)
+
+                console.log(pictureRequest)
+
+                // create a new blob with the img file from server
+                const blob = new Blob([pictureRequest.data], {type: "image/webp"})
+                console.log("blob", blob)
+
+                // create an object URL with the new blob
+                const url = URL.createObjectURL(blob)
+                console.log("URL:", url)
+
+                // set the component states with the fetched data
+                setProfilePicture(url) // this state gets passed into Avatar Component
+                
                 setProfile(profileRequest.data)
+        
             } catch (error) {
                 const errorMessage = error.response?.data?.message
                 // if we get a an error response from server display it
@@ -57,7 +66,12 @@ const Profile = () => {
                     <Col className="px-0" style={{position:"relative"}}>
                         <img src={ProfileBanner} alt="user profile banner" className="profile-banner"/>
                         <div className="container-profile-picture">
-                            <Avatar src={profilePicture} alt={`USR`} size={300} border={"25px solid rgba(139, 44, 255, 0.4)"}/>
+                            <Avatar 
+                                src={profilePicture} 
+                                alt={`User Profile Picture`} 
+                                size={300} 
+                                border={"25px solid rgba(139, 44, 255, 0.4)"}
+                            />
                         </div>
                         <div className="profile-info-wrapper">
                             <p className="profile-username">{profile.firstName} {profile.lastName}</p>
@@ -85,7 +99,7 @@ const Profile = () => {
                         <PlaceVisited rating={3.5}/>     
                         <PlaceVisited rating={2}/>
                         <PlaceVisited rating={0}/>
-                        <PlaceVisited rating={3.5}/>       
+                        <PlaceVisited rating={3.5}/>     
                     </Col>
                 </Row>
                 
