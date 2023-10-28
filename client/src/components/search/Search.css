@@ -83,14 +83,16 @@
     font-size: 1rem;
 }
 
-input[type="text"]::placeholder, 
+.search-location-wrapper input[type="text"]::placeholder, 
 .search-description {
     color: #A1A1A1;
 }
 
+.search-date-wrapper
 input[type="date"] {
     text-transform: uppercase;
     letter-spacing: 1px;
+    cursor: pointer; 
 }
 
 .search-location-icon {
