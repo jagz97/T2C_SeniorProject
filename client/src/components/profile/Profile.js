@@ -14,9 +14,9 @@ import { api } from '../../api/axios'
 
 const Profile = () => {
     const [ profile, setProfile ] = useState({})
-    const [ profilePicture, setProfilePicture] = useState(null)
+    const [profilePicture, setProfilePicture] = useState("")
     const { user } = useAuth()
-    console.log("PFP State:", profilePicture)
+    
     useEffect(() => {
         const getProfile = async () => {
             const headerOptions = {
@@ -25,23 +25,18 @@ const Profile = () => {
                 }
             }
             try {
-                const profileRequest = await api.get("/profile/getProfile", headerOptions)
-                const pictureRequest = await api.get("/profile/getProfilePicture", headerOptions)
-
-                console.log(pictureRequest)
-
-                // create a new blob with the img file from server
-                const blob = new Blob([pictureRequest.data], {type: "image/webp"})
-                console.log("blob", blob)
-
-                // create an object URL with the new blob
-                const url = URL.createObjectURL(blob)
-                console.log("URL:", url)
-
-                // set the component states with the fetched data
-                setProfilePicture(url) // this state gets passed into Avatar Component
+                const response = await api.get("/profile/getProfile", headerOptions)
+                const { profilePicture }  = response.data
                 
-                setProfile(profileRequest.data)
+                // convert buffer array into typed array
+                const buffer = new Uint8Array(profilePicture.data.data) 
+                
+                // convert the new typed array into base64 string
+                const base64str = btoa(String.fromCharCode.apply(null, buffer)) 
+                
+                // form the requried value for the img element's src attribute and set it to state
+                setProfilePicture(`data:${profilePicture.type};base64,${base64str}`) 
+                setProfile(response.data)
         
             } catch (error) {
                 const errorMessage = error.response?.data?.message
@@ -74,7 +69,7 @@ const Profile = () => {
                             />
                         </div>
                         <div className="profile-info-wrapper">
-                            <p className="profile-username">{profile.firstName} {profile.lastName}</p>
+                            {profile && <p className="profile-username">{profile.firstName} {profile.lastName}</p>}  
                             <div className="profile-about">                      
                                 {/* 255 character placeholder text */}
                                 Lorem ipsum dolor sit amet, 
