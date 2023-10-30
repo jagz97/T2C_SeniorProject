@@ -3,7 +3,11 @@ import Help from "../components/help/Help"
 
 
 const HelpPage = () => {
-    return <Help/>
+    return (
+        <main className="help">
+            <Help/>
+        </main>
+    )
     
 }
 
