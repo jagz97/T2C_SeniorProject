@@ -81,7 +81,7 @@ const Signup = () => {
                                                     required
                                                     className='signup-input'
                                                 />
-                                                <InputGroup.Text className='signup-input-addon'></InputGroup.Text>
+                                                <InputGroup.Text className='signup-input-addon no-cursor'></InputGroup.Text>
                                             </InputGroup>
                                         </Form.Group>
 
@@ -96,7 +96,7 @@ const Signup = () => {
                                                     required
                                                     className='signup-input'
                                                 />
-                                                <InputGroup.Text className='signup-input-addon'></InputGroup.Text>
+                                                <InputGroup.Text className='signup-input-addon no-cursor'></InputGroup.Text>
                                                 
                                             </InputGroup>
                                         
