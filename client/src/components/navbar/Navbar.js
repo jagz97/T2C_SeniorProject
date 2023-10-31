@@ -1,61 +1,56 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import './Navbar.css'
-import Avatar from '../avatar/Avatar'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavbarBootstrap from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown';
-import CustomDropdown from "./CustomDropdown"
-
+import NavCustomDropdown from './NavCustomDropdown';
 import useAuth from "../../hooks/useAuth"
 
 import {
   Search,
-  Gear,
   MoreVerticalFill
 } from 'akar-icons'
 
+import { GoTriangleDown } from "react-icons/go"
 
 const Navbar = () => {
   const { user, logout } = useAuth()
+  const { pathname } = useLocation()
+  
+  const toggle = <><span>Services</span><GoTriangleDown color="#fff" size={12} strokeWidth={2}/></>
+  const mobileToggle = <MoreVerticalFill color="#fff" size={25}/>
+
   return (
     <header>
-      <NavbarBootstrap expand="sm" className="navbar-dark" style={{ backgroundColor: "#000", height: "75px" }}>
-        <Container fluid className="p-0 p-sm-3 p-lg-5" >
-          <NavbarBootstrap.Brand as={Link} className="p-0 ps-3 ps-sm-0" to="/">LOGO</NavbarBootstrap.Brand>
+      <NavbarBootstrap className="global-nav" style={{height: "75px"}}>
+        <Container className="p-0 p-sm-3 p-lg-5" >
+          <NavbarBootstrap.Brand as={Link} className="global-nav-logo p-0 ps-3 ps-sm-0" to="/">Travel2Connect</NavbarBootstrap.Brand>
           {
             user ?
             <>
-              <NavbarBootstrap.Toggle aria-controls="nav" className="me-3" />
-              <NavbarBootstrap.Collapse id="nav">
-                <Nav className="ms-auto position-relative mt-2 mt-sm-0 px-3 px-sm-0 align-items-center gap-2 " style={{ zIndex: 100, background: "#000" }}>
-                      {/* Dropdown Items */}
-                      <Nav.Link as={Link} to="/" className="d-block d-sm-none">Home</Nav.Link>
-                      <Nav.Link as={Link} to="/search" className="d-block d-sm-none" >Search</Nav.Link>
-                      <Nav.Link as={Link} to="/settings" className="d-block d-sm-none" >Settings</Nav.Link>
-                      <Nav.Link as={Link} to="/help" className="d-block d-sm-none" >Help</Nav.Link>
-                      
-                      <Nav.Link href="/search" className="d-none d-sm-block me-5 nav-item"><Search color="#fff" size={30} /></Nav.Link>
-                      <Nav.Link href="/settings" className="d-none d-sm-block ms-5 nav-item"><Gear color="#fff" size={30} /></Nav.Link>
-          
-                      <Dropdown align="end" autoClose="outside" className="d-none d-sm-block nav-item">
-                        <Dropdown.Toggle as={CustomDropdown} id="dropdown-custom-components">
-                          <MoreVerticalFill color="#fff" size={30}/>
-                        </Dropdown.Toggle>
-          
-                        <Dropdown.Menu className="rounded-0 nav-dropdown">
-                          {/* Collapsed Dropdown Items */}
-                          <Dropdown.Item as={Link} to="/">Home</Dropdown.Item>
-                          <Dropdown.Item as={Link} to="/help">Help</Dropdown.Item>
-                          <Dropdown.Item as={Link} to="/settings">Option </Dropdown.Item>
-                          <Dropdown.Item onClick={logout}>Sign Out </Dropdown.Item> 
-                        </Dropdown.Menu>
-                      </Dropdown>
-                      
-                      <Nav.Link as={Link} to="/profile" className="d-none d-sm-block"><Avatar src="https://picsum.photos/700/700" alt="avatar photo" size={45}/></Nav.Link>
+                <Nav className="ms-auto px-3 px-md-0 align-items-center align-items-md-baseline gap-md-3" activeKey={pathname}>
+                  <Nav.Link href="/search" className="me-3" ><Search color="#fff" size={25}/></Nav.Link>
+                  <Nav.Link href="/" className="d-none d-md-block nav-item">Home</Nav.Link>
+                  <Nav.Link href="/profile" className="d-none d-md-block nav-item">Profile</Nav.Link>
+
+                  {/* Custom Dropdown Desktop */}
+                  <NavCustomDropdown toggle={toggle} desktop className="nav-item d-none d-md-block">
+                      <Dropdown.Item as={Link} to="/help">Help</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
+                      <Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item> 
+                  </NavCustomDropdown>
+
+                  {/* Custom Dropdown Mobile */}
+                  <NavCustomDropdown toggle={mobileToggle} className="nav-item d-block d-md-none">
+                      <Dropdown.Item as={Link} to="/">Home</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/help">Help</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
+                      <Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item>
+                  </NavCustomDropdown>
                 </Nav>
-              </NavbarBootstrap.Collapse>
             </>
             :
             <Nav className="nav-btns pe-3 pe-sm-0">
@@ -63,8 +58,6 @@ const Navbar = () => {
               <Nav.Link className="nav-btn login-btn" as={Link} to="login">Login</Nav.Link>
             </Nav>
           }
-          
-
         </Container>
       </NavbarBootstrap>
     </header>
