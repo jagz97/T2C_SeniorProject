@@ -22,5 +22,6 @@
 .avatar-wrapper {
     overflow: hidden;
     border-radius: 50%;
+    width: fit-content
 }
 
