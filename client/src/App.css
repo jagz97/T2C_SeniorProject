@@ -1,3 +1,9 @@
+body {
+  font-family: "DM Sans", "poppins", "volkhov";
+  color: #000;
+  background-color: #f2f2ff;
+}
+
 .error {
     color: red;
-  }
+}

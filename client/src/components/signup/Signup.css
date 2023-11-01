@@ -1,10 +1,9 @@
 main.signup {
     margin: 0;
     height: 100vh;
-    background-color: rgb(114,126,173); 
     background: url('../../images/pexels-brandon-morrison-990344.jpg') no-repeat bottom center fixed;
     background-size: cover;
-    font-family: 'DM Sans', sans-serif; 
+    font-family: inherit; 
     color: #fff;
   }
   
@@ -29,7 +28,6 @@ main.signup {
     font-size: 0.875rem;
   }
 
-  
   .container-next-input {
     margin-top: 20px;
   }
@@ -63,6 +61,9 @@ main.signup {
     padding: 0 1.5em;
   }
 
+  .signup-input-addon.no-cursor {
+    cursor: default;
+  }
  
   .container-continue {
     margin-top: 30px;
@@ -141,4 +142,6 @@ main.signup {
     font-size: 1rem;
     text-align: end;
   }
+
+ 
   
