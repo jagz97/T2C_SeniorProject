@@ -139,3 +139,56 @@ input[type="date"] {
 
     }
 }
+
+.search-result-row {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container-result {
+    width: 335px;
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.container-result-img {
+    width: 100%;
+    height: 215px;
+}
+
+.result-img {
+    display: block;
+    height: 215px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.result-footer { /*Maybe remove*/
+    padding: .5em 1em;
+}
+
+.result-title {
+    color: #000;
+    font-size: inherit;
+}
+
+.result-price {
+    color: #3C3A83;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+.result-title,
+.result-price {
+    text-decoration: none;
+}
+
+.result-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

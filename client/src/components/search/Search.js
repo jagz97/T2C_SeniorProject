@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import introImg from '../../images/pexels-jake-brown-2531314.jpg'
-
+import SearchResult from './SearchResult'
 
 
 const Search = () => {
@@ -23,6 +23,17 @@ const Search = () => {
                         <SearchForm/>
                     </Col>
                 </Row>
+            <Row className="search-result-row justify-content-center mt-5">
+        
+                <SearchResult/>
+                <SearchResult/>
+                <SearchResult/>
+                <SearchResult/>
+                <SearchResult/>
+                <SearchResult/>
+                
+                
+            </Row>
             </Container>
     )
 }
