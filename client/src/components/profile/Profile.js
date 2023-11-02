@@ -16,7 +16,7 @@ const Profile = () => {
     const [ profile, setProfile ] = useState({})
     const [profilePicture, setProfilePicture] = useState("")
     const { user } = useAuth()
-    
+    console.log(profile)
     useEffect(() => {
         const getProfile = async () => {
             const headerOptions = {
@@ -60,26 +60,28 @@ const Profile = () => {
                 <Row>
                     <Col className="px-0" style={{position:"relative"}}>
                         <img src={ProfileBanner} alt="user profile banner" className="profile-banner"/>
-                        <div className="container-profile-picture">
-                            <Avatar 
-                                src={profilePicture} 
-                                alt={`User Profile Picture`} 
-                                size={300} 
-                                border={"25px solid rgba(139, 44, 255, 0.4)"}
-                            />
-                        </div>
-                        <div className="profile-info-wrapper">
-                            {profile && <p className="profile-username">{profile.firstName} {profile.lastName}</p>}  
-                            <div className="profile-about">                      
-                                {/* 255 character placeholder text */}
-                                Lorem ipsum dolor sit amet, 
-                                consectetuer adipiscing elit. 
-                                Aenean commodo ligula eget dolor. Aenean massa. 
-                                Cum sociis natoque penatibus et magnis dis parturient montes, 
-                                nascetur ridiculus mus. Donec quam felis, 
-                                ultricies nec, pellentesque eu, pretium quis,
+                            <div className="profile-picture-wrapper">
+                                <Avatar 
+                                    src={profilePicture} 
+                                    alt={`User Profile Picture`} 
+                                    size={250} 
+                                    border="15px solid rgba(139,44,255,0.4)"
+                                />
                             </div>
-                        </div>
+                               
+                            <div className="profile-about">                      
+                                {profile && <p className="profile-username">{profile.firstName} {profile.lastName}</p>}  
+                                {/* 255 character placeholder text */}
+                                <p className="profile-bio">
+                                    Lorem ipsum dolor sit amet, 
+                                    consectetuer adipiscing elit. 
+                                    Aenean commodo ligula eget dolor. Aenean massa. 
+                                    Cum sociis natoque penatibus et magnis dis parturient montes, 
+                                    nascetur ridiculus mus. Donec quam felis, 
+                                    ultricies nec, pellentesque eu, pretium quis,
+                                </p>
+                            </div>
+                            
                     </Col>
                 </Row>
 
