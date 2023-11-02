@@ -1,10 +1,8 @@
   main.login {
     margin: 0;
     height: 100vh;
-    background-color: rgb(114,126,173); /*Fallback color for background image*/
     background: url('../../images/pexels-luke-webb-2734920 1.png') no-repeat bottom center fixed;
     background-size: cover;
-    font-family: 'DM Sans', sans-serif; /*imported DM sans via google fonts*/
     color: #fff;
   }
   
