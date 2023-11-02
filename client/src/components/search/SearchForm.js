@@ -17,26 +17,26 @@ const SearchForm = () => {
     console.log("tmrw date",tomorrowDate)
 
     useEffect(() => {
-        // const getResults = async () => {
-        //     try {
-        //         const formData = {
-        //              city: "boston",
-        //              arrival_date: "2023-10-20",  
-        //              departure_date: "2023-10-23" ,
-        //         }
+        const getResults = async () => {
+            try {
+                const formData = {
+                     city: "boston",
+                     arrival_date: "2023-10-20",  
+                     departure_date: "2023-10-23" ,
+                }
                 
-        //         const headers = {
-        //             "Content-Type" : "application/json",  
-        //         }
+                const headers = {
+                    "Content-Type" : "application/json",  
+                }
 
-        //         const response = await api.get("/hotels_search_city_name", JSON.stringify(formData), headers)
-        //         console.log(response)
+                const response = await api.get("/hotels_search_city_name", JSON.stringify(formData), headers)
+                console.log(response)
                 
-        //     } catch (error) {
-        //         console.log(error)    
-        //     }
-        // }
-        // getResults()
+            } catch (error) {
+                console.log(error)    
+            }
+        }
+        
     }, [])
 
     const submitHandler = (event) => {
@@ -76,7 +76,7 @@ const SearchForm = () => {
                                 min={currentDate}
                                 style = {{color : arrival ? "#000" : "grey" }}
                             />
-                            <p className="search-description d-none d-lg-block">Select Trip Dates</p>
+                            {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
                         </div>
                         <div className="search-date-wrapper">
                             <label htmlFor="search-date-departure">Date Departure</label>
@@ -91,7 +91,7 @@ const SearchForm = () => {
                                 min={tomorrowDate}
                                 style = {{color : departure ? "#000" : "grey" }}
                             />
-                            <p className="search-description d-none d-lg-block">Select Trip Dates</p>
+                            {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
                         </div>
                         <button type="submit">Search</button>
                 </form>
