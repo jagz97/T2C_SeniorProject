@@ -10,7 +10,7 @@ const PlaceVisited = ({location, rating}) => {
         <div className="profile-visited-wrapper">
             <img className="profile-visited" src={mohammedLak} alt="" ></img>
             <p className="profile-visited-name">Croatia</p>
-            <div className="profile-visited-rating" ><Ratings value={rating}/></div>
+            <div className="profile-visited-rating" ><Ratings value={rating} starSize={20} /></div>
         </div>
     )
 }

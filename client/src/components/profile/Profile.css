@@ -11,7 +11,7 @@
 
 .profile-picture-wrapper {
     position: absolute;
-    top: 35%;
+    top: 38%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -19,7 +19,8 @@
 .profile-username {
     text-align: center;
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 3px;
 }
 
 .profile-about {
@@ -31,13 +32,13 @@
     align-items: center;
     background-color: #fff;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     padding: 1.5em;
     text-align: center;
     line-height: 1.3;
-    min-height: 250px;
+    min-height: 220px;
     width: 85%;
-    max-width: 550px;
+    max-width: 500px;
     min-width: 400px;
     position: relative;
     top: -25px;
@@ -45,35 +46,38 @@
 
 
 
-.profile-row {
+.profile-visited-row {
     max-width: 1050px;
     margin: 50px auto; 
 }
+
 
 /* =================
     Places Visited
         Section
   ================= */
 
-.places-visited-headings {
-    padding-left: 22px;
+.profile-posts-row {
+    max-width: 1050px;
+    width: 80%;
 }
+
 .places-visited-heading {
     font-weight: 700;
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .places-visited-subheading {
     color: #404040;
     font-weight: 500;
     font-family: 'Urbanist';
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .profile-visited {
     display: "block";
-    height: 275px;
-    width: 325px;
+    height: 250px;
+    width: 300px;
     border-radius: 8px;
     object-fit: "fill";
 
@@ -82,7 +86,7 @@
 .profile-visited-name {
     width: 100% ;
     max-width: 320px ;
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     font-weight: 700;
     margin: 0;
 }
@@ -92,6 +96,12 @@
     max-width: 320px;
 }
 
+@media(min-width: 1200px) {
+    .places-visited-headings {
+        padding-left: 60px;
+    }
+}
+
 /* =================
     Profile Posts 
         Section
@@ -99,7 +109,7 @@
 .profile-post-header {
     text-transform: uppercase;
     color:#8B2CFF;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .profile-post-header img {
@@ -114,8 +124,8 @@
 }
 
 .profile-post-wrapper {
-    width: 240px; 
-    height: 240px;
+    width: 200px; 
+    height: 200px;
 }
 
 

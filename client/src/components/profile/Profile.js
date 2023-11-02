@@ -64,7 +64,7 @@ const Profile = () => {
                                 <Avatar 
                                     src={profilePicture} 
                                     alt={`User Profile Picture`} 
-                                    size={250} 
+                                    size={235} 
                                     border="15px solid rgba(139,44,255,0.4)"
                                 />
                             </div>
@@ -85,28 +85,25 @@ const Profile = () => {
                     </Col>
                 </Row>
 
-                <Row className="profile-row mx-auto">
+                <Row className="profile-visited-row mx-auto">
                     <Col className="places-visited-headings text-center text-xl-start">
                         <h2 className="places-visited-heading">Places Visited</h2>
                         <p className="places-visited-subheading">Ratings of the Experiences</p>
                     </Col>
                     <Col className="col-12 d-flex flex-wrap justify-content-center justify-content-center" style={{gap:15}}> 
                         <PlaceVisited rating={2}/>
-                        <PlaceVisited rating={0}/>
-                        <PlaceVisited rating={3.5}/>     
-                        <PlaceVisited rating={2}/>
-                        <PlaceVisited rating={0}/>
-                        <PlaceVisited rating={3.5}/>     
+                        <PlaceVisited rating={5}/>
+                        <PlaceVisited rating={3}/>     
                     </Col>
                 </Row>
                 
-                <Row className="profile-row mx-auto justify-content-center align-items-center g-4 my-5">
+                <Row className="profile-posts-row mx-auto justify-content-center align-items-center g-4 my-5">
                     {/* Posts Section Header */}
                     <Col className="col-12">
                         <div className="d-flex flex-column align-items-center" style={{height:"100%"}}>
                             <div className="profile-post-line"></div>
                             <div className="profile-post-header mt-2 mx-auto d-flex align-items-center gap-2">
-                                <BsGrid3X3 size={30}/>posts
+                                <BsGrid3X3 size={22}/>posts
                             </div>
                         </div>
                     </Col>
@@ -114,10 +111,6 @@ const Profile = () => {
                     {/*Profile Post Content */}
                     {/* Hard Code few Components for testing */}
                     <Col className="col-12 d-flex flex-wrap justify-content-center justify-content-center" style={{gap:20}}>
-                        <ProfilePost/>
-                        <ProfilePost/>
-                        <ProfilePost/>
-                        <ProfilePost/>
                         <ProfilePost/>
                         <ProfilePost/>
                         <ProfilePost/>
