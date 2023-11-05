@@ -52,7 +52,7 @@ const Profile = () => {
         }
 
         getProfile()
-    }, [])
+    }, [user.accesstoken])
 
     return (
         <div>
