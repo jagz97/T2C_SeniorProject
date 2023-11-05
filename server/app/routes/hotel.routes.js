@@ -17,5 +17,10 @@ module.exports = function (app) {
     controller.hotelSearhCityName
     );
 
+    app.post(
+        "/api/hotelDetails",
+        controller.getHotelDetails
+    );
+
 
 };

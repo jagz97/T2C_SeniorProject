@@ -93,6 +93,9 @@ exports.getPostsByUserId = async function (req, res) {
             ],
           },
         ],
+        order:[
+          [Posts,'date', 'DESC'],
+        ]
       });
 
       
@@ -101,23 +104,18 @@ exports.getPostsByUserId = async function (req, res) {
         return res.status(404).json({ message: 'User not found' });
       }
 
-      const post_data = userPosts.Posts.map(post => ({
+     // Convert the postPic data to base64 before sending the response
+    userPosts.Posts.forEach(post => {
+      if (post.postPic && Buffer.isBuffer(post.postPic.data)) {
+        post.postPic.data = post.postPic.data.toString('base64');
+      }
+    });
 
-        caption: post.caption,
-        date: post.date,
-        country: post.country,
-        city: post.city,
-        image_type: post.postPic.type,
-        data: post.postPic.data
-
-      }));
-  
-
-              // Convert the Buffer data to Base64-encoded strings for each image
      
-    
+
+          
             // Send the array of Base64-encoded image data in the response
-            res.status(200).json({ posts: post_data });
+            res.status(200).json({ posts: userPosts.Posts });
   
       
     } catch (error) {

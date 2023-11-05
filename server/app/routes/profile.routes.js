@@ -20,7 +20,7 @@ module.exports = function (app) {
 
     app.get(
     '/api/profile/getProfile',
-    [authJwt.verifyToken],
+    // [authJwt.verifyToken],
     controller.getUserProfile
     );
 
