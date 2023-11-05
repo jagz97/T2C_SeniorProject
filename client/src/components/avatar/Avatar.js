@@ -37,7 +37,7 @@ const Avatar = ({src,alt,size,color,border}) => {
 
     return (
         <div className={`avatar-wrapper`} style={borderStyle}>
-            <div className="position-relative" style={{...sizeStyle, ...colorStyle}}>
+            <div style={{...sizeStyle, ...colorStyle}}>
                 <div className="avatar"> 
                     {render}
                 </div>
