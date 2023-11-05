@@ -1,21 +1,16 @@
 import React from 'react'
-import Col from 'react-bootstrap/Col'
 import Ratings from '../ratings/Ratings'
 import mohammedLak from './temp-images/mohammed-lak.jpg'
 
-const PlaceVisited = ({location, rating}) => {
+import './Profile.css'
+
+const PlaceVisited = ({rating}) => {
     return (
-        <Col className="col-auto ">
-            <div>
-                <div style={{height: 375, width: 425}}>
-                    <img src={mohammedLak} alt=" " style={{display: "block", width: "100%", height:"100%",  borderRadius: "1.2em", objectFit: "fill"}}></img>
-                </div>
-                <h2 className="mt-2" style={{width:"100%", maxWidth:"320px"}}>Croatia</h2>
-                <div style={{width:"100%", maxWidth:"320px", marginBottom: "1em"}}><Ratings value={rating}/></div>
-            </div>
-        </Col>
-          
-        
+        <div className="profile-visited-wrapper">
+            <img className="profile-visited" src={mohammedLak} alt="" ></img>
+            <p className="profile-visited-name">Croatia</p>
+            <div className="profile-visited-rating" ><Ratings value={rating} starSize={20} /></div>
+        </div>
     )
 }
 export default PlaceVisited

@@ -1,0 +1,65 @@
+.onboard-pfp-header {
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.onboard-pfp-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    gap: 25px;
+}
+
+label[for="onboard-file-input"] {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    clip-path: circle(60%);
+    overflow: hidden;
+}
+
+.onboard-pfp-icon {
+    background-color: #3C3A83;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 25px;
+    right: 10px;
+}
+
+.onboard-pfp-form-footer {
+    width: 100%;
+}
+
+.error-onboard-img {
+    margin: 0;
+    text-align: center;
+}
+.onboard-pfp-form button {
+    color: #fff;
+    background-color: #3C3A83;
+    border: none;
+    border-radius: 8px;
+    padding: 0.4em 1.4em;
+    letter-spacing: 1px;
+    margin-top: 25px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    width: 100%;
+}
+
+#onboard-file-input {
+    display: none;
+}
+
+.onboard-skip-btn {
+    cursor: pointer;
+    text-align: center;
+}
