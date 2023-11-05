@@ -47,6 +47,20 @@ const OnboardAbout = ({navigateNextPage}) => {
         }
     }
 
+    const handleAge = (event) => {
+        if(age === "") {
+            event.target.style.color = "#000"
+        }
+        setAge(event.target.value)
+    }
+
+    const handleGender = (event) => {
+        if(gender === "") {
+            event.target.style.color = "#000"
+        }
+        setGender(event.target.value)
+    }
+
     return (
         <Container>
             <Row className="justify-content-center align-items-center vh-100">
@@ -70,24 +84,24 @@ const OnboardAbout = ({navigateNextPage}) => {
                         required
                     />
                     
-                        <select name="age" defaultValue={age} onChange={(event) => setAge(event.target.value)} required>
-                            <option value="" disabled>Age</option>
-                            {
-                                ages
-                            }
-                        </select>
+                    <select name="age" defaultValue={age} onChange={handleAge} required>
+                        <option value="" disabled>Age</option>
+                        {
+                            ages
+                        }
+                    </select>
 
-                        <select 
-                            name="gender" 
-                            defaultValue={gender} 
-                            onChange={(event) => setGender(event.target.value)} 
-                            required
-                        >
-                            <option value="" disabled >Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
+                    <select 
+                        name="gender" 
+                        defaultValue={gender} 
+                        onChange={handleGender} 
+                        required
+                    >
+                        <option value="" disabled >Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
                 
                     <button type="submit">Continue</button>
                     {errorMessage && <p className="error text-center mt-1">{errorMessage}</p>}

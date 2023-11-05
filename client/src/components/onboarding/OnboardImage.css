@@ -22,7 +22,7 @@ label[for="onboard-file-input"] {
 }
 
 .onboard-pfp-icon {
-    background-color: #3C3A83;
+    background-color: #5D17B0;
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -44,7 +44,8 @@ label[for="onboard-file-input"] {
 }
 .onboard-pfp-form button {
     color: #fff;
-    background-color: #3C3A83;
+    background-color: #5D17B0;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border: none;
     border-radius: 8px;
     padding: 0.4em 1.4em;
@@ -62,4 +63,5 @@ label[for="onboard-file-input"] {
 .onboard-skip-btn {
     cursor: pointer;
     text-align: center;
+    font-weight: 700;
 }
