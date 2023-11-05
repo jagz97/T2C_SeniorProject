@@ -25,7 +25,7 @@ const SearchForm = () => {
                     "Content-Type" : "application/json",  
                 }
 
-                const response = await api.get("/hotels_search_city_name", JSON.stringify(formData), headers)
+                const response = await api.post("/hotels_search_city_name", JSON.stringify(formData), headers)
                 console.log(response)
                 
             } catch (error) {
