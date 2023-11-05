@@ -17,8 +17,11 @@ const OnboardAbout = ({navigateNextPage}) => {
     const [ lastName, setLastName ] = useState("") 
     const [ age, setAge ] = useState("")
     const [ gender, setGender ] = useState("")
+    const [ bio, setBio ] = useState("")
     const [ errorMessage, setErrorMessage ] = useState("")
     const { user } = useAuth()
+    
+    console.log("BIO:",bio)
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -102,7 +105,13 @@ const OnboardAbout = ({navigateNextPage}) => {
                         <option value="female">Female</option>
                         <option value="other">Other</option>
                     </select>
-                
+                    <textarea 
+                        name="Profile Bio"
+                        placeholder="Enter Bio (optional)"
+                        value={bio}
+                        onChange={(event) => setBio(event.target.value)}
+                    >
+                    </textarea>    
                     <button type="submit">Continue</button>
                     {errorMessage && <p className="error text-center mt-1">{errorMessage}</p>}
                 </form>

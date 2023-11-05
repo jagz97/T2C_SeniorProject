@@ -31,9 +31,9 @@ const OnboardingPage = () => {
 
     return (
         <>
-            <img src={onboardTop} className="d-none d-lg-block" style={{position:"absolute", width:"100%"}}/>
+            <img src={onboardTop} className="d-none d-lg-block" alt="waves crashing" style={{position:"absolute", width:"100%"}}/>
             {render}
-            <img src={onboardBottom} className="d-none d-lg-block" style={{position:"absolute", bottom: "0"}}/>
+            <img src={onboardBottom} className="d-none d-lg-block" alt="colorful shapes" style={{position:"absolute", bottom: "0"}}/>
         </>
     )
 }
