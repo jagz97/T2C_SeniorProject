@@ -78,21 +78,11 @@ exports.createProfile = async (req, res) => {
             model: db.image, // Assuming this is the Image model
             as: 'profilePicture', // Use the alias defined in your association
           },
-          {
-            model: db.image, // Assuming this is the Image model
-            as: 'bioPic', // Use the alias defined in your association
-          },
         ],
       });
   
       if (!userProfile) {
         return res.status(404).json({ message: "Profile not found for this user" });
-      }
-      // Convert the profilePicture data to base64
-      if (userProfile.profilePicture && userProfile.profilePicture.data) {
-        const imageData = Buffer.from(userProfile.profilePicture.data);
-        const base64Image = imageData.toString('base64');
-        userProfile.profilePicture.data = base64Image;
       }
   
       res.status(200).json(userProfile);
@@ -177,13 +167,13 @@ exports.getProfilePic = async (req, res) => {
       return res.status(404).json({ message: 'User profile not found.' });
     }
 
-    
+    // Access the profile picture data
+    const profilePicture = profile.profilePicture;
 
-    if (profile.profilePicture && profile.profilePicture.data) {
-      const imageData = Buffer.from(profile.profilePicture.data);
-      const base64Image = imageData.toString('base64');
-      profile.profilePicture.data = base64Image;
-      res.status(200).json(profile.profilePicture);
+    if (profilePicture) {
+      // Send the image data as a response
+      res.contentType(profilePicture.type);
+      res.send(profilePicture.data);
     } else {
       return res.status(404).json({ message: 'Profile picture not found.' });
     }
@@ -275,11 +265,10 @@ exports.getBioPic = async (req, res) => {
     // Access the profile picture data
     const bioPic = profile.bioPic;
 
-    if (profile.bioPic && profile.bioPic.data) {
-      const imageData = Buffer.from(profile.bioPic.data);
-      const base64Image = imageData.toString('base64');
-      profile.bioPic.data = base64Image;
-      res.status(200).json(profile.bioPic);
+    if (bioPic) {
+      // Send the image data as a response
+      res.contentType(bioPic.type);
+      res.send(bioPic.data);
     } else {
       return res.status(404).json({ message: 'Bio picture not found.' });
     }
@@ -288,3 +277,6 @@ exports.getBioPic = async (req, res) => {
     return res.status(500).json({ message: 'Internal server error.' });
   }
 };
+
+
+

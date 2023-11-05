@@ -12,14 +12,9 @@ module.exports = function (app) {
     next();
     });
 
-    app.post(
+    app.get(
     "/api/hotels_search_city_name",
     controller.hotelSearhCityName
-    );
-
-    app.post(
-        "/api/hotelDetails",
-        controller.getHotelDetails
     );
 
 

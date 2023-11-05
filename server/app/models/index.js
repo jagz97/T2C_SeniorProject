@@ -24,22 +24,13 @@ db.users = require("./users.models.js")(sequelize, Sequelize);
 db.profile = require("./profile.models.js")(sequelize, Sequelize);
 db.image = require("./image.models.js")(sequelize, Sequelize);
 db.token = require("./token.models.js")(sequelize, Sequelize);
-db.posts = require("./posts.models.js")(sequelize, Sequelize);
 
 const Users = db.users;
 const Profile = db.profile;
 const Token = db.token;
 
-const Post = db.posts;
-const Image = db.image;
-
 //One-to-one relation of token and user
 Token.belongsTo(Users, {foreignKey: 'userId'});
-
-Post.belongsTo(Users, { foreignKey: 'userId' });
-Post.belongsTo(Image, { foreignKey: 'postPicId', as: 'postPic' });
-
-Users.hasMany(Post, { foreignKey: 'userId' });
 
 
 // Define associations for bioPic and ProfilePicture.
