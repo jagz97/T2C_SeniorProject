@@ -29,13 +29,13 @@ const Profile = () => {
                 const { profilePicture }  = response.data
                 
                 // convert buffer array into typed array
-                const buffer = new Uint8Array(profilePicture.data.data) 
+                const profilePicData = (profilePicture.data) 
                 
-                // convert the new typed array into base64 string
-                const base64str = btoa(String.fromCharCode.apply(null, buffer)) 
+                
+                
                 
                 // form the requried value for the img element's src attribute and set it to state
-                setProfilePicture(`data:${profilePicture.type};base64,${base64str}`) 
+                setProfilePicture(`data:${profilePicture.type};base64,${profilePicData}`) 
                 setProfile(response.data)
         
             } catch (error) {
@@ -73,12 +73,7 @@ const Profile = () => {
                                 {profile && <p className="profile-username">{profile.firstName} {profile.lastName}</p>}  
                                 {/* 255 character placeholder text */}
                                 <p className="profile-bio">
-                                    Lorem ipsum dolor sit amet, 
-                                    consectetuer adipiscing elit. 
-                                    Aenean commodo ligula eget dolor. Aenean massa. 
-                                    Cum sociis natoque penatibus et magnis dis parturient montes, 
-                                    nascetur ridiculus mus. Donec quam felis, 
-                                    ultricies nec, pellentesque eu, pretium quis,
+                                    {profile.bio}
                                 </p>
                             </div>
                             

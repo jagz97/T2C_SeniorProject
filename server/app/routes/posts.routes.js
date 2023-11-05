@@ -14,7 +14,7 @@ module.exports = function (app) {
     "/api/posts/createPost",
     [authJwt.verifyToken],
     upload.fields([
-        { name: 'bioPic', maxCount: 1 }, // Specify the file field name and the maximum number of files
+        { name: 'postPic', maxCount: 1 }, // Specify the file field name and the maximum number of files
         { name: 'caption' }, // Specify a field named 'key1' (you can add more as needed)
         { name: 'country' }, // Specify a field named 'key2' (you can add more as needed)
         {name: 'city'}
