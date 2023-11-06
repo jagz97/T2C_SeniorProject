@@ -6,6 +6,8 @@ import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
 import OnboardingPage from './pages/OnboardingPage'
 
+
+import SettingsPage from './pages/SettingsPage'
 import "./App.css"
 
 
@@ -29,6 +31,7 @@ function App() {
             <Route element={<NavLayout/>}>
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
+              <Route path="settings" element={<SettingsPage/>}/>
             </Route>
           </Route>
             
