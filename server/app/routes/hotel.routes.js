@@ -22,5 +22,10 @@ module.exports = function (app) {
         controller.getHotelDetails
     );
 
+    app.post(
+        "/api/createCheckout",
+        controller.createCheckout
+    )
+
 
 };
