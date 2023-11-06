@@ -12,7 +12,7 @@ exports.post = async function (req, res) {
         const id = req.id; // Extract user information from the request context (provided by the middleware)
         const user = await users.findByPk(id);
 
-        console.log('Uploaded File:', req.files['bioPic']);
+        console.log('Uploaded File:', req.files['postPic']);
         console.log('Value for key1:', req.body['caption']);
         console.log('Value for key2:', req.body['country']);
         console.log('Value for key3:', req.body.caption);
@@ -21,11 +21,11 @@ exports.post = async function (req, res) {
             return res.status(404).send({ message: "User not found." });
         }
 
-        if (req.files['bioPic'] == undefined) {
+        if (req.files['postPic'] == undefined) {
             return res.status(400).json({ error: "Please upload pictures for post" });
         }
 
-        const file = req.files['bioPic'];
+        const file = req.files['postPic'];
         console.log(file);
         
         const filenameArray = file.map(file => file.filename);
