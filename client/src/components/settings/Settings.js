@@ -1,15 +1,23 @@
 import React, {useState, useEffect} from "react"
 import { useNavigate } from "react-router-dom"
-import Avatar from '../avatar/Avatar'
-import Container from 'react-bootstrap/Container'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
-import ProfileBanner from '../../images/pexels-venelin-dimitrov-3476312.jpg'
+import Avatar from "../avatar/Avatar"
+import ToggleButton from "./ToggleButton"
+import Container from "react-bootstrap/Container"
+import Col from "react-bootstrap/Col"
+import Row from "react-bootstrap/Row"
+import ProfileBanner from "../../images/pexels-venelin-dimitrov-3476312.jpg"
 import "./Settings.css"
 
 import useAuth from "../../hooks/useAuth"
-import { api } from '../../api/axios'
+import { api } from "../../api/axios"
 
+import  {
+    MdOutlineNotifications,
+    MdOutlineContactSupport,
+    MdOutlinePersonSearch,
+    MdLogout,
+    MdLockOutline
+} from "react-icons/md"
 
 const MAX_AGE = 110
 const MIN_AGE = 18
@@ -89,7 +97,7 @@ const Settings = () => {
                                 }
                             </select>
                         </div>
-                        <button onClick={() => navigate("/")} className="settings-recover-pw">Recover Password</button>
+                        <div onClick={() => navigate("/")} className="settings-control settings-recover-pw">Recover Password</div>
                         <input
                             type="tel"
                             name="Phone Number"
@@ -98,7 +106,7 @@ const Settings = () => {
                             onChange={(event) => setPhoneNumber(event.target.value)}
                             id="settingsphone"
                             />
-                        <button onClick={logout} className="settings-logout">Log Out</button>
+                        <div onClick={logout} className="settings-control settings-logout"><MdLogout size={20}/><span>Logout</span></div>
                     </div>
                 </Col>
                 
@@ -115,10 +123,10 @@ const Settings = () => {
                                 id="settingslname"
                             />
                         </div>
-                            <div className="slider-btn-wrapper">Reminders</div>
-                            <div className="slider-btn-wrapper">Matching</div>
-                            <div className="slider-btn-wrapper">Privacy</div>
-                            <button onClick={() => navigate("/")} className="settings-help">Contact Us</button>
+                            <div className="settings-control toggle-btn-wrapper"><MdOutlineNotifications size={20}/><span>Reminders</span><ToggleButton/></div>
+                            <div className="settings-control toggle-btn-wrapper"><MdOutlinePersonSearch size={20}/><span>Matching</span><ToggleButton/></div>
+                            <div className="settings-control toggle-btn-wrapper"><MdLockOutline size={20}/><span>Privacy</span><ToggleButton/></div>
+                            <div onClick={() => navigate("/")} className="settings-control settings-help"><MdOutlineContactSupport size={20}/><span>Contact Us</span><ToggleButton/></div>
                         </div>
                 </Col>
             </Row>

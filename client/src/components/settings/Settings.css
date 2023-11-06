@@ -33,18 +33,18 @@
 
 .container-settings input,
 .container-settings select,
-.container-settings button,
+.container-settings .settings-control,
 .container-settings .slider-btn-wrapper {
     border-radius: 6px;
     border: none;
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
     font-size: 1.2rem;
     padding: 0.4em 0.6em;
+    height: 44px;
 }
 
-.container-settings button,
-.container-settings select,
-.container-settings .slider-btn-wrapper {
+.container-settings .settings-control,
+.container-settings select {
     background-color: #fff;
     color: inherit;
 }
@@ -55,7 +55,7 @@
 }
 
 .container-settings select {
-    padding: 0.4em;
+    /* padding:  0.4em; */
 }
 
 .container-settings select[name="gender"] {
@@ -66,15 +66,15 @@
     width: 35%;
 }
 
-.container-settings button {
-   text-align: start;
-    display: block;
-}
-
-.slider-btn-wrapper {
+.toggle-btn-wrapper {
     cursor: default;   
 }
 
+.settings-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 .settings-btn {
     display: block;
     margin: 0 auto;
