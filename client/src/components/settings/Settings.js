@@ -16,7 +16,11 @@ import  {
     MdOutlineContactSupport,
     MdOutlinePersonSearch,
     MdLogout,
-    MdLockOutline
+    MdLockOutline,
+    MdLockReset,
+    MdOutlineEditNote,
+    MdOutlinePhotoCamera,
+    MdEditNote
 } from "react-icons/md"
 
 const MAX_AGE = 110
@@ -27,7 +31,9 @@ for(let i = MIN_AGE; i <= MAX_AGE; i++) {
 }
 
 const Settings = () => {
-
+    
+    const [ bio, setBio ] = useState("")
+    const [ pfp, setPfp ] = useState("")
     const [ firstName, setFirstName ] = useState("")
     const [ lastName, setLastName ] = useState("")
     const [ age, setAge ] = useState("")
@@ -37,9 +43,30 @@ const Settings = () => {
     const [ reminders, setReminders ] = useState(false)
     const [ matching, setMatching ] = useState(false)
     const [ privacy, setPrivacy ] = useState(false)
-   
+
+
+    const [ errorMessage , setErrorMessage] = useState("")
+    const [ bioModal, setBioModal ] = useState("")
+    
     const navigate = useNavigate()
     const { logout } = useAuth()
+
+
+    const handleUpload = (event) => {
+        const { files } = event.target
+        setErrorMessage("")
+        if(files.length > 0) {
+            if(!files[0].type.startsWith("image")) {
+                setErrorMessage("File must be an image")
+            }
+            else {
+                console.log(files[0])
+                setPfp(files[0])
+            }
+            // reset input value so that image is rendered when same file is chosen for pfp and biopic
+           event.target.value = "" 
+        }
+    }
 
     return (
         <Container fluid>
@@ -54,22 +81,24 @@ const Settings = () => {
                             border="15px solid rgba(139,44,255,0.4)"
                         />
                     </div>
-                    <div className="profile-about">                      
-                                <a>Upload Image</a> <a>Edit Bio</a>
-                                {/* 255 character placeholder text */}
-                                <p className="profile-bio">
-                                    Lorem ipsum dolor sit amet, 
-                                    consectetuer adipiscing elit. 
-                                    Aenean commodo ligula eget dolor. Aenean massa. 
-                                    Cum sociis natoque penatibus et magnis dis parturient montes, 
-                                    nascetur ridiculus mus. Donec quam felis, 
-                                    ultricies nec, pellentesque eu, pretium quis,
-                                </p>
-                            </div>
+                    <div className="profile-about">    
+                        <div className="settings-bio-control" onClick={() => setBioModal(true)}>
+                            <MdOutlineEditNote siz={20}/>Edit Bio
+                        </div>
+                        {/* 255 character placeholder text */}
+                        <p className="profile-bio">
+                            Lorem ipsum dolor sit amet, 
+                            consectetuer adipiscing elit. 
+                            Aenean commodo ligula eget dolor. Aenean massa. 
+                            Cum sociis natoque penatibus et magnis dis parturient montes, 
+                            nascetur ridiculus mus. Donec quam felis, 
+                            ultricies nec, pellentesque eu, pretium quis,
+                        </p>
+                    </div>
                 </Col>
             </Row>
             <Row className="justify-content-center mb-5">
-                <Col className="col-12 col-md-auto" >
+                <Col className="col-12 col-md-auto mb-3 mb-md-0" >
                     <div className="container-settings">
                         <div className="settingsfname-wrapper">    
                             <label htmlFor="settingsfname">First Name</label>
@@ -82,6 +111,14 @@ const Settings = () => {
                                 id="settingsfname"
                             />
                         </div>
+                        <input
+                            type="tel"
+                            name="Phone Number"
+                            value={phoneNumber}
+                            placeholder="Phone Number"
+                            onChange={(event) => setPhoneNumber(event.target.value)}
+                            id="settingsphone"
+                        />  
                         <div className="settings-dropdown">
                             <select 
                                     name="gender" 
@@ -101,15 +138,22 @@ const Settings = () => {
                                 }
                             </select>
                         </div>
-                        <div onClick={() => navigate("/")} className="settings-control settings-recover-pw">Recover Password</div>
-                        <input
-                            type="tel"
-                            name="Phone Number"
-                            value={phoneNumber}
-                            placeholder="Phone Number"
-                            onChange={(event) => setPhoneNumber(event.target.value)}
-                            id="settingsphone"
-                            />
+                        <label className="settings-control" htmlFor="settings-file-input">
+                                <MdOutlinePhotoCamera size={20}/>
+                                Edit Profile Picture
+                                <input 
+                                    type="file" 
+                                    name="pfp"
+                                    onChange={handleUpload}
+                                    accept="image/*"
+                                    id="settings-file-input"
+                                />
+                        </label> 
+                        <div onClick={() => navigate("/")} className="settings-control settings-recover-pw">
+                            <MdLockReset size={20}/>
+                            Recover Password
+                        </div>
+                        
                         <div onClick={logout} className="settings-control settings-logout"><MdLogout size={20}/><span>Logout</span></div>
                     </div>
                 </Col>

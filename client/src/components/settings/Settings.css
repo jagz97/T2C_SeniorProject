@@ -6,12 +6,22 @@
     object-position: center;
 }
 
+.settings-bio-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: 5px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
 .container-settings {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 290px;
-    height: 280px;
+    height: 350px;
     margin: 0 auto;
     color: #000;
     font-family: "DM sans", sans-serif;
@@ -85,6 +95,16 @@
     border: 0;
 }
 
+label.settings-file-input {
+    font-size: inherit;
+    cursor: pointer;
+    width: 100%;
+}
+
+input#settings-file-input {
+    display: none
+
+}
 .settings-deactivate {
     background-color: #C73968;
     margin-bottom: 25px;
