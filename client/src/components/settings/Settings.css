@@ -66,14 +66,16 @@
     width: 35%;
 }
 
-.toggle-btn-wrapper {
-    cursor: default;   
-}
 
 .settings-control {
     display: flex;
     align-items: center;
     gap: 5px;
+    cursor: pointer;
+}
+
+.toggle-btn-wrapper {
+    cursor: default;   
 }
 .settings-btn {
     display: block;

@@ -34,6 +34,10 @@ const Settings = () => {
     const [ gender, setGender ] = useState("")
     const [ phoneNumber, setPhoneNumber ] =  useState("")
 
+    const [ reminders, setReminders ] = useState(false)
+    const [ matching, setMatching ] = useState(false)
+    const [ privacy, setPrivacy ] = useState(false)
+   
     const navigate = useNavigate()
     const { logout } = useAuth()
 
@@ -123,12 +127,27 @@ const Settings = () => {
                                 id="settingslname"
                             />
                         </div>
-                            <div className="settings-control toggle-btn-wrapper"><MdOutlineNotifications size={20}/><span>Reminders</span><ToggleButton/></div>
-                            <div className="settings-control toggle-btn-wrapper"><MdOutlinePersonSearch size={20}/><span>Matching</span><ToggleButton/></div>
-                            <div className="settings-control toggle-btn-wrapper"><MdLockOutline size={20}/><span>Privacy</span><ToggleButton/></div>
-                            <div onClick={() => navigate("/")} className="settings-control settings-help"><MdOutlineContactSupport size={20}/><span>Contact Us</span><ToggleButton/></div>
+                            <div className="settings-control toggle-btn-wrapper">
+                                <MdOutlineNotifications size={20}/>
+                                <span>Reminders</span>
+                                <ToggleButton toggleState={reminders} setToggleState={setReminders}/>
+                            </div> 
+                            <div className="settings-control toggle-btn-wrapper">
+                                <MdOutlinePersonSearch size={20}/>
+                                <span>Matching</span>
+                                <ToggleButton toggleState={matching} setToggleState={setMatching}/></div>
+                            <div className="settings-control toggle-btn-wrapper">
+                                <MdLockOutline size={20}/>
+                                <span>Privacy</span>
+                                <ToggleButton toggleState={privacy} setToggleState={setPrivacy}/>
+                            </div>
+                            <div onClick={() => navigate("/")} className="settings-control settings-help">
+                                <MdOutlineContactSupport size={20}/>
+                                <span>Contact Us</span>
+                            </div>
                         </div>
                 </Col>
+                                
             </Row>
             <Row className="justify-content-center mb-5">
                 <Col className="col-auto">

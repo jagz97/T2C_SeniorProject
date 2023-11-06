@@ -10,8 +10,8 @@
 }
 
 .toggle-button-inner {
-    width: 35%;
-    height: 73%;
+    width: 15px;
+    height: 15px;
     background-color: #fff;
     border-radius: 50%;
     /* border: 1px #000 solid; */
