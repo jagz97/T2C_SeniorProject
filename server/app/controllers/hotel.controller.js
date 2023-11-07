@@ -1,5 +1,6 @@
 const axios = require('axios');
 const hotelconfig = require('../config/hotelapi.config.js')
+const stripe = require('stripe')('sk_test_51KxjFzLGavGifIHgiMdIOOdRlyHLKg0elxsL5iStElwzlbGrboQmH7RHtS1CJ8VxmZ2IrefIiCjPjZpNqNwG1Aep00kaUCU9cP')
 
 
 
@@ -169,4 +170,53 @@ exports.getHotelDetails = async (req,res) => {
       console.error(error);
       res.status(500).json({ error: 'An error occurred' });
     }
+  };
+
+
+ 
+
+
+  exports.createCheckout = async (req,res) =>{
+
+    
+    function usdToCents(usd) {
+      // Check if the input is a valid number
+      if (typeof usd !== 'number' || isNaN(usd)) {
+        return 'Invalid input';
+      }
+      
+      // Convert USD to cents by multiplying by 100
+      const cents = Math.round(usd * 100);
+    
+      return cents;
+    }
+
+
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: 'Hyatt Place San Jose, Downtown',
+              description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id massa in purus bibendum varius. Cras lacinia, libero ut dictum tincidunt, justo urna dapibus lectus, ac convallis nisl libero in nisi. Sed aliquet leo ut eros laoreet, auctor dictum erat scelerisque. Curabitur',
+              images: [
+                'https://cf.bstatic.com/xdata/images/hotel/square60/155536705.jpg?k=c882f29ff952ef506f5285f0395fb5b294d201bfbb1c1d2a0b70d9a0f1545eca&o=',
+                'https://cf.bstatic.com/xdata/images/hotel/max300/155536705.jpg?k=c882f29ff952ef506f5285f0395fb5b294d201bfbb1c1d2a0b70d9a0f1545eca&o=',
+              ],
+            },
+            unit_amount: usdToCents(184.1222),
+          },
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: 'http://localhost:3000/',
+      cancel_url: 'http://localhost:3000/home',
+    });
+  
+    res.redirect(303, session.url);
+
+
+
   };

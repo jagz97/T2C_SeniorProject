@@ -1,5 +1,6 @@
 const {authJwt, upload} = require('../middleware');
-const createPost = require('../controllers/posts.contoller');
+const controller = require('../controllers/posts.contoller');
+
 
 module.exports = function (app) {
     app.use(function (req, res, next) {
@@ -14,12 +15,12 @@ module.exports = function (app) {
     "/api/posts/createPost",
     [authJwt.verifyToken],
     upload.fields([
-        { name: 'bioPic', maxCount: 1 }, // Specify the file field name and the maximum number of files
+        { name: 'postPic', maxCount: 1 }, // Specify the file field name and the maximum number of files
         { name: 'caption' }, // Specify a field named 'key1' (you can add more as needed)
         { name: 'country' }, // Specify a field named 'key2' (you can add more as needed)
         {name: 'city'}
     ]),
-    createPost.post
+    controller.post
     );
 
 
@@ -27,9 +28,39 @@ module.exports = function (app) {
     app.get(
         "/api/posts/getAllPosts",
         [authJwt.verifyToken],
-        createPost.getPostsByUserId
+        controller.getPostsByUserId
 
     );
+
+    app.post(
+        "/api/posts/:postId/like",
+        [authJwt.verifyToken],
+        controller.createLike
+
+    );
+
+    app.get(
+        "/api/posts/:postId/likes",
+        controller.getLikeCount
+    );
+
+    app.post(
+        "/api/posts/:postId/comment",
+        [authJwt.verifyToken],
+        controller.createComment
+
+    );
+
+    app.get(
+        "/api/posts/:postId/comments",
+        controller.getComments
+    );
+
+    app.get(
+        "/api/posts/:postId/getPostDetails",
+        controller.getPostDetails
+
+    )
 
 
 
