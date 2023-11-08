@@ -17,7 +17,7 @@ const SearchResult = () => {
                     <div className="result-footer">
                         <h2 className="result-title">Grand Canal, Venice</h2>
                         <div className="result-details">
-                            <Rating value={5} starSize={22}/>
+                            <Rating value={5} starSize={18}/>
                             <h2 className="result-price">$700</h2>
                         </div>
                     </div>
