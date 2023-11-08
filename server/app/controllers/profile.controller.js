@@ -30,6 +30,7 @@ exports.createProfile = async (req, res) => {
         lastName: req.body.lastName,
         age: req.body.age,
         gender: req.body.gender,
+        bio: req.body.bio,
       };
   
       // Update the existing profile or create a new one
