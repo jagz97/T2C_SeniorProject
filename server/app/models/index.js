@@ -24,13 +24,54 @@ db.users = require("./users.models.js")(sequelize, Sequelize);
 db.profile = require("./profile.models.js")(sequelize, Sequelize);
 db.image = require("./image.models.js")(sequelize, Sequelize);
 db.token = require("./token.models.js")(sequelize, Sequelize);
+db.posts = require("./posts.models.js")(sequelize, Sequelize);
+db.likes = require("./like.models.js")(sequelize,Sequelize);
+db.comments = require("./comment.models.js")(sequelize, Sequelize);
 
+
+const Comments = db.comments;
+const Likes = db.likes;
 const Users = db.users;
 const Profile = db.profile;
 const Token = db.token;
+const Post = db.posts;
+const Image = db.image;
+
+
+// Define associations
+Post.hasMany(Comments, { foreignKey: 'postId' });
+Users.hasMany(Comments, { foreignKey: 'userId' });
+
+// You can also add a reverse association to get the comments of a post
+Comments.belongsTo(Post, { foreignKey: 'postId' });
+Comments.belongsTo(Users, { foreignKey: 'userId' });
+
+
+// Define associations
+Post.hasMany(Likes, { foreignKey: 'postId' });
+Users.hasMany(Likes, { foreignKey: 'userId' });
+
+// You can also add a reverse association to get the likes of a post
+Likes.belongsTo(Post, { foreignKey: 'postId' });
+
+
+
+// Define associations
+Post.hasMany(Likes, { foreignKey: 'postId' });
+Users.hasMany(Likes, { foreignKey: 'userId' });
+
+// You can also add a reverse association to get the likes of a post
+Likes.belongsTo(Post, { foreignKey: 'postId' });
+
+
 
 //One-to-one relation of token and user
 Token.belongsTo(Users, {foreignKey: 'userId'});
+
+Post.belongsTo(Users, { foreignKey: 'userId' });
+Post.belongsTo(Image, { foreignKey: 'postPicId', as: 'postPic' });
+
+Users.hasMany(Post, { foreignKey: 'userId' });
 
 
 // Define associations for bioPic and ProfilePicture.

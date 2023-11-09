@@ -4,7 +4,10 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
+import OnboardingPage from './pages/OnboardingPage'
 import SearchPage from './pages/SearchPage'
+import "./App.css"
+
 
 import AuthRequired from './components/authrequired/AuthRequired'
 
@@ -14,15 +17,22 @@ function App() {
         <Routes>
           <Route path="login" element={<LoginPage/>}/>
           <Route path="register" element={<SignupPage/>}/>
-            <Route element={<NavLayout/>}>
+
+          <Route element={<NavLayout/>}>
               <Route index element={<h1>Home</h1>}/>
-              {/* Protected Routes */}
-              <Route element={<AuthRequired/>}>
-                <Route path="posts" element={<ListviewPage/>}/>
-                <Route path="profile" element={<ProfilePage/>}/>
-                <Route path="search" element={<SearchPage/>}/>
-              </Route>
+          </Route>
+  
+          {/* Protected Routes */}
+          <Route element={<AuthRequired/>}>
+            <Route path="onboarding" element={<OnboardingPage/>}/>
+          
+            <Route element={<NavLayout/>}>
+              <Route path="posts" element={<ListviewPage/>}/>
+              <Route path="profile" element={<ProfilePage/>}/>
+              <Route path="search" element={<SearchPage/>}/>
             </Route>
+          </Route>
+            
             <Route path="*" element={<h1>Not Found!</h1>}/>
         </Routes>
     </BrowserRouter>
