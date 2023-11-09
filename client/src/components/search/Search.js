@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { getDate } from "../../utils/Date"
 import './Search.css'
-import SearchForm from './SearchForm'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -14,8 +14,34 @@ import {
 } from "react-icons/md"
 
 
-
 const Search = () => {
+
+    /* Search States */
+    const [ search, setSearch ] = useState({ 
+        city : "",
+        arrival_date: "",
+        departure_date: ""
+    }) 
+
+    const [ results, setResults ] = useState([])
+
+    const currentDate = getDate()
+    const tomorrowDate = getDate(1) // pass day offset of 1
+
+    const searchChangeHandler = (event) => {
+        const { name, value } = event.target
+
+        setSearch((prevSearch) => ({
+            ...prevSearch,
+            [ name ] : value
+        }))
+    }
+
+    const submitHandler = (event) => {
+        event.preventDefault()
+        console.log("A search will happen with this state:", search)
+    }
+
     return (
             <Container fluid>
                 <Row className="container-search-image">
@@ -24,10 +50,57 @@ const Search = () => {
                         <img src={introImg} alt="sunset" className="intro-img"/>
                     </Col>
                 </Row>
-              
                 <Row className="search-form-row justify-content-center">
                     <Col className="col-auto col-lg-10">
-                        <SearchForm/>
+                    <div className="container-search-form">
+                        <form className="search-form d-flex flex-column flex-lg-row" onSubmit={submitHandler}>
+                            <div className="search-location-wrapper">
+                                <label htmlFor="search-location">Location</label>
+                                <div className="position-relative">
+                                    <input
+                                        type="text"
+                                        value={search.city}
+                                        name="city"
+                                        placeholder="Where are you going?"
+                                        onChange={searchChangeHandler}
+                                        id="search-location"
+                                    />
+                                </div>
+                                {/* <p className="search-description d-none d-lg-block">Where are you going?</p> */}
+                            </div>
+                            <div className="search-date-wrapper">
+                                <label htmlFor="search-date-arrival">Date Arrival</label>
+                                <input 
+                                    type="date"
+                                    value={search.arrival_date}
+                                    name="arrival_date"
+                                    onChange={searchChangeHandler}
+                                    onKeyDown={(event) => event.preventDefault()}
+                                    onClick={(event) => event.target.showPicker()}
+                                    id="search-date-arrival"
+                                    min={currentDate}
+                                    style = {{color : search.arrival_date ? "#000" : "grey" }}
+                                />
+                                {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
+                            </div>
+                            <div className="search-date-wrapper">
+                                <label htmlFor="search-date-departure">Date Departure</label>
+                                <input 
+                                    type="date"
+                                    value={search.departure_date}
+                                    name="departure_date"
+                                    onChange={searchChangeHandler}
+                                    onKeyDown={(event) => event.preventDefault()}
+                                    onClick={(event) => event.target.showPicker()}
+                                    id="search-date-departure"
+                                    min={tomorrowDate}
+                                    style = {{color : search.departure_date ? "#000" : "grey" }}
+                                />
+                                {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
+                            </div>
+                            <button type="submit">Search</button>
+                        </form>
+                    </div>
                     </Col>
                 </Row>
 
