@@ -145,7 +145,7 @@ input[type="date"] {
 
 .search-filter-container {
     width: 100%;
-    max-width: 325px;
+    max-width: 330px;
     margin: 0 auto;
     font-size: 1.125rem;
     color: #343434;
@@ -194,12 +194,14 @@ input[type="date"] {
 }
 
 .container-result {
-    width: 315px;
-    height: 290px;
+    display: block;
+    text-decoration: none;
+    width: 325px;
+    height: 310px;
     border-radius: 15px;
     overflow: hidden;
     background-color: #fff;
-    font-size: 1.125rem;
+    font-size: 1rem;
     text-decoration: none;
 }
 
@@ -218,9 +220,9 @@ input[type="date"] {
 .result-footer { /*Maybe remove*/
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: 75px;
-    padding: 0 1em;
+    justify-content: space-between;
+    height: 90px;
+    padding: 0.6em 1em;
 }
 
 .result-title {
@@ -231,7 +233,7 @@ input[type="date"] {
 
 .result-price {
     color: #3C3A83;
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     margin-bottom: 0;
 }
 
@@ -244,4 +246,5 @@ input[type="date"] {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
 }

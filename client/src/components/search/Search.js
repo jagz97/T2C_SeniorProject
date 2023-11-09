@@ -7,12 +7,16 @@ import Row from 'react-bootstrap/Row'
 import introImg from '../../images/pexels-jake-brown-2531314.jpg'
 import SearchResult from './SearchResult'
 import FilterRating from './FilterRating'
+
+import { api } from "../../api/axios"
+
 import {
     MdOutlineFileUpload,
     MdOutlineFileDownload,
     MdDriveFileRenameOutline
 } from "react-icons/md"
 
+import { data } from "./tempData.js"
 
 const Search = () => {
 
@@ -20,11 +24,14 @@ const Search = () => {
     const [ search, setSearch ] = useState({ 
         city : "",
         arrival_date: "",
-        departure_date: ""
+        departure_date: "",
+        // set guest + room to 1 for now
+        guest_qty: "1",
+        room_qty:"1"
     }) 
 
-    const [ results, setResults ] = useState([])
-
+    const [ searchResults, setSearchResults ] = useState([])
+    console.log(searchResults)
     const currentDate = getDate()
     const tomorrowDate = getDate(1) // pass day offset of 1
 
@@ -36,11 +43,29 @@ const Search = () => {
             [ name ] : value
         }))
     }
-
-    const submitHandler = (event) => {
+    
+    const submitHandler = async (event) => {
         event.preventDefault()
-        console.log("A search will happen with this state:", search)
+        try {
+            const response = await api.post("/hotels_search_city_name", search) 
+            console.log("A search will happen with this state:", search)
+            console.log(response.data)
+            setSearchResults(response.data.results)
+        } catch (error) {
+            const errorMessage = error
+            console.log(errorMessage)
+        }
     }
+
+    const hotels = searchResults.map((result) => (
+        <SearchResult 
+            key={result.id}
+            hotelImage={result.main_photo_url} 
+            hotelRating={result.review_score} 
+            hotelPrice={result.price_breakdown.gross_price}
+            hotelName={result.hotel_name}
+        />
+    ))
 
     return (
             <Container fluid>
@@ -147,12 +172,9 @@ const Search = () => {
                     </Col>
                     <Col className="col-12 col-lg-8 col-xl-8 col-xxl-9">
                         <div className="search-results-container d-flex justify-content-center">
-                            <SearchResult/>
-                            <SearchResult/>
-                            <SearchResult/>
-                            <SearchResult/>
-                            <SearchResult/>
-                            <SearchResult/>
+                            {
+                                hotels
+                            }
                         </div>
                     </Col>
                 </Row>
