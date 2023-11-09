@@ -25,7 +25,7 @@ const OnboardAbout = ({navigateNextPage}) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        const profileData = { firstName, lastName, age, gender }
+        const profileData = { firstName, lastName, age, gender, bio }
 
         const headerOptions = {
             headers: {
@@ -34,8 +34,11 @@ const OnboardAbout = ({navigateNextPage}) => {
         }
 
         try {
-            const request = await api.post("/profile/createProfile", profileData, headerOptions)
-            console.log(request.data)
+            const response = await api.post("/profile/createProfile", profileData, headerOptions)
+            // const bioResponse = await api.post("/profile/updateBio", { bio }, headerOptions ) 
+            // change this
+            // console.log(bioResponse.data)
+            console.log(response.data)
             navigateNextPage() 
         } catch (error) {
             const errorMessage = error.response?.data?.message
