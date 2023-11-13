@@ -30,6 +30,7 @@ exports.createProfile = async (req, res) => {
         lastName: req.body.lastName,
         age: req.body.age,
         gender: req.body.gender,
+        bio: req.body.bio,
       };
   
       // Update the existing profile or create a new one
@@ -59,38 +60,55 @@ exports.createProfile = async (req, res) => {
   */
 
     
-  exports.getUserProfile = async (req, res) => {
-    try {
-      // Check if the user is authenticated based on the presence of the JWT token
-      const userId = req.id; // Extract user information from the request context (provided by the middleware)
-  
-      // Check if the user exists
-      const user = await db.users.findByPk(userId);
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
+    exports.getUserProfile = async (req, res) => {
+      try {
+        // Check if the user is authenticated based on the presence of the JWT token
+        const userId = req.id; // Extract user information from the request context (provided by the middleware)
+    
+        // Check if the user exists
+        const user = await db.users.findByPk(userId);
+        if (!user) {
+          return res.status(404).json({ message: "User not found" });
+        }
+    
+        // Retrieve the user's profile by userId, including the associated profile picture
+        const userProfile = await db.profile.findOne({
+          where: { userId },
+          include: [
+            {
+              model: db.image, // Assuming this is the Image model
+              as: 'profilePicture', // Use the alias defined in your association
+            },
+            {
+              model: db.image, // Assuming this is the Image model
+              as: 'bioPic', // Use the alias defined in your association
+            },
+          ],
+        });
+    
+        if (!userProfile) {
+          return res.status(404).json({ message: "Profile not found for this user" });
+        }
+        // Convert the profilePicture data to base64
+        if (userProfile.profilePicture && userProfile.profilePicture.data) {
+          const imageData = Buffer.from(userProfile.profilePicture.data);
+          const base64Image = imageData.toString('base64');
+          userProfile.profilePicture.data = base64Image;
+        }
+
+        // Convert the profilePicture data to base64
+        if (userProfile.bioPic && userProfile.bioPic.data) {
+          const imageData = Buffer.from(userProfile.bioPic.data);
+          const base64Image = imageData.toString('base64');
+          userProfile.bioPic.data = base64Image;
+        }
+    
+        res.status(200).json(userProfile);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
       }
-  
-      // Retrieve the user's profile by userId, including the associated profile picture
-      const userProfile = await db.profile.findOne({
-        where: { userId },
-        include: [
-          {
-            model: db.image, // Assuming this is the Image model
-            as: 'profilePicture', // Use the alias defined in your association
-          },
-        ],
-      });
-  
-      if (!userProfile) {
-        return res.status(404).json({ message: "Profile not found for this user" });
-      }
-  
-      res.status(200).json(userProfile);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Internal server error" });
-    }
-};
+  };
   
 /*
     ************************************************************
@@ -280,3 +298,67 @@ exports.getBioPic = async (req, res) => {
 
 
 
+
+exports.addBio = async (req, res) => {
+
+
+  try {
+    // Check if the user is authenticated based on the presence of the JWT token
+    const id = req.id; // Extract user information from the request context (provided by the middleware)
+    const user = await db.users.findByPk(id);
+
+
+    if (!user) {
+      return res.status(404).send({message: "User not found."});
+    }
+
+    const profileData = {
+      userId: id,
+      bio: req.body.bio,
+    };
+
+    // Update the existing profile or create a new one
+    let profile = await Profile.findOne({ where: { id: id } });
+
+    if (!profile) {
+      // If no profile exists, create a new one
+      profile = await Profile.create(profileData);
+      return res.status(200).send({ message: "Bio created sucessfully." })
+    }
+
+    // Update the profile data
+    await profile.update(profileData);
+
+    return res.status(200).send({ message: "Bio updated sucessfully." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+exports.getBio = async (req, res) => {
+  try {
+
+    const userId = req.id; 
+
+    // Fetch the user's profile along with the associated profile picture
+    const profile = await Profile.findOne({ where: { id: id } });
+
+    if (!profile) {
+      return res.status(404).json({ message: 'User Profile not found.' });
+    }
+
+    // Access the profile picture data
+    const bio = profile.bio;
+
+    if (bio) {
+      return res.status(200).send(bio);
+    } else {
+      return res.status(404).json({ message: 'Bio picture not found.' });
+    }
+  } catch (error) {
+    console.error('Error retrieving user Bio picture:', error);
+    return res.status(500).json({ message: 'Internal server error.' });
+  }
+};
