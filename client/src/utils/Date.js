@@ -5,11 +5,10 @@ export function getDate(dayOffset=0) {
     // add dayOffset to current if nonzero
     date.setDate(date.getDate() + dayOffset) 
 
-    // return date in YYYY-MM-DD
-    const day = date.getDate() 
-    const month = date.getMonth() + 1
-    const year = date.getFullYear()
-    const currentDate = `${year}-${month}-${day}`
+    return date
 
-    return currentDate
+}
+
+export function dateToString(date) {
+    return date.toISOString().split('T')[0]
 }
