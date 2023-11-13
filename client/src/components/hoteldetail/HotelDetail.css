@@ -1,0 +1,83 @@
+.container-result-img {
+
+}
+
+.container-result-image { 
+    position: relative;
+    z-index: -1;
+}
+
+.intro-img {
+    display: block;
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    object-position: center;
+    z-index: -1;
+}
+
+.intro-text {
+    position: absolute;
+    top: 38%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 100%;
+    font-size: 3rem;
+    letter-spacing: 3px;
+    font-weight: 700;
+    text-transform: capitalize;
+    color: #fff;
+}
+
+nav.hotel-detail-nav {
+    background-color: #F8F8F8;
+}
+
+ul.hotel-detail-links {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    height: 70px;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+li.hotel-detail-link {
+    display: flex;
+    width: 33%;
+   
+}
+
+li.hotel-detail-link > a {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+    color: #343434;
+    letter-spacing: 1px;
+}
+
+.container-hotel-detail {
+    margin: 0 auto;
+    margin-top: -50px;
+    min-height: 300px;
+    background-color: #fff;
+    width: 95%;
+    max-width: 450px;
+}
+
+/* Small Breakpoint*/
+@media(min-width: 576px) {
+    .container-hotel-detail {
+        max-width: 950px;
+    }
+}
+

@@ -10,6 +10,10 @@ import "./App.css"
 
 
 import AuthRequired from './components/authrequired/AuthRequired'
+import HotelDetailLayout from './components/hoteldetail/HotelDetailLayout'
+import HotelDetailPage from './pages/HotelDetailPage'
+import HotelPaymentPage from './pages/HotelPaymentPage'
+import HotelTourPlanPage from './pages/HotelTourPlanPage'
 
 function App() {
   return (
@@ -29,6 +33,12 @@ function App() {
             <Route element={<NavLayout/>}>
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
+
+              <Route path="hotel/:id" element={<HotelDetailLayout/>}> 
+                <Route index element={<HotelDetailPage/>}/>
+                <Route path="tourplan" element={<HotelTourPlanPage/>}/>
+                <Route path="payment" element={<HotelPaymentPage/>}/>
+              </Route>
             </Route>
           </Route>
             
