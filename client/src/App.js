@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
 import OnboardingPage from './pages/OnboardingPage'
 
+import NotFound from './pages/NotFoundPage'
 import "./App.css"
 
 
@@ -32,7 +33,7 @@ function App() {
             </Route>
           </Route>
             
-            <Route path="*" element={<h1>Not Found!</h1>}/>
+            <Route path="*" element={<NotFound/>}/>
         </Routes>
     </BrowserRouter>
   );
