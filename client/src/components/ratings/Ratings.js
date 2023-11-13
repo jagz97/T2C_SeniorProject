@@ -7,12 +7,13 @@ import {
 
 // Not sure how Ratings will be stored in db so this is def up for changes
 
-const Ratings = ({value}) => {
+const Ratings = ({value, starSize}) => {
     
     // Empty array to render JSX
     let render = []
     let numStars = value
-
+    const size = starSize ? starSize : "25px"
+    
     if(value) {    
     
         // handle case if value of props.value out of range
@@ -28,7 +29,7 @@ const Ratings = ({value}) => {
            Keys will be indexes since all arr values are identical
         */
         for(let i = 0; i < Math.floor(numStars); i++) {
-            render.push(<LiaStarSolid key={i} color="#FFE071" size="25px" />)
+            render.push(<LiaStarSolid key={i} color="#FFE071" size={size} />)
         }
     }
     
@@ -37,7 +38,7 @@ const Ratings = ({value}) => {
       add a half star to jsx arr
     */
     if(!numStars || numStars % 1 !== 0) 
-        render.push(<LiaStarHalfSolid key={render.length} color="#FFE071" size="25px" />)
+        render.push(<LiaStarHalfSolid key={render.length} color="#FFE071" size={size} />)
     
     return (
         <div className="container-ratings" style={{display: "flex", gap: 4}}>

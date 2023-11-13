@@ -1,0 +1,70 @@
+.create-profile-header {
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.create-profile-form {
+    width: 400px;
+}
+
+.create-profile-form input,
+.create-profile-form input::placeholder,
+.create-profile-form select {
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    color: #000;
+    opacity: 1; /*For Firefox*/
+}
+
+.create-profile-form input,
+.create-profile-form select {
+    border: none;
+    padding: 0.6em;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.create-profile-form select {
+    border-right: 0.6em solid transparent; /* Apply "padding" on the right of select arrow */
+}
+
+.create-profile-form button {
+    color: #fff;
+    background-color: #3C3A83;
+    border: none;
+    border-radius: 8px;
+    padding: 0.4em 1.4em;
+    letter-spacing: 1px;
+    margin-top: 25px;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.create-profile-form input[type="text"],
+.create-profile-form button  {
+    display: block;
+    width: 100%;
+}
+
+.create-profile-form input[name="lastName"] {
+    margin: 15px 0;
+}
+
+.create-profile-form select[name="gender"] {
+    width: 70%;
+    margin-left: 3%;
+}
+
+.create-profile-form select[name="age"] {
+    width: 27%;
+}
+
+
+
+
+
+

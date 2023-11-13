@@ -1,11 +1,13 @@
 const axios = require('axios');
 const hotelconfig = require('../config/hotelapi.config.js')
+const stripe = require('stripe')('sk_test_51KxjFzLGavGifIHgiMdIOOdRlyHLKg0elxsL5iStElwzlbGrboQmH7RHtS1CJ8VxmZ2IrefIiCjPjZpNqNwG1Aep00kaUCU9cP')
+
 
 
 const createOptions = (method, url, params) =>{
   return {
     method: method,
-    url: hotelconfig.URL_PREFIX + url,
+    url: url,
     params: params,
     headers: {
       'X-RapidAPI-Key': hotelconfig.API_KEY,
@@ -16,18 +18,37 @@ const createOptions = (method, url, params) =>{
 
 };
 
+const page_number = (reqBody) => {
+  if (reqBody.page_number) {
+    return reqBody.page_number;
+  } else {
+    return '0';
+  }
+};
+
+const order = (reqBody) => {
+  if (reqBody.order_by) {
+    return reqBody.order_by;
+  } else {
+    return 'popularity';
+  }
+};
+
 exports.hotelSearhCityName = async (req, res) => {
 
+
+
+  
   let destId;
   let destType;
 
     const locationParams = {
-      text: req.body.city,
-      languagecode: 'en-us'
+      name: req.body.city,
+      locale: 'en-us'
 
     };
-    const locationOptions = createOptions('GET', '/locations/auto-complete', locationParams)
-    console.log(locationOptions.url);
+    const locationOptions = createOptions('GET', 'https://booking-com.p.rapidapi.com/v1/hotels/locations', locationParams)
+   
   
     try {
       const response = await axios.request(locationOptions);
@@ -39,31 +60,50 @@ exports.hotelSearhCityName = async (req, res) => {
               
       
             }
+            
+            console.log(destId);
+            console.log(destType);
       
     } catch (error) {
       
       console.log(error);   
     }
 
+
+
+
+
+    // const searchParams =  {
+
+
     const searchParams =  {
+      checkin_date: req.body.arrival_date,
+      dest_type: destType,
+      units: 'metric',
+      checkout_date: req.body.departure_date,
+      adults_number: req.body.guest_qty,
+      order_by: order(req.body),
+      dest_id: destId,
+      filter_by_currency: 'USD',
+      locale: 'en-us',
+      room_number: req.body.room_qty,
+      page_number: page_number(req.body),
+      include_adjacency: 'true'
+  };
+  console.log(searchParams.order_by);
       
-        offset: '0',
-        arrival_date: req.body.arrival_date,  // req format: '2023-10-12'
-        departure_date: req.body.departure_date , //'2023-10-13'
-        guest_qty: req.body.guest_qty,
-        dest_ids: destId,
-        room_qty: req.body.room_qty,
-        search_type: destType,
-        price_filter_currencycode: 'USD',
-        languagecode: 'en-us',
+    
   
 
-    };
-
-    const searchOptions = createOptions('GET', '/properties/list', searchParams);
+    // };
+    // console.log(searchParams.search_id);
+    const searchOptions = createOptions('GET', 'https://booking-com.p.rapidapi.com/v1/hotels/search', searchParams);
     
     try{
-      const search_response = await axios.request(searchOptions);
+       const search_response = await axios.request(searchOptions);
+       const totalCount = search_response.data.count;
+       const totalPages = Math.ceil(totalCount / 20);
+
       const filteredResults = search_response.data.result.map(property => ({
         
         
@@ -80,10 +120,20 @@ exports.hotelSearhCityName = async (req, res) => {
         hotel_id: property.hotel_id,
         review_nr: property.review_nr,
         review_score: property.review_score,
-        review_score_word: property.review_score_word,
+         review_score_word: property.review_score_word,
       }));
+
+      const responseWithCount = {
+        count: search_response.data.count, // Include the count key
+        results: filteredResults, // Include your filtered results
+        totalPages: totalPages,
+      };
+
+     
   
-      res.status(200).json(filteredResults);
+      res.status(200).send(responseWithCount);
+      
+
     }catch (error) {
       console.error(error);
       res.status(500).json({ error: 'An error occurred' });
@@ -92,6 +142,81 @@ exports.hotelSearhCityName = async (req, res) => {
     
 
     
-  };
+};
 
   
+exports.getHotelDetails = async (req,res) => {
+
+    
+    const searchParams = {
+     
+        hotel_id: req.body.hotel_id,
+        currency: 'USD',
+        locale: 'en-us',
+        checkout_date: req.body.checkout_date,
+        checkin_date: req.body.checkin_date,
+      
+      
+    };
+    
+
+    const options = createOptions('GET', 'https://booking-com.p.rapidapi.com/v2/hotels/details', searchParams);
+    try {
+      const response = await axios.request(options);
+      res.status(200).send(response.data);
+      
+
+    }catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred' });
+    }
+  };
+
+
+ 
+
+
+  exports.createCheckout = async (req,res) =>{
+
+    
+    function usdToCents(usd) {
+      // Check if the input is a valid number
+      if (typeof usd !== 'number' || isNaN(usd)) {
+        return 'Invalid input';
+      }
+      
+      // Convert USD to cents by multiplying by 100
+      const cents = Math.round(usd * 100);
+    
+      return cents;
+    }
+
+
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: 'Hyatt Place San Jose, Downtown',
+              description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id massa in purus bibendum varius. Cras lacinia, libero ut dictum tincidunt, justo urna dapibus lectus, ac convallis nisl libero in nisi. Sed aliquet leo ut eros laoreet, auctor dictum erat scelerisque. Curabitur',
+              images: [
+                'https://cf.bstatic.com/xdata/images/hotel/square60/155536705.jpg?k=c882f29ff952ef506f5285f0395fb5b294d201bfbb1c1d2a0b70d9a0f1545eca&o=',
+                'https://cf.bstatic.com/xdata/images/hotel/max300/155536705.jpg?k=c882f29ff952ef506f5285f0395fb5b294d201bfbb1c1d2a0b70d9a0f1545eca&o=',
+              ],
+            },
+            unit_amount: usdToCents(184.1222),
+          },
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: 'http://localhost:3000/',
+      cancel_url: 'http://localhost:3000/home',
+    });
+  
+    res.redirect(303, session.url);
+
+
+
+  };

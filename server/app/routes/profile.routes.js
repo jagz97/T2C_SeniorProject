@@ -46,7 +46,10 @@ module.exports = function (app) {
     controller.getBioPic
     );
 
-
+    app.post("/api/profile/updateBio",
+    [authJwt.verifyToken], 
+    controller.addBio
+    );
 
 
 

@@ -1,18 +1,18 @@
 import React from 'react'
-import Col from 'react-bootstrap/Col'
 import nil from './temp-images/nils.jpg'
 
 import { Link } from "react-router-dom"
 
+import './Profile.css'
+
 const ProfilePost = ({postImage}) => {
     return (
-        <Col className="col-auto">
-            <Link to="#">
-                <div style={{ width: "240px", height: "240px"}}>
-                    <img className="rounded" src={nil} alt =" " style={{display: "block", width: "100%",height: "100%", objectFit:"cover"}}></img>
+                <div className="profile-post-wrapper">
+                    <Link to="#">
+                        <img className="profile-post-image" src={nil} alt=""></img>
+                    </Link>
                 </div>
-            </Link>
-        </Col>
+            
     )
 }
 
