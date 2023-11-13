@@ -71,7 +71,7 @@
     padding: 0 0.5rem;
 }
 
-.search-form button {
+.search-form button[type="submit"] {
     display: block;
     color: #fff;
     border: none;
@@ -88,11 +88,17 @@
     color: #A1A1A1;
 }
 
-.search-date-wrapper
-input[type="date"] {
+.search-date {
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer; 
+}
+
+.search-date-wrapper, 
+.search-date-wrapper > div.react-datepicker-wrapper, 
+.search-date-wrapper > div > div.react-datepicker__input-container
+.search-date-wrapper > div > div.react-datepicker__input-container input {
+   width: 100%;
 }
 
 @media(min-width: 992px) {
@@ -127,7 +133,7 @@ input[type="date"] {
         height: 83px;
     }
   
-    .search-form button {
+    .search-form button[type="submit"] {
         margin-left: auto;
         /* margin-top: 3px; */
         align-self:center;

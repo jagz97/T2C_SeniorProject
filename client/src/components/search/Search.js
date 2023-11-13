@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
-import { getDate } from "../../utils/Date"
+import React, { useState, useEffect } from 'react'
+import { useSearchParams } from "react-router-dom"
+import { getDate, dateToString } from "../../utils/Date"
 import './Search.css'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import introImg from '../../images/pexels-jake-brown-2531314.jpg'
-import SearchResult from './SearchResult'
-import FilterRating from './FilterRating'
+import "react-datepicker/dist/react-datepicker.css"
+import DatePicker from "react-datepicker"
+import introImg from "../../images/pexels-jake-brown-2531314.jpg"
+import SearchResult from "./SearchResult"
+import Pagination  from "./Pagination.js"
+import FilterRating from "./FilterRating"
 
 import { api } from "../../api/axios"
 
@@ -21,40 +25,112 @@ import { data } from "./tempData.js"
 const Search = () => {
 
     /* Search States */
-    const [ search, setSearch ] = useState({ 
-        city : "",
-        arrival_date: "",
-        departure_date: "",
-        // set guest + room to 1 for now
-        guest_qty: "1",
-        room_qty:"1"
-    }) 
+    
+    const [ city, setCity ] = useState("")
+    const [ arrivalDate, setArrivalDate ] = useState(null)
+    const [ departureDate, setDepartureDate ] = useState(null)
 
     const [ searchResults, setSearchResults ] = useState([])
-    console.log(searchResults)
+    
+    const [ totalPageNumber, setTotalPageNumber ] = useState(2)
+
+    const [ isLoading, setIsLoading ] = useState(false)
+    const [ errorInputMsg, setErrorInputMsg ] = useState(null)
+
+    /* Search Sorters*/
+    const [ searchSorter, setSearchSorter ] = useState(null)
+    
+    // get current dates
     const currentDate = getDate()
     const tomorrowDate = getDate(1) // pass day offset of 1
 
-    const searchChangeHandler = (event) => {
-        const { name, value } = event.target
+    const [ searchParams, setSearchParams ] = useSearchParams()
 
-        setSearch((prevSearch) => ({
-            ...prevSearch,
-            [ name ] : value
-        }))
-    }
+    const currentPage = searchParams.get("page")
     
-    const submitHandler = async (event) => {
-        event.preventDefault()
+    // console.log("Total page numbers:", totalPageNumber)
+
+    const handleSearch = async () => {
+        setErrorInputMsg("")
+        // convert date objects into "yyyy-mm-dd" strings
+        let arrival_date, departure_date, page_number
+
+        if(arrivalDate && departureDate) {
+            if(arrivalDate >= departureDate) {
+                setErrorInputMsg("Invalid Dates Selected")
+                return
+            }
+            arrival_date = dateToString(arrivalDate)
+            departure_date = dateToString(departureDate)
+        }
+
+        // console.log("arrival_date", arrival_date)
+        // console.log("departure_date", departure_date)
+        
+        // if the search params page is undefined
+        // set it to page = 1 when request is sent
+        if (!currentPage || currentPage == 1) {
+            setSearchParams({page:1})
+            page_number = 0
+        }
+        else {
+            page_number = currentPage - 1 // 0 indexed 
+        }
+
+        // form the data to send to server
+        const search = {
+            city,
+            arrival_date,
+            departure_date,
+            guest_qty: "1",
+            room_qty: "1",
+            page_number
+        }
+
+        console.log("We will search with: ", search)
+        
         try {
-            const response = await api.post("/hotels_search_city_name", search) 
-            console.log("A search will happen with this state:", search)
-            console.log(response.data)
-            setSearchResults(response.data.results)
+            setIsLoading(true)
+            // const response = await api.post("/hotels_search_city_name", search) 
+            // setSearchResults(response.data.results)
+            // setTotalPageNumber(response.data.totalPages)
+            setSearchResults(data)
+            setIsLoading(false)
         } catch (error) {
             const errorMessage = error
             console.log(errorMessage)
         }
+    }
+
+
+    useEffect(() => {
+        // only run effect when search params have changed
+        // and if we have made already made a request
+        if(searchResults.length > 0 && currentPage) {
+            handleSearch()
+        }
+    },[currentPage])
+
+    const handleSort = (event) => {
+        const { value } = event.target
+        if (searchResults.length > 0)  {
+            console.log(value)
+            const search = {
+                city,
+                arrival_date: dateToString(arrivalDate),
+                departure_date: dateToString(departureDate),
+                guest_qty: "1",
+                room_qty: "1",
+                order_by: value
+            }
+            console.log("Sort with data:", search)
+            // const response = await api.post("/hotels_search_city_name", search)
+        }
+    }
+
+    const submitHandler = (event) => {
+        event.preventDefault()
+        handleSearch()
     }
 
     const hotels = searchResults.map((result) => (
@@ -84,48 +160,52 @@ const Search = () => {
                                 <div className="position-relative">
                                     <input
                                         type="text"
-                                        value={search.city}
+                                        value={city}
                                         name="city"
                                         placeholder="Where are you going?"
-                                        onChange={searchChangeHandler}
+                                        onChange={(event) => setCity(event.target.value)}
                                         id="search-location"
+                                        required
                                     />
                                 </div>
                                 {/* <p className="search-description d-none d-lg-block">Where are you going?</p> */}
                             </div>
                             <div className="search-date-wrapper">
                                 <label htmlFor="search-date-arrival">Date Arrival</label>
-                                <input 
-                                    type="date"
-                                    value={search.arrival_date}
-                                    name="arrival_date"
-                                    onChange={searchChangeHandler}
-                                    onKeyDown={(event) => event.preventDefault()}
-                                    onClick={(event) => event.target.showPicker()}
+                                <DatePicker 
+                                    selected={arrivalDate} 
+                                    onChange={(date) => setArrivalDate(date)}
+                                    dateFormat="yyyy/MM/dd"
+                                    className="search-date"
+                                    placeholderText="yyyy-mm-dd"
+                                    minDate={currentDate}
                                     id="search-date-arrival"
-                                    min={currentDate}
-                                    style = {{color : search.arrival_date ? "#000" : "grey" }}
+                                    shouldCloseOnSelect={false}
+                                    required
                                 />
+
                                 {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
                             </div>
                             <div className="search-date-wrapper">
                                 <label htmlFor="search-date-departure">Date Departure</label>
-                                <input 
-                                    type="date"
-                                    value={search.departure_date}
-                                    name="departure_date"
-                                    onChange={searchChangeHandler}
-                                    onKeyDown={(event) => event.preventDefault()}
-                                    onClick={(event) => event.target.showPicker()}
+                                <DatePicker 
+                                    selected={departureDate} 
+                                    onChange={(date) => setDepartureDate(date)}
+                                    dateFormat="yyyy/MM/dd"
+                                    className="search-date"
+                                    placeholderText="yyyy-mm-dd"
+                                    minDate={tomorrowDate}
                                     id="search-date-departure"
-                                    min={tomorrowDate}
-                                    style = {{color : search.departure_date ? "#000" : "grey" }}
+                                    shouldCloseOnSelect={false}
+                                    required
                                 />
+
                                 {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
                             </div>
                             <button type="submit">Search</button>
                         </form>
                     </div>
+                    {errorInputMsg ? <p className="error text-center mt-2">{errorInputMsg}</p> : null}
                     </Col>
                 </Row>
 
@@ -136,46 +216,70 @@ const Search = () => {
                                 <p className="filter-header">Sorting</p>
                                 <div className="search-filter-sorter">
                                     <MdOutlineFileUpload size={20}/>
-                                    <label htmlFor="">Price Low to High</label>
+                                    <label htmlFor="sort-price-ascending">Price Low to High</label>
                                     <input
-                                        type="checkbox"
-                                        id=""
+                                        type="radio"
+                                        id="sort-price-ascending"
+                                        name="searchSort"
+                                        value="price"
+                                        onClick={(event) => handleSort(event)}
                                     />
                                 </div>
                                 <div className="search-filter-sorter">
                                     <MdOutlineFileDownload size={20}/>
-                                    <label htmlFor="">Price High to Low</label>
+                                    <label htmlFor="sort-price-descending">Price High to Low</label>
                                     <input
-                                        type="checkbox"
-                                        id=""
+                                        type="radio"
+                                        id="sort-price-descending"
+                                        name="searchSort"
+                                        value="price"
+                                        onClick={(event) => handleSort(event)}
                                     />
                                 </div>
                                 <div className="search-filter-sorter">
                                     <MdDriveFileRenameOutline size={20}/>
-                                    <label htmlFor="">Name (A-Z)</label>
+                                    <label htmlFor="">Star Rating</label>
                                     <input
-                                        type="checkbox"
-                                        id=""
+                                        type="radio"
+                                        name="searchSort"
+                                        value="rating"
+                                        id="sort-ratings-descending"
+                                        onClick={(event) => handleSort(event)}
                                     />
                                 </div>
+                                
                             </div>
-
-                            <div className="search-filter-rating">
+                             <div className="search-filter-rating">
                                 <p className="filter-header">Star Rating</p>
                                 <FilterRating value={1}/>
                                 <FilterRating value={2}/>
                                 <FilterRating value={3}/>
                                 <FilterRating value={4}/>
                                 <FilterRating value={5}/>
-                            </div>
+                            </div> 
                         </div>
                     </Col>
                     <Col className="col-12 col-lg-8 col-xl-8 col-xxl-9">
-                        <div className="search-results-container d-flex justify-content-center">
-                            {
-                                hotels
-                            }
-                        </div>
+                        {
+                            isLoading ? <h2 className="text-center">Loading...</h2> 
+                            : 
+                            <>
+                                <div className="search-results-container d-flex justify-content-center">
+                                    { hotels }
+                                </div>
+                                {
+                                    hotels.length !== 0 && 
+                                    <div className="search-pages">
+                                    <div className="search-page-numbers">
+                                        <Pagination 
+                                            pages={totalPageNumber}  
+                                        />                                      
+                                    </div>
+                                </div>
+                        }
+                            </>
+                        }
+                     
                     </Col>
                 </Row>
             </Container>
