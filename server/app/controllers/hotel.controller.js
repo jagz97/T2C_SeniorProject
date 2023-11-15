@@ -101,13 +101,17 @@ exports.hotelSearhCityName = async (req, res) => {
     
     try{
        const search_response = await axios.request(searchOptions);
+
+       
        const totalCount = search_response.data.count;
        const totalPages = Math.ceil(totalCount / 20);
+       console.log(search_response.message);
 
+       
       const filteredResults = search_response.data.result.map(property => ({
         
         
-        main_photo_url: property.main_photo_url,
+        main_photo_url: property.max_photo_url,
         hotel_name: property.hotel_name_trans,
         district: property.district,
         address: property.address,
@@ -136,7 +140,7 @@ exports.hotelSearhCityName = async (req, res) => {
 
     }catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'An error occurred' });
+      res.status(500).json({ error: 'Dates must be current.' });
     }
 
     
@@ -144,39 +148,114 @@ exports.hotelSearhCityName = async (req, res) => {
     
 };
 
+
+
+exports.getHotelDetails = async (req, res) => {
+
+  let hotelData;
   
-exports.getHotelDetails = async (req,res) => {
 
-    
-    const searchParams = {
-     
-        hotel_id: req.body.hotel_id,
-        currency: 'USD',
-        locale: 'en-us',
-        checkout_date: req.body.checkout_date,
-        checkin_date: req.body.checkin_date,
-      
-      
-    };
-    
-
-    const options = createOptions('GET', 'https://booking-com.p.rapidapi.com/v2/hotels/details', searchParams);
-    try {
-      const response = await axios.request(options);
-      res.status(200).send(response.data);
-      
-
-    }catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'An error occurred' });
-    }
+  const options = {
+    method: 'GET',
+    url: 'https://booking-com.p.rapidapi.com/v2/hotels/details',
+    params: {
+      hotel_id: req.body.hotel_id,
+      currency: 'USD',
+      locale: 'en-us',
+      checkout_date: req.body.checkout_date,
+      checkin_date: req.body.checkin_date,
+    },
+    headers: {
+      'X-RapidAPI-Key': hotelconfig.API_KEY,
+      'X-RapidAPI-Host': hotelconfig.HOST
+    },
   };
 
+  try {
+    const response = await axios.request(options);
 
+    hotelData = {
+      hotelName: response.data.hotel_name,
+      hotelAddress: response.data.address,
+      city: response.data.city_trans,   
+      zip: response.data.zip,
+      country: response.data.country_trans,
+      amount_per_night: response.data.composite_price_breakdown.gross_amount_per_night,
+      propertyOffersIcons: response.data.property_highlight_strip,
+      rooms: {},
+      reviewNr: response.data.review_nr,   
+      
+    };
+
+    // Extract room information
+    for (const roomId in response.data.rooms) {
+      const room = response.data.rooms[roomId];
+      hotelData.rooms[roomId] = { 
+        photos: room.photos.map(photo => ({ url_original: photo.url_original })), 
+        description: room.description,
+       
+        // Add more room details as needed
+      };
+    }
+
+    
+  } catch (error) {
+    console.error(error);
+    
+  }
+
+  console.log(hotelData);
+
+  const reviewOptions = {
+    method: 'GET',
+  url: 'https://booking-com.p.rapidapi.com/v1/hotels/reviews',
+  params: {
+    sort_type: 'SORT_MOST_RELEVANT',
+    hotel_id: req.body.hotel_id,
+    locale: 'en-gb'
+  },
+  headers: {
+    'X-RapidAPI-Key': 'dc738405a5msh5a6e6771d7ad9fap1a9b2ejsn149b95dc3d3e',
+    'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
+  }
+};
+
+  try{
+
+    const response = await axios.request(reviewOptions);
+
+    const extractedReviews = {
+      reviews: response.data.result.map(review => ({
+        pros: review.pros,
+        title: review.title,
+        averageScore: review.average_score,
+      })),
+    };
+    
+    const results = {
+      hotelData,
+      extractedReviews
+    }
+    
+
+
+
+
+    res.status(200).json(results);
+  } catch(error){
+
+    res.status(error.response?.status || 500).json({
+      error: error.response?.data?.message || 'An error occurred',
+    });
+
+
+  }
+
+};
  
 
 
-  exports.createCheckout = async (req,res) =>{
+exports.createCheckout = async (req,res) =>{
 
     
     function usdToCents(usd) {

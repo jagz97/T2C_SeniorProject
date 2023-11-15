@@ -60,7 +60,17 @@ module.exports = function (app) {
         "/api/posts/:postId/getPostDetails",
         controller.getPostDetails
 
-    )
+    );
+
+    // app.post(
+    //     "/api/profile/createExperience",
+    //     controller.createExperience
+    // );
+    
+    // app.get(
+    //     "/api/profile/experiences",
+    //     controller.getExperience
+    // );
 
 
 
