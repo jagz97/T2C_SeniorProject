@@ -8,7 +8,6 @@ const Comments  = comments;
 
 
 
-
 exports.post = async function (req, res) {
     try {
         // Check if the user is authenticated based on the presence of the JWT token
