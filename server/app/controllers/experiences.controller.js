@@ -6,7 +6,7 @@ exports.createExperience = async function (req, res) {
   try {
 
     // Check if the user is authenticated based on the presence of the JWT token
-    const id = req.id; // Extract user information from the request context (provided by the middleware)
+    const id = req.id; // Extract user information from the request context (provided by the middleware)k
     const user = await db.users.findByPk(id);
 
     if (!user) {
@@ -86,7 +86,7 @@ exports.createExperience = async function (req, res) {
 
 
 exports.getExperience = async function (req, res) {
-    const userId = '1';
+    const userId = req.id;
 
   try {
     // Find the user by their ID and include their experiences and associated hotels, attractions, and restaurants
