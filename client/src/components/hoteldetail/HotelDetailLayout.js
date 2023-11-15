@@ -8,23 +8,27 @@ import "./HotelDetail.css"
 
 import { api } from "../../api/axios"
 
+import { detail } from "./tempData"
+
 import {
     IoLocationOutline,
-    IoCalendarClearOutline,
     IoInformationCircleOutline
 } from "react-icons/io5"
 
 const SearchResultLayout = () => {
     
     const params= useParams()
-    
+    const [ hotelDetail, sethotelDetail ] = useState({})
+    const [ resultDates, setResultDates ] = useState("")
     useEffect(() => {
         const fetchHotelDetail = async () => {
+            // if dates change we need to make another request!
+
             // const request = api.post("")
-            
+            sethotelDetail(detail)
         }
         fetchHotelDetail()
-    }, [params.id])
+    }, [params.id, resultDates])
     
     const activeStyle = {
         backgroundColor: "#fff",
@@ -49,18 +53,13 @@ const SearchResultLayout = () => {
                                     </NavLink>
                                 </li>
                                 <li className="hotel-detail-link">
-                                    <NavLink to="tourplan" style={({isActive}) => isActive ? activeStyle : null }>
-                                        <IoCalendarClearOutline/><span>Tour Plan</span>
-                                    </NavLink>
-                                </li>
-                                <li className="hotel-detail-link">
                                     <NavLink to="payment" style={({isActive}) => isActive ? activeStyle : null }>
                                         <IoInformationCircleOutline/><span>Payment</span>
                                     </NavLink>
                                 </li>
                             </ul>
                         </nav>
-                        <Outlet context={{hotelId: params.id}}/>
+                        <Outlet context={{data: hotelDetail.hotelData, reviews: hotelDetail.extractedReviews}}/>
                     </div>
                 </Col>
             </Row>
