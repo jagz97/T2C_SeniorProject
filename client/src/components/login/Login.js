@@ -132,7 +132,7 @@ const Login = () => {
                                         </InputGroup>
                                         <div className="login-error-message">{errorMessage}</div>
                                         <div className='container-recover-password'>
-                                            <Link to='#' className='recover-password-btn'>Recover Password?</Link>
+                                            <Link to='/passwordrecovery' className='recover-password-btn'>Recover Password?</Link>
                                         </div>
 
                                     </Form.Group>
