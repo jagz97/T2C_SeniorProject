@@ -20,6 +20,7 @@ module.exports = function (app) {
 
     app.get(
         "/api/profile/experiences",
+        [authJwt.verifyToken],
         controller.getExperience
     );
 
