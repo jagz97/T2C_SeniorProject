@@ -19,16 +19,15 @@ const SearchResultLayout = () => {
     
     const params= useParams()
     const [ hotelDetail, sethotelDetail ] = useState({})
-    const [ resultDates, setResultDates ] = useState("")
     useEffect(() => {
         const fetchHotelDetail = async () => {
-            // if dates change we need to make another request!
-
-            // const request = api.post("")
+            // simulate fetch delay
+            // setTimeout(() => sethotelDetail(detail), 2000) 
             sethotelDetail(detail)
+            console.log("Layout Route Effect!")
         }
         fetchHotelDetail()
-    }, [params.id, resultDates])
+    }, [params.id])
     
     const activeStyle = {
         backgroundColor: "#fff",
@@ -59,7 +58,11 @@ const SearchResultLayout = () => {
                                 </li>
                             </ul>
                         </nav>
-                        <Outlet context={{data: hotelDetail.hotelData, reviews: hotelDetail.extractedReviews}}/>
+                        {
+                            Object.keys(hotelDetail).length === 0 ? <h1 className="text-center text-muted">Loading...</h1>
+                            :
+                            <Outlet context={{hotelData: hotelDetail.hotelData, hotelReviews: hotelDetail.extractedReviews}}/>
+                        }
                     </div>
                 </Col>
             </Row>
