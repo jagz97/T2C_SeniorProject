@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { Outlet, useParams, NavLink } from "react-router-dom"
+import { Outlet, useParams, useLocation, NavLink } from "react-router-dom"
+import { getDate } from "../../utils/Date"
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -17,8 +18,16 @@ import {
 
 const SearchResultLayout = () => {
     
-    const params= useParams()
+    const params = useParams()
+    const location = useLocation()
+
+    const arrival = location.state?.arrival || null
+    const departure = location.state?.departure || null
+
     const [ hotelDetail, sethotelDetail ] = useState({})
+    const [ arrivalDate, setArrivalDate ] = useState(() => arrival ? arrival : getDate())
+    const [ departureDate, setDepartureDate ] = useState(() => departure ? departure : getDate(1))
+    
     useEffect(() => {
         const fetchHotelDetail = async () => {
             // simulate fetch delay
@@ -32,7 +41,7 @@ const SearchResultLayout = () => {
     const activeStyle = {
         backgroundColor: "#fff",
     }
-
+    
     return (
         <Container fluid>
             <Row className="container-result-image">
@@ -61,7 +70,7 @@ const SearchResultLayout = () => {
                         {
                             Object.keys(hotelDetail).length === 0 ? <h1 className="text-center text-muted">Loading...</h1>
                             :
-                            <Outlet context={{hotelData: hotelDetail.hotelData, hotelReviews: hotelDetail.extractedReviews}}/>
+                            <Outlet context={{hotelDetail, arrivalDate, setArrivalDate, departureDate, setDepartureDate}}/>
                         }
                     </div>
                 </Col>

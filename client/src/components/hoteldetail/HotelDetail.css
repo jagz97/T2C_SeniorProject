@@ -80,6 +80,7 @@ li.hotel-detail-link > a {
 
 /*Detail Page*/
 .hotel-detail {
+    font-family:  "DM sans", "Poppins", sans-serif;
     padding: 2em;
     min-height: 950px;
     margin-bottom: 50px;
@@ -159,6 +160,7 @@ li.hotel-detail-link > a {
 }
 
 .hotel-detail-middle {
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -173,21 +175,44 @@ li.hotel-detail-link > a {
 
 /*Hotel Control Card*/
 .hotel-reserve-card {
-    min-height: 350px;
-    width: 325px;
+    min-height: 400px;
+    width: 350px;
     box-shadow: 0px 0px 16px 0px rgba(194, 198, 204, 0.60);
     padding: 1.7em;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: column;  
+    align-items: center;
+    gap: 15px;
 }
 
 .hotel-reserve-start {
     border-bottom: 2px solid #e0e2e6;
+    align-self: stretch;
+
 }
 
 .hotel-reserve-price {
     text-transform: uppercase;
+}
+
+.hotel-reserve-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #9a9a9a;
+}
+
+.hotel-reserve-amount {
+    border: none;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.24);
+    border-radius: 8px;
+    padding: 0.5em 1.1em;
+    font-size: 1rem;
+    width: 150px;
+    margin: 0;
+    cursor: pointer;
+    color: #9a9a9a;
 }
 
 .hotel-reserve-btn {
@@ -196,8 +221,9 @@ li.hotel-detail-link > a {
     border: none;
     border-radius: 20px;
     font-weight: 700;
-    font-size: 1.125rem;
-    padding: 0.3em 1.9em;
+    font-size: 1.25rem;
+    padding: 0.3em 2.4em;
+    width: 85%;
     color: #fff;
     margin: 0 auto;
     margin-top: auto;
@@ -215,7 +241,8 @@ li.hotel-detail-link > a {
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
-    margin: 0 auto;
+    margin: 50px auto;
+    
 }
 
 .hotel-review {
@@ -270,3 +297,4 @@ li.hotel-detail-link > a {
         text-align: start;
     }
 }
+

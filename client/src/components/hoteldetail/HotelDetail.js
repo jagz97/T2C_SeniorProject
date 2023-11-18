@@ -1,29 +1,64 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { useOutletContext } from "react-router-dom"
 import HotelReview from "./HotelReview"
-import Ratings from "../ratings/Ratings"
+import ButtonDatePicker from "../buttondatepicker/ButtonDatePicker"
+import { getDate, getDayDifference } from "../../utils/Date"
 import "./HotelDetail.css"
 
+import "react-datepicker/dist/react-datepicker.css"
+
+
+const MAX = 10
+const roomAmounts = [] // stores option elements for select
+for(let i = 1; i <= MAX; i++) {
+    roomAmounts.push(<option value={i} key={i}>{i}</option>)
+}
 
 const SearchResult = () => {
-    const {hotelData, hotelReviews} = useOutletContext()
+    const {
+            hotelDetail : { hotelData, extractedReviews },
+            arrivalDate,
+            setArrivalDate,
+            departureDate,
+            setDepartureDate
+        } = useOutletContext()
+       
+    const [ tripDays, setTripDays ] = useState(1)
+    const [ roomAmount, setRoomAmount ] = useState(1)
+    const [ dateErrorMsg, setDateErrorMsg ] = useState("")
     
+    /* Grabbing Data from api data*/
     const roomId = Object.keys(hotelData.rooms)[0]
     const room = hotelData.rooms[roomId]
     
     const { value, currency } = hotelData.amount_per_night
     const cost = Math.floor(value)
 
-    const { reviews } = hotelReviews // An array of review objects
+    const { reviews } = extractedReviews // An array of review objects
 
-    const userReviews = reviews.slice(0,4).map((review) => (
+    const totalCost = tripDays * roomAmount * cost
+    
+    const userReviews = reviews.slice(0,4).map((review,idx) => (
         <HotelReview
+            key={idx}
             title={review.title}
             averageScore={review.averageScore}
             pros={review.pros}
         />
     ))
-
+   
+    useEffect(() => {
+        // .getTime() does not test for equality for some reason.
+        if(arrivalDate.getTime() >= departureDate.getTime() || arrivalDate.toString() === departureDate.toString()) {
+            setDateErrorMsg("Invalid Dates Selected")
+        }
+        else {
+            setDateErrorMsg("")
+            const difference = getDayDifference(arrivalDate,departureDate)
+            setTripDays(difference)
+           
+        }
+    },[arrivalDate,departureDate])
 
     return (
         <div className="hotel-detail">
@@ -52,15 +87,54 @@ const SearchResult = () => {
             <section className="hotel-detail-middle">
                 <div className="hotel-offers">
                     <h3 className="hotel-offers-header">What this place offers</h3>
-
                 </div>
                 <div className="hotel-reserve-card">
                     <div className="hotel-reserve-start">
-                        <h2 className="hotel-reserve-price">${cost} {currency}</h2>
+                        {
+                            dateErrorMsg.length !== 0 ?
+                            <p className="error">{dateErrorMsg}</p>
+                            :
+                            <h2 className="hotel-reserve-price">
+                                ${totalCost} {currency} {`(${tripDays} ${tripDays > 1 ? "days" : "day"})`}
+                            </h2>
+                        }
                     </div>
-                    <div className="hotel-reserve-controls">
+                    <div className="hotel-reserve-control">
+                        <label className="hotel-reserve-label">Check In:</label>
+                        <ButtonDatePicker
+                            selected={arrivalDate}
+                            onChange={(date) => setArrivalDate(date)}
+                            minDate={getDate()}
+                            className="hoteldetail-datepicker"
+                        />
+                    </div>
+                    <div className="hotel-reserve-control">
+                        <label className="hotel-reserve-label">Check Out:</label>
+                        <ButtonDatePicker
+                            selected={departureDate}
+                            onChange={(date) =>  setDepartureDate(date)}
+                            minDate={getDate(1)}
+                            className="hoteldetail-datepicker"
+                        />
+                    </div>
+                
+                    <div className="hotel-reserve-control">
+                        <label className="hotel-reserve-label" htmlFor="hotel-reserve-amount">Room Amount:</label>
+                        <select 
+                            className="hotel-reserve-amount"
+                            onChange={(event) => setRoomAmount(event.target.value)}
+                            defaultValue={roomAmount}
+                            name="roomAmount"
 
+                            id="hotel-reserve-amount"
+                        >
+                            <option disabled>---Select Room Amount---</option>
+                            {
+                                roomAmounts
+                            }
+                        </select>
                     </div>
+                  
                     <button className="hotel-reserve-btn">Reserve Now</button>
                 </div>
             </section>
@@ -73,7 +147,6 @@ const SearchResult = () => {
                 </div>
             </section>
         </div>
-        
     )
 }
 
