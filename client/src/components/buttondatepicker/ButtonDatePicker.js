@@ -13,7 +13,7 @@ import { MdOutlineCalendarMonth } from "react-icons/md";
 
 const ButtonDatePicker = ({className, minDate, maxDate, selected, onChange}) => {  
   const ButtonInput= forwardRef(({ value, onClick }, ref) => (
-    <button className={className} onClick={onClick} ref={ref}>
+    <button className={className} onClick={onClick} ref={ref} type="button">
       <MdOutlineCalendarMonth />{value}
     </button>
   ));
