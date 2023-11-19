@@ -5,8 +5,7 @@ import './Search.css'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import "react-datepicker/dist/react-datepicker.css"
-import DatePicker from "react-datepicker"
+import ButtonDatePicker from "../buttondatepicker/ButtonDatePicker.js"
 import introImg from "../../images/pexels-jake-brown-2531314.jpg"
 import SearchResult from "./SearchResult"
 import Pagination  from "./Pagination.js"
@@ -20,19 +19,27 @@ import {
     MdDriveFileRenameOutline
 } from "react-icons/md"
 
+import { FaMagnifyingGlass } from "react-icons/fa6";
+
 import { data } from "./tempData.js"
+
+const MAX = 5
+const options = [] // stores option elements for select
+for(let i = 1; i <= MAX; i++) {
+    options.push(<option value={i} key={i}>{i}</option>)
+}
 
 const Search = () => {
 
     /* Search States */
     
     const [ city, setCity ] = useState("")
-    const [ arrivalDate, setArrivalDate ] = useState(null)
-    const [ departureDate, setDepartureDate ] = useState(null)
-
+    const [ arrivalDate, setArrivalDate ] = useState(() => getDate())
+    const [ departureDate, setDepartureDate ] = useState(() => getDate(1))
+    const [ roomAmount, setRoomAmount ] = useState(1)
     const [ searchResults, setSearchResults ] = useState([])
-    
-    const [ totalPageNumber, setTotalPageNumber ] = useState(2)
+    console.log("roomAmount:",roomAmount)
+    const [ totalPageNumber, setTotalPageNumber ] = useState(100)
 
     const [ isLoading, setIsLoading ] = useState(false)
     const [ errorInputMsg, setErrorInputMsg ] = useState(null)
@@ -40,10 +47,6 @@ const Search = () => {
     /* Search Sorters*/
     const [ searchSorter, setSearchSorter ] = useState(null)
     
-    // get current dates
-    const currentDate = getDate()
-    const tomorrowDate = getDate(1) // pass day offset of 1
-
     const [ searchParams, setSearchParams ] = useSearchParams()
 
     const currentPage = searchParams.get("page")
@@ -153,7 +156,6 @@ const Search = () => {
                 </Row>
                 <Row className="search-form-row justify-content-center">
                     <Col className="col-auto col-lg-10">
-                    <div className="container-search-form">
                         <form className="search-form d-flex flex-column flex-lg-row" onSubmit={submitHandler}>
                             <div className="search-location-wrapper">
                                 <label htmlFor="search-location">Location</label>
@@ -172,39 +174,45 @@ const Search = () => {
                             </div>
                             <div className="search-date-wrapper">
                                 <label htmlFor="search-date-arrival">Date Arrival</label>
-                                <DatePicker 
+                                <ButtonDatePicker
                                     selected={arrivalDate} 
                                     onChange={(date) => setArrivalDate(date)}
-                                    dateFormat="yyyy/MM/dd"
-                                    className="search-date"
-                                    placeholderText="yyyy-mm-dd"
-                                    minDate={currentDate}
+                                    className="hotelsearch-datepicker"
+                                    minDate={getDate()}
                                     id="search-date-arrival"
-                                    shouldCloseOnSelect={false}
-                                    required
                                 />
 
                                 {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
                             </div>
                             <div className="search-date-wrapper">
                                 <label htmlFor="search-date-departure">Date Departure</label>
-                                <DatePicker 
+                                <ButtonDatePicker
                                     selected={departureDate} 
                                     onChange={(date) => setDepartureDate(date)}
-                                    dateFormat="yyyy/MM/dd"
-                                    className="search-date"
-                                    placeholderText="yyyy-mm-dd"
-                                    minDate={tomorrowDate}
+                                    className="hotelsearch-datepicker"
+                                    minDate={getDate(1)}
                                     id="search-date-departure"
-                                    shouldCloseOnSelect={false}
-                                    required
                                 />
 
                                 {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
                             </div>
-                            <button type="submit">Search</button>
+                            <div className="search-amount-wrapper">
+                                <label htmlFor="search-room-amount">Room Amount</label>
+                                <select 
+                                    className="search-room-amount"
+                                    id="search-room-amount"
+                                    defaultValue={roomAmount}
+                                    onChange={(event) => setRoomAmount(event.target.value)}
+                                >
+                                    <option disabled>---Choose Number of Rooms---</option>
+                                    {
+                                        options
+                                    }
+                                </select>
+                            </div>
+                            <button type="submit"><FaMagnifyingGlass size={20}/></button>
                         </form>
-                    </div>
+                  
                     {errorInputMsg ? <p className="error text-center mt-2">{errorInputMsg}</p> : null}
                     </Col>
                 </Row>

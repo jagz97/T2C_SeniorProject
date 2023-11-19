@@ -26,35 +26,36 @@
     font-weight: 700;
     text-transform: capitalize;
     color: #fff;
+   justify-content: center;
 }
 
 /*Search Form*/
 .search-form-row {
+    display: flex;
+    align-items: center;
     margin-top: -200px;
 }
 
-.container-search-form {
+.search-form {
     font-family: "Poppins", "DM-sans",sans-serif;
     width: 100%;
     min-width: 400px;
     max-width: 1100px;
-    max-height: 350px; 
+    max-height: 400px; 
     color: #333;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 13px;
-    padding: 1.8rem;
+    padding: 2em 2.5em;
     box-shadow: 0px 16px 40px 0px rgba(0,0,0,0.25);
-}
-
-.search-form {
     gap: 7px;
-    font-size: 0.8125rem;
+    font-size: 1rem;
 }
 
 .search-form label {
+    display: block;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.875rem;
 }
 
 .search-form label,
@@ -63,24 +64,28 @@
     /* padding-left: 1px; */
 }
 
-.search-form input {
+.search-form input,
+.search-form select {
     border: 1px #A1A1A1 solid;
     border-radius: 3px;
     width: 100%;
-    height: 33px;
+    height: 40px;
     padding: 0 0.5rem;
+    background: transparent;
 }
 
 .search-form button[type="submit"] {
     display: block;
     color: #fff;
     border: none;
+    border-radius: 8px;
+    width: 100%;
+    padding: 0.5em;
     font-weight: 600;
     background-color: #5d17b0;
-    border-radius: 5px;
-    letter-spacing: 1px;
-    padding: 0.6em 3em;
+    
     font-size: 1rem;
+
 }
 
 .search-location-wrapper input[type="text"]::placeholder, 
@@ -89,12 +94,10 @@
 }
 
 .search-date {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer; 
+    /* text-transform: uppercase; */
+    /* letter-spacing: 1px; */
+    /* cursor: pointer;  */
 }
-
-.search-date-wrapper, 
 .search-date-wrapper > div.react-datepicker-wrapper, 
 .search-date-wrapper > div > div.react-datepicker__input-container
 .search-date-wrapper > div > div.react-datepicker__input-container input {
@@ -109,35 +112,36 @@
         margin-top: -100px;
     }
     .search-form {
-        gap: 12px;
-        justify-content: flex-start;
-    }
-    .container-search-form {
-        height: 130px;
+        gap: 15px;
+        height: 115px;
+        align-items: flex-end;
     }
     .search-location-wrapper {
+        /* max-width: 300px;  */
         flex: 1 0 auto;
-        max-width: 325px;
-        min-width: 250px;
-        
+        max-width: 275px;
     }
-
-    .search-date-wrapper {
-        flex: 1;
-        max-width: 235px;
-        min-width: 150px;
+    .search-date-wrapper,
+    .search-amount-wrapper {
+        width: 150px;
+        /* max-width: 150px; */
     }
-
+    .search-amount-wrapper, 
     .search-date-wrapper,
     .search-location-wrapper {
-        height: 83px;
+        height: 60px;
     }
-  
+    
     .search-form button[type="submit"] {
         margin-left: auto;
-        /* margin-top: 3px; */
-        align-self:center;
-
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        align-self: flex-end;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
     }
 }
 
