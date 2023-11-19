@@ -66,7 +66,6 @@ const Search = () => {
             arrival_date = dateToString(arrivalDate)
             departure_date = dateToString(departureDate)
         }
-
         // console.log("arrival_date", arrival_date)
         // console.log("departure_date", departure_date)
         

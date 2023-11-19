@@ -117,14 +117,11 @@
         align-items: flex-end;
     }
     .search-location-wrapper {
-        /* max-width: 300px;  */
-        flex: 1 0 auto;
         max-width: 275px;
     }
     .search-date-wrapper,
     .search-amount-wrapper {
         width: 150px;
-        /* max-width: 150px; */
     }
     .search-amount-wrapper, 
     .search-date-wrapper,
@@ -167,8 +164,6 @@
         margin-right: 0;
     }
 }
-
-
 
 .filter-header {
     font-weight: 700;
