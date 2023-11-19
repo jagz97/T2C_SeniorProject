@@ -197,7 +197,7 @@ li.hotel-detail-link > a {
     display: flex;
     align-items: center;
     /* justify-content: center; */
-    gap: 8px;
+    gap: 10px;
     /* border: 1px magenta solid; */
     width: 48%;
     font-size: 1.125rem;

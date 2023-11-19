@@ -9,7 +9,7 @@ import "./HotelDetail.css"
 
 import { api } from "../../api/axios"
 
-import { detail } from "./tempData2"
+import { detail } from "./tempData"
 
 import {
     IoLocationOutline,

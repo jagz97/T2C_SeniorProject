@@ -120,7 +120,7 @@ const SearchResult = () => {
                         }
                     </div>
                     <div className="hotel-reserve-control">
-                        <label className="hotel-reserve-label">Check In:</label>
+                        <label className="hotel-reserve-label">Check-In:</label>
                         <ButtonDatePicker
                             selected={arrivalDate}
                             onChange={(date) => setArrivalDate(date)}
@@ -129,7 +129,7 @@ const SearchResult = () => {
                         />
                     </div>
                     <div className="hotel-reserve-control">
-                        <label className="hotel-reserve-label">Check Out:</label>
+                        <label className="hotel-reserve-label">Check-Out:</label>
                         <ButtonDatePicker
                             selected={departureDate}
                             onChange={(date) =>  setDepartureDate(date)}
@@ -139,7 +139,7 @@ const SearchResult = () => {
                     </div>
                 
                     <div className="hotel-reserve-control">
-                        <label className="hotel-reserve-label" htmlFor="hotel-reserve-amount">Room Amount:</label>
+                        <label className="hotel-reserve-label" htmlFor="hotel-reserve-amount">Rooms:</label>
                         <select 
                             className="hotel-reserve-amount"
                             onChange={(event) => setRoomAmount(event.target.value)}

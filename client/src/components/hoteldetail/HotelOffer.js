@@ -1,12 +1,12 @@
 import React from "react"
-import { FaLeaf } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import "./HotelReview"
 
 
-const HotelOffer = ({name, iconName}) => {
+const HotelOffer = ({name}) => {
     return (
         <div className="hotel-offer">
-            <FaLeaf size={18}/><p className="hotel-offer-name">{name}</p>
+            <FaCheck size={15} color={"green"}/><p className="hotel-offer-name">{name}</p>
         </div>
     )
 }
