@@ -84,6 +84,7 @@ li.hotel-detail-link > a {
     padding: 2em;
     min-height: 950px;
     margin-bottom: 50px;
+    
 }
 
 .hotel-detail-top {
@@ -113,6 +114,7 @@ li.hotel-detail-link > a {
 
 .hotel-location {
     font-size: 0.875rem;
+    color: #9a9a9a;
 }
 
 .hotel-room-description {
@@ -170,7 +172,35 @@ li.hotel-detail-link > a {
 .hotel-offers {
     width: 100%;
     max-width: 400px;
-    background-color: aquamarine;
+    height: 315px;
+    /* border: 1px solid firebrick; */
+}
+
+.hotel-offers-header {
+    margin-bottom: 25px;
+}
+
+.hotel-offer-name {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.hotel-facilities {
+    display: flex;
+    justify-content: space-between;
+    row-gap: 20px;
+    flex-wrap: wrap;
+
+}
+
+.hotel-offer {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 8px;
+    /* border: 1px magenta solid; */
+    width: 48%;
+    font-size: 1.125rem;
 }
 
 /*Hotel Control Card*/
@@ -199,20 +229,30 @@ li.hotel-detail-link > a {
     display: block;
     font-size: 1rem;
     font-weight: 500;
-    color: #9a9a9a;
 }
 
 .hotel-reserve-amount {
     border: none;
-    background-color: #fff;
-    border: 1px solid rgba(0,0,0,.24);
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 0.5em 1.1em;
     font-size: 1rem;
     width: 150px;
-    margin: 0;
+    border: 1px #A1A1A1 solid;
+    border-radius: 3px;
+    height: 40px;
+    padding: 0 0.5rem;
+    background: transparent;
     cursor: pointer;
-    color: #9a9a9a;
+}
+
+.hotel-reserve-days {
+    font-size: 1rem;
+    margin-left: 5px;
+    text-transform: lowercase;
+}
+
+.hotel-reserve-error {
+    font-size: 1.5rem;
 }
 
 .hotel-reserve-btn {
@@ -268,6 +308,9 @@ li.hotel-detail-link > a {
     }
     .hotel-detail-top {
         flex-direction: row-reverse;
+    }
+    .hotel-offer-name {
+        font-size: 1.125rem;
     }
 }
 

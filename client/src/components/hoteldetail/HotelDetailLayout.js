@@ -9,7 +9,7 @@ import "./HotelDetail.css"
 
 import { api } from "../../api/axios"
 
-import { detail } from "./tempData"
+import { detail } from "./tempData2"
 
 import {
     IoLocationOutline,
@@ -31,8 +31,8 @@ const SearchResultLayout = () => {
     useEffect(() => {
         const fetchHotelDetail = async () => {
             // simulate fetch delay
-            // setTimeout(() => sethotelDetail(detail), 2000) 
-            sethotelDetail(detail)
+            setTimeout(() => sethotelDetail(detail), 2000) 
+            // sethotelDetail(detail)
             console.log("Layout Route Effect!")
         }
         fetchHotelDetail()

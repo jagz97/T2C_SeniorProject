@@ -9,7 +9,7 @@ const HotelPayment = () => {
     return (
         <div>
             <h1 className="text-center">"Hotel Payment"</h1>
-            <p className="text-center">From Outlet Context (in payment): id = {hotelDetail}</p>
+            
         </div>
     )
 }

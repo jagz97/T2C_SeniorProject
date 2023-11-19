@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { useOutletContext } from "react-router-dom"
-import HotelReview from "./HotelReview"
 import ButtonDatePicker from "../buttondatepicker/ButtonDatePicker"
 import { getDate, getDayDifference } from "../../utils/Date"
+import HotelOffer from "./HotelOffer"
+import HotelReview from "./HotelReview"
 import "./HotelDetail.css"
 
 import "react-datepicker/dist/react-datepicker.css"
@@ -34,8 +35,11 @@ const SearchResult = () => {
     const { value, currency } = hotelData.amount_per_night
     const cost = Math.floor(value)
 
-    const { reviews } = extractedReviews // An array of review objects
+    const reviews = extractedReviews?.reviews || []// An array of review objects
 
+    const offers = hotelData?.propertyOffersIcons || []
+    
+    
     const totalCost = tripDays * roomAmount * cost
     
     const userReviews = reviews.slice(0,4).map((review,idx) => (
@@ -46,9 +50,13 @@ const SearchResult = () => {
             pros={review.pros}
         />
     ))
-   
+    
+    const hotelOffers = offers.slice(0,10).map((offer) => (
+        <HotelOffer name={offer.name}/>
+    ))
+        
     useEffect(() => {
-        // .getTime() does not test for equality for some reason.
+        // for whatever reason .getTime() does not work for equality test.
         if(arrivalDate.getTime() >= departureDate.getTime() || arrivalDate.toString() === departureDate.toString()) {
             setDateErrorMsg("Invalid Dates Selected")
         }
@@ -87,15 +95,27 @@ const SearchResult = () => {
             <section className="hotel-detail-middle">
                 <div className="hotel-offers">
                     <h3 className="hotel-offers-header">What this place offers</h3>
+                    <div className="hotel-facilities">
+                        {
+                            hotelOffers.length !== 0 
+                                ?
+                                <> { hotelOffers }</> 
+                                : 
+                                <p className="text-muted text-center">No Offers Found.</p>
+                        }
+                    </div>
                 </div>
                 <div className="hotel-reserve-card">
                     <div className="hotel-reserve-start">
                         {
                             dateErrorMsg.length !== 0 ?
-                            <p className="error">{dateErrorMsg}</p>
+                            <h2 className="error hotel-reserve-error">{dateErrorMsg}</h2>
                             :
                             <h2 className="hotel-reserve-price">
-                                ${totalCost} {currency} {`(${tripDays} ${tripDays > 1 ? "days" : "day"})`}
+                                ${totalCost} {currency} 
+                                <span className="hotel-reserve-days">
+                                    {`(${tripDays} ${tripDays > 1 ? "days" : "day"})`}
+                                </span>
                             </h2>
                         }
                     </div>
@@ -142,7 +162,11 @@ const SearchResult = () => {
                 <div className="container-hotel-reviews">
                     <h3 className="hotel-review-header">Hotel Reviews</h3>
                         {
-                            userReviews
+                            userReviews.length !== 0 
+                            ?
+                            <> { userReviews }</> 
+                            : 
+                            <p className="text-muted text-center">No Reviews Found.</p>
                         }
                 </div>
             </section>
