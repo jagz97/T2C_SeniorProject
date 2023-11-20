@@ -37,6 +37,8 @@ const Search = () => {
     const [ arrivalDate, setArrivalDate ] = useState(() => getDate())
     const [ departureDate, setDepartureDate ] = useState(() => getDate(1))
     const [ roomAmount, setRoomAmount ] = useState(1)
+    const [ guestAmount, setGuestAmount ] = useState(1)
+
     const [ searchResults, setSearchResults ] = useState([])
     console.log("roomAmount:",roomAmount)
     const [ totalPageNumber, setTotalPageNumber ] = useState(100)
@@ -52,7 +54,7 @@ const Search = () => {
     const currentPage = searchParams.get("page")
     
     // console.log("Total page numbers:", totalPageNumber)
-
+    console.log(arrivalDate,departureDate)
     const handleSearch = async () => {
         setErrorInputMsg("")
         // convert date objects into "yyyy-mm-dd" strings
@@ -84,8 +86,8 @@ const Search = () => {
             city,
             arrival_date,
             departure_date,
-            guest_qty: "1",
-            room_qty: "1",
+            room_qty: roomAmount,
+            guest_qty: guestAmount,
             page_number
         }
 
@@ -172,7 +174,7 @@ const Search = () => {
                                 {/* <p className="search-description d-none d-lg-block">Where are you going?</p> */}
                             </div>
                             <div className="search-date-wrapper">
-                                <label htmlFor="search-date-arrival">Date Arrival</label>
+                                <label htmlFor="search-date-arrival">Arrival</label>
                                 <ButtonDatePicker
                                     selected={arrivalDate} 
                                     onChange={(date) => setArrivalDate(date)}
@@ -180,11 +182,10 @@ const Search = () => {
                                     minDate={getDate()}
                                     id="search-date-arrival"
                                 />
-
                                 {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
                             </div>
                             <div className="search-date-wrapper">
-                                <label htmlFor="search-date-departure">Date Departure</label>
+                                <label htmlFor="search-date-departure">Departure</label>
                                 <ButtonDatePicker
                                     selected={departureDate} 
                                     onChange={(date) => setDepartureDate(date)}
@@ -192,24 +193,38 @@ const Search = () => {
                                     minDate={getDate(1)}
                                     id="search-date-departure"
                                 />
-
                                 {/* <p className="search-description d-none d-lg-block">Select Trip Dates</p> */}
                             </div>
                             <div className="search-amount-wrapper">
-                                <label htmlFor="search-room-amount">Room Amount</label>
+                                <label htmlFor="search-room-amount">Rooms</label>
                                 <select 
                                     className="search-room-amount"
                                     id="search-room-amount"
                                     defaultValue={roomAmount}
                                     onChange={(event) => setRoomAmount(event.target.value)}
                                 >
-                                    <option disabled>---Choose Number of Rooms---</option>
+                                    <option disabled>Rooms</option>
                                     {
                                         options
                                     }
                                 </select>
                             </div>
-                            <button type="submit"><FaMagnifyingGlass size={20}/></button>
+                            <div className="search-amount-wrapper">
+                                <label htmlFor="search-guest-amount">Guests</label>
+                                <select 
+                                    className="search-guest-amount"
+                                    id="search-guest-amount"
+                                    defaultValue={guestAmount}
+                                    onChange={(event) => setGuestAmount(event.target.value)}
+                                >
+                                    <option disabled>Guests</option>
+                                    {
+                                        options
+                                    }
+                                </select>
+                            </div>
+                            
+                            <button type="submit">Search</button>
                         </form>
                   
                     {errorInputMsg ? <p className="error text-center mt-2">{errorInputMsg}</p> : null}
