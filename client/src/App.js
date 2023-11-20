@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
 import OnboardingPage from './pages/OnboardingPage'
 
+import CreatePostPage from './pages/CreatePostPage'
 import "./App.css"
 
 
@@ -29,6 +30,7 @@ function App() {
             <Route element={<NavLayout/>}>
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
+              <Route path="createpost" element={<CreatePostPage/>}/>
             </Route>
           </Route>
             
