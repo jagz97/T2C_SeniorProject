@@ -1,0 +1,132 @@
+.postcreate-img-header {
+    font-size: 1.75rem;
+    margin-bottom: 15px; 
+}
+
+.postcreate-img-wrapper {
+    background-color: #fff;
+    border: dashed 3px #b5b5b5;
+    width: 315px;
+    height: 295px;
+    border-radius: 15px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0px 0px 15px 0px rgba(132, 132, 132, 0.25);
+}
+
+.postcreate-img-msg {
+    margin: 0;
+}
+
+.postcreate-img-wrapper label[for="postcreate-img"] {
+    width: 175px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.postcreate-emphasize {
+    color: #5d17b0;
+    font-weight: 700;
+}
+
+.postcreate-img-wrapper input[type="file"] {
+    display: none;
+}
+
+.postcreate-img-error {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.createpost-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 0 auto;
+    
+}
+
+/*sm breakpoint*/
+@media(min-width: 576px) {
+    .createpost-inputs {
+        width: 450px;
+    }
+}
+
+.createpost-caption-wrapper {
+    width: 100%;
+}
+
+.createpost-text-count {
+   color: #828282; 
+   text-align: right;
+   margin: 0;
+}
+
+
+textarea#createpost-caption {
+    display: block;
+    width: 100%;
+    border: none;
+    min-height: 125px;
+    resize: none;
+    padding: 0.6em;
+    font-size: inherit;
+    
+}
+
+.createpost-caption-wrapper label[for="createpost-caption"],
+.createpost-country-wrapper label[for="createpost-country"],
+.createpost-city-wrapper label[for="createpost-city"] {
+    display: block;
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+textarea#createpost-caption,
+select#createpost-country,
+select#createpost-city{ 
+    border-radius: 6px;
+    box-shadow: 0px 0px 15px 0px #84848440;
+    border: none;
+}
+
+.createpost-select-inputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 0.875rem;
+}
+
+select#createpost-country,
+select#createpost-city {
+    background-color: #fff;
+    padding: 0.5em 0.6em;
+    border-right: 0.6em solid transparent;
+    font-family: "DM-sans", "Poppins", sans-serif;
+    font-size: inherit;
+}
+.createpost-btn {
+    display: block;
+    padding: 0.2em 2.4em;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: #5d17b0;
+    border: none;
+    border-radius: 7px;
+    margin-top: 15px;
+    margin-left: auto;
+}
+
+@media(min-width:576px) {
+    .createpost-select-inputs {
+        font-size: 1rem;;
+    }
+}
