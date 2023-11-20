@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import Avatar from "../avatar/Avatar"
 import ToggleButton from "./ToggleButton"
 import Container from "react-bootstrap/Container"
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
+import Modal from 'react-bootstrap/Modal'
 import ProfileBanner from "../../images/pexels-venelin-dimitrov-3476312.jpg"
 import "./Settings.css"
 
@@ -20,7 +21,6 @@ import  {
     MdLockReset,
     MdOutlineEditNote,
     MdOutlinePhotoCamera,
-    MdEditNote
 } from "react-icons/md"
 
 const MAX_AGE = 110
@@ -32,25 +32,49 @@ for(let i = MIN_AGE; i <= MAX_AGE; i++) {
 
 const Settings = () => {
     
-    const [ bio, setBio ] = useState("")
-    const [ pfp, setPfp ] = useState("")
-    const [ firstName, setFirstName ] = useState("")
+    const [ profilePicture, setProfilePicture ] = useState(null)
+
+    const [ firstName, setFirstName ] = useState()
     const [ lastName, setLastName ] = useState("")
     const [ age, setAge ] = useState("")
     const [ gender, setGender ] = useState("")
-    const [ phoneNumber, setPhoneNumber ] =  useState("")
+    const [ bio, setBio ] = useState("")
+    const [ bioText, setBioText ] = useState("")
+    const [ bioModal, setBioModal ] = useState(false)
+    const [ settingsPfp, setSettingsPfp ] = useState(null)
 
     const [ reminders, setReminders ] = useState(false)
     const [ matching, setMatching ] = useState(false)
     const [ privacy, setPrivacy ] = useState(false)
 
-
+    const [ successMessage, setSuccessMessage] = useState("")
     const [ errorMessage , setErrorMessage] = useState("")
-    const [ bioModal, setBioModal ] = useState("")
-    
-    const navigate = useNavigate()
-    const { logout } = useAuth()
 
+    const navigate = useNavigate()
+    const { user, logout } = useAuth()
+
+    const maxCount = 255
+
+    const handleBioSave = async () => {
+        const headerOptions = {
+            headers: {
+                Authorization: `${user.accesstoken}`,
+            }
+        }
+        try {
+            const response = await api.post("/profile/updateBio", { bio }, headerOptions)
+            console.log(response)
+            if(response.status === 200) {
+                setSuccessMessage("Bio Updated Successfully.")
+                setBioText(bio)
+            } 
+            
+                
+        } catch (error) {
+            console.log(error)
+        }
+        setBioModal(false)
+    }
 
     const handleUpload = (event) => {
         const { files } = event.target
@@ -61,10 +85,84 @@ const Settings = () => {
             }
             else {
                 console.log(files[0])
-                setPfp(files[0])
+                setSettingsPfp(files[0])
             }
-            // reset input value so that image is rendered when same file is chosen for pfp and biopic
-           event.target.value = "" 
+        }
+    }
+   
+    useEffect(() => {
+        const fetchProfile = async () => {
+            const headerOptions = {
+                headers: {
+                    Authorization: `${user.accesstoken}`,
+                }
+            }
+
+            try {
+                const response = await api.get("/profile/getProfile", headerOptions)
+                const { data } = response
+                const { profilePicture }  = response.data
+                
+                // convert buffer array into typed array
+                const profilePicData = (profilePicture.data) 
+                
+
+                // form the requried value for the img element's src attribute and set it to state
+                setProfilePicture(`data:${profilePicture.type};base64,${profilePicData}`) 
+                setFirstName(data?.firstName || "")
+                setLastName(data?.lastName || "")
+                setAge(data?.age || "")
+                setGender(data?.gender || "")
+                setBio(data?.bio || "")
+                setBioText(data?.bio || "")
+    
+            } catch (error) {
+                const errorMessage = error.response?.data?.message
+                // if we get a an error response from server display it
+                // otherwise we display error directly from axios library
+                if(errorMessage) {
+                    console.log(errorMessage)
+                }
+                else {
+                    console.log(error.message)
+                }
+            }
+        }
+        fetchProfile()
+    }, []) 
+
+    const handleSave = async () => {
+        const newData = {
+            firstName,
+            lastName,
+            age ,
+            gender,
+            bio,
+        }
+      
+        console.log("Data we will post:",newData)
+        try {
+            const headerOptions = {
+                headers: {
+                    Authorization: `${user.accesstoken}`,
+                }
+            }
+
+            if(settingsPfp) {
+                const data = new FormData()
+                data.append("profilePic", settingsPfp)
+                const pfpResponse = await api.post("/profile/updateProfilePic", data, headerOptions)
+                console.log(pfpResponse)
+            }
+
+            const response = await api.post("profile/createProfile", newData, headerOptions)
+            console.log(response)
+            if(response.status === 200) {
+                setSuccessMessage("Profile Updated Successfully.")
+            }
+        } catch (error) {
+            const errorMessage = error.response?.data?.message || "Error Occured."
+            setErrorMessage(errorMessage)
         }
     }
 
@@ -75,7 +173,7 @@ const Settings = () => {
                     <img src={ProfileBanner} alt="user profile banner" className="settings-banner"/>
                     <div className="profile-picture-wrapper">
                         <Avatar 
-                            // src={profilePicture} 
+                            src={ settingsPfp ? URL.createObjectURL(settingsPfp) : null || profilePicture } 
                             alt={`User Profile Picture`} 
                             size={235} 
                             border="15px solid rgba(139,44,255,0.4)"
@@ -86,15 +184,16 @@ const Settings = () => {
                             <MdOutlineEditNote siz={20}/>Edit Bio
                         </div>
                         {/* 255 character placeholder text */}
-                        <p className="profile-bio">
-                            Lorem ipsum dolor sit amet, 
-                            consectetuer adipiscing elit. 
-                            Aenean commodo ligula eget dolor. Aenean massa. 
-                            Cum sociis natoque penatibus et magnis dis parturient montes, 
-                            nascetur ridiculus mus. Donec quam felis, 
-                            ultricies nec, pellentesque eu, pretium quis,
+                        <p className={`profile-bio ${!bio && "text-muted"}`}>
+                          {
+                            bioText ? bioText : "You do not have a bio yet."
+                          }
                         </p>
                     </div>
+                    {
+                        successMessage && <p className="text-center success">{successMessage}</p> 
+                    }
+                    
                 </Col>
             </Row>
             <Row className="justify-content-center mb-5">
@@ -111,28 +210,21 @@ const Settings = () => {
                                 id="settingsfname"
                             />
                         </div>
-                        <input
-                            type="tel"
-                            name="Phone Number"
-                            value={phoneNumber}
-                            placeholder="Phone Number"
-                            onChange={(event) => setPhoneNumber(event.target.value)}
-                            id="settingsphone"
-                        />  
                         <div className="settings-dropdown">
                             <select 
                                     name="gender" 
                                     defaultValue={gender} 
+                                    value={gender}
                                     onChange={(event) => setGender(event.target.value)} 
                                     required
                                 >
-                                    <option value="" disabled >Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
+                                    <option value="" disabled >{gender}</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
                             </select>
-                            <select name="age" defaultValue={age} onChange={(event) => setAge(event.target.value)} required>
-                                <option value="" disabled>Age</option>
+                            <select name="age" defaultValue={age} value={age} onChange={(event) => setAge(event.target.value)} required>
+                                <option value="" disabled>{age}</option>
                                 {
                                     ages
                                 }
@@ -160,13 +252,13 @@ const Settings = () => {
                 
                 <Col className="col-12 col-md-auto">
                         <div className="container-settings settings-right mt-2 mt-md-0">
-                        <div className="settingsfname-wrapper">
+                        <div className="settingslname-wrapper">
                             <label htmlFor="settingslname">Last Name</label>
                             <input
                                 type="text"
                                 name="Last Name"
                                 value={lastName}
-                                placeholder="Last Name"
+                                placeholder={lastName}
                                 onChange={(event) => setLastName(event.target.value)}
                                 id="settingslname"
                             />
@@ -185,7 +277,7 @@ const Settings = () => {
                                 <span>Privacy</span>
                                 <ToggleButton toggleState={privacy} setToggleState={setPrivacy}/>
                             </div>
-                            <div onClick={() => navigate("/")} className="settings-control settings-help">
+                            <div onClick={() => navigate("/help")} className="settings-control settings-help">
                                 <MdOutlineContactSupport size={20}/>
                                 <span>Contact Us</span>
                             </div>
@@ -195,10 +287,39 @@ const Settings = () => {
             </Row>
             <Row className="justify-content-center mb-5">
                 <Col className="col-auto">
+                    <p className="error text-center">{errorMessage.length !== 0 ? errorMessage : null}</p>
                     <button className="settings-btn settings-deactivate">Deactivate Account</button>
-                    <button className="settings-btn settings-submit">Save Changes</button>
+                    <button className="settings-btn settings-submit" onClick={handleSave}>Save Changes</button>
                 </Col>
             </Row>
+            <Modal 
+                show={bioModal} 
+                onHide={() => setBioModal(false)}
+                animation={false} 
+                dialogClassName="edit-bio-modal"
+                centered
+            >
+                <Modal.Header className="pb-0">
+                    <Modal.Title className="settings-editbio-header">Edit Bio</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="pb-0">
+                    <textarea
+                        className="settings-editbio"
+                        value={bio}
+                        onChange={(event) => setBio(event.target.value)}
+                        maxLength={maxCount}
+                    ></textarea>
+                    <p className="settings-editbio-count">{bio.length} / {maxCount}</p>
+                </Modal.Body>
+                <Modal.Footer className="border-0 pb-3 pt-2">
+                <button className="edit-bio-close" onClick={() => setBioModal(false)}>
+                    Close
+                </button>
+                <button className="edit-bio-save" onClick={handleBioSave}>
+                    Save Changes
+                </button>
+                </Modal.Footer>
+            </Modal>
         </Container>
     )
 }
