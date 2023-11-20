@@ -5,11 +5,12 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import ProfileBanner from '../../images/pexels-venelin-dimitrov-3476312.jpg'
 import useAuth from "../../hooks/useAuth"
+import DragAndDrop from "../dragdrop/DragAndDrop"
 import { api } from '../../api/axios'
 
 import "./CreatePost.css"
 
-import { HiOutlinePhoto } from "react-icons/hi2";
+
 
 
 
@@ -75,33 +76,35 @@ const CreatePost = () => {
     const [ errorMessage, setErrorMessage ] = useState("")
     
 
-    const handleUpload = (event) => {
-        event.preventDefault()
-        let files
-        if(event.type === "change") {
-            files = event.target.files
-        }
-        else if(event.type === "drop") {
-            files = event.dataTransfer.files
-        }
+    // const handleUpload = (event) => {
+    //     event.preventDefault()
+    //     let files
+    //     if(event.type === "change") {
+    //         files = event.target.files
+    //     }
+    //     else if(event.type === "drop") {
+    //         files = event.dataTransfer.files
+    //     }
 
-        setErrorMessage("")
-        if(files.length > 0) {
-            if(!files[0].type.startsWith("image")) {
-                setErrorImgMsg("File must be an image")
-            }
-            else {
-                inputRef.current.style.border = "2px solid #b5b5b5"
-                console.log(files[0])
-                setPostPic(files[0])
-            } 
-        }
-    }
+    //     setErrorMessage("")
+    //     if(files.length > 0) {
+    //         if(!files[0].type.startsWith("image")) {
+    //             setErrorImgMsg("File must be an image")
+    //         }
+    //         else {
+    //             inputRef.current.style.border = "2px solid #b5b5b5"
+    //             console.log(files[0])
+    //             setPostPic(files[0])
+    //         } 
+    //     }
+    // }
 
     const handleSubmit = () => {
         // do post request here.
         setErrorPostMsg("something went wrong.")
     }
+
+    console.log("inside createpost:",postPic)
 
     return (
         <Container fluid>
@@ -130,7 +133,7 @@ const CreatePost = () => {
             <Row className="justify-content-center align-items-center gap-5 mb-5 mt-3">
                 <Col className="col-12 col-md-auto ">
                     <h2 className="postcreate-img-header text-center text-md-start">Create Post</h2>
-                    <div className="postcreate-img-wrapper"
+                    {/* <div className="postcreate-img-wrapper"
                         onDragOver={(event) => event.preventDefault()}
                         onDrop={handleUpload}
                         ref={inputRef}
@@ -153,8 +156,12 @@ const CreatePost = () => {
                             accept="image/*"
                             id="postcreate-img"
                         />
-                    </div>
-                    { errorImgMsg ? <p className="error postcreate-img-error">{errorImgMsg}</p> : null }
+                    </div> */}
+                    <DragAndDrop
+                        picture={postPic}
+                        setPicture={setPostPic}
+                    />
+
                 </Col>
                 <Col className="col-12 col-md-auto ">
                     <div className="createpost-inputs">
