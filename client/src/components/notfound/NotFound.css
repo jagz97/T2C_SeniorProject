@@ -1,5 +1,6 @@
 .notfound-container {
-    font-family: "poppins", "DM sans", sans-serif;
+    font-family: "DM sans", "poppins", sans-serif;
+    color: #000;
 }
 .notfound-header {
     font-size: 2rem;
@@ -12,7 +13,14 @@
 
 .notfound-message,
 .notfound-anchor {
+    font-size: 0.875rem;
+}
+
+@media(min-width: 576px) {
+    .notfound-message,
+    .notfound-anchor {
     font-size: 1rem;
+}
 }
 
 .notfound-anchor,
