@@ -1,4 +1,7 @@
-const db = require("../models")
+const db = require("../models");
+const Image = db.image;
+const fs = require("fs");
+const Experience = db.experience;
 
 
 exports.createExperience = async function (req, res) {
@@ -9,27 +12,58 @@ exports.createExperience = async function (req, res) {
     const id = req.id; // Extract user information from the request context (provided by the middleware)k
     const user = await db.users.findByPk(id);
 
+
+    
     if (!user) {
-        return res.status(404).send({ message: "User not found." });
+      return res.status(404).send({ message: "User not found." });
+    }
+      
+
+    if (req.files['experiencePic'] == undefined) {
+            return res.status(400).json({ error: "Please upload picture for experience" });
     }
 
-    const {
-      description,
-      city_country,
-      starRating,
-      hotelName, 
-      restaurantName, 
-      restaurantCuisine,
-      hotelLocation,
-      hotelRatings, 
-      restaurantLocation,
-      restaurantRatings,
-      attractionName,
-      attractionLocation,
-      attractionDescription,
-      attractionRatings
+    const file = req.files['experiencePic'];
+    console.log(file);
+    
+    const filenameArray = file.map(file => file.filename);
+    const fileTypeArray = file.map(file => file.mimetype);
+    
+    const filenames = filenameArray.join(', '); // Join the filenames into a single string
+    const fileTypes = fileTypeArray.join(', '); // Join the file types into a single string
+    
+    console.log(filenames);
+    console.log(fileTypes);
 
-    } = req.body;
+
+    const image = await Image.create({
+        type: fileTypes,
+        name: filenames,
+        data: fs.readFileSync(
+            __basedir + "/resources/static/assets/uploads/" + filenames
+        ),
+    });
+
+    
+
+    // Get the current date
+    
+    
+    const starRating = req.body['starRating'];
+    const description = req.body['description'];
+    const  city_country = req.body['city_country'];
+    const hotelName = req.body['hotelName']; 
+    const restaurantName = req.body['restaurantName']; 
+    const restaurantCuisine = req.body['restaurantCuisine']
+    const hotelLocation = req.body['hotelLocation']
+    const hotelRatings = req.body['hotelRatings']
+    const restaurantLocation = req.body['restaurantLocation']
+    const restaurantRatings = req.body['restaurantRatings'];
+    const attractionName = req.body['attractionName'];
+    const attractionLocation = req.body['attractionLocation'];
+    const attractionDescription = req.body['attractionDescription'];
+    const attractionRatings = req.body['attractionRatings'];
+
 
     
     let hotels = await db.hotel.findOne({ where: { name: hotelName } });
@@ -41,6 +75,9 @@ exports.createExperience = async function (req, res) {
             rating: hotelRatings 
         });
     }
+
+
+    
 
     
     let restaurants = await db.restaurant.findOne({ where: { name: restaurantName } });
@@ -73,6 +110,8 @@ exports.createExperience = async function (req, res) {
         hotelId: hotels.id,
         restaurantId: restaurants.id,
         attractionId: attractions.id,
+        experiencePicId: image.id,
+
     });
 
     res.status(200).json(newExperience);
@@ -99,6 +138,7 @@ exports.getExperience = async function (req, res) {
             { model: db.hotel, as: 'hotel' },
             { model: db.attraction, as: 'attraction' },
             { model: db.restaurant, as: 'restaurant' },
+            {model: db.image, as: 'experiencePic' },
           ],
         },
       ],
@@ -110,6 +150,13 @@ exports.getExperience = async function (req, res) {
 
     // Access the user's experiences, including associated hotels, attractions, and restaurants
     const userExperiences = user.experiences;
+
+     // Convert the postPic data to base64 before sending the response
+     userExperiences.forEach(experience => {
+      if (experience.experiencePic && Buffer.isBuffer(experience.experiencePic.data)) {
+        experience.experiencePic.data = experience.experiencePic.data.toString('base64');
+      }
+    });
 
     return res.status(200).json({userExperiences: userExperiences});
   } catch (error) {
