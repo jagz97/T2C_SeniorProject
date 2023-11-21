@@ -1,6 +1,6 @@
 
 const controller = require('../controllers/hotel.controller');
-
+const {authJwt, upload} = require('../middleware');
 
 
 module.exports = function (app) {
@@ -24,8 +24,22 @@ module.exports = function (app) {
 
     app.post(
         "/api/createCheckout",
+        [authJwt.verifyToken],
         controller.createCheckout
-    )
+    );
+
+    app.post(
+        "/api/successReservation",
+        [authJwt.verifyToken],
+        controller.handleSuccess
+    );
+
+    app.get(
+        "/api/reservations",
+        [authJwt.verifyToken],
+        controller.getReservations
+    );
+   
 
 
 };
