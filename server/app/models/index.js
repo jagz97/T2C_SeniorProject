@@ -55,6 +55,8 @@ Reservation.belongsTo(Users, { foreignKey: 'userId' });
 Experience.belongsTo(Users, { foreignKey: 'userId' });
 Users.hasMany(Experience, {foreignKey: 'userId', as: 'experiences' });
 
+Experience.belongsTo(sequelize.models.Image, { foreignKey: 'experiencePicId', as: 'experiencePic' });
+
 
 // associations for Experience, Hotel, Restaurant, and Attraction
 Experience.belongsTo(Hotel, { foreignKey: 'hotelId', as: 'hotel' });
