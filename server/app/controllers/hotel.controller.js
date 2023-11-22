@@ -1,6 +1,7 @@
 const axios = require('axios');
 const hotelconfig = require('../config/hotelapi.config.js')
 const stripe = require('stripe')('sk_test_51KxjFzLGavGifIHgiMdIOOdRlyHLKg0elxsL5iStElwzlbGrboQmH7RHtS1CJ8VxmZ2IrefIiCjPjZpNqNwG1Aep00kaUCU9cP')
+const db = require("../models");
 
 
 
@@ -101,13 +102,17 @@ exports.hotelSearhCityName = async (req, res) => {
     
     try{
        const search_response = await axios.request(searchOptions);
+
+       
        const totalCount = search_response.data.count;
        const totalPages = Math.ceil(totalCount / 20);
+       console.log(search_response.message);
 
+       
       const filteredResults = search_response.data.result.map(property => ({
         
         
-        main_photo_url: property.main_photo_url,
+        main_photo_url: property.max_photo_url,
         hotel_name: property.hotel_name_trans,
         district: property.district,
         address: property.address,
@@ -136,7 +141,7 @@ exports.hotelSearhCityName = async (req, res) => {
 
     }catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'An error occurred' });
+      res.status(500).json({ error: 'Dates must be current.' });
     }
 
     
@@ -144,39 +149,137 @@ exports.hotelSearhCityName = async (req, res) => {
     
 };
 
-  
-exports.getHotelDetails = async (req,res) => {
 
-    
-    const searchParams = {
-     
-        hotel_id: req.body.hotel_id,
-        currency: 'USD',
-        locale: 'en-us',
-        checkout_date: req.body.checkout_date,
-        checkin_date: req.body.checkin_date,
-      
+
+exports.getHotelDetails = async (req, res) => {
+
+  let hotelData;
+  
+
+  const options = {
+    method: 'GET',
+    url: 'https://booking-com.p.rapidapi.com/v2/hotels/details',
+    params: {
+      hotel_id: req.body.hotel_id,
+      currency: 'USD',
+      locale: 'en-us',
+      checkout_date: req.body.checkout_date,
+      checkin_date: req.body.checkin_date,
+    },
+    headers: {
+      'X-RapidAPI-Key': hotelconfig.API_KEY,
+      'X-RapidAPI-Host': hotelconfig.HOST
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+
+    hotelData = {
+      hotelName: response.data.hotel_name,
+      hotelAddress: response.data.address,
+      city: response.data.city_trans,   
+      zip: response.data.zip,
+      country: response.data.country_trans,
+      amount_per_night: response.data.composite_price_breakdown.gross_amount_per_night,
+      propertyOffersIcons: response.data.property_highlight_strip,
+      rooms: {},
+      reviewNr: response.data.review_nr,   
       
     };
+
+    // Remove "iconset/" from each icon in propertyOffersIcons
+  hotelData.propertyOffersIcons.forEach((offer) => {
+    if (offer.icon_list) {
+      offer.icon_list.forEach((icon) => {
+        if (icon.icon) {
+          icon.icon = icon.icon.replace('iconset/', '');
+        }
+      });
+    }
+  });
+
+    // Extract room information
+    for (const roomId in response.data.rooms) {
+      const room = response.data.rooms[roomId];
+      hotelData.rooms[roomId] = { 
+        photos: room.photos.map(photo => ({ url_original: photo.url_original })), 
+        description: room.description,
+       
+        // Add more room details as needed
+      };
+    }
+
+    
+  } catch (error) {
+    console.error(error);
+    
+  }
+
+  console.log(hotelData);
+
+  const reviewOptions = {
+    method: 'GET',
+  url: 'https://booking-com.p.rapidapi.com/v1/hotels/reviews',
+  params: {
+    sort_type: 'SORT_MOST_RELEVANT',
+    hotel_id: req.body.hotel_id,
+    locale: 'en-gb'
+  },
+  headers: {
+    'X-RapidAPI-Key': 'dc738405a5msh5a6e6771d7ad9fap1a9b2ejsn149b95dc3d3e',
+    'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
+  }
+};
+
+  try{
+
+    const response = await axios.request(reviewOptions);
+
+    const extractedReviews = {
+      reviews: response.data.result.map(review => ({
+        pros: review.pros,
+        title: review.title,
+        averageScore: review.average_score,
+      })),
+    };
+    
+    const results = {
+      hotelData,
+      extractedReviews
+    }
     
 
-    const options = createOptions('GET', 'https://booking-com.p.rapidapi.com/v2/hotels/details', searchParams);
-    try {
-      const response = await axios.request(options);
-      res.status(200).send(response.data);
-      
 
-    }catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'An error occurred' });
-    }
-  };
+
+
+    res.status(200).json(results);
+  } catch(error){
+
+    res.status(error.response?.status || 500).json({
+      error: error.response?.data?.message || 'An error occurred',
+    });
+
+
+  }
+
+};
 
 
  
 
 
-  exports.createCheckout = async (req,res) =>{
+exports.createCheckout = async (req,res) =>{
+
+    const userId = req.id;
+    const price = req.body.price;
+ 
+      
+    // Check if the user exists
+    const user = await db.users.findByPk(userId);
+    if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+    }
 
     
     function usdToCents(usd) {
@@ -198,25 +301,80 @@ exports.getHotelDetails = async (req,res) => {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: 'Hyatt Place San Jose, Downtown',
-              description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id massa in purus bibendum varius. Cras lacinia, libero ut dictum tincidunt, justo urna dapibus lectus, ac convallis nisl libero in nisi. Sed aliquet leo ut eros laoreet, auctor dictum erat scelerisque. Curabitur',
+              name: req.body.hotelName,
+              description: req.body.descreption,
               images: [
-                'https://cf.bstatic.com/xdata/images/hotel/square60/155536705.jpg?k=c882f29ff952ef506f5285f0395fb5b294d201bfbb1c1d2a0b70d9a0f1545eca&o=',
-                'https://cf.bstatic.com/xdata/images/hotel/max300/155536705.jpg?k=c882f29ff952ef506f5285f0395fb5b294d201bfbb1c1d2a0b70d9a0f1545eca&o=',
+                req.body.imageUrl,
               ],
             },
-            unit_amount: usdToCents(184.1222),
+            unit_amount: usdToCents(182.1222),
           },
-          quantity: 1,
+          quantity: req.body.roomQuantity,
         },
       ],
       mode: 'payment',
-      success_url: 'http://localhost:3000/',
-      cancel_url: 'http://localhost:3000/home',
+      success_url: 'http://localhost:3000/success',
+      cancel_url: 'http://localhost:3000/cancel',
     });
   
     res.redirect(303, session.url);
+    // res.json({ sessionUrl: session.url });
+};
 
 
+// Handle the success URL (e.g., /success) to create a reservation
+exports.handleSuccess = async (req, res) => {
 
-  };
+    const userId = req.id;
+  try {
+      // Extract necessary information from the request body
+      const { hotelName, description, checkInDate, duration, guests, price, imageUrl } = req.body;
+
+      // Check if the user exists
+      const user = await db.users.findByPk(userId);
+      if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+      }
+
+      // Create reservation
+      const reservation = await db.reservations.create({
+          userId,
+          hotelName,
+          description,
+          checkInDate,
+          duration,
+          guests,
+          price,
+          imageUrl,
+      });
+
+      res.status(201).json(reservation);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+exports.getReservations = async (req, res) => {
+  const userId = req.id;
+
+  try {
+
+    // Check if the user exists
+    const user = await db.users.findByPk(userId);
+    if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Get reservations for the user
+    const reservations = await db.reservations.findAll({
+        where: { userId},
+    });
+
+    res.status(200).json(reservations);
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+
+};
