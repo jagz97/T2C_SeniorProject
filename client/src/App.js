@@ -4,7 +4,7 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
-
+import HelpPage from './pages/HelpPage'
 import AuthRequired from './components/authrequired/AuthRequired'
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
               <Route element={<AuthRequired/>}>
                 <Route path="posts" element={<ListviewPage/>}/>
                 <Route path="profile" element={<ProfilePage/>}/>
+                <Route path="help" element={<HelpPage/>}/>
               </Route>
             </Route>
             <Route path="*" element={<h1>Not Found!</h1>}/>
