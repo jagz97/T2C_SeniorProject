@@ -1,10 +1,10 @@
 main.help {
     background: url('../../images/pexels-james-wheeler-1486974\ 1.jpg') no-repeat bottom center fixed;
     background-size: cover;
-    font-family: 'DM Sans', sans-serif;
+    font-family: "poppins", "DM Sans", sans-serif;
     color: #fff;
     /*Prevent Scrolling by calculating remaining height based off fixed nav height*/
-    height: calc(100vh - 75px); 
+    height: 100vh; 
 }
 
 a.help-link {
@@ -18,19 +18,24 @@ a.help-link:hover {
 }
 
 .container-help {
-    padding-top: 100px;
     text-align: center;
 }
 
 .container-help h1 {
-    font-size: 3rem;
+    font-size: 2.75rem;
     margin: 0;
-    font-weight: 400;
 }
+.container-help h1,
+.container-help h2 {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
 
 .container-help h2,
 .help-links {
-    font-size: 2rem;
+    font-weight: 700;
+    font-size: 1.75rem;
     width: auto;
 } 
 
@@ -44,7 +49,9 @@ a.help-link:hover {
 }
 
 .help-links {
-    background-color: rgba(0, 0, 0, .53);
+    background: rgba(243, 243, 243, 0.60);
+    backdrop-filter: blur(17px);
+    color: #fff;
     min-height: 225px;
     display: flex;
     flex-direction: column;
