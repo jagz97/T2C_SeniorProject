@@ -23,10 +23,12 @@ const SearchResultLayout = () => {
 
     const arrival = location.state?.arrival || null
     const departure = location.state?.departure || null
+    const rooms = location.state?.roomAmount || null
 
     const [ hotelDetail, sethotelDetail ] = useState({})
     const [ arrivalDate, setArrivalDate ] = useState(() => arrival ? arrival : getDate())
     const [ departureDate, setDepartureDate ] = useState(() => departure ? departure : getDate(1))
+    const [ roomAmount, setRoomAmount ] = useState(() => rooms ? rooms : 1 )
     
     useEffect(() => {
         const fetchHotelDetail = async () => {
@@ -70,7 +72,7 @@ const SearchResultLayout = () => {
                         {
                             Object.keys(hotelDetail).length === 0 ? <h1 className="text-center text-muted">Loading...</h1>
                             :
-                            <Outlet context={{hotelDetail, arrivalDate, setArrivalDate, departureDate, setDepartureDate}}/>
+                            <Outlet context={{hotelDetail, arrivalDate, setArrivalDate, departureDate, setDepartureDate, roomAmount, setRoomAmount}}/>
                         }
                     </div>
                 </Col>

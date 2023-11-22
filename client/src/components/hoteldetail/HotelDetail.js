@@ -21,11 +21,13 @@ const SearchResult = () => {
             arrivalDate,
             setArrivalDate,
             departureDate,
-            setDepartureDate
+            setDepartureDate,
+            roomAmount,
+            setRoomAmount
         } = useOutletContext()
        
     const [ tripDays, setTripDays ] = useState(1)
-    const [ roomAmount, setRoomAmount ] = useState(1)
+ 
     const [ dateErrorMsg, setDateErrorMsg ] = useState("")
     
     /* Grabbing Data from api data*/
@@ -53,7 +55,7 @@ const SearchResult = () => {
     
     const hotelOffers = offers.slice(0,10).map((offer) => (
         <HotelOffer name={offer.name}/>
-    ))
+    ))  
         
     useEffect(() => {
         // for whatever reason .getTime() does not work for equality test.
