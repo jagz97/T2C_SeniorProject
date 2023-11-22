@@ -19,7 +19,6 @@ import {
     MdDriveFileRenameOutline
 } from "react-icons/md"
 
-import { FaMagnifyingGlass } from "react-icons/fa6";
 
 import { data } from "./tempData.js"
 
@@ -139,11 +138,13 @@ const Search = () => {
 
     const hotels = searchResults.map((result) => (
         <SearchResult 
-            key={result.id}
+            key={result.hotel_id}
+            id={result.hotel_id}
             hotelImage={result.main_photo_url} 
             hotelRating={result.review_score} 
             hotelPrice={result.price_breakdown.gross_price}
             hotelName={result.hotel_name}
+            dates={{arrivalDate, departureDate}}
         />
     ))
 
