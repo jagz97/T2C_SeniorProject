@@ -241,7 +241,7 @@ const Settings = () => {
                                     id="settings-file-input"
                                 />
                         </label> 
-                        <div onClick={() => navigate("/")} className="settings-control settings-recover-pw">
+                        <div onClick={() => navigate("/passwordreset")} className="settings-control settings-recover-pw">
                             <MdLockReset size={20}/>
                             Recover Password
                         </div>
