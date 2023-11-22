@@ -145,6 +145,7 @@ const Search = () => {
             hotelPrice={result.price_breakdown.gross_price}
             hotelName={result.hotel_name}
             dates={{arrivalDate, departureDate}}
+            roomAmount={roomAmount}
         />
     ))
 

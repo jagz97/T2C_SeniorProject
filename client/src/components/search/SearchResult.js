@@ -3,12 +3,12 @@ import { Link } from "react-router-dom"
 import Rating from "../ratings/Ratings"
 import Col from "react-bootstrap/Col"
 import "./Search.css"
-const SearchResult = ({hotelImage, hotelPrice, hotelRating, hotelName, id, dates}) => {
+const SearchResult = ({hotelImage, hotelPrice, hotelRating, hotelName, id, dates, roomAmount}) => {
 
     return (
 
         <Col className="col-auto mx-xxl-2 mb-4">
-                <Link className="container-result mx-auto" state={dates} to={`/hotel/${id}`}>
+                <Link className="container-result mx-auto" state={{...dates, roomAmount}} to={`/hotel/${id}`}>
                     <div className="container-result-img">
                         <img className="result-img" src={hotelImage}/>   
                     </div>
