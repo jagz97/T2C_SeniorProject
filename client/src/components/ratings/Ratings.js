@@ -16,8 +16,11 @@ const Ratings = ({value, starSize}) => {
     
     if(value) {    
     
-        // handle case if value of props.value out of range
-        if(numStars > 5) {
+        // handle case if value of props.value out of range of 5
+        if(numStars > 5 && numStars <= 10) {
+            numStars /= 2 
+        }
+        else if(numStars > 10) {
             numStars = 5
         }
         else if(numStars < 0) {
