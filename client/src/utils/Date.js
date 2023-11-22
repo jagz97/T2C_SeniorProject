@@ -10,7 +10,9 @@ export function getDate(dayOffset=0) {
 }
 
 export function dateToString(date) {
-    return date.toISOString().split('T')[0]
+    const timezoneOffset = date.getTimezoneOffset()
+    const localDate = new Date(date.getTime() - (timezoneOffset * 60 * 1000))
+    return localDate.toISOString().split('T')[0]
 }
 
 export function getDayDifference(d1,d2) {
