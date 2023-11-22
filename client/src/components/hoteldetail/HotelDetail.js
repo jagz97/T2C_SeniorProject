@@ -84,13 +84,13 @@ const SearchResult = () => {
                 </div>
                 <div className="hotel-images">
                     <div className="hotel-image-sml">
-                        <img className="hotel-image" src={room.photos[0]["url_original"]} alt="hotel preview sm"/>
+                        <img className="hotel-image" src={room.photos[0]["url_original"]} alt=""/>
                     </div>
                     <div className="hotel-image-smr">
-                        <img className="hotel-image" src={room.photos[2]["url_original"]} alt="hotel preview sm"/>
+                        <img className="hotel-image" src={room.photos[2]["url_original"]} alt=""/>
                     </div>
                     <div className="hotel-image-lgb">
-                        <img className="hotel-image" src={room.photos[1]["url_original"]} alt="hotel preview lg"/>
+                        <img className="hotel-image" src={room.photos[1]["url_original"]} alt=""/>
                     </div>
                 </div>
             </section>
