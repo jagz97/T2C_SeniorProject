@@ -60,9 +60,14 @@ const Login = () => {
         const formData = { email: emailData, password: passwordData }
         try {
             const { data : user } = await api.post("/users/auth/signin", formData)
-            console.log(user)
-            login(user)
-            navigate(from, {replace: true})
+
+            // if first time login redirect to profile creation page
+            // else redirect to a protected route or home page
+            const path = user.firsTimeLogin ? "/onboarding" : from 
+
+            login(user) // stores user info in local storage
+
+            navigate(path, {replace: true})
         }
         catch(error) {
             const errorMessage = error.response?.data?.message
@@ -127,7 +132,7 @@ const Login = () => {
                                         </InputGroup>
                                         <div className="login-error-message">{errorMessage}</div>
                                         <div className='container-recover-password'>
-                                            <Link to='#' className='recover-password-btn'>Recover Password?</Link>
+                                            <Link to='/passwordrecovery' className='recover-password-btn'>Recover Password?</Link>
                                         </div>
 
                                     </Form.Group>

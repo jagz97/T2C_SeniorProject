@@ -14,6 +14,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: true
         },
+        bio: {
+            type: Sequelize.TEXT,
+            allowNull: true
+        },
         gender: {
             type: Sequelize.STRING,
             allowNull: true

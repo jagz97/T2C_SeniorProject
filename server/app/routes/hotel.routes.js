@@ -1,6 +1,6 @@
 
 const controller = require('../controllers/hotel.controller');
-
+const {authJwt, upload} = require('../middleware');
 
 
 module.exports = function (app) {
@@ -12,10 +12,34 @@ module.exports = function (app) {
     next();
     });
 
-    app.get(
+    app.post(
     "/api/hotels_search_city_name",
     controller.hotelSearhCityName
     );
+
+    app.post(
+        "/api/hotelDetails",
+        controller.getHotelDetails
+    );
+
+    app.post(
+        "/api/createCheckout",
+        [authJwt.verifyToken],
+        controller.createCheckout
+    );
+
+    app.post(
+        "/api/successReservation",
+        [authJwt.verifyToken],
+        controller.handleSuccess
+    );
+
+    app.get(
+        "/api/reservations",
+        [authJwt.verifyToken],
+        controller.getReservations
+    );
+   
 
 
 };
