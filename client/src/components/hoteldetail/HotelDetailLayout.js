@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Outlet, useParams, useLocation, NavLink } from "react-router-dom"
-import { getDate } from "../../utils/Date"
+import { getDate, dateToString} from "../../utils/Date"
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -21,20 +21,38 @@ const SearchResultLayout = () => {
     const params = useParams()
     const location = useLocation()
 
-    const arrival = location.state?.arrival || null
-    const departure = location.state?.departure || null
+    const arrival = location.state?.arrivalDate || null
+    const departure = location.state?.departureDate || null
     const rooms = location.state?.roomAmount || null
 
     const [ hotelDetail, sethotelDetail ] = useState({})
     const [ arrivalDate, setArrivalDate ] = useState(() => arrival ? arrival : getDate())
     const [ departureDate, setDepartureDate ] = useState(() => departure ? departure : getDate(1))
     const [ roomAmount, setRoomAmount ] = useState(() => rooms ? rooms : 1 )
-    
+
     useEffect(() => {
         const fetchHotelDetail = async () => {
             // simulate fetch delay
-            setTimeout(() => sethotelDetail(detail), 2000) 
+            // setTimeout(() => sethotelDetail(detail), 2000) 
             // sethotelDetail(detail)
+            console.log(arrivalDate, departureDate, params.id)
+            const detailData = {
+                hotel_id : params.id,
+                checkin_date: dateToString(arrivalDate),
+                checkout_date: dateToString(departureDate)
+            }
+            console.log("We will post with:",detailData)
+            try {
+                // const response = await api.post("/hotelDetails", detailData)
+                // sethotelDetail(response.data)
+                
+                // set to placholder data:
+                sethotelDetail(detail)
+
+                // console.log(response)
+            } catch (error) {
+                console.log(error)
+            }
             console.log("Layout Route Effect!")
         }
         fetchHotelDetail()
