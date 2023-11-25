@@ -1,8 +1,8 @@
 import React from 'react';
 import './Avatar.css'
 import {
-    Person
-} from 'akar-icons'
+    BsPersonFill
+} from 'react-icons/bs'
 
 /** Avatar Component Props
  * src - Path of Image File
@@ -25,14 +25,14 @@ const Avatar = ({src,alt,size,color,border}) => {
     }
     
     // avatar background
-    let colorStyle = color ? {backgroundColor: color} : {backgroundColor: "#1e1e1e"}
+    let colorStyle = color ? {backgroundColor: color} : {backgroundColor: "#fff"}
 
     // render either user img or anonymous icon
     if(src) {
         render = <img src={src} alt={alt}/>
     }
     else {
-        render = <Person />
+        render = <BsPersonFill color={"#b5bab7"} strokeWidth={1.1}/>
     }
 
     return (

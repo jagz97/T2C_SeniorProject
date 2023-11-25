@@ -7,6 +7,9 @@ import ListviewPage from './pages/ListviewPage'
 import OnboardingPage from './pages/OnboardingPage'
 
 import CreatePostPage from './pages/CreatePostPage'
+import PasswordRequestPage from './pages/PasswordRequestPage'
+import PasswordResetPage from './pages/PasswordResetPage'
+
 import "./App.css"
 
 
@@ -18,7 +21,8 @@ function App() {
         <Routes>
           <Route path="login" element={<LoginPage/>}/>
           <Route path="register" element={<SignupPage/>}/>
-
+          <Route path="passwordrecovery" element={<PasswordRequestPage/>}/>
+          <Route path="passwordreset" element={<PasswordResetPage/>}/>
           <Route element={<NavLayout/>}>
               <Route index element={<h1>Home</h1>}/>
           </Route>

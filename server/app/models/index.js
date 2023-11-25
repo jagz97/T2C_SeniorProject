@@ -27,8 +27,19 @@ db.token = require("./token.models.js")(sequelize, Sequelize);
 db.posts = require("./posts.models.js")(sequelize, Sequelize);
 db.likes = require("./like.models.js")(sequelize,Sequelize);
 db.comments = require("./comment.models.js")(sequelize, Sequelize);
+db.experience = require("./experiences.models.js")(sequelize, Sequelize);
+db.hotel = require("./hotels.models.js")(sequelize,Sequelize);
+db.restaurant = require("./restaurants.models.js")(sequelize,Sequelize);
+db.attraction = require("./attractions.models.js")(sequelize,Sequelize);
+db.reservations = require("./reservations.models.js")(sequelize, Sequelize);
 
 
+
+const Reservation = db.reservations;
+const Experience = db.experience;
+const Hotel = db.hotel;
+const Restaurant = db.restaurant;
+const Attraction = db.attraction;
 const Comments = db.comments;
 const Likes = db.likes;
 const Users = db.users;
@@ -38,11 +49,32 @@ const Post = db.posts;
 const Image = db.image;
 
 
-// Define associations
+Users.hasMany(Reservation, { foreignKey: 'userId', as: 'reservations' });
+Reservation.belongsTo(Users, { foreignKey: 'userId' });
+
+Experience.belongsTo(Users, { foreignKey: 'userId' });
+Users.hasMany(Experience, {foreignKey: 'userId', as: 'experiences' });
+
+Experience.belongsTo(sequelize.models.Image, { foreignKey: 'experiencePicId', as: 'experiencePic' });
+
+
+// associations for Experience, Hotel, Restaurant, and Attraction
+Experience.belongsTo(Hotel, { foreignKey: 'hotelId', as: 'hotel' });
+Experience.belongsTo(Restaurant, { foreignKey: 'restaurantId', as: 'restaurant' });
+Experience.belongsTo(Attraction, { foreignKey: 'attractionId', as: 'attraction' });
+
+Hotel.hasMany(Experience, { foreignKey: 'hotelId', as: 'experiences' });
+Restaurant.hasMany(Experience, { foreignKey: 'restaurantId', as: 'experiences' });
+Attraction.hasMany(Experience, { foreignKey: 'attractionId', as: 'experiences' });
+
+
+
+//post associations for user
+
 Post.hasMany(Comments, { foreignKey: 'postId' });
 Users.hasMany(Comments, { foreignKey: 'userId' });
 
-// You can also add a reverse association to get the comments of a post
+// association to get the comments of a post
 Comments.belongsTo(Post, { foreignKey: 'postId' });
 Comments.belongsTo(Users, { foreignKey: 'userId' });
 
@@ -51,7 +83,7 @@ Comments.belongsTo(Users, { foreignKey: 'userId' });
 Post.hasMany(Likes, { foreignKey: 'postId' });
 Users.hasMany(Likes, { foreignKey: 'userId' });
 
-// You can also add a reverse association to get the likes of a post
+// reverse association to get the likes of a post
 Likes.belongsTo(Post, { foreignKey: 'postId' });
 
 
@@ -60,7 +92,7 @@ Likes.belongsTo(Post, { foreignKey: 'postId' });
 Post.hasMany(Likes, { foreignKey: 'postId' });
 Users.hasMany(Likes, { foreignKey: 'userId' });
 
-// You can also add a reverse association to get the likes of a post
+// reverse association to get the likes of a post
 Likes.belongsTo(Post, { foreignKey: 'postId' });
 
 
