@@ -6,6 +6,9 @@ import Row from 'react-bootstrap/Row'
 import ProfileBanner from '../../images/pexels-venelin-dimitrov-3476312.jpg'
 import useAuth from "../../hooks/useAuth"
 import DragAndDrop from "../dragdrop/DragAndDrop"
+import ExperienceTextInput from "./ExperienceTextInput"
+import ExperienceTextArea from "./ExperienceTextArea"
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector"
 import { api } from '../../api/axios'
 
 import "./CreateExperience.css"
@@ -52,33 +55,37 @@ const CreateExperience = () => {
 
     
     const [ expPic, setExpPic ] = useState(null)
+
     const [ description, setDescription ] = useState("")
     const [ country, setCountry ] = useState("")
-    const [ city, setCity ] = useState("")
+    const [ region, setRegion ] = useState("")
 
     const [ hotelName, setHotelName ] = useState("")
     const [ hotelLocation, setHotelLocation ] = useState("")
 
     const [ restaurantName, setRestaurantName] = useState("")
-    const [ restaurantCuisine, setRestaurantCuisine ] = useState("")
     const [ restaurantLocation, setRestaurantLocation ] = useState("")
+    const [ restaurantCuisine, setRestaurantCuisine ] = useState("")
 
     const [ attractionName, setAttractionName ] = useState("")
     const [ attractionLocation, setAttractionLocation] = useState("")
+    const [ attractionDescription, setAttractionDescription ] = useState("")
 
-    const [ overallRating, setOverallRating ] = useState(0)
+    const [ starRating, setStarRating ] = useState(0)
     const [ attractionRating, setAttractionRating ] = useState(0)
     const [ restaurantRating, setRestaurantRating ] = useState(0)
+    const [ hotelRating, setHotelRating ] = useState(0)
 
     const [ success, setSuccess ] = useState(false)
-    const [ errorExpMsg, setErrorExpMsg ] = useState("")
+    const [ errorExpImg, setErrorExpImg ] = useState("")
     
     const descriptionLimit = 255
 
     const handleReset = () => {
         console.log("Reset.")
     }
-
+    console.log(restaurantName)
+    console.log(restaurantName.length)
     return (
         <Container fluid>
             <Row>
@@ -93,27 +100,29 @@ const CreateExperience = () => {
                             />
                         </div>
                             
-                        <div className="profile-about">                      
+                        <div className="profile-about-container">                      
                             {profile && <p className="profile-username">{profile.firstName} {profile.lastName}</p>}  
                             {/* 255 character placeholder text */}
-                            <p className="profile-bio">
-                                {profile.bio}
-                            </p>
+                            <div className="profile-bio-wrapper">
+                                <p className="profile-bio">
+                                    {profile.bio}
+                                </p>
+                            </div>
                         </div>  
                 </Col>
             </Row>
-            <Row className="createexp-row justify-content-center align-items-end gap-5 mt-1">
+            <Row className="expcreate-row justify-content-center align-items-end gap-5 mt-1">
                 {
                  success ? 
-                 <Col className="col-12 text-center createexp-reset-col">
+                 <Col className="col-12 text-center expcreate-reset-col">
                      <p className="success">Experience Successfully Created</p>
-                     <p className="createexp-reset" onClick={handleReset}>Click to make another post.</p>
+                     <p className="expcreate-reset" onClick={handleReset}>Click to make another post.</p>
                 </Col>
                 :
                 <>
                     <Col className="col-12 col-md-auto">
                     <h2 className="expcreate-img-header text-center text-md-start">Create Experience</h2>
-                        { errorExpMsg ? <p className="error text-center m-0">{errorExpMsg}</p>: null }
+                        { errorExpImg ? <p className="error text-center m-0">{errorExpImg}</p>: null }
                         <DragAndDrop
                             picture={expPic}
                             setPicture={setExpPic}
@@ -122,40 +131,93 @@ const CreateExperience = () => {
                     <Col className="col-12 col-md-auto">
                         <div className="expcreate-inputs">
                             <form className="expcreate-form">
-                                <div className="expcreate-caption-wrapper">
-                                    <label htmlFor="createxp-caption">Caption</label>
-                                    <textarea
-                                        name="description"
-                                        value={description}
-                                        onChange={(event) => setDescription(event.target.value) }
-                                        id="expcreate-description"
-                                        maxLength={descriptionLimit}
-                                        required
+                                <ExperienceTextArea
+                                    name="Experience Description"
+                                    value={restaurantName}
+                                    onChange={(event) => setDescription(event.target.value)}
+                                    id="expcreate-description"
+                                    max={100}
+                                /> 
+                                 <div className="expcreate-country-wrapper">
+                                    <label htmlFor="expcreate-country">Country</label>
+                                    <CountryDropdown
+                                        value={country}
+                                        onChange={(value) => setCountry(value)}
+                                        defaultOptionLabel="Select Country"
+                                        priorityOptions={["CA", "US",]}
+                                        id="expcreate-country"
+                                        className="expcreate-country"
                                     />
-                                <p className="expcreate-text-count">{description.length} / {descriptionLimit}</p>
                                 </div>
-                                <div className="expcreate-input-row">
-                                    <div className="expcreate-textinput-wrapper">
-                                        <label htmlFor="exp-hotel">Hotel</label>
-                                        <input
-                                            type="text"
-                                            name=""
-                                            // value={}
-                                            // onChange={}
-                                            id=""
-                                        />
-                                    </div>
-                                    <div className="expcreate-textinput-wrapper">
-                                        <label htmlFor="exp-hotel">Hotel</label>
-                                        <input
-                                            type="text"
-                                            name=""
-                                            // value={}
-                                            // onChange={}
-                                            id=""
-                                        />
-                                    </div>
+                                <div className="expcreate-region-wrapper">
+                                    <label htmlFor="expcreate-region">Region</label>
+                                    <RegionDropdown
+                                        country={country}
+                                        value={region}
+                                        onChange={(value) => setRegion(value)}
+                                        id="expcreate-region"
+                                        showDefaultOption
+                                        defaultOptionLabel="Select Region"
+                                        blankOptionLabel="No Country selected yet"
+                                        className="expcreate-region"
+                                    />
                                 </div>
+                                <ExperienceTextInput
+                                    name="Hotel Name"
+                                    value={hotelName}
+                                    onChange={(event) => setHotelName(event.target.value)}
+                                    id="expcreate-hotelname"
+                                    max={100}
+                                />
+                                <ExperienceTextInput
+                                    name="Hotel Location"
+                                    value={hotelLocation}
+                                    onChange={(event) => setHotelLocation(event.target.value)}
+                                    id="expcreate-hotellocation"
+                                    max={100}
+                                />
+                                <ExperienceTextInput
+                                    name="Restaurant Name"
+                                    value={restaurantName}
+                                    onChange={(event) => setRestaurantName(event.target.value)}
+                                    id="expcreate-restaurantname"
+                                    max={100}
+                                />
+                                <ExperienceTextInput
+                                    name="Restaurant Location"
+                                    value={restaurantLocation}
+                                    onChange={(event) => setRestaurantLocation(event.target.value)}
+                                    id="expcreate-restaurantlocation"
+                                    max={100}
+                                />
+                                <ExperienceTextInput
+                                    name="Restaurant Cuisine"
+                                    value={restaurantCuisine}
+                                    onChange={(event) => setRestaurantCuisine(event.target.value)}
+                                    id="expcreate-restaurantcuisine"
+                                    max={100}
+                                />
+                                <ExperienceTextInput
+                                    name="Attraction Name"
+                                    value={attractionName}
+                                    onChange={(event) => setAttractionName(event.target.value)}
+                                    id="expcreate-attractioncuisine"
+                                    max={100}
+                                />
+                                <ExperienceTextInput
+                                    name="Attraction Location"
+                                    value={attractionLocation}
+                                    onChange={(event) => setAttractionLocation(event.target.value)}
+                                    id="expcreate-attractionlocation"
+                                    max={100}
+                                />
+                                <ExperienceTextArea
+                                    name="Attraction Description"
+                                    value={attractionName}
+                                    onChange={(event) => setAttractionDescription(event.target.value)}
+                                    id="expcreate-attractiondesc"
+                                    max={100}
+                                /> 
                             </form>
                         </div>
                     </Col>
