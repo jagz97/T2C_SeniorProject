@@ -107,20 +107,6 @@ const CreatePost = () => {
 
     }
 
-      // For select styles:
-    const handleCountry = (event) => {
-        if(country === "") {
-            event.target.style.color = "#000"
-        }
-        setCountry(event.target.value)
-    }
-
-    const handleCity = (event) => {
-        if(region === "") {
-            event.target.style.color = "#000"
-        }
-        setRegion(event.target.value)
-    }
 
     const handleReset = () => {
         setCaption("")
@@ -145,7 +131,7 @@ const CreatePost = () => {
                             />
                         </div>
                             
-                        <div className="profile-about">                      
+                        <div className="profile-about-container">                      
                             {profile && <p className="profile-username">{profile.firstName} {profile.lastName}</p>}  
                             {/* 255 character placeholder text */}
                             <p className="profile-bio">
