@@ -131,7 +131,7 @@ const Settings = () => {
             }
         }
         fetchProfile()
-    }, []) 
+    }, [user.accesstoken]) 
 
     const handleSave = async () => {
         
