@@ -85,10 +85,11 @@ const OnboardImage = ({navigateNextPage, header, endpoint}) => {
                         <Avatar 
                             src={usrImg ? URL.createObjectURL(usrImg): null} 
                             size={275} 
-                            color={"#2a2a2a"}
+                            color={"#fff"}
+                            border={"3px solid #5D17B0"}
                             alt="user profile picture"
                         />
-                        <div className="onboard-pfp-icon"><Plus size={15} strokeWidth={5}/></div>
+                        <div className="onboard-pfp-icon"><Plus size={15} strokeWidth={5} color={"#fff"}/></div>
                         </label>
                     <input 
                         type="file" 

@@ -69,12 +69,19 @@ const Profile = () => {
                                 />
                             </div>
                                
-                            <div className="profile-about">                      
-                                {profile && <p className="profile-username">{profile.firstName} {profile.lastName}</p>}  
-                                {/* 255 character placeholder text */}
-                                <p className="profile-bio">
-                                    {profile.bio}
-                                </p>
+                            <div className="profile-about-container">
+                                <div className="profile-username-wrapper">
+                                    {profile && <p className="profile-username">{profile.firstName} {profile.lastName}</p>}  
+                                </div>                      
+                                <div className="profile-bio-wrapper">
+                                    {
+                                        profile.bio ? 
+                                        <p className="profile-bio">{profile.bio}</p>
+                                        :
+                                        <p className="profile-bio text-muted">{profile.firstName} does not have a bio yet.</p>
+                                    }
+                                </div>
+                                
                             </div>
                             
                     </Col>

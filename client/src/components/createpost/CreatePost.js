@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row'
 import ProfileBanner from '../../images/pexels-venelin-dimitrov-3476312.jpg'
 import useAuth from "../../hooks/useAuth"
 import DragAndDrop from "../dragdrop/DragAndDrop"
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector"
 import { api } from '../../api/axios'
 
 import "./CreatePost.css"
@@ -54,7 +55,7 @@ const CreatePost = () => {
     const [ caption, setCaption ] = useState("")
     const [ postPic, setPostPic ] = useState(null)
     const [ country, setCountry ] = useState("")
-    const [ city, setCity ] = useState("")
+    const [ region, setRegion ] = useState("")
 
     const [ success, setSuccess ] = useState(false)
     const [ errorPostMsg, setErrorPostMsg ] = useState("")
@@ -67,7 +68,7 @@ const CreatePost = () => {
         
         setErrorPostMsg("")
     
-        if(!caption || !postPic || !country || !city) {
+        if(!caption || !postPic || !country || !region) {
             setErrorPostMsg("All input fields are required.")
             return
         }
@@ -77,7 +78,7 @@ const CreatePost = () => {
         const data = new FormData()
         data.append("caption",caption)
         data.append("country",country)
-        data.append("city",city)
+        data.append("city",region)
         data.append("postPic", postPic)
 
         const headerOptions = {
@@ -106,27 +107,13 @@ const CreatePost = () => {
 
     }
 
-      // For select styles:
-    const handleCountry = (event) => {
-        if(country === "") {
-            event.target.style.color = "#000"
-        }
-        setCountry(event.target.value)
-    }
-
-    const handleCity = (event) => {
-        if(city === "") {
-            event.target.style.color = "#000"
-        }
-        setCity(event.target.value)
-    }
 
     const handleReset = () => {
         setCaption("")
         setCaption("")
         setPostPic(null)
         setCountry("")
-        setCity("")
+        setRegion("")
         setSuccess(false)
     }
 
@@ -144,7 +131,7 @@ const CreatePost = () => {
                             />
                         </div>
                             
-                        <div className="profile-about">                      
+                        <div className="profile-about-container">                      
                             {profile && <p className="profile-username">{profile.firstName} {profile.lastName}</p>}  
                             {/* 255 character placeholder text */}
                             <p className="profile-bio">
@@ -153,7 +140,7 @@ const CreatePost = () => {
                         </div>  
                 </Col>
             </Row>
-            <Row className="createpost-row justify-content-center align-items-end gap-5 mt-1">
+            <Row className="createpost-row justify-content-center align-items-center gap-5 ">
                 {
                  success ? 
                  <Col className="col-12 text-center createpost-reset-col">
@@ -162,7 +149,7 @@ const CreatePost = () => {
                 </Col>
                  : 
                 <>
-                    <Col className="col-12 col-md-auto ">
+                    <Col className="col-12 col-md-auto align-self-start">
                         <h2 className="postcreate-img-header text-center text-md-start">Create Post</h2>
                         <DragAndDrop
                             picture={postPic}
@@ -187,28 +174,25 @@ const CreatePost = () => {
                             <div className="createpost-select-inputs">
                                 <div className="createpost-country-wrapper">
                                     <label htmlFor="createpost-country">Country</label>
-                                    <select 
+                                    <CountryDropdown
+                                        value={country}
+                                        onChange={(value) => setCountry(value)}
+                                        defaultOptionLabel="Select Country"
+                                        priorityOptions={["CA", "US",]}
                                         id="createpost-country"
-                                        defaultValue={country}
-                                        onChange={handleCountry}
-                                    >
-                                        <option disabled value="">Choose Country</option>
-                                        <option value="United States" >United States</option>
-                                        <option value="Canada">Canada</option>
-                                    </select>
+                                    />
                                 </div>
-                                <div className="createpost-city-wrapper">
-                                    <label htmlFor="createpost-city">City</label>
-                                    <select 
-                                        id="createpost-city"  
-                                        defaultValue={city}
-                                        onChange={handleCity}
-                                        
-                                    >
-                                        <option disabled value="">Choose City</option>
-                                        <option value="San Francisco" >San Francisco</option>
-                                        <option value="Los Angeles" >Los Angeles</option>
-                                    </select>
+                                <div className="createpost-region-wrapper">
+                                    <label htmlFor="createpost-region">Region</label>
+                                    <RegionDropdown
+                                        country={country}
+                                        value={region}
+                                        onChange={(value) => setRegion(value)}
+                                        id="createpost-region"
+                                        showDefaultOption
+                                        defaultOptionLabel="Select Region"
+                                        blankOptionLabel="No Country selected yet"
+                                    />
                                 </div>
                             </div>
                             <button className="createpost-btn" onClick={handleSubmit}>Post</button>
