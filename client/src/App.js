@@ -7,6 +7,7 @@ import ListviewPage from './pages/ListviewPage'
 import OnboardingPage from './pages/OnboardingPage'
 
 import CreatePostPage from './pages/CreatePostPage'
+import CreateExperiencePage from './pages/CreateExperiencePage'
 import "./App.css"
 
 
@@ -31,6 +32,7 @@ function App() {
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
               <Route path="createpost" element={<CreatePostPage/>}/>
+              <Route path="createexperience" element={<CreateExperiencePage/>}/>
             </Route>
           </Route>
             
