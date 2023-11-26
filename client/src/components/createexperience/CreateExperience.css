@@ -1,0 +1,35 @@
+.expcreate-row {
+    margin-bottom: 100px;
+}
+
+.expcreate-form {
+    width: 100%;
+    max-width: 400px;
+}
+
+.expcreate-text-count {
+    color: #828282; 
+    text-align: right;
+    margin: 0;
+ }
+
+ textarea#expcreate-description {
+    display: block;
+    width: 100%;
+    border: none;
+    min-height: 125px;
+    resize: none;
+    padding: 0.6em;
+    font-size: inherit;
+}
+
+.expcreate-input-row {
+    display: flex;
+}
+
+
+@media(min-width: 576px) {
+    .expcreate-form {
+        width: 500px;
+    }
+}
