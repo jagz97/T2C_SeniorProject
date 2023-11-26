@@ -134,9 +134,11 @@ const CreatePost = () => {
                         <div className="profile-about-container">                      
                             {profile && <p className="profile-username">{profile.firstName} {profile.lastName}</p>}  
                             {/* 255 character placeholder text */}
-                            <p className="profile-bio">
-                                {profile.bio}
-                            </p>
+                            <div className="profile-bio-wrapper">
+                                <p className="profile-bio">
+                                    {profile.bio}
+                                </p>
+                            </div>
                         </div>  
                 </Col>
             </Row>
