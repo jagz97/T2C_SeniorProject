@@ -56,6 +56,8 @@ const Settings = () => {
     const maxCount = 255
 
     const handleBioSave = async () => {
+        setSuccessMessage("")
+      
         const headerOptions = {
             headers: {
                 Authorization: `${user.accesstoken}`,
@@ -67,6 +69,7 @@ const Settings = () => {
             if(response.status === 200) {
                 setSuccessMessage("Bio Updated Successfully.")
                 setBioText(bio)
+                setErrorMessage("")
             } 
             
                 
@@ -106,7 +109,6 @@ const Settings = () => {
                 // convert buffer array into typed array
                 const profilePicData = (profilePicture.data) 
                 
-
                 // form the requried value for the img element's src attribute and set it to state
                 setProfilePicture(`data:${profilePicture.type};base64,${profilePicData}`) 
                 setFirstName(data?.firstName || "")
@@ -132,6 +134,7 @@ const Settings = () => {
     }, []) 
 
     const handleSave = async () => {
+        
         const newData = {
             firstName,
             lastName,
@@ -141,6 +144,16 @@ const Settings = () => {
         }
       
         console.log("Data we will post:",newData)
+
+
+        setErrorMessage("")
+        setSuccessMessage("")
+
+        if(!firstName || !lastName || !age || !gender) {
+            setErrorMessage("Input fields cannot be empty.")
+            return
+        }
+
         try {
             const headerOptions = {
                 headers: {
@@ -166,6 +179,9 @@ const Settings = () => {
         }
     }
 
+    const handleBioClose = () => {
+       setBioModal(false)
+    }
     return (
         <Container fluid>
             <Row>
@@ -184,7 +200,7 @@ const Settings = () => {
                             <MdOutlineEditNote siz={20}/>Edit Bio
                         </div>
                         {/* 255 character placeholder text */}
-                        <p className={`profile-bio ${!bio && "text-muted"}`}>
+                        <p className={`profile-bio ${!bioText && "text-muted"}`}>
                           {
                             bioText ? bioText : "You do not have a bio yet."
                           }
@@ -258,7 +274,7 @@ const Settings = () => {
                                 type="text"
                                 name="Last Name"
                                 value={lastName}
-                                placeholder={lastName}
+                                placeholder="Last Name"
                                 onChange={(event) => setLastName(event.target.value)}
                                 id="settingslname"
                             />
@@ -312,7 +328,7 @@ const Settings = () => {
                     <p className="settings-editbio-count">{bio.length} / {maxCount}</p>
                 </Modal.Body>
                 <Modal.Footer className="border-0 pb-3 pt-2">
-                <button className="edit-bio-close" onClick={() => setBioModal(false)}>
+                <button className="edit-bio-close" onClick={handleBioClose}>
                     Close
                 </button>
                 <button className="edit-bio-save" onClick={handleBioSave}>
