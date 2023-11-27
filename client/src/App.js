@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
+import HelpPage from './pages/HelpPage'
 import OnboardingPage from './pages/OnboardingPage'
 import NotFound from './pages/NotFoundPage'
 import PasswordRequestPage from './pages/PasswordRequestPage'
@@ -33,6 +34,7 @@ function App() {
             <Route element={<NavLayout/>}>
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
+              <Route path="help" element={<HelpPage/>}/>
             </Route>
           </Route>
             
