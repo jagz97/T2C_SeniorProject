@@ -1,0 +1,19 @@
+.toggle-button-outer {
+    display: inline-flex;
+    align-items: center;
+    width: 44px;
+    height: 22px;
+    border-radius: 150px;
+    background-color: #C73968;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.toggle-button-inner {
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border-radius: 50%;
+    /* border: 1px #000 solid; */
+    margin: 0 5px;
+}
