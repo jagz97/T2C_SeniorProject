@@ -25,7 +25,7 @@ import  {
 
 const MAX_AGE = 110
 const MIN_AGE = 18
-const ages = [] // stores option elements for select
+const ages = [] //stores option elements for select
 for(let i = MIN_AGE; i <= MAX_AGE; i++) {
     ages.push(<option value={i} key={i}>{i}</option>)
 }
