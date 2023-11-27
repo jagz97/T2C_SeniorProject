@@ -8,10 +8,14 @@ import HelpPage from './pages/HelpPage'
 import OnboardingPage from './pages/OnboardingPage'
 
 
+import CreatePostPage from './pages/CreatePostPage'
+
+
 
 import SettingsPage from './pages/SettingsPage'
 
 import NotFound from './pages/NotFoundPage'
+
 
 import PasswordRequestPage from './pages/PasswordRequestPage'
 import PasswordResetPage from './pages/PasswordResetPage'
@@ -41,9 +45,13 @@ function App() {
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
 
+              <Route path="createpost" element={<CreatePostPage/>}/>
+
+
               <Route path="settings" element={<SettingsPage/>}/>
 
               <Route path="help" element={<HelpPage/>}/>
+
 
             </Route>
           </Route>

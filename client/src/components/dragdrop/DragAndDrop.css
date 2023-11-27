@@ -1,0 +1,63 @@
+
+.dnd-img-wrapper {
+    background-color: #fff;
+    border: dashed 3px #b5b5b5;
+    width: 315px;
+    height: 295px;
+    border-radius: 15px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0px 0px 15px 0px rgba(132, 132, 132, 0.25);
+}
+
+.dnd-img-msg {
+    margin: 0;
+}
+
+.dnd-img-wrapper label[for="dnd-img"] {
+    width: 175px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.dnd-emphasize {
+    color: #5d17b0;
+    font-weight: 700;
+}
+
+.dnd-img-wrapper input[type="file"] {
+    display: none;
+}
+
+.dnd-img-error {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.dnd-msg {
+    margin: 0;
+}
+
+.dnd-wrapper label[for="dnd-img"] {
+    width: 175px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.postcreate-emphasize {
+    color: #5d17b0;
+    font-weight: 700;
+}
+
+.dnd-wrapper input[type="file"] {
+    display: none;
+}
+
+.dnd-error {
+    text-align: center;
+    margin-top: 5px;
+}
