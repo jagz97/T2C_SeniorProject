@@ -41,6 +41,14 @@ module.exports = (sequelize, Sequelize) => {
                 key: 'id', 
             }
         },
+        experiencePicId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'Images', // This should match the table name in your Image model
+                key: 'id',
+            }
+        },
         attractionId: {
             type: Sequelize.INTEGER,
             allowNull: true,
@@ -48,7 +56,8 @@ module.exports = (sequelize, Sequelize) => {
                 model: 'Attractions', 
                 key: 'id', 
             }
-        }
+        },
+        
     });
 
     return Experience;

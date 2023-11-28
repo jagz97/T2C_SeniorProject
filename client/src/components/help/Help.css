@@ -1,0 +1,66 @@
+main.help {
+    background: url('../../images/pexels-james-wheeler-1486974\ 1.jpg') no-repeat bottom center fixed;
+    background-size: cover;
+    font-family: "poppins", "DM Sans", sans-serif;
+    color: #fff;
+    /*Prevent Scrolling by calculating remaining height based off fixed nav height*/
+    height: 100vh; 
+}
+
+a.help-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.help-link:hover {
+    color: inherit;
+    opacity: .8;
+}
+
+.container-help {
+    text-align: center;
+}
+
+.container-help h1 {
+    font-size: 2.75rem;
+    margin: 0;
+}
+.container-help h1,
+.container-help h2 {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+
+.container-help h2,
+.help-links {
+    font-weight: 700;
+    font-size: 1.75rem;
+    width: auto;
+} 
+
+.help-links,
+.help-intro {
+    font-size: 1.875rem;
+    width: 95%;
+    min-width: 400px;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.help-links {
+    background: rgba(243, 243, 243, 0.60);
+    backdrop-filter: blur(17px);
+    color: #fff;
+    min-height: 225px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+}
+
+.help-link {
+    display: block;
+}

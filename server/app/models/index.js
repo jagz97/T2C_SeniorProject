@@ -31,10 +31,11 @@ db.experience = require("./experiences.models.js")(sequelize, Sequelize);
 db.hotel = require("./hotels.models.js")(sequelize,Sequelize);
 db.restaurant = require("./restaurants.models.js")(sequelize,Sequelize);
 db.attraction = require("./attractions.models.js")(sequelize,Sequelize);
+db.reservations = require("./reservations.models.js")(sequelize, Sequelize);
 
 
 
-
+const Reservation = db.reservations;
 const Experience = db.experience;
 const Hotel = db.hotel;
 const Restaurant = db.restaurant;
@@ -48,8 +49,13 @@ const Post = db.posts;
 const Image = db.image;
 
 
+Users.hasMany(Reservation, { foreignKey: 'userId', as: 'reservations' });
+Reservation.belongsTo(Users, { foreignKey: 'userId' });
+
 Experience.belongsTo(Users, { foreignKey: 'userId' });
-Users.hasMany(Experience, {foreignKey: 'userId', as: 'experiences', });
+Users.hasMany(Experience, {foreignKey: 'userId', as: 'experiences' });
+
+Experience.belongsTo(sequelize.models.Image, { foreignKey: 'experiencePicId', as: 'experiencePic' });
 
 
 // associations for Experience, Hotel, Restaurant, and Attraction

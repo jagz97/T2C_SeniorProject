@@ -4,20 +4,21 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
+import HelpPage from './pages/HelpPage'
 import OnboardingPage from './pages/OnboardingPage'
-
+import CreatePostPage from './pages/CreatePostPage'
+import SettingsPage from './pages/SettingsPage'
+import NotFound from './pages/NotFoundPage'
 import PasswordRequestPage from './pages/PasswordRequestPage'
 import PasswordResetPage from './pages/PasswordResetPage'
-
 import SearchPage from './pages/SearchPage'
-import "./App.css"
-
-
 import AuthRequired from './components/authrequired/AuthRequired'
 import HotelDetailLayout from './components/hoteldetail/HotelDetailLayout'
 import HotelDetailPage from './pages/HotelDetailPage'
 import HotelPaymentPage from './pages/HotelPaymentPage'
 import PaymentErrorPage from './pages/PaymentErrorPage'
+
+import "./App.css"
 
 function App() {
   return (
@@ -38,18 +39,19 @@ function App() {
             <Route element={<NavLayout/>}>
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
-
               <Route path="hotel/:id" element={<HotelDetailLayout/>}> 
                 <Route index element={<HotelDetailPage/>}/>
                 <Route path="payment" element={<HotelPaymentPage/>}/>
               </Route>
               <Route path="search" element={<SearchPage/>}/>
-
               <Route path="paymenterror" element={<PaymentErrorPage/>}/>
+              <Route path="createpost" element={<CreatePostPage/>}/>
+              <Route path="settings" element={<SettingsPage/>}/>
+              <Route path="help" element={<HelpPage/>}/>
             </Route>
           </Route>
             
-            <Route path="*" element={<h1>Not Found!</h1>}/>
+            <Route path="*" element={<NotFound/>}/>
         </Routes>
     </BrowserRouter>
   );

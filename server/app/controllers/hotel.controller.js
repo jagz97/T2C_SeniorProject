@@ -1,6 +1,7 @@
 const axios = require('axios');
 const hotelconfig = require('../config/hotelapi.config.js')
 const stripe = require('stripe')('sk_test_51KxjFzLGavGifIHgiMdIOOdRlyHLKg0elxsL5iStElwzlbGrboQmH7RHtS1CJ8VxmZ2IrefIiCjPjZpNqNwG1Aep00kaUCU9cP')
+const db = require("../models");
 
 
 
@@ -187,6 +188,17 @@ exports.getHotelDetails = async (req, res) => {
       
     };
 
+    // Remove "iconset/" from each icon in propertyOffersIcons
+  hotelData.propertyOffersIcons.forEach((offer) => {
+    if (offer.icon_list) {
+      offer.icon_list.forEach((icon) => {
+        if (icon.icon) {
+          icon.icon = icon.icon.replace('iconset/', '');
+        }
+      });
+    }
+  });
+
     // Extract room information
     for (const roomId in response.data.rooms) {
       const room = response.data.rooms[roomId];
@@ -252,10 +264,22 @@ exports.getHotelDetails = async (req, res) => {
   }
 
 };
+
+
  
 
 
 exports.createCheckout = async (req,res) =>{
+
+    const userId = req.id;
+    const price = req.body.price;
+ 
+      
+    // Check if the user exists
+    const user = await db.users.findByPk(userId);
+    if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+    }
 
     
     function usdToCents(usd) {
@@ -270,32 +294,88 @@ exports.createCheckout = async (req,res) =>{
       return cents;
     }
 
-
+    try{
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: 'Hyatt Place San Jose, Downtown',
-              description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id massa in purus bibendum varius. Cras lacinia, libero ut dictum tincidunt, justo urna dapibus lectus, ac convallis nisl libero in nisi. Sed aliquet leo ut eros laoreet, auctor dictum erat scelerisque. Curabitur',
-              images: [
-                'https://cf.bstatic.com/xdata/images/hotel/square60/155536705.jpg?k=c882f29ff952ef506f5285f0395fb5b294d201bfbb1c1d2a0b70d9a0f1545eca&o=',
-                'https://cf.bstatic.com/xdata/images/hotel/max300/155536705.jpg?k=c882f29ff952ef506f5285f0395fb5b294d201bfbb1c1d2a0b70d9a0f1545eca&o=',
-              ],
+              name: req.body.hotelName,
+              description: req.body.descreption,
             },
-            unit_amount: usdToCents(184.1222),
+            unit_amount: usdToCents(182.1222),
           },
-          quantity: 1,
+          quantity: req.body.roomQuantity,
         },
       ],
       mode: 'payment',
-      success_url: 'http://localhost:3000/',
-      cancel_url: 'http://localhost:3000/home',
+      success_url: 'http://localhost:3000/reservations',
+      cancel_url: 'http://localhost:3000/cancel',
     });
   
-    res.redirect(303, session.url);
+   
+    res.status(200).json({ sessionUrl: session.url });
 
+  }catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+};
 
+// Handle the success URL (e.g., /success) to create a reservation
+exports.handleSuccess = async (req, res) => {
 
-  };
+    const userId = req.id;
+  try {
+      // Extract necessary information from the request body
+      const { hotelName, description, checkInDate, duration, guests, price, imageUrl } = req.body;
+
+      // Check if the user exists
+      const user = await db.users.findByPk(userId);
+      if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+      }
+
+      // Create reservation
+      const reservation = await db.reservations.create({
+          userId,
+          hotelName,
+          description,
+          checkInDate,
+          duration,
+          guests,
+          price,
+          imageUrl,
+      });
+
+      res.status(201).json(reservation);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+exports.getReservations = async (req, res) => {
+  const userId = req.id;
+
+  try {
+
+    // Check if the user exists
+    const user = await db.users.findByPk(userId);
+    if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Get reservations for the user
+    const reservations = await db.reservations.findAll({
+        where: { userId},
+    });
+
+    res.status(200).json(reservations);
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+
+};
