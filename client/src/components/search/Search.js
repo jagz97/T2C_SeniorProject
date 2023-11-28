@@ -37,14 +37,14 @@ const Search = () => {
     const [ departureDate, setDepartureDate ] = useState(() => getDate(1))
     const [ roomAmount, setRoomAmount ] = useState(1)
     const [ guestAmount, setGuestAmount ] = useState(1)
-
     const [ searchResults, setSearchResults ] = useState([])
-    console.log("roomAmount:",roomAmount)
     const [ totalPageNumber, setTotalPageNumber ] = useState(100)
-
+    
     const [ isLoading, setIsLoading ] = useState(false)
+    const [ hasSearched, setHasSearched ] = useState(false)
     const [ errorInputMsg, setErrorInputMsg ] = useState(null)
-
+    
+    console.log(searchResults)
     /* Search Sorters*/
     const [ searchSorter, setSearchSorter ] = useState(null)
     
@@ -60,7 +60,7 @@ const Search = () => {
         let arrival_date, departure_date, page_number
 
         if(arrivalDate && departureDate) {
-            if(arrivalDate >= departureDate) {
+            if(arrivalDate.getTime() >= departureDate.getTime() || arrivalDate.toString() === departureDate.toString()) {
                 setErrorInputMsg("Invalid Dates Selected")
                 return
             }
@@ -94,10 +94,12 @@ const Search = () => {
         
         try {
             setIsLoading(true)
-            // const response = await api.post("/hotels_search_city_name", search) 
-            // setSearchResults(response.data.results)
+            setHasSearched(true)
+            const response = await api.post("/hotels_search_city_name", search) 
+            setSearchResults(response.data.results)
             // setTotalPageNumber(response.data.totalPages)
-            setSearchResults(data)
+            // setSearchResults(data)
+            // console.log(response)
             setIsLoading(false)
         } catch (error) {
             const errorMessage = error
@@ -142,7 +144,7 @@ const Search = () => {
             id={result.hotel_id}
             hotelImage={result.main_photo_url} 
             hotelRating={result.review_score} 
-            hotelPrice={result.price_breakdown.gross_price}
+            hotelPrice={Math.floor(result.price_breakdown.all_inclusive_price)}
             hotelName={result.hotel_name}
             dates={{arrivalDate, departureDate}}
             roomAmount={roomAmount}
@@ -289,7 +291,7 @@ const Search = () => {
                             : 
                             <>
                                 <div className="search-results-container d-flex justify-content-center">
-                                    { hotels }
+                                    { (hotels.length > 0 ) ? hotels : hasSearched && <p className="text-muted text-center">No hotels found.</p> }
                                 </div>
                                 {
                                     hotels.length !== 0 && 
