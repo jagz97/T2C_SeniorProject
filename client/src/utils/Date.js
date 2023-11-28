@@ -21,3 +21,11 @@ export function getDayDifference(d1,d2) {
     const result = Math.ceil(timeDiff / (1000 * 60 * 60 * 24))
     return result
 }
+
+export function getString(date) {
+    let month = date.toLocaleString("default", { month: "long" });
+    let day = date.getUTCDate()
+    let year = date.getUTCFullYear()
+
+    return `${month} ${day}, ${year}`
+}
