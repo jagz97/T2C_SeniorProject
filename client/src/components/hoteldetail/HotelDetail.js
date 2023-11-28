@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useOutletContext } from "react-router-dom"
+import { useOutletContext, useNavigate } from "react-router-dom"
 import ButtonDatePicker from "../buttondatepicker/ButtonDatePicker"
 import { getDate, getDayDifference } from "../../utils/Date"
 import HotelOffer from "./HotelOffer"
@@ -28,19 +28,20 @@ const SearchResult = () => {
        
     const [ tripDays, setTripDays ] = useState(1)
  
-    const [ dateErrorMsg, setDateErrorMsg ] = useState("")
-    
+    const [ dateError, setDateError ] = useState("")
+    console.log(tripDays)
+    const Navigate = useNavigate()
+
     /* Grabbing Data from api data*/
     const roomId = Object.keys(hotelData.rooms)[0]
-    const room = hotelData.rooms[roomId]
+    const room = hotelData.rooms[roomId] // an array of images
     
     const { value, currency } = hotelData.amount_per_night
     const cost = Math.floor(value)
 
-    const reviews = extractedReviews?.reviews || []// An array of review objects
+    const reviews = extractedReviews?.reviews || [] // An array of review objects
 
     const offers = hotelData?.propertyOffersIcons || []
-    
     
     const totalCost = tripDays * roomAmount * cost
     
@@ -60,10 +61,10 @@ const SearchResult = () => {
     useEffect(() => {
         // for whatever reason .getTime() does not work for equality test.
         if(arrivalDate.getTime() >= departureDate.getTime() || arrivalDate.toString() === departureDate.toString()) {
-            setDateErrorMsg("Invalid Dates Selected")
+            setDateError(true)
         }
         else {
-            setDateErrorMsg("")
+            setDateError(false)
             const difference = getDayDifference(arrivalDate,departureDate)
             setTripDays(difference)
            
@@ -82,17 +83,22 @@ const SearchResult = () => {
                         { room.description }
                     </p>
                 </div>
-                <div className="hotel-images">
-                    <div className="hotel-image-sml">
-                        <img className="hotel-image" src={room.photos[0]["url_original"]} alt=""/>
+                {
+                    (room?.photos.length >=3) ?
+                    <div className="hotel-images">  
+                        <div className="hotel-image-sml">
+                            <img className="hotel-image" src={room.photos[0]["url_original"]} alt=""/>
+                        </div>
+                        <div className="hotel-image-smr">
+                            <img className="hotel-image" src={room.photos[2]["url_original"]} alt=""/>
+                        </div>
+                        <div className="hotel-image-lgb">
+                            <img className="hotel-image" src={room.photos[1]["url_original"]} alt=""/>
+                        </div>
                     </div>
-                    <div className="hotel-image-smr">
-                        <img className="hotel-image" src={room.photos[2]["url_original"]} alt=""/>
-                    </div>
-                    <div className="hotel-image-lgb">
-                        <img className="hotel-image" src={room.photos[1]["url_original"]} alt=""/>
-                    </div>
-                </div>
+                    :
+                    <p className="text-muted text-center w-50">No Images Found.</p>
+                }
             </section>
             <section className="hotel-detail-middle">
                 <div className="hotel-offers">
@@ -110,13 +116,13 @@ const SearchResult = () => {
                 <div className="hotel-reserve-card">
                     <div className="hotel-reserve-start">
                         {
-                            dateErrorMsg.length !== 0 ?
-                            <h2 className="error hotel-reserve-error">{dateErrorMsg}</h2>
+                            dateError ?
+                            <h2 className="error hotel-reserve-error">Invalid dates Selected</h2>
                             :
                             <h2 className="hotel-reserve-price">
                                 ${totalCost} {currency} 
                                 <span className="hotel-reserve-days">
-                                    {`(${tripDays} ${tripDays > 1 ? "days" : "day"})`}
+                                    {`(${tripDays} ${tripDays > 1 ? "nights" : "night"})`}
                                 </span>
                             </h2>
                         }
@@ -157,7 +163,7 @@ const SearchResult = () => {
                         </select>
                     </div>
                   
-                    <button className="hotel-reserve-btn">Reserve Now</button>
+                    <button onClick={() => Navigate("payment")} className="hotel-reserve-btn">Reserve Now</button>
                 </div>
             </section>
             <section className="hotel-reviews">

@@ -43,13 +43,13 @@ const SearchResultLayout = () => {
             }
             console.log("We will post with:",detailData)
             try {
-                // const response = await api.post("/hotelDetails", detailData)
-                // sethotelDetail(response.data)
+                const response = await api.post("/hotelDetails", detailData)
+                sethotelDetail(response.data)
                 
                 // set to placholder data:
-                sethotelDetail(detail)
+                // sethotelDetail(detail)
 
-                // console.log(response)
+                console.log(response)
             } catch (error) {
                 console.log(error)
             }
