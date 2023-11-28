@@ -17,7 +17,7 @@ import AuthRequired from './components/authrequired/AuthRequired'
 import HotelDetailLayout from './components/hoteldetail/HotelDetailLayout'
 import HotelDetailPage from './pages/HotelDetailPage'
 import HotelPaymentPage from './pages/HotelPaymentPage'
-
+import PaymentErrorPage from './pages/PaymentErrorPage'
 
 function App() {
   return (
@@ -44,6 +44,8 @@ function App() {
                 <Route path="payment" element={<HotelPaymentPage/>}/>
               </Route>
               <Route path="search" element={<SearchPage/>}/>
+
+              <Route path="paymenterror" element={<PaymentErrorPage/>}/>
             </Route>
           </Route>
             
