@@ -80,7 +80,7 @@ const SearchResult = () => {
                         {`${hotelData.hotelAddress}, ${hotelData.country}, ${hotelData.city}, ${hotelData.zip}`}
                     </p>
                     <p className="hotel-room-description">
-                        { room.description }
+                        { room?.description ? room.description :  <p className="text-muted text-center text-md-start">No Description Found.</p>}
                     </p>
                 </div>
                 {
