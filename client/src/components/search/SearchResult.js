@@ -10,7 +10,7 @@ const SearchResult = ({hotelImage, hotelPrice, hotelRating, hotelName, id, dates
         <Col className="col-auto mx-xxl-2 mb-4">
                 <Link className="container-result mx-auto" state={{...dates, roomAmount}} to={`/hotel/${id}`}>
                     <div className="container-result-img">
-                        <img className="result-img" src={hotelImage}/>   
+                        <img loading="lazy" className="result-img" src={hotelImage}/>   
                     </div>
                     <div className="result-footer">
                         <h2 className="result-title">{hotelName}</h2>
