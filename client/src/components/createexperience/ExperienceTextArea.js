@@ -2,7 +2,7 @@ import React from "react"
 import "./CreateExperience.css"
 
 const ExperienceTextArea = ({name, value, onChange, id, max}) => {
-
+    
     return (
         <div className="experience-text-area">
             <label htmlFor={id}>{name}</label>

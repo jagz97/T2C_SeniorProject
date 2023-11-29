@@ -1,0 +1,7 @@
+.container-rating-select {
+    display: flex;
+}
+
+.rating-select-input {
+    display: none;
+}
