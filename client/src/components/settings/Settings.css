@@ -1,0 +1,205 @@
+
+.profile-picture-wrapper {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.profile-about {
+    margin: 0 auto;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    font-size: 1.125rem;
+    padding: 1em 1.5em;
+    text-align: center;
+    line-height: 1.3;
+    min-height: 220px;
+    width: 85%;
+    max-width: 500px;
+    min-width: 400px;
+    position: relative;
+    top: -25px;
+}
+
+.profile-bio {
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-banner {
+    display: block;
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.settings-bio-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: 5px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.container-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 290px;
+    height: 275px;
+    margin: 0 auto;
+    color: #000;
+    font-family: "DM sans", sans-serif;
+}
+
+.container-settings input,
+.create-profile-form input::placeholder,
+.create-profile-form select
+.container-settings label {
+    display: block;
+    opacity: 1; /*For Firefox*/
+    width: 100%;
+}
+
+.container-settings label {
+    font-size: 0.875rem;
+    padding-left: 1px;
+}
+
+.container-settings input,
+.container-settings select,
+.container-settings .settings-control,
+.container-settings .slider-btn-wrapper {
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+    font-size: 1.2rem;
+    padding: 0.4em 0.6em;
+    height: 44px;
+}
+
+.container-settings .settings-control,
+.container-settings select {
+    background-color: #fff;
+    color: inherit;
+}
+
+.settings-dropdown {
+    display: flex;
+    justify-content: space-between;
+}
+
+.settings-dropdown option {
+    text-transform: capitalize;
+}
+
+.container-settings select {
+    border-right: 0.6em solid transparent;
+}
+
+.container-settings select[name="gender"] {
+    width: 60%;
+}
+
+.container-settings select[name="age"] {
+    width: 35%;
+}
+
+
+.settings-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.toggle-btn-wrapper {
+    cursor: default;   
+}
+.settings-btn {
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #fff;
+    border: 0;
+}
+
+label.settings-file-input {
+    font-size: inherit;
+    cursor: pointer;
+    width: 100%;
+}
+
+input#settings-file-input {
+    display: none
+
+}
+.settings-deactivate {
+    background-color: #C73968;
+    margin-bottom: 25px;
+    padding: 0.4em 1em;
+    border-radius: 30px;
+}
+
+.settings-submit {
+    background-color: #8B2CFF;
+    padding: 0.6em 1.2em;
+    border-radius: 7px;
+    font-weight: 500;
+}
+
+.edit-bio-modal {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+}
+@media(min-width: 576px) {
+    .edit-bio-modal {
+        max-width: 500px
+    }
+}
+
+.settings-editbio-header {
+    font-size: 1.75rem;
+
+}
+
+.settings-editbio {
+    display: block;
+    border-radius: 6px;
+    padding: 0.6em;
+    /* box-shadow: 0px 0px 15px 0px #84848440; */
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    resize: none;
+    width: 100%;
+    min-height: 150px;
+}
+
+.settings-editbio-count {
+    color: #828282; 
+    text-align: right;
+    margin: 0;
+ }
+
+.edit-bio-save,
+.edit-bio-close {
+    border: none;
+    padding: 0.4em 1em;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.edit-bio-save {
+    background-color: #C73968;
+}
+
+.edit-bio-close {
+    background-color: #8B2CFF;
+}

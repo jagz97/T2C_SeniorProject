@@ -1,0 +1,35 @@
+.notfound-container {
+    font-family: "DM sans", "poppins", sans-serif;
+    color: #000;
+}
+.notfound-header {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.notfound-message {
+    margin-bottom : 0.5rem;
+}
+
+.notfound-message,
+.notfound-anchor {
+    font-size: 0.875rem;
+}
+
+@media(min-width: 576px) {
+    .notfound-message,
+    .notfound-anchor {
+    font-size: 1rem;
+}
+}
+
+.notfound-anchor,
+.notfound-anchor:hover  {
+    color: inherit;
+}
+
+.notfound-error {
+    position: absolute;
+    top: 50px;
+    font-weight: 700;
+}

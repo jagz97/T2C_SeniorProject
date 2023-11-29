@@ -10,6 +10,7 @@ body {
 
 .success {
   color: green;
+
 }
 
 .profile-banner {
@@ -56,4 +57,5 @@ body {
   min-width: 400px;
   position: relative;
   top: -25px;
+
 }

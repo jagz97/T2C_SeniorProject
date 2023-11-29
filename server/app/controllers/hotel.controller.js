@@ -294,7 +294,7 @@ exports.createCheckout = async (req,res) =>{
       return cents;
     }
 
-
+    try{
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
@@ -303,9 +303,6 @@ exports.createCheckout = async (req,res) =>{
             product_data: {
               name: req.body.hotelName,
               description: req.body.descreption,
-              images: [
-                req.body.imageUrl,
-              ],
             },
             unit_amount: usdToCents(182.1222),
           },
@@ -313,14 +310,18 @@ exports.createCheckout = async (req,res) =>{
         },
       ],
       mode: 'payment',
-      success_url: 'http://localhost:3000/success',
+      success_url: 'http://localhost:3000/reservations',
       cancel_url: 'http://localhost:3000/cancel',
     });
   
-    res.redirect(303, session.url);
-    // res.json({ sessionUrl: session.url });
-};
+   
+    res.status(200).json({ sessionUrl: session.url });
 
+  }catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+};
 
 // Handle the success URL (e.g., /success) to create a reservation
 exports.handleSuccess = async (req, res) => {
