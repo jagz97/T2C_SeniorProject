@@ -134,13 +134,13 @@ const CreatePost = () => {
                         <div className="profile-about-container">                      
                             {profile && <p className="profile-username">{profile.firstName} {profile.lastName}</p>}  
                             {/* 255 character placeholder text */}
-                            <p className="profile-bio">
+                            <p className="profile-bio-wrapper">
                                 {profile.bio}
                             </p>
                         </div>  
                 </Col>
             </Row>
-            <Row className="createpost-row justify-content-center align-items-center gap-5 ">
+            <Row className="createpost-row justify-content-center align-items-center gap-5 mt-5">
                 {
                  success ? 
                  <Col className="col-12 text-center createpost-reset-col">
