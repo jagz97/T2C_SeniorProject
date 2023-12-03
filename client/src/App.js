@@ -9,6 +9,7 @@ import OnboardingPage from './pages/OnboardingPage'
 
 
 import CreatePostPage from './pages/CreatePostPage'
+import CreateExperiencePage from './pages/CreateExperiencePage'
 
 
 
@@ -46,6 +47,7 @@ function App() {
               <Route path="profile" element={<ProfilePage/>}/>
 
               <Route path="createpost" element={<CreatePostPage/>}/>
+              <Route path="createexperience" element={<CreateExperiencePage/>}/>
 
 
               <Route path="settings" element={<SettingsPage/>}/>

@@ -16,6 +16,7 @@
 
 .dnd-img-msg {
     margin: 0;
+    text-align: center;
 }
 
 .dnd-img-wrapper label[for="dnd-img"] {
