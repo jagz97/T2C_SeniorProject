@@ -5,3 +5,7 @@
 .rating-select-input {
     display: none;
 }
+
+.rating-select-star {
+    cursor:pointer;
+}
