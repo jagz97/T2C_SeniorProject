@@ -23,12 +23,14 @@ const HotelPayment = () => {
     const [ paymentError, setPaymentError ] = useState("")
 
     const { user } = useAuth()
-
+    
+    const roomId = Object.keys(hotelData.rooms)[0]
     const dailyPrice = Math.floor(hotelData.amount_per_night.value)
     const tripDays = getDayDifference(arrivalDate,departureDate)
     const arrival = getString(arrivalDate)
     const departure = getString(departureDate)
     const subTotal = dailyPrice * tripDays * roomAmount
+    const paymentTotal = subTotal + CLEANING_FEE + TAX_FEE
 
     const invalidDate = (arrivalDate.getTime() >= departureDate.getTime()) || (arrivalDate.toString() === departureDate.toString())
 
@@ -36,11 +38,12 @@ const HotelPayment = () => {
         try {
             const paymentData = {
                 hotelName : hotelData.hotelName,
-                descreption : hotelData.rooms.description,
+                descreption : roomId?  hotelData.rooms[roomId].description : " ",
                 checkInDate : arrivalDate,
                 roomQuantity : roomAmount,
-                price : dailyPrice,
+                price : paymentTotal,
             }
+            console.log("We will checkout with this:", paymentData)
             const headerOptions = {
                 headers: {
                     Authorization: `${user.accesstoken}`,
@@ -49,8 +52,7 @@ const HotelPayment = () => {
             }
 
             const response = await api.post("/createCheckout", paymentData, headerOptions)
-            console.log(response)
-            window.location.href = response.url
+            window.location.href = response.data.sessionUrl
     
         } catch (error) {
             const errorMessage = error.response?.data?.message
@@ -111,7 +113,7 @@ const HotelPayment = () => {
                         </div>
                         <div className="payment-card-footer">
                             <p className="payment-card-total">Total</p>
-                            <p className="payment-total">${subTotal + CLEANING_FEE + TAX_FEE}.00</p>
+                            <p className="payment-total">${paymentTotal}.00</p>
                         </div>
                     </> 
                     :
