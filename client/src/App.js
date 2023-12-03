@@ -35,6 +35,7 @@ function App() {
           {/* Protected Routes */}
           <Route element={<AuthRequired/>}>
             <Route path="onboarding" element={<OnboardingPage/>}/>
+            <Route path="cancel" element={<PaymentErrorPage/>}/>
           
             <Route element={<NavLayout/>}>
               <Route path="posts" element={<ListviewPage/>}/>
@@ -44,7 +45,6 @@ function App() {
                 <Route path="payment" element={<HotelPaymentPage/>}/>
               </Route>
               <Route path="search" element={<SearchPage/>}/>
-              <Route path="paymenterror" element={<PaymentErrorPage/>}/>
               <Route path="createpost" element={<CreatePostPage/>}/>
               <Route path="settings" element={<SettingsPage/>}/>
               <Route path="help" element={<HelpPage/>}/>
