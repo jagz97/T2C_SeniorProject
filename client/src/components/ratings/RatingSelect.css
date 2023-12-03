@@ -1,0 +1,11 @@
+.container-rating-select {
+    display: flex;
+}
+
+.rating-select-input {
+    display: none;
+}
+
+.rating-select-star {
+    cursor:pointer;
+}

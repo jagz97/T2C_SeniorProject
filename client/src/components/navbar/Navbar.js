@@ -39,15 +39,18 @@ const Navbar = () => {
                   <NavCustomDropdown toggle={toggle} desktop className="nav-item d-none d-md-block">
                       <Dropdown.Item as={Link} to="/help">Help</Dropdown.Item>
                       <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/createpost">Create Post</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/createexperience">Create Experience</Dropdown.Item>
                       <Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item> 
                   </NavCustomDropdown>
 
                   {/* Custom Dropdown Mobile */}
                   <NavCustomDropdown toggle={mobileToggle} className="nav-item d-block d-md-none">
-                      <Dropdown.Item as={Link} to="/">Home</Dropdown.Item>
                       <Dropdown.Item as={Link} to="/profile">Profile</Dropdown.Item>
                       <Dropdown.Item as={Link} to="/help">Help</Dropdown.Item>
                       <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/createpost">Create Post</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/createexperience">Create Experience</Dropdown.Item>
                       <Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item>
                   </NavCustomDropdown>
                 </Nav>

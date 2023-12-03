@@ -142,7 +142,7 @@ const CreatePost = () => {
                         </div>  
                 </Col>
             </Row>
-            <Row className="createpost-row justify-content-center align-items-center gap-5 ">
+            <Row className="createpost-row justify-content-center align-items-center gap-5 mt-5">
                 {
                  success ? 
                  <Col className="col-12 text-center createpost-reset-col">

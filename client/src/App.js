@@ -7,6 +7,7 @@ import ListviewPage from './pages/ListviewPage'
 import HelpPage from './pages/HelpPage'
 import OnboardingPage from './pages/OnboardingPage'
 import CreatePostPage from './pages/CreatePostPage'
+import CreateExperiencePage from './pages/CreateExperiencePage'
 import SettingsPage from './pages/SettingsPage'
 import NotFound from './pages/NotFoundPage'
 import PasswordRequestPage from './pages/PasswordRequestPage'
@@ -46,12 +47,13 @@ function App() {
               </Route>
               <Route path="search" element={<SearchPage/>}/>
               <Route path="createpost" element={<CreatePostPage/>}/>
+              <Route path="createexperience" element={<CreateExperiencePage/>}/>
               <Route path="settings" element={<SettingsPage/>}/>
               <Route path="help" element={<HelpPage/>}/>
             </Route>
           </Route>
             
-            <Route path="*" element={<NotFound/>}/>
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
     </BrowserRouter>
   );
