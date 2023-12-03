@@ -99,6 +99,8 @@ const CreateExperience = () => {
         setAttractionLocation("")
         setAttractionDescription("")
         setAttractionRatings(1)
+        setCountry("")
+        setRegion("")
         setExpPic(null)
     }
    
