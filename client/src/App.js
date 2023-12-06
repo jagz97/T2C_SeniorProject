@@ -4,7 +4,19 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
+import HelpPage from './pages/HelpPage'
 import OnboardingPage from './pages/OnboardingPage'
+
+
+import CreatePostPage from './pages/CreatePostPage'
+import CreateExperiencePage from './pages/CreateExperiencePage'
+
+
+
+import SettingsPage from './pages/SettingsPage'
+
+import NotFound from './pages/NotFoundPage'
+
 
 import PasswordRequestPage from './pages/PasswordRequestPage'
 import PasswordResetPage from './pages/PasswordResetPage'
@@ -34,10 +46,20 @@ function App() {
             <Route element={<NavLayout/>}>
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
+
+              <Route path="createpost" element={<CreatePostPage/>}/>
+              <Route path="createexperience" element={<CreateExperiencePage/>}/>
+
+
+              <Route path="settings" element={<SettingsPage/>}/>
+
+              <Route path="help" element={<HelpPage/>}/>
+
+
             </Route>
           </Route>
             
-            <Route path="*" element={<h1>Not Found!</h1>}/>
+            <Route path="*" element={<NotFound/>}/>
         </Routes>
     </BrowserRouter>
   );

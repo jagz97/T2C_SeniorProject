@@ -344,7 +344,6 @@ exports.createCheckout = async (req,res) =>{
 }
 };
 
-
 // Handle the success URL (e.g., /success) to create a reservation
 exports.handleSuccess = async (req, res) => {
 
@@ -435,3 +434,4 @@ exports.deleteReservation = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
