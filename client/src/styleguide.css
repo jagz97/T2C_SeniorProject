@@ -1,0 +1,10 @@
+:root {
+    --black: rgba(8, 8, 9, 1);
+    --circle: rgba(245, 245, 245, 1);
+    --text-2: rgba(132, 130, 154, 1);
+    --text-clr: rgba(94, 98, 130, 1);
+    --text-heading-color: rgba(30, 29, 76, 1);
+    --white: rgba(255, 255, 255, 1);
+    --x-3: rgba(240, 187, 31, 1);
+    --x-4: rgba(241, 90, 43, 1);
+  }

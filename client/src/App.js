@@ -26,6 +26,7 @@ import "./App.css"
 
 import AuthRequired from './components/authrequired/AuthRequired'
 import ExperienceDetailPage from './pages/ExperienceDetailPage'
+import HomePage from './pages/HomePage'
 
 function App() {
   return (
@@ -36,14 +37,14 @@ function App() {
           <Route path="passwordrecovery" element={<PasswordRequestPage/>}/>
           <Route path="passwordreset" element={<PasswordResetPage/>}/>
           <Route element={<NavLayout/>}>
-              <Route index element={<h1>Home</h1>}/>
+              <Route index element={<HomePage/>}/>
           </Route>
   
           {/* Protected Routes */}
           <Route element={<AuthRequired/>}>
             <Route path="onboarding" element={<OnboardingPage/>}/>
           
-            <Route element={<NavLayout/>}>
+            <Route element={<NavLayout/>}>  
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
 
