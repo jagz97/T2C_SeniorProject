@@ -1,6 +1,5 @@
 import React from 'react'
 import Ratings from '../ratings/Ratings'
-import mohammedLak from './temp-images/mohammed-lak.jpg'
 
 import { Link } from "react-router-dom"
 

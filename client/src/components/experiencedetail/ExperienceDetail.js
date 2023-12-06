@@ -13,16 +13,6 @@ import { IoCloseSharp } from "react-icons/io5";
 
 
 const ExperienceDetail = () => {
-    
-    /* Temporary Variables */
-    const expImg = ProfileBanner
-    const expLocation = "Manila, Philippines"
-    const overallRating = 5
-    let locationDesc = "in enim a arcu imperdiet malesuada. Sed vel lectus. Donec odio urna, tempus molestie, porttitor ut, iaculis quis, sem. Phasellus rhoncus. Aenean id metus id velit ullamcorper pulvinar. Vestibulum fermentum tortor id mi. Pe"
-    locationDesc = "Manila is the capital and second-most populous city of the Philippines. Located on the eastern shore of Manila Bay on the island of Luzon, it is classified as a highly urbanized city. "
-    const rating = 4
-    const experienceName = "This is a long hotel name or attraction!"
-
     const params = useParams()
     const { user } = useAuth()
 
@@ -55,7 +45,7 @@ const ExperienceDetail = () => {
        
         }
         fetchExperience()
-    }, [params.id])
+    }, [params.id, user.accesstoken])
 
     const handleClick = () => {
         console.log("Clicked!")
