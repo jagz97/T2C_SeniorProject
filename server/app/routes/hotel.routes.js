@@ -39,6 +39,14 @@ module.exports = function (app) {
         [authJwt.verifyToken],
         controller.getReservations
     );
+
+    app.post(
+        "/api/reservations/:id",
+        [authJwt.verifyToken],
+        controller.deleteReservation
+
+
+    );
    
 
 

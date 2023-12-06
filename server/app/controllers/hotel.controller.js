@@ -227,8 +227,8 @@ exports.getHotelDetails = async (req, res) => {
     locale: 'en-gb'
   },
   headers: {
-    'X-RapidAPI-Key': 'dc738405a5msh5a6e6771d7ad9fap1a9b2ejsn149b95dc3d3e',
-    'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
+    'X-RapidAPI-Key': hotelconfig.API_KEY,
+    'X-RapidAPI-Host': hotelconfig.HOST
   }
 };
 
@@ -272,8 +272,15 @@ exports.getHotelDetails = async (req, res) => {
 exports.createCheckout = async (req,res) =>{
 
     const userId = req.id;
-    const price = req.body.price;
- 
+    const priceString = req.body.price;
+
+    const price = parseFloat(priceString);
+    const hotelName = req.body.hotelName;
+    const description = req.body.descreption;
+    const guests = req.body.roomQuantity;
+    const checkInDate = req.body.checkInDate;
+    const duration = req.body.duration;
+  
       
     // Check if the user exists
     const user = await db.users.findByPk(userId);
@@ -290,11 +297,13 @@ exports.createCheckout = async (req,res) =>{
       
       // Convert USD to cents by multiplying by 100
       const cents = Math.round(usd * 100);
+
     
       return cents;
     }
+    console.log(usdToCents(price));
 
-
+    try{
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
@@ -303,22 +312,36 @@ exports.createCheckout = async (req,res) =>{
             product_data: {
               name: req.body.hotelName,
               description: req.body.descreption,
-              images: [
-                req.body.imageUrl,
-              ],
             },
-            unit_amount: usdToCents(182.1222),
+            unit_amount: usdToCents(price),
           },
           quantity: req.body.roomQuantity,
         },
       ],
       mode: 'payment',
-      success_url: 'http://localhost:3000/success',
+      success_url: 'http://localhost:3000/reservations',
       cancel_url: 'http://localhost:3000/cancel',
     });
+
+    // Create reservation
+    await db.reservations.create({
+      userId,
+      hotelName,
+      description,
+      checkInDate,
+      duration,
+      guests,
+      price
+  });
+
   
-    res.redirect(303, session.url);
-    // res.json({ sessionUrl: session.url });
+   
+    res.status(200).json({ sessionUrl: session.url });
+
+  }catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
 };
 
 
@@ -377,4 +400,38 @@ exports.getReservations = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
 }
 
+};
+
+
+
+exports.deleteReservation = async (req, res) => {
+  const userId = req.id;
+  const reservationId = req.params.id; 
+
+  try {
+    // Check if the user exists
+    const user = await db.users.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Check if the reservation exists for the given user
+    const reservation = await db.reservations.findOne({
+      where: { reservationId: reservationId, userId },
+    });
+
+    if (!reservation) {
+      return res.status(404).json({ error: 'Reservation not found' });
+    }
+
+    // Delete the reservation
+    await db.reservations.destroy({
+      where: { reservationId: reservationId, userId },
+    });
+
+    res.status(200).json({ message: 'Reservation deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
