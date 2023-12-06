@@ -15,6 +15,8 @@ import { api } from '../../api/axios'
 const Profile = () => {
     const [ profile, setProfile ] = useState({})
     const [profilePicture, setProfilePicture] = useState("")
+
+    const [ experiences, setExperiences ] = useState([])
     const { user } = useAuth()
     console.log(profile)
     useEffect(() => {
@@ -26,6 +28,8 @@ const Profile = () => {
             }
             try {
                 const response = await api.get("/profile/getProfile", headerOptions)
+                const expResponse = await api.get("/profile/experiences", headerOptions)
+                console.log("Exp", expResponse.data.userExperiences)
                 const { profilePicture }  = response.data
                 
                 // convert buffer array into typed array
@@ -37,6 +41,7 @@ const Profile = () => {
                 // form the requried value for the img element's src attribute and set it to state
                 setProfilePicture(`data:${profilePicture.type};base64,${profilePicData}`) 
                 setProfile(response.data)
+                setExperiences(expResponse.data.userExperiences)
         
             } catch (error) {
                 const errorMessage = error.response?.data?.message
@@ -54,6 +59,16 @@ const Profile = () => {
         getProfile()
     }, [user.accesstoken])
 
+    const placesVisited = experiences.map((exp) => (
+        <PlaceVisited
+            key={exp.id}
+            id={exp.id}
+            rating={Number(exp.starRating)}
+            location={exp.city_country}
+            image={exp.experiencePic}
+        />
+    ))
+    
     return (
         <div>
             <Container fluid>
@@ -93,9 +108,9 @@ const Profile = () => {
                         <p className="places-visited-subheading">Ratings of the Experiences</p>
                     </Col>
                     <Col className="col-12 d-flex flex-wrap justify-content-center justify-content-center" style={{gap:15}}> 
-                        <PlaceVisited rating={2}/>
-                        <PlaceVisited rating={5}/>
-                        <PlaceVisited rating={3}/>     
+                         {
+                            placesVisited.length > 0 ? placesVisited : <p className="text-muted text-center mt-5">No Places to show.</p>
+                         }
                     </Col>
                 </Row>
                 
