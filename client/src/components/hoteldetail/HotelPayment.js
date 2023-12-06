@@ -19,7 +19,6 @@ const HotelPayment = () => {
         roomAmount
     } = useOutletContext()
     
-    const [ paymentSuccess, setPaymentSuccess ]= useState(false)
     const [ paymentError, setPaymentError ] = useState("")
 
     const { user } = useAuth()
@@ -35,6 +34,7 @@ const HotelPayment = () => {
     const invalidDate = (arrivalDate.getTime() >= departureDate.getTime()) || (arrivalDate.toString() === departureDate.toString())
 
     const handlePayment = async () => {
+        setPaymentError("")
         try {
             const paymentData = {
                 hotelName : hotelData.hotelName,
@@ -59,10 +59,10 @@ const HotelPayment = () => {
             // if we get a an error response from server display it
             // otherwise we display error directly from axios library
             if(errorMessage) {
-                console.log(errorMessage)
+                setPaymentError(errorMessage)
             }
             else {
-                console.log(error.message)
+                setPaymentError(error.message)
             }
         }
     }
@@ -121,6 +121,7 @@ const HotelPayment = () => {
                 }
                 </div>
             <button className="payment-card-confirm" disabled={invalidDate} onClick={handlePayment}> Proceed to Checkout</button>
+            <p className="error text-center"> {paymentError} </p>    
        </div>
     )
 }
