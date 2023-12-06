@@ -25,6 +25,7 @@ import "./App.css"
 
 
 import AuthRequired from './components/authrequired/AuthRequired'
+import ExperienceDetailPage from './pages/ExperienceDetailPage'
 
 function App() {
   return (
@@ -54,7 +55,7 @@ function App() {
 
               <Route path="help" element={<HelpPage/>}/>
 
-
+              <Route path="experience/:id" element={<ExperienceDetailPage/>}/>
             </Route>
           </Route>
             
