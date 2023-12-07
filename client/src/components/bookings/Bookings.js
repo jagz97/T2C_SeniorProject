@@ -14,6 +14,7 @@ const Bookings = () => {
     const [ bookings, setBookings ] = useState([])
     const [ modal, setModal ] = useState(false)
     const [ bookingError, setBookingError ] = useState("")
+
     const { user } = useAuth()
     const idRef = useRef(null)
     
@@ -36,8 +37,8 @@ const Bookings = () => {
         fetchBookings()
     }, [])
 
+    console.log("ref: ",idRef.current)
     const handleModalDelete =  async (id) => {
-        console.log("WE WILL DELETE BOOKING WITH ID", id)
         setBookingError("")
         if(id === null) {
             setBookingError("An error Occured.")
@@ -49,14 +50,18 @@ const Bookings = () => {
                 Authorization: `${user.accesstoken}`,
             }
         }
+
         const data = {
-            id : id
+            reservationId : id
         }
 
-        console.log(`We will be trying to delete reservation w/ `, data)
+        console.log("We will be deleting a booking with:", data)
         try {
-            const response = await api.post("/reservations/deleteReservationById", data , headerOptions)
+            const response = await api.post(`/reservations/${id}`, data, headerOptions)
             console.log(response)
+            if(response.status === 200) {
+                fetchBookings() // when deletion successful fetch updated bookings 
+            }
     
         } catch (error) {
             const errorMessage = error.response?.data?.message
@@ -79,7 +84,7 @@ const Bookings = () => {
         idRef.current = id
     }
 
-    console.log(bookings)
+    // console.log(bookings)
 
     const usrBookings = bookings.map((booking) => (
         <Booking

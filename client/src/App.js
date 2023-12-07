@@ -48,7 +48,7 @@ function App() {
             <Route element={<NavLayout/>}>  
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
-              <Route path="bookings" element={<BookingsPage/>}/>
+              <Route path="reservations" element={<BookingsPage/>}/>
               <Route path="hotel/:id" element={<HotelDetailLayout/>}> 
                 <Route index element={<HotelDetailPage/>}/>
                 <Route path="payment" element={<HotelPaymentPage/>}/>

@@ -2,8 +2,6 @@ import React from "react"
 import "./Bookings.css"
 
 const Booking = ({imgSrc,title,checkin,duration,guests,price,handleCancel}) => {
-    // const arrival = dateToString(checkin)
-    console.log(typeof checkin)
     return (
         <div className="booking">
             <div className="booking-inner">
@@ -20,7 +18,7 @@ const Booking = ({imgSrc,title,checkin,duration,guests,price,handleCancel}) => {
                             <strong>Duration: </strong><span className="booking-duration">{duration}</span>
                         </div>
                         <div className="booking-detail">
-                            <strong>Guests: </strong><span className="booking-guests">{guests}</span>
+                            <strong>Rooms: </strong><span className="booking-guests">{guests}</span>
                         </div>
                     </div>
                     <p className="booking-price">${price}</p>
