@@ -51,7 +51,7 @@ function App() {
             <Route element={<NavLayout/>}>  
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
-              <Route path="singlepost" element={<PostViewPage/>}/>
+              <Route path="singlepost/:id" element={<PostViewPage/>}/>
 
               <Route path="createpost" element={<CreatePostPage/>}/>
               <Route path="createexperience" element={<CreateExperiencePage/>}/>

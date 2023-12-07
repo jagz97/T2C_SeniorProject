@@ -1,17 +1,15 @@
 import React from 'react'
-import nil from './temp-images/nils.jpg'
-
 import { Link } from "react-router-dom"
 
 import './Profile.css'
 
-const ProfilePost = ({postImage}) => {
+const ProfilePost = ({image, id}) => {
     return (
-                <div className="profile-post-wrapper">
-                    <Link to="#">
-                        <img className="profile-post-image" src={nil} alt=""></img>
-                    </Link>
-                </div>
+        <div className="profile-post-wrapper">
+            <Link to={`/singlepost/${id}`}>
+                <img loading="lazy" className="profile-post-image" src={`data:${image.type};base64,${image.data}`} alt="" ></img>
+            </Link>
+        </div>
             
     )
 }
