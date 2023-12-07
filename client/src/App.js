@@ -18,6 +18,8 @@ import HotelDetailLayout from './components/hoteldetail/HotelDetailLayout'
 import HotelDetailPage from './pages/HotelDetailPage'
 import HotelPaymentPage from './pages/HotelPaymentPage'
 import PaymentErrorPage from './pages/PaymentErrorPage'
+import ExperienceDetailPage from './pages/ExperienceDetailPage'
+import HomePage from './pages/HomePage'
 
 import "./App.css"
 
@@ -30,7 +32,7 @@ function App() {
           <Route path="passwordrecovery" element={<PasswordRequestPage/>}/>
           <Route path="passwordreset" element={<PasswordResetPage/>}/>
           <Route element={<NavLayout/>}>
-              <Route index element={<h1>Home</h1>}/>
+              <Route index element={<HomePage/>}/>
           </Route>
   
           {/* Protected Routes */}
@@ -38,7 +40,7 @@ function App() {
             <Route path="onboarding" element={<OnboardingPage/>}/>
             <Route path="cancel" element={<PaymentErrorPage/>}/>
           
-            <Route element={<NavLayout/>}>
+            <Route element={<NavLayout/>}>  
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
               <Route path="hotel/:id" element={<HotelDetailLayout/>}> 
@@ -50,6 +52,7 @@ function App() {
               <Route path="createexperience" element={<CreateExperiencePage/>}/>
               <Route path="settings" element={<SettingsPage/>}/>
               <Route path="help" element={<HelpPage/>}/>
+              <Route path="experience/:id" element={<ExperienceDetailPage/>}/>
             </Route>
           </Route>
             
