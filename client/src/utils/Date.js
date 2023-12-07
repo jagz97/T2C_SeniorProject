@@ -24,8 +24,7 @@ export function getDayDifference(d1,d2) {
 
 export function getString(date) {
     let month = date.toLocaleString("default", { month: "long" });
-    let day = date.getUTCDate()
-    let year = date.getUTCFullYear()
-
+    let day = date.getDate()
+    let year = date.getFullYear()
     return `${month} ${day}, ${year}`
 }
