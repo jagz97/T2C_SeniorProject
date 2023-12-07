@@ -6,12 +6,13 @@ import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
 import HelpPage from './pages/HelpPage'
 import OnboardingPage from './pages/OnboardingPage'
-
+import FeedPage from './pages/FeedPage'
 
 import CreatePostPage from './pages/CreatePostPage'
 import CreateExperiencePage from './pages/CreateExperiencePage'
 
 
+import PostViewPage from './pages/PostViewPage'
 
 import SettingsPage from './pages/SettingsPage'
 
@@ -35,6 +36,8 @@ function App() {
           <Route path="register" element={<SignupPage/>}/>
           <Route path="passwordrecovery" element={<PasswordRequestPage/>}/>
           <Route path="passwordreset" element={<PasswordResetPage/>}/>
+          
+          <Route path="feed" element={<FeedPage/>}/>
           <Route element={<NavLayout/>}>
               <Route index element={<HomePage/>}/>
           </Route>
@@ -42,10 +45,12 @@ function App() {
           {/* Protected Routes */}
           <Route element={<AuthRequired/>}>
             <Route path="onboarding" element={<OnboardingPage/>}/>
+            
           
             <Route element={<NavLayout/>}>
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
+              <Route path="singlepost" element={<PostViewPage/>}/>
 
               <Route path="createpost" element={<CreatePostPage/>}/>
               <Route path="createexperience" element={<CreateExperiencePage/>}/>

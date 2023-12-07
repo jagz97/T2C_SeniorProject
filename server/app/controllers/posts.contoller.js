@@ -282,6 +282,7 @@ exports.getPostDetails = async (req, res) => {
       likeCount,
       UsersLikedPosts: usernames,
       comments: commentsFormatted,
+      username: usernames
     });
   } catch (error) {
     console.error(error);
