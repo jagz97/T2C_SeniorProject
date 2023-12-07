@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
 import HelpPage from './pages/HelpPage'
 import OnboardingPage from './pages/OnboardingPage'
+import BookingsPage from './pages/BookingsPage'
 import CreatePostPage from './pages/CreatePostPage'
 import FeedPage from './pages/FeedPage'
 import CreateExperiencePage from './pages/CreateExperiencePage'
@@ -47,6 +48,7 @@ function App() {
             <Route element={<NavLayout/>}>  
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
+              <Route path="reservations" element={<BookingsPage/>}/>
               <Route path="hotel/:id" element={<HotelDetailLayout/>}> 
                 <Route index element={<HotelDetailPage/>}/>
                 <Route path="payment" element={<HotelPaymentPage/>}/>
