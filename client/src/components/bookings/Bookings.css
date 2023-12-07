@@ -136,4 +136,25 @@
     .booking-cancel-btn {
         font-size: 1rem;
     }
+    .cancel-booking-modal {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+.cancel-booking-save,
+.cancel-booking-close {
+    border: none;
+    padding: 0.4em 1em;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.cancel-booking-save {
+    background-color: #C73968;
+}
+
+.cancel-booking-close {
+    background-color: #8B2CFF;
 }

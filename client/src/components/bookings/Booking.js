@@ -2,13 +2,14 @@ import React from "react"
 import "./Bookings.css"
 
 const Booking = ({imgSrc,title,checkin,duration,guests,price,handleCancel}) => {
-
+    // const arrival = dateToString(checkin)
+    console.log(typeof checkin)
     return (
         <div className="booking">
             <div className="booking-inner">
-                <div className="booking-image-wrapper d-none d-sm-block">
+                {/* <div className="booking-image-wrapper d-none d-sm-block">
                     <img className="booking-image" src={imgSrc} alt="preview of booking"/>
-                </div>
+                </div> */}
                 <div className="booking-detail-wrapper">
                     <h2 className="booking-title">{title}</h2>
                     <div className="booking-details">
