@@ -23,7 +23,7 @@ const HotelPayment = () => {
 
     const { user } = useAuth()
     
-    const roomId = Object.keys(hotelData.rooms)[0]
+    // const roomId = Object.keys(hotelData.rooms)[0]
     const dailyPrice = Math.floor(hotelData.amount_per_night.value)
     const tripDays = getDayDifference(arrivalDate,departureDate)
     const arrival = getString(arrivalDate)
