@@ -57,6 +57,12 @@
     Places Visited
         Section
   ================= */
+.profile-content-image,
+.profile-content-image:hover,
+.profile-content-image:focus {
+    text-decoration: none;
+    color: inherit;
+}
 
 .profile-posts-row {
     max-width: 1050px;
@@ -87,9 +93,13 @@
 .profile-visited-name {
     width: 100% ;
     max-width: 320px ;
-    font-size: 1.375rem;
+    font-size: 1.25rem;
     font-weight: 700;
     margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 300px;
 }
 
 .profile-visited-rating {

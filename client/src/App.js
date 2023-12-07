@@ -25,6 +25,7 @@ import "./App.css"
 
 
 import AuthRequired from './components/authrequired/AuthRequired'
+import ExperienceDetailPage from './pages/ExperienceDetailPage'
 import HomePage from './pages/HomePage'
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
           <Route element={<AuthRequired/>}>
             <Route path="onboarding" element={<OnboardingPage/>}/>
           
-            <Route element={<NavLayout/>}>
+            <Route element={<NavLayout/>}>  
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
 
@@ -55,7 +56,7 @@ function App() {
 
               <Route path="help" element={<HelpPage/>}/>
 
-
+              <Route path="experience/:id" element={<ExperienceDetailPage/>}/>
             </Route>
           </Route>
             
