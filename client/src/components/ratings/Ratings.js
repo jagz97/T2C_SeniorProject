@@ -16,8 +16,11 @@ const Ratings = ({value, starSize}) => {
     
     if(value) {    
     
-        // handle case if value of props.value out of range
-        if(numStars > 5) {
+        // handle case if value of props.value out of range of 5
+        if(numStars > 5 && numStars <= 10) {
+            numStars /= 2 
+        }
+        else if(numStars > 10) {
             numStars = 5
         }
         else if(numStars < 0) {
@@ -34,10 +37,9 @@ const Ratings = ({value, starSize}) => {
     }
     
     /*
-      If no value prop given or a decimal part is present
-      add a half star to jsx arr
+      If no value prop given or a decimal part >= 0.5 add a half star 
     */
-    if(!numStars || numStars % 1 !== 0) 
+    if(!numStars || numStars % 1 >= 0.5) 
         render.push(<LiaStarHalfSolid key={render.length} color="#FFE071" size={size} />)
     
     return (
