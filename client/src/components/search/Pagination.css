@@ -1,0 +1,30 @@
+.search-pagination > li > a
+{
+    color: #3C3A83;
+    background-color: #fff;
+}
+
+.search-pagination > li > a:focus,
+.search-pagination > li > a:hover,
+.search-pagination > li > span:focus,
+.search-pagination > li > span:hover
+{
+    color: #fff;
+    background-color: #3C3A83 !important;
+    border-color: #fff;
+    box-shadow: none;
+}
+
+.search-pagination > .active > a
+{
+    background-color: #3C3A83 !important;
+    color: #fff;
+    border: solid 1px #3C3A83 !important;
+}
+
+.search-pagination > .active > a:hover
+{
+    background-color: #3C3A83 !important;
+    border: solid 1px #3C3A83;
+    color: #fff;
+}

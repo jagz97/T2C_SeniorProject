@@ -1,0 +1,25 @@
+.hoteldetail-datepicker{
+    padding: 0.4em 1.1em;
+    font-size: 1rem;
+    width: 150px;
+}
+
+.hotelsearch-datepicker {
+    width: 100%;
+    font-size: inherit;
+}
+
+.hoteldetail-datepicker,
+.hotelsearch-datepicker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    border: 1px #A1A1A1 solid;
+    border-radius: 3px;
+    height: 40px;
+    padding: 0 0.5rem;
+    background: transparent;
+}
+
