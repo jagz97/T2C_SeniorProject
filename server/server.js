@@ -63,6 +63,7 @@ require("./app/routes/profile.routes")(app);
 require("./app/routes/hotel.routes")(app);
 require("./app/routes/posts.routes.js")(app);
 require("./app/routes/experience.routes.js")(app);
+require("./app/routes/matching.routes.js")(app);
 
 
 // set port, listen for requests

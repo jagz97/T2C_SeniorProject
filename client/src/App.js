@@ -4,10 +4,21 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import ProfilePage from './pages/ProfilePage'
 import ListviewPage from './pages/ListviewPage'
+import HelpPage from './pages/HelpPage'
 import OnboardingPage from './pages/OnboardingPage'
 
 
 import BookingsPage from './pages/BookingsPage'
+import CreatePostPage from './pages/CreatePostPage'
+import CreateExperiencePage from './pages/CreateExperiencePage'
+
+
+
+import SettingsPage from './pages/SettingsPage'
+
+import NotFound from './pages/NotFoundPage'
+
+
 import PasswordRequestPage from './pages/PasswordRequestPage'
 import PasswordResetPage from './pages/PasswordResetPage'
 
@@ -15,6 +26,7 @@ import "./App.css"
 
 
 import AuthRequired from './components/authrequired/AuthRequired'
+import HomePage from './pages/HomePage'
 
 function App() {
   return (
@@ -25,7 +37,7 @@ function App() {
           <Route path="passwordrecovery" element={<PasswordRequestPage/>}/>
           <Route path="passwordreset" element={<PasswordResetPage/>}/>
           <Route element={<NavLayout/>}>
-              <Route index element={<h1>Home</h1>}/>
+              <Route index element={<HomePage/>}/>
           </Route>
   
           {/* Protected Routes */}
@@ -37,10 +49,19 @@ function App() {
               <Route path="profile" element={<ProfilePage/>}/>
 
               <Route path="bookings" element={<BookingsPage/>}/>
+              <Route path="createpost" element={<CreatePostPage/>}/>
+              <Route path="createexperience" element={<CreateExperiencePage/>}/>
+
+
+              <Route path="settings" element={<SettingsPage/>}/>
+
+              <Route path="help" element={<HelpPage/>}/>
+
+
             </Route>
           </Route>
             
-            <Route path="*" element={<h1>Not Found!</h1>}/>
+            <Route path="*" element={<NotFound/>}/>
         </Routes>
     </BrowserRouter>
   );

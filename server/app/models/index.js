@@ -32,9 +32,11 @@ db.hotel = require("./hotels.models.js")(sequelize,Sequelize);
 db.restaurant = require("./restaurants.models.js")(sequelize,Sequelize);
 db.attraction = require("./attractions.models.js")(sequelize,Sequelize);
 db.reservations = require("./reservations.models.js")(sequelize, Sequelize);
+db.preferences = require("./preferences.models.js")(sequelize, Sequelize);
 
 
 
+const Preferences = db.preferences;
 const Reservation = db.reservations;
 const Experience = db.experience;
 const Hotel = db.hotel;
@@ -49,11 +51,33 @@ const Post = db.posts;
 const Image = db.image;
 
 
+
+// Define a relationship with the MatchedUsers table
+Users.belongsToMany(Users, { through: 'MatchedUsers', foreignKey: 'user1Id', as: 'User1' });
+Users.belongsToMany(Users, { through: 'MatchedUsers', foreignKey: 'user2Id', as: 'User2' });
+
+
+
+Users.hasOne(Preferences, {
+  foreignKey: 'userId',
+  as: 'userPreferences', // Optional, but it's good practice to provide a specific alias
+  onDelete: 'CASCADE' // Optional, this ensures that if a user is deleted, their associated preference is also deleted
+});
+
+Preferences.belongsTo(Users, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE'
+});
+
+
+
 Users.hasMany(Reservation, { foreignKey: 'userId', as: 'reservations' });
 Reservation.belongsTo(Users, { foreignKey: 'userId' });
 
 Experience.belongsTo(Users, { foreignKey: 'userId' });
 Users.hasMany(Experience, {foreignKey: 'userId', as: 'experiences' });
+
+Experience.belongsTo(sequelize.models.Image, { foreignKey: 'experiencePicId', as: 'experiencePic' });
 
 
 // associations for Experience, Hotel, Restaurant, and Attraction

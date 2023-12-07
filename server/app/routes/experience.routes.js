@@ -15,6 +15,22 @@ module.exports = function (app) {
     app.post(
     "/api/profile/createExperience",
     [authJwt.verifyToken],
+    upload.fields([
+        { name: 'experiencePic', maxCount: 1 }, // Specify the file field name and the maximum number of files
+        { name: 'city_country' }, // Specify a field named 'key1' (you can add more as needed)
+        { name: 'starRating' }, // Specify a field named 'key2' (you can add more as needed)
+        {name: 'hotelName'},
+        {name: 'restaurantName'},
+        {name: 'restaurantCuisine'},
+        {name: 'hotelLocation'},
+        {name: 'hotelRatings'},
+        {name: 'restaurantLocation'},
+        {name: 'restaurantRatings'},
+        {name: 'attractionName'},
+        {name: 'attractionLocation'},
+        {name: 'attractionDescription'},
+        {name: 'attractionRatings'},
+    ]),
     controller.createExperience
     );
 
@@ -22,6 +38,12 @@ module.exports = function (app) {
         "/api/profile/experiences",
         [authJwt.verifyToken],
         controller.getExperience
+    );
+
+    app.get('/api/profile/experiences/:experienceId',
+        [authJwt.verifyToken],
+        controller.getExperienceById
+    
     );
 
 
