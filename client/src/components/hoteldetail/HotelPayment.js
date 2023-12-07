@@ -38,10 +38,11 @@ const HotelPayment = () => {
         try {
             const paymentData = {
                 hotelName : hotelData.hotelName,
-                descreption : roomId?  hotelData.rooms[roomId].description : " ",
+                descreption : " ",
                 checkInDate : arrivalDate,
                 roomQuantity : roomAmount,
                 price : paymentTotal,
+                duration : tripDays, 
             }
             console.log("We will checkout with this:", paymentData)
             const headerOptions = {
