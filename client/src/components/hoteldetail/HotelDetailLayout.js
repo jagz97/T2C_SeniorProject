@@ -9,7 +9,7 @@ import "./HotelDetail.css"
 
 import { api } from "../../api/axios"
 
-import { detail } from "./tempData"
+// import { detail } from "./tempData"
 
 import {
     IoLocationOutline,
@@ -56,6 +56,10 @@ const SearchResultLayout = () => {
             console.log("Layout Route Effect!")
         }
         fetchHotelDetail()
+        // eslint gives a warning about not including arrivalDate and departureDate
+        // in the dependency array if we inlcude them in the array, then we make 
+        // an unecessary call to hotel api when user changes booking dates. since 
+        // we're not doing real payment this should be okay to exclude 
     }, [params.id])
     
     const activeStyle = {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSearchParams } from "react-router-dom"
 import { getDate, dateToString } from "../../utils/Date"
 import './Search.css'
@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row'
 import ButtonDatePicker from "../buttondatepicker/ButtonDatePicker.js"
 import introImg from "../../images/pexels-jake-brown-2531314.jpg"
 import SearchResult from "./SearchResult"
-import Pagination  from "./Pagination.js"
+// import Pagination  from "./Pagination.js"
 import FilterRating from "./FilterRating"
 
 import { api } from "../../api/axios"
@@ -20,7 +20,7 @@ import {
 } from "react-icons/md"
 
 
-import { data } from "./tempData.js"
+// import { data } from "./tempData.js"
 
 const MAX = 5
 const options = [] // stores option elements for select
@@ -38,7 +38,7 @@ const Search = () => {
     const [ roomAmount, setRoomAmount ] = useState(1)
     const [ guestAmount, setGuestAmount ] = useState(1)
     const [ searchResults, setSearchResults ] = useState([])
-    const [ totalPageNumber, setTotalPageNumber ] = useState(100)
+    // const [ totalPageNumber, setTotalPageNumber ] = useState(100)
     
     const [ isLoading, setIsLoading ] = useState(false)
     const [ hasSearched, setHasSearched ] = useState(false)
@@ -46,7 +46,7 @@ const Search = () => {
     
     console.log(searchResults)
     /* Search Sorters*/
-    const [ searchSorter, setSearchSorter ] = useState(null)
+    // const [ searchSorter, setSearchSorter ] = useState(null)
     
     const [ searchParams, setSearchParams ] = useSearchParams()
 
@@ -72,7 +72,7 @@ const Search = () => {
         
         // if the search params page is undefined
         // set it to page = 1 when request is sent
-        if (!currentPage || currentPage == 1) {
+        if (!currentPage || currentPage === 1) {
             setSearchParams({page:1})
             page_number = 0
         }
@@ -108,13 +108,13 @@ const Search = () => {
     }
 
 
-    useEffect(() => {
-        // only run effect when search params have changed
-        // and if we have made already made a request
-        if(searchResults.length > 0 && currentPage) {
-            handleSearch()
-        }
-    },[currentPage])
+    // useEffect(() => {
+    //     // only run effect when search params have changed
+    //     // and if we have made already made a request
+    //     if(searchResults.length > 0 && currentPage) {
+    //         handleSearch()
+    //     }
+    // },[currentPage])
 
     const handleSort = (event) => {
         const { value } = event.target
@@ -297,9 +297,9 @@ const Search = () => {
                                     hotels.length !== 0 && 
                                     <div className="search-pages">
                                     <div className="search-page-numbers">
-                                        <Pagination 
+                                        {/* <Pagination 
                                             pages={totalPageNumber}  
-                                        />                                      
+                                        />                                       */}
                                     </div>
                                 </div>
                         }

@@ -47,7 +47,7 @@ const PageNumbers = ({ pages }) => {
     // populate jsx array
     for( let number = 1; number <= numItem; number++) {
         render.push(
-            <Pagination.Item key={number} className={`${(number) == currentPage ? "active" : null}`}>    
+            <Pagination.Item key={number} className={`${(number) === currentPage ? "active" : null}`}>    
                 {number}
             </Pagination.Item>
         )
