@@ -35,6 +35,9 @@ const Bookings = () => {
 
     useEffect(() => {
         fetchBookings()
+        // eslint throws a warning to include fetchBookings in dep
+        // array. If included, uncessary api calls will happen
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     console.log("ref: ",idRef.current)

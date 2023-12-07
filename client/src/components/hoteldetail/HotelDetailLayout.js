@@ -60,6 +60,7 @@ const SearchResultLayout = () => {
         // in the dependency array if we inlcude them in the array, then we make 
         // an unecessary call to hotel api when user changes booking dates. since 
         // we're not doing real payment this should be okay to exclude 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params.id])
     
     const activeStyle = {
