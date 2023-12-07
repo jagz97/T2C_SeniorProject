@@ -7,7 +7,9 @@ import ListviewPage from './pages/ListviewPage'
 import HelpPage from './pages/HelpPage'
 import OnboardingPage from './pages/OnboardingPage'
 import CreatePostPage from './pages/CreatePostPage'
+import FeedPage from './pages/FeedPage'
 import CreateExperiencePage from './pages/CreateExperiencePage'
+import PostViewPage from './pages/PostViewPage'
 import SettingsPage from './pages/SettingsPage'
 import NotFound from './pages/NotFoundPage'
 import PasswordRequestPage from './pages/PasswordRequestPage'
@@ -31,6 +33,8 @@ function App() {
           <Route path="register" element={<SignupPage/>}/>
           <Route path="passwordrecovery" element={<PasswordRequestPage/>}/>
           <Route path="passwordreset" element={<PasswordResetPage/>}/>
+          
+          <Route path="feed" element={<FeedPage/>}/>
           <Route element={<NavLayout/>}>
               <Route index element={<HomePage/>}/>
           </Route>
@@ -39,6 +43,7 @@ function App() {
           <Route element={<AuthRequired/>}>
             <Route path="onboarding" element={<OnboardingPage/>}/>
             <Route path="cancel" element={<PaymentErrorPage/>}/>
+            
           
             <Route element={<NavLayout/>}>  
               <Route path="posts" element={<ListviewPage/>}/>
@@ -48,6 +53,7 @@ function App() {
                 <Route path="payment" element={<HotelPaymentPage/>}/>
               </Route>
               <Route path="search" element={<SearchPage/>}/>
+              <Route path="singlepost" element={<PostViewPage/>}/>
               <Route path="createpost" element={<CreatePostPage/>}/>
               <Route path="createexperience" element={<CreateExperiencePage/>}/>
               <Route path="settings" element={<SettingsPage/>}/>
