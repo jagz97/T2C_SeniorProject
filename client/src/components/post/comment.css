@@ -1,0 +1,154 @@
+.comments {
+    align-items: flex-start;
+    background-color: #ffffff;
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .comments .profile-header {
+    align-items: flex-start;
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-bottom-width: 0.5px;
+    border-color: #f0f0f0;
+    display: flex;
+    flex: 0 0 auto;
+    padding: 9px 8px 9px 14px;
+    position: relative;
+    width: 405px;
+  }
+  
+  .comments .frame {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-grow: 1;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .comments .image {
+    align-items: flex-start;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 8px;
+    padding: 5px;
+    position: relative;
+  }
+  
+  .comments .avatar {
+    height: 32px;
+    object-fit: cover;
+    position: relative;
+    width: 32px;
+  }
+  
+  .comments .text-wrapper {
+    color: #262626;
+    flex: 1;
+    font-family: "DM Sans-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+  }
+  
+  .comments .more {
+    height: 40px;
+    position: relative;
+    width: 34px;
+  }
+  
+  .comments .author-comment {
+    align-items: flex-start;
+    background-color: #ffffff;
+    display: flex;
+    flex: 0 0 auto;
+    padding: 14px;
+    position: relative;
+    width: 405px;
+  }
+  
+  .comments .div {
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    flex-grow: 1;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .comments .container {
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .comments .text {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 8px;
+    padding: 4px 0px 0px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .comments .text-wrapper-2 {
+    color: #262626;
+    flex: 1;
+    font-family: "DM Sans-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+  }
+  
+  .comments .actions {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 12px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .comments .user-comment {
+    align-items: flex-start;
+    background-color: #ffffff;
+    display: flex;
+    flex: 0 0 auto;
+    padding: 7px 14px;
+    position: relative;
+    width: 405px;
+  }
+  
+  .comments .eceegulden-it-s-so {
+    color: #262626;
+    flex: 1;
+    font-family: "DM Sans-Medium", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+  }
+  
+  .comments .span {
+    font-weight: 500;
+  }
+  
+  .comments .text-wrapper-3 {
+    font-family: "DM Sans-Regular", Helvetica;
+  }

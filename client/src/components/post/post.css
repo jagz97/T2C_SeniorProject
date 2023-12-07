@@ -1,0 +1,666 @@
+.macbook-post {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.macbook-post .iphone-pro-max {
+  background-color: #ffffff;
+  position: relative;
+}
+
+.macbook-post .tempimagejbglxr {
+  left: 0;
+  position: absolute;
+  top: 0;
+  margin-left: -260px;
+  margin-top:-50px;
+ 
+  
+}
+
+.macbook-post .instagram-post-full {
+  background-color: #f2f2ff;
+  position: absolute;
+}
+
+.macbook-post .overlap-group {
+  height: 870px;
+  left: 0;
+  position: absolute;
+  top: 84px;
+  width: 430px;
+}
+
+.macbook-post .instagram-post-web {
+  height: 532px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 430px;
+}
+
+.macbook-post .container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 401px;
+  left: 0;
+  position: absolute;
+  top: 469px;
+  width: 430px;
+}
+
+
+.macbook-post .container-5 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 401px;
+  left: 0;
+  position: absolute;
+  top: 469px;
+  width: 430px;
+  margin-left: 770px;
+}
+
+.macbook-post .comments {
+  align-items: flex-start;
+  background-color: #ffffff;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+  width: 430px;
+}
+
+.macbook-post .profile-header {
+  align-items: flex-start;
+  background-color: #ffffff;
+  border-bottom-style: solid;
+  border-bottom-width: 0.5px;
+  border-color: #f0f0f0;
+  display: flex;
+  flex: 0 0 auto;
+  padding: 9px 8px 9px 14px;
+  position: relative;
+  width: 430px;
+}
+
+.macbook-post .frame {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  position: relative;
+  width: 163px;
+}
+
+.macbook-post .image {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 8px;
+  padding: 5px;
+  position: relative;
+}
+
+.macbook-post .avatar {
+  height: 25px;
+  object-fit: cover;
+  position: relative;
+  width: 25px;
+  margin-top: -3px;
+}
+
+.macbook-post .text-wrapper {
+  color: #262626;
+  flex: 1;
+  font-family: "DM Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+}
+
+.macbook-post .more {
+  height: 40px;
+  left: 380px;
+  position: absolute;
+  top: -3px;
+  width: 36px;
+}
+
+.macbook-post .author-comment {
+  align-items: flex-start;
+  background-color: #ffffff;
+  display: flex;
+  flex: 0 0 auto;
+  padding: 14px;
+  position: relative;
+  width: 430px;
+}
+
+.macbook-post .div {
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  flex-grow: 1;
+  gap: 10px;
+  position: relative;
+}
+
+.macbook-post .container-2 {
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 10px;
+  position: relative;
+}
+
+.macbook-post .text {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+  padding: 4px 0px 0px;
+  position: relative;
+  width: 100%;
+}
+
+.macbook-post .text-wrapper-2 {
+  color: #262626;
+  flex: 1;
+  font-family: "DM Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+}
+
+.macbook-post .actions {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 12px;
+  position: relative;
+  width: 100%;
+}
+
+.macbook-post .user-comment {
+  align-items: flex-start;
+  background-color: #ffffff;
+  display: flex;
+  flex: 0 0 auto;
+  padding: 7px 14px;
+  position: relative;
+  width: 430px;
+}
+
+.macbook-post .eceegulden-it-s-so {
+  color: #262626;
+  flex: 1;
+  font-family: "DM Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+}
+
+.macbook-post .span {
+  font-weight: 500;
+}
+
+.macbook-post .text-wrapper-3 {
+  color: #262626;
+  font-family: "DM Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.macbook-post .comments-table{
+  align-items: flex-start;
+  background-color: #ffffff;
+  border-color: #f0f0f0;
+  border-top-style: solid;
+  border-top-width: 1px;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  padding: 7px 6px 7px 10px;
+  position: relative;
+  width: 100%;
+
+}
+
+.macbook-post .actions-wrapper {
+  align-items: flex-start;
+  background-color: #ffffff;
+  border-color: #f0f0f0;
+  border-top-style: solid;
+  border-top-width: 1px;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  padding: 7px 6px 7px 10px;
+  position: relative;
+  width: 100%;
+}
+
+.macbook-post .actions-wrapper-2 {
+  align-items: flex-start;
+  background-color: #ffffff;
+  border-color: #f0f0f0;
+  border-top-style: solid;
+  border-top-width: 1px;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  padding: 7px 6px 7px 10px;
+  position: relative;
+  width: 100%;
+  margin-top:40px;
+}
+
+
+
+
+.macbook-post .actions-2 {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  position: relative;
+  width: 100%;
+}
+.macbook-post .actions-3 {
+  width: 600%;
+  margin-top: -460px;
+
+}
+.macbook-post .like {
+  height: 40px;
+  position: relative;
+  width: 40px;
+  
+}
+
+.macbook-post .space {
+  flex: 1;
+  flex-grow: 1;
+  position: relative;
+}
+
+.macbook-post .date {
+  align-items: flex-start;
+  align-self: stretch;
+  background-color: #ffffff;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-color: #f0f0f0;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0px 16px 14px;
+  position: relative;
+  width: 100%;
+}
+
+.macbook-post .date-2 {
+  align-items: flex-start;
+  align-self: stretch;
+  background-color: #ffffff;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-color: #f0f0f0;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0px 16px 14px;
+  position: relative;
+  width: 100%;
+  margin-right: 80px;
+  
+}
+
+.macbook-post .text-wrapper-4 {
+  align-self: stretch;
+  color: #262626;
+  font-family: "DM Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  margin-left: 1%;
+  position: relative;
+}
+
+.macbook-post .text-wrapper-5 {
+  align-self: stretch;
+  color: #262626;
+  font-family: "DM Sans", Helvetica;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  margin-left: 1%;
+  position: relative;
+}
+
+.macbook-post .frame-2 {
+  align-items: center;
+  align-self: stretch;
+  background-color: #ffffff;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 22px;
+  padding: 14px 36px 14px 16px;
+  position: relative;
+  width: 100%;
+}
+
+.macbook-post .add-a-comment {
+  color: #737373;
+  flex: 1;
+  font-family: "DM Sans", Helvetica;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+}
+
+.macbook-post .text-wrapper-5 {
+  color: #737373;
+  font-family: "DM Sans", Helvetica;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.macbook-post .frame-3 {
+  height: 24px;
+  position: relative;
+  width: 24px;
+}
+
+.macbook-post .div-wrapper {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 8px;
+  padding: 4px 0px;
+  position: relative;
+}
+
+.macbook-post .text-wrapper-6 {
+  color: #1a6a9f;
+  font-family: "DM Sans", Helvetica;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  opacity: 0.6;
+  position: relative;
+  width: fit-content;
+  border:none;
+  background-color: #1a6a9f00;
+}
+
+.macbook-post .text-wrapper-6:hover {
+  opacity: 1; /* Change the opacity on hover */
+}
+
+.macbook-post .prev {
+  position: absolute;
+}
+
+.macbook-post .img {
+  height: 70px;
+  left: 360px;
+  position: absolute;
+  top: 6px;
+  width: 70px;
+}
+.macbook-post .container-3 img.instagram-post-web-1 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Optional: Maintain aspect ratio and cover container */
+}
+
+.macbook-post .container-3 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 361px;
+  left: -30px;
+  position: absolute;
+  top: 1210px;
+  width: 715px;
+}
+
+
+.macbook-post .overlap-group .instagram-post-web{
+  width: 100%;
+  height: 50%;
+  object-fit: cover; /* Optional: Maintain aspect ratio and cover container */
+
+}
+
+/* .macbook-post .container-3 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 361px;
+  left: 22px;
+  position: absolute;
+  top: 6px;
+  width: 715px;
+} */
+
+.macbook-post .comments-2 {
+  align-items: flex-start;
+  background-color: #ffffff;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+  width: 715px;
+}
+
+.macbook-post .frame-wrapper {
+  align-items: flex-start;
+  background-color: #ffffff;
+  border-bottom-style: solid;
+  border-bottom-width: 0.5px;
+  border-color: #f0f0f0;
+  display: flex;
+  flex: 0 0 auto;
+  padding: 9px 8px 9px 14px;
+  position: relative;
+  width: 405px;
+}
+
+.macbook-post .frame-4 {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-grow: 1;
+  gap: 10px;
+  position: relative;
+}
+
+.macbook-post .more-2 {
+  height: 40px;
+  left: 675px;
+  position: absolute;
+  top: 6px;
+  width: 40px;
+}
+
+.macbook-post .author-comment-2 {
+  align-items: flex-start;
+  background-color: #ffffff;
+  display: flex;
+  flex: 0 0 auto;
+  padding: 14px;
+  position: relative;
+  width: 405px;
+}
+
+.macbook-post .user-comment-2 {
+  align-items: flex-start;
+  background-color: #ffffff;
+  display: flex;
+  flex: 0 0 auto;
+  padding: 7px 14px;
+  position: relative;
+  width: 405px;
+}
+
+.macbook-post .actions-3 {
+  align-items: flex-start;
+  align-self: stretch;
+  background-color: #ffffff;
+  border-color: #f0f0f0;
+  border-top-style: solid;
+  border-top-width: 1px;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  padding: 7px 6px 7px 10px;
+  position: relative;
+  width: 100%;
+}
+
+.macbook-post .overlap-group-2 {
+  height: auto !important;
+  left: 68px;
+  position: absolute;
+  top: 616px;
+  width: 1210px;
+}
+
+
+
+.macbook-post .overlap-group-3 {
+  height: auto !important;
+  left: 68px;
+  position: absolute;
+  
+  width: 790px;
+}
+.macbook-post .instagram-post-web-3 {
+  height: 746px;
+  left: 0;
+  position: absolute;
+  top: -00px;
+  width: 800px;
+}
+
+.macbook-post .instagram-post-web-wrapper-3 {
+  background-color: #f2f2ff;
+  height: 759px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 800px;
+  margin-left: -80px;
+}
+
+
+
+
+
+.macbook-post .instagram-post-web-wrapper {
+  background-color: #f2f2ff;
+  height: 759px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1230px;
+  margin-left: -30px;
+  margin-top:10px;
+}
+
+.macbook-post .instagram-post-web-2 {
+  height: 746px;
+  left: 0;
+  position: absolute;
+  top: -00px;
+  width: 800px;
+}
+
+
+
+.macbook-post .prev-2 {
+  height: 70px;
+  left: 1140px;
+  position: absolute;
+  top: 332px;
+  width: 70px;
+}
+
+.macbook-post .prev-3 {
+  height: 70px;
+  left: 0;
+  position: absolute;
+  margin-top: -405px;
+  opacity: 0.5; /* Set the default opacity value */
+  transition: opacity 0.3s ease; /* Add a smooth transition effect */
+}
+
+.macbook-post .prev-3:hover {
+  opacity: 1; /* Change the opacity on hover */
+}
+
+.macbook-post .prev-4 {
+  height: 70px;
+  left: 762px;
+  position: absolute;
+  top: 486px;
+  width: 70px;
+}
+
+
+.macbook-post .like {
+ 
+}
+
+.macbook-post.liked {
+  color: red; /* Set the color to red when the 'liked' class is present */
+}
+
+
+
+
+.table-div {
+  align-items: flex-start;
+  background-color: #ffffff;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+  width: 715px;
+  
+
+}
