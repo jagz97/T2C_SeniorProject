@@ -43,7 +43,6 @@ function App() {
           <Route element={<AuthRequired/>}>
             <Route path="onboarding" element={<OnboardingPage/>}/>
             <Route path="cancel" element={<PaymentErrorPage/>}/>
-            
           
             <Route element={<NavLayout/>}>  
               <Route path="posts" element={<ListviewPage/>}/>
@@ -53,7 +52,7 @@ function App() {
                 <Route path="payment" element={<HotelPaymentPage/>}/>
               </Route>
               <Route path="search" element={<SearchPage/>}/>
-              <Route path="singlepost" element={<PostViewPage/>}/>
+              <Route path="singlepost/:id" element={<PostViewPage/>}/>
               <Route path="createpost" element={<CreatePostPage/>}/>
               <Route path="createexperience" element={<CreateExperiencePage/>}/>
               <Route path="settings" element={<SettingsPage/>}/>

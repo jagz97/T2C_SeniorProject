@@ -15,10 +15,11 @@ import { api } from '../../api/axios'
 const Profile = () => {
     const [ profile, setProfile ] = useState({})
     const [profilePicture, setProfilePicture] = useState("")
-
     const [ experiences, setExperiences ] = useState([])
+    const [ posts, setPosts ] = useState([])
     const { user } = useAuth()
     console.log(profile)
+   
     useEffect(() => {
         const getProfile = async () => {
             const headerOptions = {
@@ -29,7 +30,8 @@ const Profile = () => {
             try {
                 const response = await api.get("/profile/getProfile", headerOptions)
                 const expResponse = await api.get("/profile/experiences", headerOptions)
-                console.log("Exp", expResponse.data.userExperiences)
+                const postResponse = await api.get("/posts/getAllPosts", headerOptions)
+              
                 const { profilePicture }  = response.data
                 
                 // convert buffer array into typed array
@@ -42,6 +44,7 @@ const Profile = () => {
                 setProfilePicture(`data:${profilePicture.type};base64,${profilePicData}`) 
                 setProfile(response.data)
                 setExperiences(expResponse.data.userExperiences)
+                setPosts(postResponse.data.posts)
         
             } catch (error) {
                 const errorMessage = error.response?.data?.message
@@ -66,6 +69,14 @@ const Profile = () => {
             rating={Number(exp.starRating)}
             location={exp.city_country}
             image={exp.experiencePic}
+        />
+    ))
+
+    const userPosts = posts.map((post) => (
+        <ProfilePost
+            key={post.id}
+            id={post.id}
+            image={post.postPic}
         />
     ))
     
@@ -128,10 +139,9 @@ const Profile = () => {
                     {/*Profile Post Content */}
                     {/* Hard Code few Components for testing */}
                     <Col className="col-12 d-flex flex-wrap justify-content-center justify-content-center" style={{gap:20}}>
-                        <ProfilePost/>
-                        <ProfilePost/>
-                        <ProfilePost/>
-                        <ProfilePost/>
+                        {
+                            userPosts.length > 0 ? userPosts : <p className="text-muted text-center mt-5">No Posts to show.</p>
+                        }
                     </Col>
                 </Row>
             </Container>
