@@ -1,8 +1,8 @@
 // models/matchedUsers.js
 'use strict';
 module.exports = (sequelize, Sequelize) => {
-    const MatchedUsers = sequelize.define("matchedUsers", {
-        matchedUserId: {
+    const MatchedUsers = sequelize.define("matchedusers", {
+        id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true

@@ -125,7 +125,13 @@ exports.createExperience = async function (req, res) {
 
 
 exports.getExperience = async function (req, res) {
-    const userId = req.id;
+    let userId = req.params.userId;
+
+
+    // If userId is not present in params, check if the user is authenticated based on the presence of the JWT token
+    if (!userId) {
+      userId = req.id;
+    }
 
   try {
     // Find the user by their ID and include their experiences and associated hotels, attractions, and restaurants

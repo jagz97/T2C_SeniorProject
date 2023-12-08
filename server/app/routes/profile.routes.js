@@ -24,6 +24,12 @@ module.exports = function (app) {
     controller.getUserProfile
     );
 
+    app.get(
+        '/api/profile/getProfile/:userId',
+        [authJwt.verifyToken],
+        controller.getUserProfile
+        );
+
     app.post("/api/profile/updateProfilePic",
     [authJwt.verifyToken],
     upload.single('profilePic',), 
@@ -34,6 +40,8 @@ module.exports = function (app) {
     [authJwt.verifyToken], 
     controller.getProfilePic
     );
+
+    
 
     app.post("/api/profile/updateBioPic",
     [authJwt.verifyToken],

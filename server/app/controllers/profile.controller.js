@@ -63,7 +63,13 @@ exports.createProfile = async (req, res) => {
     exports.getUserProfile = async (req, res) => {
       try {
         // Check if the user is authenticated based on the presence of the JWT token
-        const userId = req.id; // Extract user information from the request context (provided by the middleware)
+        let userId = req.params.userId; // Replace 'userId' with the actual parameter name
+
+        // If userId is not present in params, check if the user is authenticated based on the presence of the JWT token
+        if (!userId) {
+          userId = req.id;
+        }
+
     
         // Check if the user exists
         const user = await db.users.findByPk(userId);

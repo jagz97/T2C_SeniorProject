@@ -8,6 +8,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import NavCustomDropdown from './NavCustomDropdown';
 import useAuth from "../../hooks/useAuth"
 
+
+
 import {
   Search,
   MoreVerticalFill
@@ -26,7 +28,12 @@ const Navbar = () => {
     <header>
       <NavbarBootstrap className="global-nav" style={{height: "75px"}}>
         <Container className="p-0 p-sm-3 p-lg-5" >
+        <NavbarBootstrap.Brand as={Link} className="global-nav-logo p-0 ps-3 ps-sm-0" to="/">
+            <img src={"/img/navbarlogo.png"} alt="Travel2Connect Logo" style={{ height: '120px', marginRight: '0px' }} />
+            
+          </NavbarBootstrap.Brand>
           <NavbarBootstrap.Brand as={Link} className="global-nav-logo p-0 ps-3 ps-sm-0" to="/">Travel2Connect</NavbarBootstrap.Brand>
+          
           {
             user ?
             <>

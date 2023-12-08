@@ -19,6 +19,10 @@ import SettingsPage from './pages/SettingsPage'
 import NotFound from './pages/NotFoundPage'
 
 
+import MatchingOnboardPage from './pages/MatchingOnboardPage'
+import MatchUsersPage from './pages/MatchUsersPage'
+import ChatPage from './pages/ChatPage'
+
 import PasswordRequestPage from './pages/PasswordRequestPage'
 import PasswordResetPage from './pages/PasswordResetPage'
 
@@ -37,6 +41,7 @@ function App() {
           <Route path="register" element={<SignupPage/>}/>
           <Route path="passwordrecovery" element={<PasswordRequestPage/>}/>
           <Route path="passwordreset" element={<PasswordResetPage/>}/>
+          <Route path="chat" element={<ChatPage/>}/>
           
           <Route path="feed" element={<FeedPage/>}/>
           <Route element={<NavLayout/>}>
@@ -46,12 +51,17 @@ function App() {
           {/* Protected Routes */}
           <Route element={<AuthRequired/>}>
             <Route path="onboarding" element={<OnboardingPage/>}/>
+            <Route path="onboardmatching" element={<MatchingOnboardPage/>}/>
             
           
             <Route element={<NavLayout/>}>  
               <Route path="posts" element={<ListviewPage/>}/>
               <Route path="profile" element={<ProfilePage/>}/>
               <Route path="singlepost" element={<PostViewPage/>}/>
+              <Route path="profile/:userId" element={<ProfilePage/>}/>
+
+              <Route path="matching" element={<MatchUsersPage/>}/>
+
 
               <Route path="createpost" element={<CreatePostPage/>}/>
               <Route path="createexperience" element={<CreateExperiencePage/>}/>

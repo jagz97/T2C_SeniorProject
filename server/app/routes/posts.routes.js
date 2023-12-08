@@ -32,6 +32,13 @@ module.exports = function (app) {
 
     );
 
+    app.get(
+        "/api/posts/getAllPosts/:userId",
+        [authJwt.verifyToken],
+        controller.getPostsByUserId
+
+    );
+
     app.post(
         "/api/posts/:postId/like",
         [authJwt.verifyToken],

@@ -80,7 +80,12 @@ exports.post = async function (req, res) {
 
 exports.getPostsByUserId = async function (req, res) {
     try {
-        const userId = req.id; // Extract user information from the request context (provided by the middleware)
+      let userId = req.params.userId;
+
+      // If userId is not present in params, check if the user is authenticated based on the presence of the JWT token
+    if (!userId) {
+      userId = req.id;
+    }
 
             // Fetch user's posts and include related images
     const userPosts = await User.findByPk(userId, {

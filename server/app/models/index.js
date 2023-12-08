@@ -33,6 +33,8 @@ db.restaurant = require("./restaurants.models.js")(sequelize,Sequelize);
 db.attraction = require("./attractions.models.js")(sequelize,Sequelize);
 db.reservations = require("./reservations.models.js")(sequelize, Sequelize);
 db.preferences = require("./preferences.models.js")(sequelize, Sequelize);
+db.matchedusers = require("./matched.models.js")(sequelize,Sequelize);
+
 
 
 
