@@ -22,9 +22,12 @@ const Profile = () => {
     const { userId } = useParams();
     const [isLoading, setIsLoading] = useState(true);
 
+
     const [ experiences, setExperiences ] = useState([])
+    const [ posts, setPosts ] = useState([])
     const { user } = useAuth()
     console.log(profile)
+   
     useEffect(() => {
         const getProfile = async () => {
             const headerOptions = {
@@ -35,13 +38,17 @@ const Profile = () => {
 
             console.log(userId)
             try {
+
                 // Conditionally include userId in the request URL
                 const profileEndpoint = userId ? `/profile/getProfile/${userId}` : '/profile/getProfile';
                 const expEndpoint = userId ? `/profile/experiences/${userId}` : '/profile/experiences';
+                const postEndpoint = userId ? `/posts/getAllPosts/${userId}` : '/posts/getAllPosts';
 
                 const response = await api.get(profileEndpoint, headerOptions);
                 const expResponse = await api.get(expEndpoint, headerOptions);
-                console.log("Exp", expResponse.data.userExperiences)
+                const postResponse = await api.get(postEndpoint, headerOptions)
+                
+
                 const { profilePicture }  = response.data
                 
                 // convert buffer array into typed array
@@ -54,6 +61,7 @@ const Profile = () => {
                 setProfilePicture(`data:${profilePicture.type};base64,${profilePicData}`) 
                 setProfile(response.data)
                 setExperiences(expResponse.data.userExperiences)
+                setPosts(postResponse.data.posts)
         
             } catch (error) {
                 const errorMessage = error.response?.data?.message
@@ -90,6 +98,14 @@ const Profile = () => {
             rating={Number(exp.starRating)}
             location={exp.city_country}
             image={exp.experiencePic}
+        />
+    ))
+
+    const userPosts = posts.map((post) => (
+        <ProfilePost
+            key={post.id}
+            id={post.id}
+            image={post.postPic}
         />
     ))
     
@@ -152,10 +168,9 @@ const Profile = () => {
                     {/*Profile Post Content */}
                     {/* Hard Code few Components for testing */}
                     <Col className="col-12 d-flex flex-wrap justify-content-center justify-content-center" style={{gap:20}}>
-                        <ProfilePost/>
-                        <ProfilePost/>
-                        <ProfilePost/>
-                        <ProfilePost/>
+                        {
+                            userPosts.length > 0 ? userPosts : <p className="text-muted text-center mt-5">No Posts to show.</p>
+                        }
                     </Col>
                 </Row>
             </Container>

@@ -1,0 +1,31 @@
+.payment-cancel-container {
+    font-family: "DM sans", "poppins", sans-serif;
+    color: #000;
+}
+.payment-cancel-header {
+    font-size: 1.5rem;
+}
+
+.payment-cancel-message {
+    margin-bottom: 0;
+}
+
+.payment-cancel-message,
+.payment-cancel-anchor {
+    font-size: 0.875rem;
+}
+
+@media(min-width: 576px) {
+    .payment-cancel-message,
+    .payment-cancel-anchor {
+        font-size: 1rem;
+    }
+    .payment-cancel-header{
+        font-size: 1.75rem;
+    }
+}
+
+.payment-cancel-anchor,
+.payment-cancel-anchor:hover  {
+    color: inherit;
+}
