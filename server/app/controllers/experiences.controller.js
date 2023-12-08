@@ -175,40 +175,29 @@ exports.getExperience = async function (req, res) {
 
 
 exports.getExperienceById = async function (req, res) {
-  const userId = req.id;
   const experienceId = req.params.experienceId; // Assuming the experience ID is provided in the request parameters
 
   try {
-    // Find the user by their ID and include the specified experience with associated hotels, attractions, and restaurants
-    const user = await db.users.findByPk(userId, {
+    // Find the experience by its ID and include associated hotels, attractions, restaurants, and images
+    const experience = await db.experience.findByPk(experienceId, {
       include: [
-        {
-          model: db.experience,
-          as: 'experiences',
-          include: [
-            { model: db.hotel, as: 'hotel' },
-            { model: db.attraction, as: 'attraction' },
-            { model: db.restaurant, as: 'restaurant' },
-            { model: db.image, as: 'experiencePic' },
-          ],
-          where: { id: experienceId }, // Filter by the specified experience ID
-        },
+        { model: db.hotel, as: 'hotel' },
+        { model: db.attraction, as: 'attraction' },
+        { model: db.restaurant, as: 'restaurant' },
+        { model: db.image, as: 'experiencePic' },
       ],
     });
 
-    if (!user || !user.experiences || user.experiences.length === 0) {
+    if (!experience) {
       return res.status(404).json({ message: 'Experience not found' });
     }
 
-    // Access the specified experience, including associated hotels, attractions, and restaurants
-    const specificExperience = user.experiences[0]; // Assuming there is only one experience with the given ID
-
     // Convert the experiencePic data to base64 before sending the response
-    if (specificExperience.experiencePic && Buffer.isBuffer(specificExperience.experiencePic.data)) {
-      specificExperience.experiencePic.data = specificExperience.experiencePic.data.toString('base64');
+    if (experience.experiencePic && Buffer.isBuffer(experience.experiencePic.data)) {
+      experience.experiencePic.data = experience.experiencePic.data.toString('base64');
     }
 
-    return res.status(200).json({ specificExperience });
+    return res.status(200).json({ specificExperience: experience });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Server error' });
