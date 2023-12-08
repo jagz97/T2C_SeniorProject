@@ -133,7 +133,7 @@ Users.hasMany(Post, { foreignKey: 'userId' });
 // Define associations for bioPic and ProfilePicture.
 Profile.belongsTo(sequelize.models.Image, { foreignKey: 'bioPicId', as: 'bioPic' });
 Profile.belongsTo(sequelize.models.Image, { foreignKey: 'profilePictureId', as: 'profilePicture' });
-
+Users.belongsTo(sequelize.models.Image, { foreignKey: 'profilePictureId', as: 'profilePicture' });
 
 Users.associate = (models) => {
   Users.hasOne(models.Profile, {

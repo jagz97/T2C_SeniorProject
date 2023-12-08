@@ -43,7 +43,7 @@ console.log(dotenv);
 
 
 const db = require("./app/models");
-db.sequelize.sync({force: true})
+db.sequelize.sync({force: false})
   .then(() => {
     console.log("Drop and re-sync db.");
   })
@@ -55,6 +55,7 @@ db.sequelize.sync({force: true})
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to application." });
 });
+
 
 require("./app/routes/turorial.routes")(app);
 require("./app/routes/users.routes")(app);

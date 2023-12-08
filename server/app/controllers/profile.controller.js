@@ -146,15 +146,23 @@ exports.updateProfilePicture = async (req, res) => {
       where: { userId },
     });
 
+    const user = await db.users.findOne({
+        where: {userId: userId },
+    });
+    if(!user) {
+      return res.status(404).json("User profile not found.");
+    }
+
     if (!profile) {
       return res.status(404).json("User profile not found.");
     }
 
     // Update the profilePictureId with the ID of the newly created image
     profile.profilePictureId = image.id;
-
+    user.profilePictureId =image.id;
     // Save the updated profile
     await profile.save();
+    await user.save();
 
     return res.status(200).send({ message: "File has been uploaded and associated with the user's profile picture." });
 
