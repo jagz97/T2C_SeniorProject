@@ -3226,29 +3226,15 @@
   top: 0;
 }
 
-.homepage-max .header-3 {
-  background-color: transparent;
-  height: 993px;
-  left: 0;
-  position: absolute;
-  top: 0;
-}
 
-.homepage-max .overlap-28 {
-  height: 993px;
-  position: relative;
-}
 
-.homepage-max .rectangle-29 {
-  background-color: #00000054;
-  height: 976px;
-  left: 0;
-  position: absolute;
-  top: 0;
-}
+
+
+
 
 .homepage-max .unsplash-nsmseuhuoeu-3 {
   position: absolute;
+  margin-top: 20px;
 
 }
 
@@ -3261,6 +3247,7 @@
 .homepage-max .context-13 {
   height: 375px;
   position: relative;
+  margin-top: -50px;
 }
 
 .homepage-max .overlap-29 {
@@ -3417,12 +3404,28 @@
   top: 644px;
 }
 
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 0.2;
+    transform: scale(0.5);
+  }
+}
+
 .homepage-max .image-10 {
-  height: 252px;
+  height: 150px;
   object-fit: cover;
   position: absolute;
-  top: 4px;
+  top: 420px;
+  margin-left: 585px;
+
+  animation: fadeInOut 10s ease-in-out infinite; /* Adjust the duration and easing as needed */
 }
+
+
 
 .homepage-max .partners-3 {
   background-color: #f7f7f7;

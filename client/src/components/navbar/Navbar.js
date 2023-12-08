@@ -48,6 +48,7 @@ const Navbar = () => {
                       <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
                       <Dropdown.Item as={Link} to="/createpost">Create Post</Dropdown.Item>
                       <Dropdown.Item as={Link} to="/createexperience">Create Experience</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/matching">Matching Profile</Dropdown.Item>
                       <Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item> 
                   </NavCustomDropdown>
 
@@ -58,6 +59,7 @@ const Navbar = () => {
                       <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
                       <Dropdown.Item as={Link} to="/createpost">Create Post</Dropdown.Item>
                       <Dropdown.Item as={Link} to="/createexperience">Create Experience</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/matching">Matching Profile</Dropdown.Item>
                       <Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item>
                   </NavCustomDropdown>
                 </Nav>

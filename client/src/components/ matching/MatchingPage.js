@@ -263,7 +263,7 @@ const MatchingPage = () => {
                                         backgroundImage: screenWidth >= 834 && screenWidth < 1280
                                             ? "url(/img/rectangle-14-2.svg)"
                                             : screenWidth >= 1280 && screenWidth < 1920
-                                                ? "url(/img/rectangle-14-3.svg)"
+                                                ? "url(/img/rectangle-17.png)"
                                                 : screenWidth >= 1920
                                                     ? "url(/img/rectangle-14.svg)"
                                                     : undefined,

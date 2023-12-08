@@ -24,6 +24,14 @@ module.exports = (sequelize, Sequelize) => {
         lastLoggedIn: {
             type: Sequelize.DATE,
             allowNull: true
+        },
+        profilePictureId: {
+            type: Sequelize.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'Images',
+                key: 'id', //Image model has a primary key named 'id'.
+            },
         }
     }, {
         timestamps: false,

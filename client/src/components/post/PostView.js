@@ -3,6 +3,7 @@ import { useWindowWidth } from '../../breakpoints'
 import './post.css'
 import { api } from '../../api/axios'
 import useAuth from '../../hooks/useAuth'
+import { useParams } from "react-router-dom"
 
 
 const PostView = () => {
@@ -10,7 +11,7 @@ const PostView = () => {
     const [ post, setPost ] = useState({})
     const [isLoading, setIsLoading] = useState(true);
     const [postPicture, setPostPicture] = useState("")
-    const postId = 1
+    const params = useParams();
     const { user } = useAuth()
     const [commentText, setCommentText] = useState('')
     const [isCommentInputVisible, setCommentInputVisible] = useState(false)
@@ -32,7 +33,7 @@ const PostView = () => {
     
             console.log(`${user?.accesstoken}`); // Optional chaining to avoid errors if user is undefined
     
-            const response = await api.post(`/posts/${postId}/like`, {}, headerOptions);
+            const response = await api.post(`/posts/${params.id}/like`, {}, headerOptions);
     
             console.log('Post liked successfully:', response.data);
             setIsLiked(true);
@@ -42,7 +43,7 @@ const PostView = () => {
             console.error('Error liking post:', errorMessage);
             // Handle the error as needed, you may want to show a user-friendly message or perform other actions.
         }
-    }, [user.accesstoken]);
+    }, [params.id, user?.accesstoken]);
     
     const handleLikeClick = async () => {
         await likePost();
@@ -60,7 +61,7 @@ const PostView = () => {
         }
         console.log(`${user.accesstoken}`)
         try {
-            const response = await api.post(`/posts/${postId}/comment`,{text: comment}, headerOptions)
+            const response = await api.post(`/posts/${params.id}/comment`,{text: comment}, headerOptions)
             console.log('Comment sent successfully:', response.data);
     
         } catch (error) {
@@ -85,7 +86,7 @@ const PostView = () => {
         const getPost = async () => {
             
             try {
-                const response = await api.get(`/posts/${postId}/getPostDetails`);
+                const response = await api.get(`/posts/${params.id}/getPostDetails`);
                 console.log(response.data)
                 
                 setPost(response.data)
@@ -109,7 +110,7 @@ const PostView = () => {
         }
 
         getPost()
-    },[postId, user?.accesstoken, isCommentInputVisible, isLiked])
+    },[user.accesstoken, isCommentInputVisible, isLiked, params.id])
 
     if (isLoading) {
       
