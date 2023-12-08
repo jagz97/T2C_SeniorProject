@@ -19,6 +19,8 @@ const ExperienceDetail = () => {
     const [ experience, setExperience ] = useState({})
     const [ experienceError, setExperienceError] = useState("")
 
+    console.log(params.id)
+
     useEffect(() => {
         const fetchExperience = async () => {
             setExperienceError("")

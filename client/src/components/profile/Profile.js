@@ -41,7 +41,7 @@ const Profile = () => {
 
                 // Conditionally include userId in the request URL
                 const profileEndpoint = userId ? `/profile/getProfile/${userId}` : '/profile/getProfile';
-                const expEndpoint = userId ? `/profile/experiences/${userId}` : '/profile/experiences';
+                const expEndpoint = userId ? `/profile/experience/${userId}` : '/profile/experiences';
                 const postEndpoint = userId ? `/posts/getAllPosts/${userId}` : '/posts/getAllPosts';
 
                 const response = await api.get(profileEndpoint, headerOptions);

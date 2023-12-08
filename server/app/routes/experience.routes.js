@@ -41,13 +41,15 @@ module.exports = function (app) {
     );
 
     app.get(
-        "/api/profile/experiences/:userId",
+        "/api/profile/experience/:userId",
         [authJwt.verifyToken],
         controller.getExperience
     );
 
+    
+
     app.get('/api/profile/experiences/:experienceId',
-        [authJwt.verifyToken],
+        
         controller.getExperienceById
     
     );
