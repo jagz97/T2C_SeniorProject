@@ -12,9 +12,17 @@ import { BsGrid3X3 } from 'react-icons/bs'
 import useAuth from "../../hooks/useAuth"
 import { api } from '../../api/axios'
 
+import { useParams } from 'react-router-dom';
+
+
+
 const Profile = () => {
     const [ profile, setProfile ] = useState({})
     const [profilePicture, setProfilePicture] = useState("")
+    const { userId } = useParams();
+    const [isLoading, setIsLoading] = useState(true);
+
+
     const [ experiences, setExperiences ] = useState([])
     const [ posts, setPosts ] = useState([])
     const { user } = useAuth()
@@ -27,11 +35,20 @@ const Profile = () => {
                     Authorization: `${user.accesstoken}`,
                 }
             }
+
+            console.log(userId)
             try {
-                const response = await api.get("/profile/getProfile", headerOptions)
-                const expResponse = await api.get("/profile/experiences", headerOptions)
-                const postResponse = await api.get("/posts/getAllPosts", headerOptions)
-              
+
+                // Conditionally include userId in the request URL
+                const profileEndpoint = userId ? `/profile/getProfile/${userId}` : '/profile/getProfile';
+                const expEndpoint = userId ? `/profile/experiences/${userId}` : '/profile/experiences';
+                const postEndpoint = userId ? `/posts/getAllPosts/${userId}` : '/posts/getAllPosts';
+
+                const response = await api.get(profileEndpoint, headerOptions);
+                const expResponse = await api.get(expEndpoint, headerOptions);
+                const postResponse = await api.get(postEndpoint, headerOptions)
+                
+
                 const { profilePicture }  = response.data
                 
                 // convert buffer array into typed array
@@ -56,11 +73,23 @@ const Profile = () => {
                 else {
                     console.log(error.message)
                 }
+            }finally{
+                setIsLoading(false);
+
             }
         }
 
+
+
+
         getProfile()
-    }, [user.accesstoken])
+    }, [user.accesstoken, userId])
+
+    if (isLoading) {
+
+        return <div>Loading...</div>;
+        }
+        
 
     const placesVisited = experiences.map((exp) => (
         <PlaceVisited

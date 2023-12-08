@@ -8,7 +8,7 @@ const sequelize = require("sequelize");
 exports.preferences = async function (req, res)  {
     try {
         const userId = req.id;
-        const { gender, country, interest } = req.body;
+        const { gender, country, interest, bio } = req.body;
 
         // Check if the user exists
         const user = await db.users.findByPk(userId);
@@ -29,6 +29,7 @@ exports.preferences = async function (req, res)  {
                 gender,
                 country,
                 interest,
+                bio
             });
         } else {
             userPreferences = await db.preferences.create({
@@ -36,6 +37,7 @@ exports.preferences = async function (req, res)  {
                 gender,
                 country,
                 interest,
+                bio
             });
         }
 
@@ -76,9 +78,9 @@ exports.getpreferences = async function (req, res){
 
 
 
-// GET /api/matchedUsers/:userId
-// Display users with the same preferences
-exports.getUsersWithPreferences = async function(req, res) {
+
+
+exports.getUsersWithPreferences = async function (req, res) {
     try {
         const userId = req.id;
 
@@ -93,21 +95,22 @@ exports.getUsersWithPreferences = async function(req, res) {
         if (!userPreferences) {
             return res.status(404).json({ error: 'User preferences not found.' });
         }
-    
 
         // Find users with the same preferences
         const matchedUsers = await db.users.findAll({
+            attributes: ['userId', 'username'], // Select only the necessary fields
             include: [{
                 model: db.preferences,
                 as: 'userPreferences',
+                attributes: ['userPreferenceId', 'userId', 'gender', 'country', 'interest','bio'], // Select only the necessary fields
                 where: {
-                    gender: userPreferences.gender,
-                    country: userPreferences.country,
-                    interest: userPreferences.interest,
+                    [sequelize.Op.or]: [ 
+                        { gender: userPreferences.gender },
+                        { country: userPreferences.country },
+                        { interest: userPreferences.interest },
+                    ],
                 },
-                
-            }
-        ],
+            }],
             where: {
                 userId: { [sequelize.Op.ne]: userId }, // Exclude the current user
             },
@@ -126,3 +129,30 @@ exports.getUsersWithPreferences = async function(req, res) {
 
 
 
+exports.matchUser = async function (req, res) {
+
+    const user1Id = req.id;
+    const user2Id = req.body.user2Id;
+
+    const currentDate = new Date();
+    if (!user1Id) {
+        return res.status(404).json({ error: 'User not found.' });
+    }
+
+    try {
+        const newMatchedUser = await db.matchedusers.create({
+            user1Id: user1Id,
+            user2Id: user2Id,
+            matchDate: currentDate
+        });
+        
+        const insertedRecord = await newMatchedUser.reload();
+        return res.status(200).json(insertedRecord);
+     
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+
+};

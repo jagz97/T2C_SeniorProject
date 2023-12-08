@@ -32,6 +32,13 @@ module.exports = function (app) {
         controller.getUsersWithPreferences
     );
 
+    app.post(
+        "/api/createMatch",
+        [authJwt.verifyToken],
+        controller.matchUser
+
+    );
+
     
 
    

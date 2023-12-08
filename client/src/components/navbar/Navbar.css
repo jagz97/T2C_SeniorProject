@@ -6,10 +6,14 @@ header {
 }
 
 .global-nav {
-    background: transparent; 
-    color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Set a high z-index to ensure it appears above other elements */
+  background-color: #5f5f5f8c; /* Set your desired background color */
+  color: #ffffff;
 }
-
 .global-nav-logo {
     font-family: "volkhov", "DM sans", sans-serif;
     font-size: 1.5rem;

@@ -40,6 +40,12 @@ module.exports = function (app) {
         controller.getExperience
     );
 
+    app.get(
+        "/api/profile/experiences/:userId",
+        [authJwt.verifyToken],
+        controller.getExperience
+    );
+
     app.get('/api/profile/experiences/:experienceId',
         [authJwt.verifyToken],
         controller.getExperienceById

@@ -1,0 +1,91 @@
+.create-profile-header {
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 2.25rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.create-profile-form {
+    font-family: "Poppins", "DM sans", sans-serif;
+    width: 400px;
+}
+
+.create-profile-form input[type="text"] {
+    color: #000;
+}
+
+.create-profile-form input,
+.create-profile-form input::placeholder,
+.create-profile-form select,
+.create-profile-form textarea {
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 1.125rem;
+}
+
+.create-profile-form input::placeholder,
+.create-profile-form select {
+    color: grey;
+    opacity: 1; /*For Firefox*/
+}
+.create-profile-form input,
+.create-profile-form select,
+.create-profile-form textarea {
+    border: none;
+    padding: 0.6em;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);  
+}
+
+.create-profile-form select {
+    border-right: 0.6em solid transparent; /* Apply "padding" on the right of select arrow */
+}
+.create-profile-form select option:not(:disabled) {
+    color: #000;
+}
+
+.create-profile-form button {
+    color: #fff;
+    background-color: #5D17B0;
+    border: none;
+    border-radius: 8px;
+    padding: 0.4em 1.4em;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.create-profile-form input[type="text"],
+.create-profile-form button  {
+    display: block;
+    width: 100%;
+}
+
+.create-profile-form input[name="lastName"] {
+    margin: 15px 0;
+}
+
+.create-profile-form select[name="gender"] {
+    width: 70%;
+    margin-left: 3%;
+}
+
+.create-profile-form select[name="age"] {
+    width: 27%;
+}
+
+.create-profile-form textarea {
+    margin-top: 15px;
+    width: 100%;
+    resize: none;
+}
+
+
+
+
+
+
