@@ -112,4 +112,12 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 # Technologies Used
 - Payment API: [Stripe](https://stripe.com/)
+
+Stripe is a widely used online payment processing platform. It provides a set of APIs that allows businesses to securely accept and manage online payments.
+Usage in the Project: The project utilizes the Stripe API for handling payment transactions. This could include processing credit card payments, managing subscriptions, and handling other e-commerce-related transactions.
+Rapid API (Hotel Booking API):
+
 - Hotel Booking API: [Rapid API](https://rapidapi.com/)
+Rapid API is a platform that connects developers with thousands of APIs. It simplifies the process of integrating third-party APIs into applications by providing a centralized hub for discovering, testing, and connecting to APIs.
+Usage in the Project: The project uses a Hotel Booking API through Rapid API, which suggests integration with a third-party hotel booking service. This allows users to search for and book hotel accommodations within the application.
+These technologies enable the project to incorporate essential features such as online payment processing for services and seamless integration with a hotel booking service, enhancing the overall functionality and user experience of the application.
